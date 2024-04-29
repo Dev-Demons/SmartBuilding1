@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ever felt curious about how Decentraland Catalyst nodes work? Ever wanted to run your own node and felt overwhelmed about where to start? Are you building content for Decentraland and finding it hard to do the whole development and testing cycles on production servers?
+If you are (or have been there), fear no more. This tutorial will help you in the process of planning, figuring out what you need to decide and then guide you step by step in starting up the server.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="How to run your own Catalyst Node">
+<meta property="og:description" content="Ever felt curious about how Decentraland Catalyst nodes work? Ever wanted to run your own node and felt overwhelmed about where to start? Are you building content for Decentraland and finding it hard to do the whole development and testing cycles on production servers?
+If you are (or have been there), fear no more. This tutorial will help you in the process of planning, figuring out what you need to decide and then guide you step by step in starting up the server.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="contributor">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>How to run your own Catalyst Node | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./How to run your own Catalyst Node _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+<div class="active-bar" style="border-color: #EE834A;"></div>
+<style>
+                :root {
+                  --primary: #EE834A;
+                }
+              </style>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./How to run your own Catalyst Node _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Introduction</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/welcome/" class="">Welcome!</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/architecture/" class="">Architecture</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Identity</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/authchain/" class="">Authentication Chain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/signed-fetch/" class="">Signed Fetch</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Content</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/filesystem/" class="">File System</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities/" class="">Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/pointers/" class="">Pointers</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/snapshots/" class="">Snapshots</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/collections/" class="">Collections</a>
+</li>
+<li>
+<input type="checkbox" id="section-78d857344d9976cb2d2de1aa922ff1d0" class="toggle">
+<label for="section-78d857344d9976cb2d2de1aa922ff1d0" class="flex justify-between">
+<a role="button" class="">Entity Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/scenes/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/outfits/" class="">Outfits</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/profiles/" class="">Profiles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/wearables/" class="">Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/emotes/" class="">Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/stores/" class="">Stores</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/practice/" class="">Practice</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Scene Runtime</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/globals/" class="">Globals</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/execution/" class="">Execution</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/permissions/" class="">Permissions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/entities/" class="">Basic Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/components/" class="">Basic Components</a>
+</li>
+<li>
+<input type="checkbox" id="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="toggle">
+<label for="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="flex justify-between">
+<a role="button" class="">Modules</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/" class="">EngineApi</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/restricted_actions/" class="">RestrictedActions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/user_identity/" class="">UserIdentity</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/" class="">SignedFetch</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Communications</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/main/" class="">MAIN Realm</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/archipelago/" class="">Archipelago</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/messages/" class="">Messages</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transports/" class="">Transports</a>
+</li>
+<li>
+<input type="checkbox" id="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="toggle">
+<label for="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="flex justify-between">
+<a role="button" class="">Transport Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/livekit/" class="">LiveKit</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/websocket/" class="">Websocket</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/signed-login/" class="">Signed Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/offline/" class="">Offline</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/simulator/" class="">Simulator</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Catalyst Nodes</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/realm-selection/" class="">Realm Selection</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Explorer Renderer</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="toggle">
+<label for="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="flex justify-between">
+<a role="button" class="">Components</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/unity-renderer/components/how-to-create-components/" class="">Component Creation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Social Service</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/js-client/" class="">Javascript Client</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/login/" class="">Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/get-friends/" class="">Get friendships</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/put-friends/" class="">Act on events and users</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-create-new-entity-type/" class="">New entity type</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/" class="active">Run a Catalyst Node</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./How to run your own Catalyst Node _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>How to run your own Catalyst Node</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>How to run your own Catalyst Node</h1><p>Ever felt curious about how Decentraland Catalyst nodes work? Ever wanted to run your own node and felt overwhelmed about where to start? Are you building content for Decentraland and finding it hard to do the whole development and testing cycles on production servers?</p>
+<p>If you are (or have been there), fear no more. This tutorial will help you in the process of planning, figuring out what you need to decide and then guide you step by step in starting up the server. Also, in case something might not go according to the plan, there is a troubleshooting section at the end with a few of the most common problems and how to fix them.</p>
+<p>Ready? Hands on to the task.</p>
+<h2 id="hardware-requirements">
+Hardware requirements
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#hardware-requirements">#</a>
+</h2>
+<p>The Decentraland Foundation servers are deployed on Amazon AWS on <code>t2.xlarge</code> instances. So while those servers are meant for public use, your own one may be ok with much smaller specs, depending on what the intended use will be.</p>
+<p>An AWS EC2 <code>t2.xlarge</code> has the following hardware:</p>
+<ul>
+<li>4 vCPUs.</li>
+<li>16 Gb RAM</li>
+</ul>
+<p>And for file storage + DB storage, an SSD / HDD with 2 Tb capacity should be more than sufficient. At the time of this writing the foundation servers are using a little over 1 Tb for all storage.</p>
+<h2 id="software-pre-requisites">
+Software pre-requisites
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#software-pre-requisites">#</a>
+</h2>
+<p>The following are required for running catalyst-owner:</p>
+<ul>
+<li>Linux / MacOS operating system</li>
+<li>Docker / docker-compose</li>
+<li>Git</li>
+<li>LiveKit Cluster</li>
+</ul>
+<h2 id="some-options-to-consider-before-we-start">
+Some options to consider before we start
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#some-options-to-consider-before-we-start">#</a>
+</h2>
+<ul>
+<li>Do you want your node to be publicly exposed on the Internet? If so, you will need an internet-exposed instance and a public URL to connect to it.</li>
+<li>Is the node going to be used for the development of scenes, wearables, etc? In this case, the hardware specs can be a lot smaller, as it will probably be one or two people accessing it, not hundreds of users.</li>
+<li>Do you want to sync all entity types? If you are using this for developing scenes, probably you want to skip synchronization of profiles, as they take a lot of time, bandwidth and most importantly disk space and won’t benefit you for your goal.</li>
+</ul>
+<h2 id="livekit">
+LiveKit
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#livekit">#</a>
+</h2>
+<p>An external LiveKit cluster is in needed by the Catalyst’s Comms service to orchestrate the communications between players. For that, there are two options: use a LiveKit Cloud account or run your own LiveKit cluster.</p>
+<p>The recommendation is to setup <a href="https://cloud.livekit.io/" target="_blank">
+Livekit Cloud account
+</a> which comes with a free tier that can manage 100 users, or paying the service according to the traffic. This approach is easier as it doesn’t require to provision extra infrastructure and the service can manage the scaling.
+Otherwise a LiveKit cluster will need to be provisioned. LiveKit does a very good job with their documentation:</p>
+<ul>
+<li><a href="https://docs.livekit.io/oss/deployment/" target="_blank">
+Deployment
+</a></li>
+<li><a href="https://docs.livekit.io/oss/deployment/distributed/" target="_blank">
+Distributed Setup
+</a></li>
+</ul>
+<p><em>In case you would like to deep dive on the technical details needed to support LiveKit transport based communications, check out the <a href="https://adr.decentraland.org/adr/ADR-70" target="_blank">
+ADR-70 New Communications Architecture
+</a>.</em></p>
+<h2 id="step-by-step-guide">
+Step by step guide
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#step-by-step-guide">#</a>
+</h2>
+<p>First thing to do is clone the <a href="https://github.com/decentraland/catalyst-owner" target="_blank">
+catalyst-owner
+</a> repository from GitHub</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; git clone https://github.com/decentraland/catalyst-owner.git
+</span></span><span class="line"><span class="cl">Cloning into <span class="s1">'catalyst-owner'</span>...
+</span></span><span class="line"><span class="cl">remote: Enumerating objects: 2392, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">remote: Counting objects: 100% <span class="o">(</span>602/602<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">remote: Compressing objects: 100% <span class="o">(</span>168/168<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">remote: Total <span class="m">2392</span> <span class="o">(</span>delta 506<span class="o">)</span>, reused <span class="m">481</span> <span class="o">(</span>delta 430<span class="o">)</span>, pack-reused <span class="m">1790</span>
+</span></span><span class="line"><span class="cl">Receiving objects: 100% <span class="o">(</span>2392/2392<span class="o">)</span>, 926.05 KiB <span class="p">|</span> 1.09 MiB/s, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Resolving deltas: 100% <span class="o">(</span>1257/1257<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">&gt; <span class="nb">cd</span> catalyst-owner
+</span></span></code></pre></div><p>Once that’s done, it’s time to configure the environment variables for the node, and make any changes as appropriate.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On the /catalyst-owner folder</span>
+</span></span><span class="line"><span class="cl">&gt; cp .env.example .env
+</span></span><span class="line"><span class="cl">&gt; cp .env-advanced.example .env-advanced
+</span></span></code></pre></div><p>Now using your favorite text editor, make any needed changes in these files. For e.g., setting up the <code>EMAIL</code> environment variable with valid email is required so that you can receive updates about Certbot certificate expiration.</p>
+<p>Also setting up your particular value for <code>CATALYST_URL</code> may be required, especially if your server is going to be exposed publicly on the Internet. For use in your local machine, the default of <code>http://localhost</code> will do.</p>
+<h4 id="comms-service">
+Comms Service
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#comms-service">#</a>
+</h4>
+<p>Once the LiveKit cluster is available you will need to set the specific LiveKit variables for the Comms service to work, e.g.:</p>
+<pre tabindex="0"><code>LIVEKIT_HOST=wss://livekit-1.mydomain.org
+LIVEKIT_API_KEY=API-JjHuvM
+LIVEKIT_API_SECRET=J7YSHmNzkNCEfT2
+ROOM_PREFIX=my-prefix
+</code></pre><p>The <code>ROOM_PREFIX</code> variable is optional and can be configured to identify LiveKit rooms created by the Catalyst. This is useful if more than one Catalyst is using the same LiveKit Cluster.</p>
+<h4 id="content-server">
+Content Server
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#content-server">#</a>
+</h4>
+<p>There is a variable called <code>CONTENT_SERVER_STORAGE</code> that defines the local folder that the content server will use for storage. This defaults to <code>CONTENT_SERVER_STORAGE=./storage</code>. You may change this value to store files somewhere else, or at least make sure that the referenced folder exists. You may need to create it like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On the /catalyst-owner folder or wherever CONTENT_SERVER_STORAGE is pointing to</span>
+</span></span><span class="line"><span class="cl">&gt; mkdir storage
+</span></span></code></pre></div><p>There is another interesting variable <code>SYNC_IGNORED_ENTITY_TYPES</code> which allows ignoring certain entity types during the synchronization process. If you are going to use the Catalyst server for development, perhaps you don’t need all content type to be synchronized. You can set env var <code>SYNC_IGNORED_ENTITY_TYPES="profile,store"</code> so that only scenes and wearables will be brought from the DAO servers. This will save a lot of time, bandwidth and disk storage in your server.</p>
+<blockquote>
+<p>💡 For a more exhaustive list of supported environment variables please have a look at the <a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#environment-variables">
+Environment variables
+</a> section below.</p>
+</blockquote>
+<h3 id="launch-the-catalyst-node">
+Launch the Catalyst node
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#launch-the-catalyst-node">#</a>
+</h3>
+<p>Once all environment variables have been set up, it is time to start the node. That should be as easy as running the <code>init.sh</code> script in the root folder.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On the /catalyst-owner folder</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; ./init.sh
+</span></span><span class="line"><span class="cl"><span class="c1">## Loading env variables... [ OK ]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span> OK <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Checking if email is configured... [ OK ]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Checking if storage is configured... [ OK ]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Checking if catalyst url is configured... [ OK ]</span>
+</span></span><span class="line"><span class="cl"> WARNING: You are not running latest image of Catalyst<span class="s1">'s Content and Catalyst'</span>s Lambdas Nodes.
+</span></span><span class="line"><span class="cl"> WARNING: You are not running latest image of Catalyst<span class="s1">'s Archipelago Node.
+</span></span></span><span class="line"><span class="cl"><span class="s1"> WARNING: You are not running latest image of Catalyst'</span>s Explorer BFF Node.
+</span></span><span class="line"><span class="cl"> - DOCKER_TAG:               45a5154f11b53d55aadfdf7f958e2fce6a964824
+</span></span><span class="line"><span class="cl"> - LIGHTHOUSE_DOCKER_TAG:    latest
+</span></span><span class="line"><span class="cl"> - CATALYST_URL:             http://localhost
+</span></span><span class="line"><span class="cl"> - CONTENT_SERVER_STORAGE:   ./storage
+</span></span><span class="line"><span class="cl"> - EMAIL:                    a@a.com
+</span></span><span class="line"><span class="cl"> - ETH_NETWORK:              mainnet
+</span></span><span class="line"><span class="cl"> - REGENERATE:               <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Starting in <span class="m">5</span> seconds...
+</span></span><span class="line"><span class="cl">45a5154f11b53d55aadfdf7f958e2fce6a964824: Pulling from decentraland/catalyst-content
+</span></span><span class="line"><span class="cl">Digest: sha256:d6c2981c57cb9367fdb3228d15b07e4d26e62c902944115937de24ecd3ab6aac
+</span></span><span class="line"><span class="cl">Status: Image is up to date <span class="k">for</span> decentraland/catalyst-content:45a5154f11b53d55aadfdf7f958e2fce6a964824
+</span></span><span class="line"><span class="cl">docker.io/decentraland/catalyst-content:45a5154f11b53d55aadfdf7f958e2fce6a964824
+</span></span><span class="line"><span class="cl">45a5154f11b53d55aadfdf7f958e2fce6a964824: Pulling from decentraland/catalyst-lambdas
+</span></span><span class="line"><span class="cl">Digest: sha256:5605812dd29316afc32e561d2a2ce1311f164f07ef3cd99a1cd60727518636e5
+</span></span><span class="line"><span class="cl">Status: Image is up to date <span class="k">for</span> decentraland/catalyst-lambdas:45a5154f11b53d55aadfdf7f958e2fce6a964824
+</span></span><span class="line"><span class="cl">docker.io/decentraland/catalyst-lambdas:45a5154f11b53d55aadfdf7f958e2fce6a964824
+</span></span><span class="line"><span class="cl">latest: Pulling from decentraland/catalyst-lighthouse
+</span></span><span class="line"><span class="cl">Digest: sha256:fedc10b714823909f0a1c17955eed2f22a02e4f784090848d3253ef734e410d4
+</span></span><span class="line"><span class="cl">Status: Image is up to date <span class="k">for</span> decentraland/catalyst-lighthouse:latest
+</span></span><span class="line"><span class="cl">docker.io/decentraland/catalyst-lighthouse:latest
+</span></span><span class="line"><span class="cl">latest: Pulling from decentraland/archipelago-service
+</span></span><span class="line"><span class="cl">Digest: sha256:e2c1d6fa96a5cfbbf6fb37e3840c0724fb5abeef8c366025a28fab3ad33d6480
+</span></span><span class="line"><span class="cl">Status: Image is up to date <span class="k">for</span> quay.io/decentraland/archipelago-service:latest
+</span></span><span class="line"><span class="cl">quay.io/decentraland/archipelago-service:latest
+</span></span><span class="line"><span class="cl">latest: Pulling from decentraland/explorer-bff
+</span></span><span class="line"><span class="cl">Digest: sha256:fa9e305c44972a8613b01f4cd573d6fb84b0fb03ce953a506fbb06053202913c
+</span></span><span class="line"><span class="cl">Status: Image is up to date <span class="k">for</span> quay.io/decentraland/explorer-bff:latest
+</span></span><span class="line"><span class="cl">quay.io/decentraland/explorer-bff:latest
+</span></span><span class="line"><span class="cl">Stopping nginx ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Using HTTP because CATALYST_URL is set to http://localhost</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Replacing value $katalyst_host on nginx server file... [ OK ]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Restarting containers...</span>
+</span></span><span class="line"><span class="cl">Creating network <span class="s2">"catalyst-owner_default"</span> with the default driver
+</span></span><span class="line"><span class="cl">Creating catalyst-owner_comms-server_1 ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating node-exporter                   ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating catalyst-owner_lambdas_1      ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating postgres                      ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating catalyst-owner_certbot_1        ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating nats                            ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating postgres-exporter               ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating catalyst-owner_content-server_1 ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating catalyst-owner_archipelago_1    ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating catalyst-owner_explorer-bff_1   ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating nats-exporter                   ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating cadvisor                        ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Creating nginx                           ... <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Catalyst server is up and running at http://localhost</span>
+</span></span></code></pre></div><p>If all went well, we now have a full Decentraland node running. You can now head to the browser and type the URL. If using the default, it should be <a href="http://localhost/" target="_blank">
+<code>http://localhost</code>
+</a>.</p>
+<p>We can check the content server logs with this docker command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; docker logs catalyst-owner_content-server_1
+</span></span></code></pre></div><p>Even though the server is now running, it’s not 100% ready to be in business. It needs to synchronize the content from the other <a href="https://decentraland.github.io/catalyst-monitor" target="_blank">
+servers of the DAO
+</a> so it can offer the same experience to users connected to it. Synchronization can take a long time. On a good internet connection, 6 hours should be pretty common. So… time to have a coffee, a nap, a good night’s rest, and come back tomorrow.</p>
+<p>One way of knowing whether synchronization is complete consists of checking the results of the content status endpoint: <a href="http://localhost/content/status" target="_blank">
+http://localhost/content/status
+</a> (use your URL here).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"synchronizationStatus"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"lastSyncWithDAO"</span><span class="p">:</span> <span class="mi">1658153514917</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"synchronizationState"</span><span class="p">:</span> <span class="s2">"Bootstrapping"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"snapshot"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"entities"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"profile"</span><span class="p">:</span> <span class="mi">1271331</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"scene"</span><span class="p">:</span> <span class="mi">23477</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"wearable"</span><span class="p">:</span> <span class="mi">17351</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"store"</span><span class="p">:</span> <span class="mi">890</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"lastUpdatedTime"</span><span class="p">:</span> <span class="mi">1658153414530</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"v3"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"commitHash"</span><span class="p">:</span> <span class="s2">"9a2e0d5d05d02646df2e1e5d00436d3166a07aa1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"catalystVersion"</span><span class="p">:</span> <span class="s2">"4.8.6"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"ethNetwork"</span><span class="p">:</span> <span class="s2">"mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>While <code>synchronizationState</code> is <code>Bootstrapping</code>, the node will temporarily suspend the acceptance of new deployments. This measure ensures that no new entities are deployed until the node is brought up-to-date within the DAO network. Once the status changes to <code>Syncing</code>, it indicates that the node has successfully caught up and is now continuously receiving the latest updates. This is the healthy state in which the node is fully working and accepting new deployments.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"synchronizationStatus"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"lastSyncWithDAO"</span><span class="p">:</span> <span class="mi">1658153872301</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"synchronizationState"</span><span class="p">:</span> <span class="s2">"Syncing"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"snapshot"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"entities"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"profile"</span><span class="p">:</span> <span class="mi">1271317</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"scene"</span><span class="p">:</span> <span class="mi">23477</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"store"</span><span class="p">:</span> <span class="mi">890</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"wearable"</span><span class="p">:</span> <span class="mi">17350</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"lastUpdatedTime"</span><span class="p">:</span> <span class="mi">1658152050030</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"v3"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"commitHash"</span><span class="p">:</span> <span class="s2">"9a2e0d5d05d02646df2e1e5d00436d3166a07aa1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"catalystVersion"</span><span class="p">:</span> <span class="s2">"4.8.6"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"ethNetwork"</span><span class="p">:</span> <span class="s2">"mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you are more of cli-kind-of-guy, you can grep the content server docker image logs for this message: <code>Starting to sync entities from servers pointer changes</code>. Once you see that text, the content server is fully synchronized and ready for full use.</p>
+<h2 id="environment-variables">
+Environment variables
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#environment-variables">#</a>
+</h2>
+<p>The following is a comprehensive list of all the content server environment variables with their default values, as logged in the content server logs during startup:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl"><span class="nx">STORAGE_ROOT_FOLDER</span><span class="o">:</span> <span class="s2">"/app/storage/content_server/"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DENYLIST_FILE_NAME</span><span class="o">:</span> <span class="s2">"denylist.txt"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DENYLIST_URLS</span><span class="o">:</span> <span class="s2">"https://config.decentraland.org/denylist"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SYNC_IGNORED_ENTITY_TYPES</span><span class="o">:</span> <span class="s2">""</span>
+</span></span><span class="line"><span class="cl"><span class="nx">FOLDER_MIGRATION_MAX_CONCURRENCY</span><span class="o">:</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SERVER_PORT</span><span class="o">:</span> <span class="mi">6969</span>
+</span></span><span class="line"><span class="cl"><span class="nx">LOG_REQUESTS</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">UPDATE_FROM_DAO_INTERVAL</span><span class="o">:</span> <span class="mi">1800000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SYNC_WITH_SERVERS_INTERVAL</span><span class="o">:</span> <span class="mi">45000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">CHECK_SYNC_RANGE</span><span class="o">:</span> <span class="mi">1200000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DECENTRALAND_ADDRESS</span><span class="o">:</span> <span class="s2">"0x1337e0507eb4ab47e08a179573ed4533d9e22a7b"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DEPLOYMENTS_DEFAULT_RATE_LIMIT_TTL</span><span class="o">:</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DEPLOYMENTS_DEFAULT_RATE_LIMIT_MAX</span><span class="o">:</span> <span class="mi">300</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ETH_NETWORK</span><span class="o">:</span> <span class="s2">"mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">LOG_LEVEL</span><span class="o">:</span> <span class="s2">"debug"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">FETCH_REQUEST_TIMEOUT</span><span class="o">:</span> <span class="s2">"2m"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">USE_COMPRESSION_MIDDLEWARE</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BOOTSTRAP_FROM_SCRATCH</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">REQUEST_TTL_BACKWARDS</span><span class="o">:</span> <span class="mi">1200000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">LAND_MANAGER_SUBGRAPH_URL</span><span class="o">:</span> <span class="s2">"https://api.thegraph.com/subgraphs/name/decentraland/land-manager"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">COLLECTIONS_L1_SUBGRAPH_URL</span><span class="o">:</span> <span class="s2">"https://api.thegraph.com/subgraphs/name/decentraland/collections-ethereum-mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">COLLECTIONS_L2_SUBGRAPH_URL</span><span class="o">:</span> <span class="s2">"https://api.thegraph.com/subgraphs/name/decentraland/collections-matic-mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">THIRD_PARTY_REGISTRY_L2_SUBGRAPH_URL</span><span class="o">:</span> <span class="s2">"https://api.thegraph.com/subgraphs/name/decentraland/tpr-matic-mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BLOCKS_L1_SUBGRAPH_URL</span><span class="o">:</span> <span class="s2">"https://api.thegraph.com/subgraphs/name/decentraland/blocks-ethereum-mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">BLOCKS_L2_SUBGRAPH_URL</span><span class="o">:</span> <span class="s2">"https://api.thegraph.com/subgraphs/name/decentraland/blocks-matic-mainnet"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PSQL_DATABASE</span><span class="o">:</span> <span class="s2">"content"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PSQL_HOST</span><span class="o">:</span> <span class="s2">"postgres"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PSQL_SCHEMA</span><span class="o">:</span> <span class="s2">"public"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PSQL_PORT</span><span class="o">:</span> <span class="s2">"5432"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">GARBAGE_COLLECTION</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nx">GARBAGE_COLLECTION_INTERVAL</span><span class="o">:</span> <span class="mi">21600000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PG_IDLE_TIMEOUT</span><span class="o">:</span> <span class="mi">30000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PG_QUERY_TIMEOUT</span><span class="o">:</span> <span class="mi">60000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PG_STREAM_QUERY_TIMEOUT</span><span class="o">:</span> <span class="mi">600000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SNAPSHOT_FREQUENCY_IN_MILLISECONDS</span><span class="o">:</span> <span class="mi">21600000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">CUSTOM_DAO</span><span class="o">:</span> <span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DISABLE_SYNCHRONIZATION</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SYNC_STREAM_TIMEOUT</span><span class="o">:</span> <span class="s2">"10m"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">CONTENT_SERVER_ADDRESS</span><span class="o">:</span> <span class="s2">"http://localhost/content/"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">REPOSITORY_QUEUE_MAX_CONCURRENCY</span><span class="o">:</span> <span class="mi">50</span>
+</span></span><span class="line"><span class="cl"><span class="nx">REPOSITORY_QUEUE_MAX_QUEUED</span><span class="o">:</span> <span class="mi">300</span>
+</span></span><span class="line"><span class="cl"><span class="nx">REPOSITORY_QUEUE_TIMEOUT</span><span class="o">:</span> <span class="s2">"1m"</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ENTITIES_CACHE_SIZE</span><span class="o">:</span> <span class="mi">150000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DEPLOYMENT_RATE_LIMIT_MAX</span><span class="o">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">DEPLOYMENT_RATE_LIMIT_TTL</span><span class="o">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">VALIDATE_API</span><span class="o">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">RETRY_FAILED_DEPLOYMENTS_DELAY_TIME</span><span class="o">:</span> <span class="mi">900000</span>
+</span></span></code></pre></div><h2 id="using-your-node-for-production">
+Using your node for production
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#using-your-node-for-production">#</a>
+</h2>
+<p>If you want to run your own server and help scale the network, first of all that’s awesome, the community and the foundation really appreciate you doing so.</p>
+<p>In this case, you’ll have to go through the process of requesting the DAO for approval to join the network by visiting <a href="https://governance.decentraland.org/submit/catalyst/" target="_blank">
+this link
+</a>. You may also ask for a MANA grant in order to cover the infrastructure and management expenses.</p>
+<p>It is important that your hardware specs are more inline with what is suggested above in the hardware requirements, as the server will be used by any members of the community to enter Decentraland.</p>
+<h2 id="api-specs">
+API Specs
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#api-specs">#</a>
+</h2>
+<p>For more details on the APIs for content, lambdas and comms servers you can check the <a href="https://decentraland.github.io/catalyst-api-specs" target="_blank">
+API specs
+</a>.</p>
+<h2 id="troubleshootingfaq">
+Troubleshooting/FAQ
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#troubleshootingfaq">#</a>
+</h2>
+<p>A few things could go wrong while starting your server. Here is a few of the most common issues encountered over time and how to fix them.</p>
+<h3 id="port-5432-is-used-by-local-postgres">
+Port 5432 is used by local postgres
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#port-5432-is-used-by-local-postgres">#</a>
+</h3>
+<p>If you run the node on a machine used for development, or if it is already hosting other services, chances are there’s already a postgres database server running on that machine. So port 5432 will be already taken.</p>
+<p>The easiest way to fix this is to stop the postgres that is already running locally and then restart the postgres docker container using <code>docker start postgres</code>.</p>
+<p>If you have knowledge on docker compose, you can start fiddling with <code>docker-compose.yml</code> and environment variables to try to get it to work on a different port. For the sake of keeping things simple here, we will avoid going that path in this tutorial.</p>
+<h3 id="port-80-port-is-used-by-local-nginx">
+Port 80 port is used by local nginx
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#port-80-port-is-used-by-local-nginx">#</a>
+</h3>
+<p>Same thing can happen with port 80 (and even port 443). If you are running nginx in the local machine, chances are that ports 80/443 are already bound that that service, so the Catalyst Docker container won’t be able to use them.</p>
+<p>Again, the simplest approach would be to stop the local nginx service and then restart the docker container using <code>docker start nginx</code>. Or alternatively, you need to leverage <code>docker-compose.yml</code> and <code>.env</code> to get it to work on a different port.</p>
+<h2 id="additional-docs-for-reference">
+Additional docs for reference
+<a class="anchor" href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/#additional-docs-for-reference">#</a>
+</h2>
+<p>If you want to understand better what a Catalyst server does, what services it includes, etc. you can check the architecture repo <a href="https://github.com/decentraland/architecture" target="_blank">
+https://github.com/decentraland/architecture
+</a> that explains the parts in detail.</p>
+<p>If you would like to contribute to Catalyst servers code, make sure to check the <a href="https://github.com/decentraland/catalyst/blob/main/docs/CONTRIBUTING.md" target="_blank">
+contributing guide
+</a> to learn about our development process, how to propose bug fixes and improvements, and how to build and test your changes.</p>
+<p>And finally, if you need to contact the team, you can do so via <a href="https://discord.com/channels/417796904760639509/948230185457696820" target="_blank">
+Discord
+</a> or submitting <a href="https://github.com/decentraland/catalyst/issues" target="_blank">
+GitHub issues
+</a>.</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./How to run your own Catalyst Node _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/contributor/tutorials/how-to-run-a-catalyst.md" target="_blank" rel="noopener">
+<img src="./How to run your own Catalyst Node _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./How to run your own Catalyst Node _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

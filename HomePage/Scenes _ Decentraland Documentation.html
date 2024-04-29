@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn how to set up a scene and configure its metadata.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Scenes">
+<meta property="og:description" content="Learn how to set up a scene and configure its metadata.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="creator">
+<meta property="article:published_time" content="2018-02-26T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Scenes | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Scenes _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Scenes _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Scenes _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Scenes _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Scenes _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Scenes _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+<div class="active-bar" style="border-color: #4947CD;"></div>
+<style>
+                :root {
+                  --primary: #4947CD;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Scenes _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Wearables &amp; Emotes</span>
+<ul>
+<li>
+<input type="checkbox" id="section-5238408129bdbe7a41bd58cdbed95be1" class="toggle">
+<label for="section-5238408129bdbe7a41bd58cdbed95be1" class="flex justify-between">
+<a role="button" class="">Wearables</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/wearables-overview/" class="">Wearables Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/" class="">Creating Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/linked-wearables/" class="">Linked wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17f08e4e58ad69e23f1096996f5c4e64" class="toggle">
+<label for="section-17f08e4e58ad69e23f1096996f5c4e64" class="flex justify-between">
+<a role="button" class="">Emotes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/emotes-overview/" class="">Emotes Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/creating-and-exporting-emotes/" class="">Creating Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/avatar-rig/" class="">Avatar Rig</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/rig-features/" class="">Rigging Features</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/props-and-sounds/" class="">Adding Props and Sounds to your Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/particles-in-emotes/" class="">Particles in Emotes 2.0</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-57010a4fb000b586393ef3ac0e4c708e" class="toggle">
+<label for="section-57010a4fb000b586393ef3ac0e4c708e" class="flex justify-between">
+<a role="button" class="">Manage Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/creating-collection/" class="">Creating a Collection</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-wearables/" class="">Uploading Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-emotes/" class="">Uploading Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-smart-wearables/" class="">Uploading Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b3bac40672f08584afca2b1951d77ffa" class="toggle">
+<label for="section-b3bac40672f08584afca2b1951d77ffa" class="flex justify-between">
+<a role="button" class="">Publishing Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/publishing-collections/" class="">Publishing Collections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/curation-committee/" class="">Curation committee</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials &amp; Examples</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/examples/7/" class="">Example scenes</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GP_K8WN7csnKnImK4R2TgMA" class="external-link " target="_blank" rel="noopener">SDK &amp; Editor Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GN8LcnnQk2BByo9L2Orvp9c" class="external-link " target="_blank" rel="noopener">Emote Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://github.com/decentraland-scenes/awesome-repository#tutorials" class="external-link " target="_blank" rel="noopener">Awesome Repository (Deprecated)<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Scenes (SDK7)</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b525100342227191f7fcea7ba56bb803" class="toggle">
+<label for="section-b525100342227191f7fcea7ba56bb803" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sdk-101/" class="">Quick start</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dev-workflow/" class="">Development workflow</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/installation-guide/" class="">Editor Installation Guide</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/editor/" class="">Decentraland Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-from-example/" class="">Scene from example</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/" class="">Coding essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-107b6725d990df022e2ce15c90ba14e8" class="toggle">
+<label for="section-107b6725d990df022e2ce15c90ba14e8" class="flex justify-between">
+<a role="button" class="">Designing the experience</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/mvp-guidelines/" class="">Scene MVP Guidelines</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/ux-ui-guide/" class="">UX and UI guide for creators</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/design-games/" class="">Design constraints for games</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="toggle">
+<label for="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/" class="">Querying components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/data-oriented-programming/" class="">Data oriented programming</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-26d2ff837ef33c0c864da60b58012b08" class="toggle">
+<label for="section-26d2ff837ef33c0c864da60b58012b08" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/color-types/" class="">Color types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/text/" class="">Text shapes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/special-types/" class="">Geometry types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/" class="">Colliders</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-e2a5c62fa44576cfaf37400c3afd999c" class="toggle">
+<label for="section-e2a5c62fa44576cfaf37400c3afd999c" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/troubleshooting/" class="">Troubleshooting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/report-a-bug/" class="">Report a bug</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="toggle">
+<label for="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17cf12281279261a57549d3a62bf1f9b" class="toggle">
+<label for="section-17cf12281279261a57549d3a62bf1f9b" class="flex justify-between">
+<a role="button" class="">Optimizing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/performance-optimization/" class="">Performance optimization</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-limitations/" class="">Scene limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d988b988b9f10b302e874ddf848f6ba3" class="toggle">
+<label for="section-d988b988b9f10b302e874ddf848f6ba3" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/make-discoverable/" class="">Make your scene discoverable</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploy-third-party/" class="">Upload a preview</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="toggle" checked="">
+<label for="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/kinds-of-projects/" class="">Kinds of Projects</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/" class="active">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/" class="">Files in a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/workspaces/" class="">Workspaces</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" class="">Portable experiences</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" class="">Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0c95a08d2936e4fb6641631c7518e5c9" class="toggle">
+<label for="section-0c95a08d2936e4fb6641631c7518e5c9" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-62db854699a952e0bb38c11370531240" class="toggle">
+<label for="section-62db854699a952e0bb38c11370531240" class="flex justify-between">
+<a role="button" class="">Input actions</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" class="">About input actions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/register-callback/" class="">Register callback</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/system-based-events/" class="">System based events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/advanced-button-events/" class="">Advanced button events</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/npc-avatars/" class="">NPC Avatars</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/" class="">Modifier Areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/runtime-data/" class="">Runtime data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deprecated-functions/" class="">Deprecated functions</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-8aced72970aba367ccb620ac0774d739" class="toggle">
+<label for="section-8aced72970aba367ccb620ac0774d739" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/serverless-multiplayer/" class="">Serverless Multiplayer</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/authoritative-server/" class="">3rd party servers</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-7c22809946dca82b52a0416bb19bee94" class="toggle">
+<label for="section-7c22809946dca82b52a0416bb19bee94" class="flex justify-between">
+<a role="button" class="">2D UI</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/onscreen-ui/" class="">2D UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dynamic-ui/" class="">Dynamic UIs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-button-events/" class="">UI Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-positioning/" class="">UI Positioning</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-text/" class="">UI Text</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-background/" class="">UI Background</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-special-elements/" class="">UI special types</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-3339f980e82707ed3f2ac8f0b7215bc6" class="toggle">
+<label for="section-3339f980e82707ed3f2ac8f0b7215bc6" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/second-layer/" class="">Second layer blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-a-dapp/" class="">Create a dApp</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploying-your-own-transactions-server/" class="">Deploying your own transactions server</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a9e2088c8e67585827711b1700609398" class="toggle">
+<label for="section-a9e2088c8e67585827711b1700609398" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/libraries/7/" class="">Library catalog</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-libraries/" class="">Create a library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cfc35d405c7d6b713873bbaa8ed9e303" class="toggle">
+<label for="section-cfc35d405c7d6b713873bbaa8ed9e303" class="flex justify-between">
+<a role="button" class="">Programming patterns</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" class="">Asynchronous code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/mutable-data/" class="">Data mutability</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/game-objects/" class="">Game objects</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-90195531610f61ac8dbe0e10d5e228a6" class="toggle">
+<label for="section-90195531610f61ac8dbe0e10d5e228a6" class="flex justify-between">
+<a role="button" class="">Web Editor</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/web-editor/" class="">Web Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items/" class="">Smart Items - Basic</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items-advanced/" class="">Smart Items - Advanced</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/editor-plus-code/" class="">Combine with code</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-76e89a14e1691ab97e791c67b7a232c7" class="toggle">
+<label for="section-76e89a14e1691ab97e791c67b7a232c7" class="flex justify-between">
+<a role="button" class="">API Reference</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/releases/7/" class="">API Reference SDK7</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/version-agreement/" class="">Version support agreement</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/testing-guidelines/" class="">SDK7 feedback guidelines</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-203470ceeef126c8dd8cbc9c390f57b4" class="toggle">
+<label for="section-203470ceeef126c8dd8cbc9c390f57b4" class="flex justify-between">
+<a role="button" class="">Other</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-analytics/" class="">Scene Analytics</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-bb199fbca80691618b9d243fc3dbf186" class="toggle">
+<label for="section-bb199fbca80691618b9d243fc3dbf186" class="flex justify-between">
+<a role="button" class="">SDK6 Scenes</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-370e2ddc65b07bfae1e1a4e45be7210f" class="toggle">
+<label for="section-370e2ddc65b07bfae1e1a4e45be7210f" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="toggle">
+<label for="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/component-groups/" class="">Component groups</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-70bcd3586e0bd17ab633662850238c9f" class="toggle">
+<label for="section-70bcd3586e0bd17ab633662850238c9f" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/special-types/" class="">Special types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/text/" class="">Text shapes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-1794a8ff3dcff28148759d9edbe03975" class="toggle">
+<label for="section-1794a8ff3dcff28148759d9edbe03975" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/troubleshooting/" class="">Troubleshooting</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-734c2c5e0f885d60ad25da7416a93698" class="toggle">
+<label for="section-734c2c5e0f885d60ad25da7416a93698" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d41c9e9dd257ad935b0ecac1a637344b" class="toggle">
+<label for="section-d41c9e9dd257ad935b0ecac1a637344b" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/deploy-third-party/" class="">Preview in Heroku</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-81e5ae4e449e727ffdfdda3212d2ec63" class="toggle">
+<label for="section-81e5ae4e449e727ffdfdda3212d2ec63" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-files/" class="">Files in a scene</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b65cbb78800cb595cbabf490d7aae0da" class="toggle">
+<label for="section-b65cbb78800cb595cbabf490d7aae0da" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/click-events/" class="">Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/avatar-modifiers/" class="">Modifier areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/onscreen-ui/" class="">2D UI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="toggle">
+<label for="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/remote-scene-considerations/" class="">About multiplayer scenes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-53f68a24178a8634051243575ac00389" class="toggle">
+<label for="section-53f68a24178a8634051243575ac00389" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/second-layer/" class="">Second layer blockchain</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a80cdadec202411af177a687b9de8c81" class="toggle">
+<label for="section-a80cdadec202411af177a687b9de8c81" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/utils/" class="">Utils library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0126a50da098471b50d6d433c560540a" class="toggle">
+<label for="section-0126a50da098471b50d6d433c560540a" class="flex justify-between">
+<a role="button" class="">Release notes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>3D Modeling and Animations</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/3d-models/" class="">3D Model Essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/meshes/" class="">Meshes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/materials/" class="">Materials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/textures/" class="">Textures</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/colliders/" class="">Colliders</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/animations/" class="">Animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/create-a-rig/" class="">Create a Rig</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Worlds</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/about/" class="">Worlds Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/cast/" class="">Decentraland Cast</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Builder</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-faq/" class="">Builder FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-101/" class="">Builder 101</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/export/" class="">Export as code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/import-items/" class="">Import custom items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/manage-scenes/" class="">Manage Builder scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/smart-items/" class="">Smart items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/nfts/" class="">NFTs</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Quests</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/overview/" class="">Quests Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/define/" class="">Defining a Quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/rewards/" class="">Quest Rewards</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/sdk-client/" class="">Quests SDK Library</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/quest-ui/" class="">Quest HUD - SDK UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/cli/" class="">Quests CLI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/walkthrough/" class="">Create your first quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/manager/" class="">Quests Manager</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Rewards</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/overview/" class="">Rewards Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/getting-started/" class="">Rewards - Getting Starting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/users/" class="">Rewards Users and Roles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/tx/" class="">Rewards Transactions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/api/" class="">Rewards API</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/integrations/" class="">Rewards API Integrations</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Places</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/places/faq/" class="">Places FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://studios.decentraland.org/" class="external-link " target="_blank" rel="noopener">Metaverse Studios<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+<ul>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Scenes _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Scenes</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Scenes</h1><p>A scene is a Decentraland project that is spatially delimited, and is mapped to one or several LAND parcels. If a scene is deployed to the Decentraland Genesis City map, players can experience it by visiting the scene’s coordinates. If a scene is deployed to a <a href="https://docs.decentraland.org/creator/worlds/about/">
+World
+</a>, players can visit it via URL.</p>
+<p>See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/">
+Files in a scene
+</a> for a list of what files are used in a scene project.</p>
+<h2 id="metadata">
+Metadata
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#metadata">#</a>
+</h2>
+<p>To edit a scene’s metadata from a UI, open Visual Editor, and click the <strong>pencil icon</strong>.</p>
+<img src="./Scenes _ Decentraland Documentation_files/pencil-icon.png" alt="Scene name" width="124" data-xblocker="passed" style="visibility: visible;">
+<p>This opens up the scene menu, where you can configure multiple properties.</p>
+<img src="./Scenes _ Decentraland Documentation_files/metadata-ui.png" alt="Scene name" width="300" data-xblocker="passed" style="visibility: visible;">
+<p>Alternatively, you can directly edit the <code>scene.json</code> file, where all of these values are stored.</p>
+<h2 id="scene-title-description-and-image">
+Scene title, description, and image
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#scene-title-description-and-image">#</a>
+</h2>
+<p>It’s very important to give your scene a title, a description and a thumbnail image to attract players to your scene and so they know what to expect.</p>
+<p>Players will see these displayed on a modal when they select the parcels of your scene on the map. They will also see these in a confirmation screen when being <a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/">
+teleported
+</a> there by another scene. Setting up compelling data here can significantly help drive traffic to your scene.</p>
+<p>When players navigate the world and enter your scene, they are able to read the scene title from under the minimap.</p>
+<img src="./Scenes _ Decentraland Documentation_files/scene-name.png" alt="Scene name" width="200" data-xblocker="passed" style="visibility: visible;">
+<p>Add this data via the scene menu in the Decentraland Editor.</p>
+<p>The thumbnail should be a <em>.png</em> image of a recommended size of <em>228x160</em> pixels. The minimum supported size is <em>196x143</em> pixels. The image may be stretched if the width-to-height proportions don’t match <em>228x160</em>.</p>
+<p>The image on <code>navmapThumbnail</code> should be a path to an image file in the project folder. It can also be a URL link to an image hosted elsewhere.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: If you host an image elsewhere, make sure this is in a site that has permissive CORS policies for displaying content on other sites.
+</blockquote>
+<p>In case you want other developers to be able to reach out to you, you can also add contact information to your scene.</p>
+<h2 id="categories">
+Categories
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#categories">#</a>
+</h2>
+<p>You can add categories to your scene to help players and users explore Decentraland better. These are used in the <a href="https://places.decentraland.org/" target="_blank">
+Decentraland Places dApp
+</a> to categorize each place and make it easier for users to find what they’re interested in.</p>
+<p><strong>Categories</strong> need to be chosen from a pre-defined list of options:</p>
+<ul>
+<li>🎨 Art</li>
+<li>🕹️ Game</li>
+<li>🃏 Casino</li>
+<li>👥 Social</li>
+<li>🎶 Music</li>
+<li>👠 Fashion</li>
+<li>🪙 Crypto</li>
+<li>📚 Education</li>
+<li>🛍️ Shop</li>
+<li>🏢 Business</li>
+<li>🏅 Sports</li>
+</ul>
+<p>A scene can belong to more than one category, it can have a maximum of 3 listed categories.</p>
+
+<p>In the <code>scene.json</code> categories are listed in the <code>tags</code> array.</p>
+
+<p>These are the predefined categories:</p>
+<ul>
+<li><code>art</code></li>
+<li><code>game</code></li>
+<li><code>casino</code></li>
+<li><code>social</code></li>
+<li><code>music</code></li>
+<li><code>fashion</code></li>
+<li><code>crypto</code></li>
+<li><code>education</code></li>
+<li><code>shop</code></li>
+<li><code>business</code></li>
+<li><code>sports</code></li>
+</ul>
+<p>For example, an Scene could be tagged as <code>game</code> and <code>casino</code> by adding the following to the <code>scene.json</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"tags"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">"game"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">"casino"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><p>After that, the scene is listed on the Places dApp under the <code>game</code> and <code>casino</code> categories.</p>
+<h2 id="age-rating">
+Age Rating
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#age-rating">#</a>
+</h2>
+<p>The <strong>Age Rating</strong> field is used to classify the content of your scene based on its appropriateness for different age groups. It helps in filtering content for players. The following options are available:</p>
+<ul>
+<li><strong>🟢 <code>T</code> for Teens (13+)</strong>: This is the minimum age requirement as specified in Decentraland’s <a href="https://decentraland.org/terms/#8-children" target="_blank">
+Terms of Use
+</a>. Opt for this category if your scene is limited to moderate violence, suggestive or horror-themed content, simulated gambling, and mild language.</li>
+<li><strong>🟡 <code>A</code> for Adults (18+)</strong>: Choose this category if your scene features any of the following: intense offensive language, graphic violence, explicit sexual content and/or nudity, real money gambling, or substances like alcohol, tobacco, and drugs.</li>
+</ul>
+<p>When editing the Age Rating via the <code>scene.json</code>, rating is a <strong>single-letter code</strong>, write either <strong>T</strong> for teens, or <strong>A</strong> for adults.</p>
+<img src="./Scenes _ Decentraland Documentation_files/content-moderation-flag-icon.png" style="margin: 1rem; display: block; width: 200px; visibility: visible;" data-xblocker="passed">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"> <span class="s2">"scene"</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"rating"</span><span class="p">:</span> <span class="s2">"T"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></div><h3 id="restricted-content">
+Restricted Content
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#restricted-content">#</a>
+</h3>
+<p>There is a third category for scenes: 🔴 <code>R</code> for Restricted. This rating is manually applied by Content Moderators to scenes that violate Decentraland’s <a href="https://decentraland.org/content" target="_blank">
+Content Policy
+</a>. Violations may include, but are not limited to:</p>
+<ul>
+<li>Suspicious content or spam</li>
+<li>Abusive or hateful content</li>
+<li>Sexual or degrading content</li>
+<li>Child abuse</li>
+<li>Harassment or bullying</li>
+<li>Promotion of terrorism/violence</li>
+<li>IP/Copyright infringement</li>
+</ul>
+<p>Scenes with this rating won’t load and no one will be able to interact with them. If your scene falls into this category, you should review and update it to comply with the <a href="https://decentraland.org/content" target="_blank">
+Content Policy
+</a>.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: Incorrectly categorizing your scene may result in player reports and subsequent moderation actions. For more details, refer to <a href="https://docs.decentraland.org/player/general/in-world-features/age-rating-scene-reporting/" target="_blank">
+Age Rating and Scene Reporting
+</a>.
+</blockquote>
+<h2 id="feature-toggles">
+Feature Toggles
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#feature-toggles">#</a>
+</h2>
+<p>There are certain features that can be disabled in specific scenes so that players can’t use these abusively. Configure these on the <strong>Settings</strong> tab of the scene settings.</p>
+<img src="./Scenes _ Decentraland Documentation_files/spawn-point.png" alt="Scene name" width="200">
+<p>Currently, only the following feature is handled like this:</p>
+<ul>
+<li>
+<p><strong>Voice Chat</strong>: Refers to players using their microphones to have conversations over voice chat with other nearby players.</p>
+</li>
+<li>
+<p><strong>Disable Portable Experiences</strong>: This setting will set the behavior for any portable experience of a player while standing inside the your scene. This includes not only <a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/">
+portable experiences
+</a> but also <a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/">
+smart wearables
+</a>. With this setting, you can chose to either keep them all enabled (default), disable them, or hide their UI. This is useful for scenes where portable experiences might give an unfair advantage to some players, for example using a jetpack in a parkour challenge. It’s also recommended to prevent these in scenes where blockchain transactions take place, and where a malicious portable experience could potentially impersonate the scene´s UI.</p>
+</li>
+</ul>
+<p>On the <code>scene.json</code> file, these toggles are managed under <code>featureToggles</code>. The corresponding features are enabled by default, unless specified as <em>disabled</em> in the <code>scene.json</code> file.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">"featureToggles"</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"voiceChat"</span><span class="p">:</span> <span class="s2">"disabled"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"portableExperiences"</span><span class="p">:</span> <span class="s2">"enabled"</span> <span class="err">|</span> <span class="s2">"disabled"</span> <span class="err">|</span> <span class="s2">"hideUi"</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></div><p>If a <code>featureToggles</code> property doesn’t exist in your <code>scene.json</code> file, create it at root level in the json tree.</p>
+<h2 id="spawn-location">
+Spawn location
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#spawn-location">#</a>
+</h2>
+<p>The <strong>Spawn Settings</strong> in the <strong>Settings</strong> tab define where players spawn when they access your scene directly, either by directly typing in the coordinates into the browser or teleporting.</p>
+<img src="./Scenes _ Decentraland Documentation_files/spawn-point.png" alt="Scene name" width="200">
+<p>Your scene might have objects that can block players from moving if they happen to spawn right over them, like trees or stairs, or your scene might have an elevated terrain. It would be a bad experience for players if they spawned over something that doesn’t let them move. That’s why you have the option to set multiple spawn positions in ad-hoc locations.</p>
+<p>The position is comprised of coordinates inside the scene. These numbers refer to a position within the parcel, similar to what you’d use in the scene’s code in a Transform component to <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/">
+position an entity
+</a>.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: All spawn points must be within the parcels that make up the scene. You can’t spawn a player outside the space of these parcels.
+</blockquote>
+<p>Check the <strong>Random Offset</strong> box to randomly offset the spawning players around the spawn point, with a maximum value. This prevents all players from appearing overlapping each other when they spawn, which looks especially bad in crowded scenes. The <strong>Max Offset</strong> value is the maximum possible distance from the original spawn point, in both the X or Z axis.</p>
+<p>Set the <strong>Camera Target</strong> to set the direction in which players start looking when they jump into your scene. This allows you to have better control over their first impression, and can be useful when wanting to help steer them towards a specific direction. By default this points at <code>{x: 8, y:1, z:8}</code>, which translates to the center of the scene for single-parcel scenes, or the center of the bottom-left parcel for larger scenes.</p>
+<p>Click <strong>Add Spawn Point</strong> to list as many spawn points as you want. Players will randomly appear in one of those.</p>
+<h3 id="spawn-points-in-json">
+Spawn points in JSON
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#spawn-points-in-json">#</a>
+</h3>
+<p>Spawn points can also be configured via the <code>scene.json</code> file, on the <code>spawnPoints</code> field.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"spawnPoints"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"spawn1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><p>A single scene can have multiple spawn points. This is especially useful in large scenes. To have many spawn points, simply list them as an array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"spawnPoints"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"spawn1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"spawn2"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><p>When there are multiple spawn points, the one that’s closest to the coordinates indicated by the player is picked.</p>
+<p>If a coordinate is marked as <code>default</code>, it will always be used, regardless of if it’s the closest. If multiple spawn points are marked as <code>default</code>, the closest one of these is picked.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"spawnPoints"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"spawn1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"default"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"not-used"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><h4 id="spawn-regions">
+Spawn regions
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#spawn-regions">#</a>
+</h4>
+<p>You can set a whole region in the scene to act as a spawn point. By specifying an array of two numbers on any of the dimensions of the position, players will appear in a random location within this range of numbers. This helps prevent the overlapping of entering players.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"spawnPoints"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"region"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><p>In the example above, players may appear anywhere in the square who’s corners are on <em>1,1,2</em> and <em>5,1,4</em>.</p>
+<p>A scene can also have multiple spawn regions, just like it can have multiple spawn points.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"spawnPoints"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"region1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"region2"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><h4 id="rotation">
+Rotation
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#rotation">#</a>
+</h4>
+<p>You can also specify the rotation of players when they spawn, so that they’re facing in a specific direction.</p>
+<p>Simply add a <code>cameraTarget</code> field to the spawn point data. The value of <code>cameraTarget</code> should reference a location in space, with <em>x</em>, <em>y</em> and <em>z</em> coordinates relative to the scene, just like the <code>position</code> field.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">"spawnPoints"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"spawn1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"position"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"cameraTarget"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"x"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"y"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"z"</span><span class="p">:</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><p>This example spawns a player on <em>5, 1, 4</em> looking East at <em>10, 1, 4</em>. If the spawn position is a range, then the player’s rotation will always match the indicated target. If there are multiple spawn points, each can have its own separate target.</p>
+<h2 id="required-permissions">
+Required Permissions
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#required-permissions">#</a>
+</h2>
+<p>The <code>requiredPermissions</code> property manages various controlled features that could be used in an abusive way and damage a player’s experience.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: Permissions are only relevant in <a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" target="_blank">
+portable experiences
+</a> and <a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" target="_blank">
+smart wearables
+</a>. Normal scenes (both in parcels or in Worlds) are not affected by these permissions, and are free to use the corresponding functionality.
+</blockquote>
+<p>The corresponding features are blocked from being used by the scene, unless the permission is requested in the <code>scene.json</code> file.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">"requiredPermissions"</span><span class="err">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">"ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="s2">"OPEN_EXTERNAL_LINK"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span><span class="err">,</span>
+</span></span></code></pre></div><p>Currently, the following permissions are managed on smart wearables and portable experiences:</p>
+<ul>
+<li><code>ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE</code>: Refers to <a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/">
+moving a Player
+</a></li>
+<li><code>ALLOW_TO_TRIGGER_AVATAR_EMOTE</code>: Refers to <a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/">
+Playing emotes on the player avatar
+</a></li>
+<li><code>USE_WEB3_API</code>: Refers to interacting with the player’s browser wallets, to make transactions or sign messages.</li>
+<li><code>USE_FETCH</code>: Refers to sending http requests to 3rd party servers, using <code>fetch</code> or <code>signedFetch</code></li>
+<li><code>USE_WEBSOCKET</code>: Refers to opening websocket connections with 3rd party servers</li>
+<li><code>OPEN_EXTERNAL_LINK</code>: Refers to prompting the player to open links to external sites</li>
+</ul>
+<p>If a <code>requiredPermissions</code> property doesn’t exist in your <code>scene.json</code> file, create it at root level in the json tree.</p>
+<h2 id="scene-parcels">
+Scene parcels
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#scene-parcels">#</a>
+</h2>
+<p>When <a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/">
+deploying
+</a> a scene, the content is uploaded to the coordinates assigned in the scene configuration. A scene can include a single parcel, or a list of up to dozens of them.</p>
+<p>Edit this on the second tab of the scene menu in the Editor.</p>
+<img src="./Scenes _ Decentraland Documentation_files/scene-parcels.png" alt="Scene name" width="300" data-xblocker="passed" style="visibility: visible;">
+<p>The default scene has its coordinates set to <em>0,0</em>, this information is not necessary to change while developing a scene offline, unless you need to occupy multiple parcels. You will need to change this before deploying, to coordinates where you do have deploy permissions.</p>
+<p>You can also change the scene coordinates on the <code>scene.json</code> file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"> <span class="s2">"scene"</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"parcels"</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">"54,-14"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"base"</span><span class="p">:</span> <span class="s2">"54,-14"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></div><p>The <code>base</code> field defines which parcel to consider the base parcel. If your scene has a single parcel, the base should be that parcel. If your scene has multiple parcels, the base should be the bottom-left (South-West) parcel. All entity positions will be measured in reference to the South-West corner of this parcel.</p>
+<p>To display multiple parcels in the scene preview, list as many parcels as you intend to use. They don’t need to be the exact parcels you’ll deploy to, but they should all be adjacent and arranged in the same way in relation to each other.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"> <span class="s2">"scene"</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"parcels"</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">"54,-14"</span><span class="p">,</span>  <span class="s2">"55,-14"</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"base"</span><span class="p">:</span> <span class="s2">"54,-14"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The largest scene size you can set is of 45 x 45 parcels.
+</blockquote>
+<h3 id="set-parcels-via-the-command-line">
+Set parcels via the command line
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#set-parcels-via-the-command-line">#</a>
+</h3>
+<p>You can set the parcels in your scene by running the <code>npx update-parcels</code> command in your scene folder. This is especially useful for large scenes, as you don’t need to list every parcel involved.</p>
+<p><strong>Single parcel</strong></p>
+<p>Pass a single argument with the scene coords. This coordinate is also set as the base parcel.</p>
+<p><code>npx update-parcels &lt;parcel&gt;</code></p>
+<p>For example:</p>
+<p><code>npx update-parcels 15,-26</code></p>
+<p><strong>Multiple parcels</strong></p>
+<p>Pass two arguments: the South-West and the North-East parcels. The South-West parcel is also set as the base parcel.</p>
+<p><code>npx update-parcels &lt;parcel&gt; &lt;parcel&gt;</code></p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: The South-West parcel is always the one with the lowest numbers on both the <em>X</em> and <em>Y</em> coordinates.
+</blockquote>
+<p>For example:</p>
+<p><code>npx update-parcels 15,-26 17,-24</code></p>
+<p>This command generates a 3x3 scene, with its base parcel in <code>15,-26</code>.</p>
+<p><strong>Customize Base Parcel</strong></p>
+<p>Pass three arguments: the South-West and the North-East parcels, and the parcel to use as a base parcel.</p>
+<p><code>npx update-parcels &lt;parcel&gt; &lt;parcel&gt; &lt;parcel&gt;</code></p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The base parcel must be one of the parcels in the scene.
+</blockquote>
+<p><strong>Non-square scenes</strong></p>
+<p>The above commands all generate rectangular-shaped scenes. Decentraland scenes can have L shapes or other configurations. You can generate a larger square with <code>npx update-parcels</code> and then manually remove excess parcels from the <code>scene.json</code> file.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The base parcel must be one of the parcels in the scene.
+</blockquote>
+<h2 id="fetch-metadata-from-scene-code">
+Fetch metadata from scene code
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/#fetch-metadata-from-scene-code">#</a>
+</h2>
+<p><a href="https://js-sdk-toolchain.pages.dev/modules/js_runtime_apis.__system_Scene_" target="_blank">
+Scene API Reference
+</a></p>
+<p>You may need a scene’s code to access the fields from the scene metadata, like the parcels that the scene is deployed to, or the spawn point positions. This is especially useful for scenes that are meant to be replicated, or for code that is meant to be reused in other scenes. It’s also very useful for libraries, where the library might for example need to know where the scene limits are.</p>
+<p>To access this data, first import the <code>getSceneInformation</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getSceneInformation</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'~system/Runtime'</span>
+</span></span></code></pre></div><p>Then you can call the <code>getSceneInformation()</code> function, which returns a json object that includes much of the contents of the scene.json file.
+The example below shows the path to obtain several of the more common fields you might need from this function’s response:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getSceneInformation</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'~system/Runtime'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">executeTask</span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">sceneInfo</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getSceneInformation</span><span class="p">({})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">sceneInfo</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"SCENE INFO: "</span><span class="p">,</span> <span class="nx">sceneInfo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: <code>getSceneInformation()</code> needs to be run as an <a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" target="_blank">
+async function
+</a>, since the response may delay a fraction of a second or more in returning data.
+Do not use the deprecated <code>getSceneInfo()</code> function.
+</blockquote>
+<p>The object returned by <code>getSceneInformation()</code> includes the following:</p>
+<ul>
+<li><code>baseUrl</code>: The base URL where the scene’s content is hosted</li>
+<li><code>content</code>: An array with all the files of the scene, including their hash, that can be used together with the baseUrl to retrieve them.</li>
+<li><code>metadataJson</code>: The full contents of the scene’s scene.json, as a string. You must parse this to obtain specific values.</li>
+<li><code>urn</code>: The unique urn for the scene as a whole.</li>
+</ul>
+<p>The example below parses the contents from <code>metadataJson</code> to obtain values from properties in the scene.json file</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getSceneInformation</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'~system/Runtime'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">executeTask</span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="nx">sceneInfo</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getSceneInformation</span><span class="p">({})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">sceneInfo</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="nx">sceneJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">sceneInfo</span><span class="p">.</span><span class="nx">metadataJson</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="nx">spawnPoints</span> <span class="o">=</span> <span class="nx">sceneJson</span><span class="p">.</span><span class="nx">spawnPoints</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="nx">parcels</span> <span class="o">=</span> <span class="nx">sceneJson</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">parcels</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span> <span class="nx">parcels</span><span class="p">,</span> <span class="nx">spawnPoints</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div></article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Scenes _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/creator/sdk7/projects/scene-metadata.md" target="_blank" rel="noopener">
+<img src="./Scenes _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Scenes _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Scenes _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

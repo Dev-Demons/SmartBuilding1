@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://docs.decentraland.org/creator/development-guide/sdk7/user-data/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Obtain data from players as they interact with your scene.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Player data">
+<meta property="og:description" content="Obtain data from players as they interact with your scene.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="creator">
+<meta property="article:published_time" content="2018-02-22T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Player data | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Player data _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Player data _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Player data _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Player data _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Player data _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Player data _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+<div class="active-bar" style="border-color: #4947CD;"></div>
+<style>
+                :root {
+                  --primary: #4947CD;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Player data _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Wearables &amp; Emotes</span>
+<ul>
+<li>
+<input type="checkbox" id="section-5238408129bdbe7a41bd58cdbed95be1" class="toggle">
+<label for="section-5238408129bdbe7a41bd58cdbed95be1" class="flex justify-between">
+<a role="button" class="">Wearables</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/wearables-overview/" class="">Wearables Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/" class="">Creating Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/linked-wearables/" class="">Linked wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17f08e4e58ad69e23f1096996f5c4e64" class="toggle">
+<label for="section-17f08e4e58ad69e23f1096996f5c4e64" class="flex justify-between">
+<a role="button" class="">Emotes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/emotes-overview/" class="">Emotes Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/creating-and-exporting-emotes/" class="">Creating Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/avatar-rig/" class="">Avatar Rig</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/rig-features/" class="">Rigging Features</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/props-and-sounds/" class="">Adding Props and Sounds to your Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/particles-in-emotes/" class="">Particles in Emotes 2.0</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-57010a4fb000b586393ef3ac0e4c708e" class="toggle">
+<label for="section-57010a4fb000b586393ef3ac0e4c708e" class="flex justify-between">
+<a role="button" class="">Manage Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/creating-collection/" class="">Creating a Collection</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-wearables/" class="">Uploading Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-emotes/" class="">Uploading Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-smart-wearables/" class="">Uploading Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b3bac40672f08584afca2b1951d77ffa" class="toggle">
+<label for="section-b3bac40672f08584afca2b1951d77ffa" class="flex justify-between">
+<a role="button" class="">Publishing Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/publishing-collections/" class="">Publishing Collections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/curation-committee/" class="">Curation committee</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials &amp; Examples</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/examples/7/" class="">Example scenes</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GP_K8WN7csnKnImK4R2TgMA" class="external-link " target="_blank" rel="noopener">SDK &amp; Editor Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GN8LcnnQk2BByo9L2Orvp9c" class="external-link " target="_blank" rel="noopener">Emote Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://github.com/decentraland-scenes/awesome-repository#tutorials" class="external-link " target="_blank" rel="noopener">Awesome Repository (Deprecated)<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Scenes (SDK7)</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b525100342227191f7fcea7ba56bb803" class="toggle">
+<label for="section-b525100342227191f7fcea7ba56bb803" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sdk-101/" class="">Quick start</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dev-workflow/" class="">Development workflow</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/installation-guide/" class="">Editor Installation Guide</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/editor/" class="">Decentraland Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-from-example/" class="">Scene from example</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/" class="">Coding essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-107b6725d990df022e2ce15c90ba14e8" class="toggle">
+<label for="section-107b6725d990df022e2ce15c90ba14e8" class="flex justify-between">
+<a role="button" class="">Designing the experience</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/mvp-guidelines/" class="">Scene MVP Guidelines</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/ux-ui-guide/" class="">UX and UI guide for creators</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/design-games/" class="">Design constraints for games</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="toggle">
+<label for="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/" class="">Querying components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/data-oriented-programming/" class="">Data oriented programming</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-26d2ff837ef33c0c864da60b58012b08" class="toggle">
+<label for="section-26d2ff837ef33c0c864da60b58012b08" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/color-types/" class="">Color types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/text/" class="">Text shapes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/special-types/" class="">Geometry types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/" class="">Colliders</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-e2a5c62fa44576cfaf37400c3afd999c" class="toggle">
+<label for="section-e2a5c62fa44576cfaf37400c3afd999c" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/troubleshooting/" class="">Troubleshooting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/report-a-bug/" class="">Report a bug</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="toggle">
+<label for="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17cf12281279261a57549d3a62bf1f9b" class="toggle">
+<label for="section-17cf12281279261a57549d3a62bf1f9b" class="flex justify-between">
+<a role="button" class="">Optimizing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/performance-optimization/" class="">Performance optimization</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-limitations/" class="">Scene limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d988b988b9f10b302e874ddf848f6ba3" class="toggle">
+<label for="section-d988b988b9f10b302e874ddf848f6ba3" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/make-discoverable/" class="">Make your scene discoverable</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploy-third-party/" class="">Upload a preview</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="toggle">
+<label for="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/kinds-of-projects/" class="">Kinds of Projects</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/" class="">Files in a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/workspaces/" class="">Workspaces</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" class="">Portable experiences</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" class="">Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0c95a08d2936e4fb6641631c7518e5c9" class="toggle" checked="">
+<label for="section-0c95a08d2936e4fb6641631c7518e5c9" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-62db854699a952e0bb38c11370531240" class="toggle">
+<label for="section-62db854699a952e0bb38c11370531240" class="flex justify-between">
+<a role="button" class="">Input actions</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" class="">About input actions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/register-callback/" class="">Register callback</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/system-based-events/" class="">System based events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/advanced-button-events/" class="">Advanced button events</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/npc-avatars/" class="">NPC Avatars</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/" class="">Modifier Areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/runtime-data/" class="">Runtime data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/" class="active">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deprecated-functions/" class="">Deprecated functions</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-8aced72970aba367ccb620ac0774d739" class="toggle">
+<label for="section-8aced72970aba367ccb620ac0774d739" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/serverless-multiplayer/" class="">Serverless Multiplayer</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/authoritative-server/" class="">3rd party servers</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-7c22809946dca82b52a0416bb19bee94" class="toggle">
+<label for="section-7c22809946dca82b52a0416bb19bee94" class="flex justify-between">
+<a role="button" class="">2D UI</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/onscreen-ui/" class="">2D UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dynamic-ui/" class="">Dynamic UIs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-button-events/" class="">UI Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-positioning/" class="">UI Positioning</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-text/" class="">UI Text</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-background/" class="">UI Background</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-special-elements/" class="">UI special types</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-3339f980e82707ed3f2ac8f0b7215bc6" class="toggle">
+<label for="section-3339f980e82707ed3f2ac8f0b7215bc6" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/second-layer/" class="">Second layer blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-a-dapp/" class="">Create a dApp</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploying-your-own-transactions-server/" class="">Deploying your own transactions server</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a9e2088c8e67585827711b1700609398" class="toggle">
+<label for="section-a9e2088c8e67585827711b1700609398" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/libraries/7/" class="">Library catalog</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-libraries/" class="">Create a library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cfc35d405c7d6b713873bbaa8ed9e303" class="toggle">
+<label for="section-cfc35d405c7d6b713873bbaa8ed9e303" class="flex justify-between">
+<a role="button" class="">Programming patterns</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" class="">Asynchronous code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/mutable-data/" class="">Data mutability</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/game-objects/" class="">Game objects</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-90195531610f61ac8dbe0e10d5e228a6" class="toggle">
+<label for="section-90195531610f61ac8dbe0e10d5e228a6" class="flex justify-between">
+<a role="button" class="">Web Editor</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/web-editor/" class="">Web Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items/" class="">Smart Items - Basic</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items-advanced/" class="">Smart Items - Advanced</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/editor-plus-code/" class="">Combine with code</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-76e89a14e1691ab97e791c67b7a232c7" class="toggle">
+<label for="section-76e89a14e1691ab97e791c67b7a232c7" class="flex justify-between">
+<a role="button" class="">API Reference</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/releases/7/" class="">API Reference SDK7</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/version-agreement/" class="">Version support agreement</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/testing-guidelines/" class="">SDK7 feedback guidelines</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-203470ceeef126c8dd8cbc9c390f57b4" class="toggle">
+<label for="section-203470ceeef126c8dd8cbc9c390f57b4" class="flex justify-between">
+<a role="button" class="">Other</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-analytics/" class="">Scene Analytics</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-bb199fbca80691618b9d243fc3dbf186" class="toggle">
+<label for="section-bb199fbca80691618b9d243fc3dbf186" class="flex justify-between">
+<a role="button" class="">SDK6 Scenes</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-370e2ddc65b07bfae1e1a4e45be7210f" class="toggle">
+<label for="section-370e2ddc65b07bfae1e1a4e45be7210f" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="toggle">
+<label for="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/component-groups/" class="">Component groups</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-70bcd3586e0bd17ab633662850238c9f" class="toggle">
+<label for="section-70bcd3586e0bd17ab633662850238c9f" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/special-types/" class="">Special types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/text/" class="">Text shapes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-1794a8ff3dcff28148759d9edbe03975" class="toggle">
+<label for="section-1794a8ff3dcff28148759d9edbe03975" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/troubleshooting/" class="">Troubleshooting</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-734c2c5e0f885d60ad25da7416a93698" class="toggle">
+<label for="section-734c2c5e0f885d60ad25da7416a93698" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d41c9e9dd257ad935b0ecac1a637344b" class="toggle">
+<label for="section-d41c9e9dd257ad935b0ecac1a637344b" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/deploy-third-party/" class="">Preview in Heroku</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-81e5ae4e449e727ffdfdda3212d2ec63" class="toggle">
+<label for="section-81e5ae4e449e727ffdfdda3212d2ec63" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-files/" class="">Files in a scene</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b65cbb78800cb595cbabf490d7aae0da" class="toggle">
+<label for="section-b65cbb78800cb595cbabf490d7aae0da" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/click-events/" class="">Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/avatar-modifiers/" class="">Modifier areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/onscreen-ui/" class="">2D UI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="toggle">
+<label for="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/remote-scene-considerations/" class="">About multiplayer scenes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-53f68a24178a8634051243575ac00389" class="toggle">
+<label for="section-53f68a24178a8634051243575ac00389" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/second-layer/" class="">Second layer blockchain</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a80cdadec202411af177a687b9de8c81" class="toggle">
+<label for="section-a80cdadec202411af177a687b9de8c81" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/utils/" class="">Utils library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0126a50da098471b50d6d433c560540a" class="toggle">
+<label for="section-0126a50da098471b50d6d433c560540a" class="flex justify-between">
+<a role="button" class="">Release notes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>3D Modeling and Animations</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/3d-models/" class="">3D Model Essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/meshes/" class="">Meshes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/materials/" class="">Materials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/textures/" class="">Textures</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/colliders/" class="">Colliders</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/animations/" class="">Animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/create-a-rig/" class="">Create a Rig</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Worlds</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/about/" class="">Worlds Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/cast/" class="">Decentraland Cast</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Builder</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-faq/" class="">Builder FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-101/" class="">Builder 101</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/export/" class="">Export as code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/import-items/" class="">Import custom items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/manage-scenes/" class="">Manage Builder scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/smart-items/" class="">Smart items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/nfts/" class="">NFTs</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Quests</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/overview/" class="">Quests Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/define/" class="">Defining a Quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/rewards/" class="">Quest Rewards</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/sdk-client/" class="">Quests SDK Library</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/quest-ui/" class="">Quest HUD - SDK UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/cli/" class="">Quests CLI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/walkthrough/" class="">Create your first quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/manager/" class="">Quests Manager</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Rewards</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/overview/" class="">Rewards Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/getting-started/" class="">Rewards - Getting Starting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/users/" class="">Rewards Users and Roles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/tx/" class="">Rewards Transactions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/api/" class="">Rewards API</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/integrations/" class="">Rewards API Integrations</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Places</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/places/faq/" class="">Places FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://studios.decentraland.org/" class="external-link " target="_blank" rel="noopener">Metaverse Studios<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+<ul>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Player data _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Player data</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Player data</h1><h2 id="player-position-and-rotation">
+Player position and rotation
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#player-position-and-rotation">#</a>
+</h2>
+<p>Use the <code>PlayerEntity</code> and the <code>CameraEntity</code> to know the player’s position and rotation, by checking their <code>Transform</code> components.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">getPlayerPosition() {</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Transform</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">PlayerEntity</span><span class="p">))</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Transform</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">))</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//player position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kr">const</span> <span class="nx">playerPos</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">PlayerEntity</span><span class="p">).</span><span class="nx">position</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//player rotation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kr">const</span> <span class="nx">playerRot</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">PlayerEntity</span><span class="p">).</span><span class="nx">rotation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//camera position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kr">const</span> <span class="nx">CameraPos</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">).</span><span class="nx">position</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//camera rotation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kr">const</span> <span class="nx">CameraRot</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">).</span><span class="nx">rotation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'playerPos: '</span><span class="p">,</span> <span class="nx">playerPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'playerRot: '</span><span class="p">,</span> <span class="nx">playerRot</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'cameraPos: '</span><span class="p">,</span> <span class="nx">CameraPos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'cameraRot: '</span><span class="p">,</span> <span class="nx">CameraRot</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">getPlayerPosition</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>PlayerEntity position</strong>: The avatar’s position, at chest height. Approximately at 0.88 cm above the ground.</li>
+<li><strong>PlayerEntity rotation</strong>: The direction in which the avatar is facing, expressed as a quaternion.</li>
+<li><strong>CameraEntity position</strong>:
+<ul>
+<li>In 1st person: Equal to the avatar’s position, but at eye-level. Approximately at 1.75 cm above the ground.</li>
+<li>In 3rd person: May vary depending on camera movements.</li>
+</ul>
+</li>
+<li><strong>PlayerEntity rotation</strong>:
+<ul>
+<li>In 1st person: Similar to the direction in which the avatar is facing, expressed as a quaternion. May be rounded slightly differently from the player’s rotation.</li>
+<li>In 3rd person: May vary depending on camera movements.</li>
+</ul>
+</li>
+</ul>
+<blockquote class="book-hint warning">
+<p><strong>📔 Note</strong>: Avoid referring to the <code>engine.PlayerEntity</code> or the <code>engine.CameraEntity</code> on the initial scene loading, because that can result in errors if the entities are not initialized yet. To avoid this problem, use these inside the <code>main()</code> function, or on a function indirectly called by <code>main()</code>. You can also encapsulate the behavior in an async <a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/#the-executetask-function" target="_blank">
+<code>executeTask</code> block
+</a>.</p>
+<p>Another option is to refer to these entities inside a system. There they will always be available, because the first execution of the system is called once the scene is already properly initialized.</p>
+</blockquote>
+<h2 id="fetch-all-players">
+Fetch all players
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#fetch-all-players">#</a>
+</h2>
+<p>All players in the scene have a <code>Transform</code> component. This component is read only in avatars. To fetch the positions of all players, <a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/">
+iterate over all entities with
+</a> a <code>PlayerIdentityData</code> component.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">PlayerIdentityData</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@dcl/sdk/ecs'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">transform</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PlayerIdentityData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Transform</span>
+</span></span><span class="line"><span class="cl"><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Player data: '</span><span class="p">,</span> <span class="p">{</span> <span class="nx">entity</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">transform</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The code above iterates over all entities with a <code>Transform</code> and a <code>PlayerIdentityData</code> component, and logs their data. You can use this same method to get any of the available data of all players.</p>
+<p>See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/#player-locks-or-unlocks-cursor">
+Event listeners
+</a> to learn how to detect and react when new players join into the scene.</p>
+<h2 id="get-player-data">
+Get player data
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#get-player-data">#</a>
+</h2>
+<p>Use <code>getPlayer()</code> to fetch data about the current player, or any other player in the scene.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPlayer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@dcl/sdk/src/players'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">main() {</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">createCube</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">myPlayer</span> <span class="o">=</span> <span class="nx">getPlayer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nx">myPlayer</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Name : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'UserId : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">userId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>getPlayer()</code> returns the following:</p>
+<ul>
+<li><code>name</code>: <em>(string)</em> The player’s user name, as others see in-world</li>
+<li><code>userId</code>: <em>(string)</em> A UUID string that identifies the player. If the player has a public key, this field will have the same value as the public key.</li>
+<li><code>isGuest</code>: <em>(boolean)</em> Indicates if the player has a public key. <em>True</em> if the player is a guest account without a public key.</li>
+<li><code>position</code>: <em>(Vector3)</em> The position of the avatar in the scene.</li>
+<li><code>avatar</code>: A nested object with data about the player’s base avatar and appearance.</li>
+<li><code>wearables</code>: An array of identifiers for each of the wearables that the player is currently wearing. For example <code>urn:decentraland:off-chain:base-avatars:green_hoodie</code>. All wearables have a similar identifier, even if they’re NFTs.</li>
+<li><code>emotes</code>: An array of identifiers for each of the emotes that the player currently has equipped in the quick access wheel.</li>
+<li><code>entity</code>: A reference to the player entity. This can be handy to pass to other functions, or to add custom components to it.</li>
+</ul>
+<p>The <code>avatar</code> object has the following nested information:</p>
+<ul>
+<li><code>bodyShapeUrn</code>: An identifier for the avatar’s general body shape. Either <code>urn:decentraland:off-chain:base-avatars:BaseFemale</code> for female or <code>urn:decentraland:off-chain:base-avatars:BaseMale</code> for male.</li>
+<li><code>skinColor</code>: Player skin color as a <code>Color4</code></li>
+<li><code>eyesColor</code>: Player eye color as a <code>Color4</code></li>
+<li><code>hairColor</code>: Player hair color as a <code>Color4</code></li>
+<li><code>name</code>: The player’s name.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPlayer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@dcl/sdk/src/players'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">main() {</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">createCube</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">myPlayer</span> <span class="o">=</span> <span class="nx">getPlayer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nx">myPlayer</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Is Guest: '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">isGuest</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Name : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'UserId : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">userId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Avatar shape : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Avatar shape : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">avatar</span><span class="o">?</span><span class="p">.</span><span class="nx">bodyShapeUrn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Avatar eyes color : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">avatar</span><span class="o">?</span><span class="p">.</span><span class="nx">eyesColor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Avatar hair color : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">avatar</span><span class="o">?</span><span class="p">.</span><span class="nx">hairColor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Wearables on : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">wearables</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Emotes available : '</span><span class="p">,</span> <span class="nx">myPlayer</span><span class="p">.</span><span class="nx">emotes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote class="book-hint info">
+<strong>💡 Tip</strong>: When testing in preview, to avoid using a random avatar, run the scene in the browser connected with your Metamask wallet. In the Decentraland Editor, open the Decentraland tab and hover your mouse over it to display the three dots icon on the top-right. Click this icon and select <strong>Open in browser with Web3</strong>.
+</blockquote>
+<p>To get the data for a specific player in the scene, different from the current player, run <code>getPlayer()</code> with an object with a <code>userId</code> property.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPlayer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@dcl/sdk/src/players'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">transform</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PlayerIdentityData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Transform</span>
+</span></span><span class="line"><span class="cl"><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">getPlayer</span><span class="p">({</span> <span class="nx">userId</span>: <span class="kt">data.address</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'PLAYER : '</span><span class="p">,</span> <span class="nx">player</span><span class="o">?</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The snippet above iterates over all the entities with a <code>PlayerIdentityData</code> component, meaning all the avatar entities in the scene. It then runs the <code>getPlayer()</code> for that entity.</p>
+<p><code>getPlayer()</code> can only fetch data from players who are currently standing in the same scene, they don’t have to necessarily be in visual range, but they should be connected to the same comms island. To try this out in preview, open a second tab and log in with a different account, and have both players stand inside the scene.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: User IDs must always be lowercase. If copying a wallet address, make sure all the characters are set to lowercase.
+</blockquote>
+<h2 id="data-from-any-player">
+Data from any player
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#data-from-any-player">#</a>
+</h2>
+<p>To obtain information from any player, make a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/#call-a-rest-api">
+REST API call
+</a> to the content servers.</p>
+<p>This information is exposed in the following URL, appending the player’s user id to the url parameter.</p>
+<p><code>https://peer.decentraland.org/lambdas/profile/&lt;player user id&gt;</code></p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: Try the URL out in a browser to see how the response is structured.
+</blockquote>
+<p>The following information is available from this API:</p>
+<ul>
+<li><code>displayName</code>: <em>(string)</em> The player’s user name, as others see in-world</li>
+<li><code>userId</code>: <em>(string)</em> A UUID string that identifies the player. If the player has a public key, this field will have the same value as the public key.</li>
+<li><code>hasConnectedWeb3</code>: <em>(boolean)</em> Indicates if the player has a public key. <em>True</em> if the player has one.</li>
+<li><code>publicKey</code>: <em>(string)</em> The public key of the player’s Ethereum wallet. If the player logs in as a guest, with no linked wallet, this field will be <code>null</code>.</li>
+<li><code>avatar</code>: A nested object with data about the player’s appearance.</li>
+<li><code>version</code>: <em>(number)</em> A version number that increases by one every time the player changes any of their settings. Use this if you encounter conflicting data, to know what version is more recent.</li>
+</ul>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: For any Ethereum transactions with the player, always use the <code>publicKey</code> field, instead of the <code>userId</code>, to avoid dealing with non-existing wallets.
+</blockquote>
+<p>The <code>avatar</code> object has the following nested information:</p>
+<ul>
+<li>
+<p><code>wearables</code>: <code>WearableId[]</code> An array of identifiers for each of the wearables that the player is currently wearing. For example <code>urn:decentraland:off-chain:base-avatars:green_hoodie</code>. All wearables have a similar identifier, even if they’re NFTs.</p>
+</li>
+<li>
+<p><code>bodyShape</code>: An identifier for the avatar’s general body shape. Either <code>urn:decentraland:off-chain:base-avatars:BaseFemale</code> for female or <code>urn:decentraland:off-chain:base-avatars:BaseMale</code> for male.</p>
+</li>
+<li>
+<p><code>skinColor</code>: <em>ColorString</em> A hex value for the player’s skin color.</p>
+</li>
+<li>
+<p><code>hairColor</code>: <em>ColorString</em> A hex value for the player’s hair color.</p>
+</li>
+<li>
+<p><code>eyeColor</code>: <em>ColorString</em> A hex value for the player’s eye color.</p>
+</li>
+<li>
+<p><code>snapshots</code>: A nested object with base64 representations of .jpg images of the player in various resolutions.</p>
+<ul>
+<li><code>face256</code>: <em>string</em> The player’s face as a 256x256 pixel image.</li>
+<li><code>body</code>: <em>string</em> The full resolution image of the player standing straight, with 512x1024 pixels.</li>
+</ul>
+</li>
+</ul>
+<blockquote class="book-hint danger">
+<strong>❗Warning</strong>
+The snapshots of the avatar will be deprecated in the future and will no longer be returned as part of an avatar’s data. The recommended approach is to use <code>AvatarTexture</code> instead, see <a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/#avatar-portraits" target="_blank">
+Avatar Portraits
+</a>.
+</blockquote>
+<p>Unlike <code>getPlayer()</code>, this option is not limited to just the players who are currently in the same scene, or even in the same server. With this approach you can fetch data from any player that has logged onto the servers in the past.</p>
+<p>If you know which server the player you want to query is connected to, you can get more up-to-date data by sending your requests to that specific server. For example, if the player changes clothes, this information will be available instantly in the player’s server, but will likely take a couple of minutes to propagate to the <code>peer.decentraland.org</code> server.</p>
+<p><code>https://&lt;player server&gt;/lambdas/profile/&lt;player user id&gt;</code></p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: You can obtain the current player’s server by fetching <code>getRealm().domain</code>.
+</blockquote>
+<p>This example combines <code>myProfile.userId</code> and <code>getRealm()</code> to obtain the player’s data directly from the server that the player is on:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getRealm</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'~system/Runtime'</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">myProfile</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@dcl/sdk/network'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">fetchPlayerData() {</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="p">{</span> <span class="nx">realmInfo</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getRealm</span><span class="p">({})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">realmInfo</span><span class="p">.</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/lambdas/profile/</span><span class="si">${</span><span class="nx">myProfile</span><span class="p">.</span><span class="nx">userId</span><span class="si">}</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'using URL: '</span><span class="p">,</span> <span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kr">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)).</span><span class="nx">json</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'full response: '</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s1">'player is wearing :'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">json</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">metadata</span><span class="p">.</span><span class="nx">avatars</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">avatar</span><span class="p">.</span><span class="nx">wearables</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'player owns :'</span><span class="p">,</span> <span class="nx">json</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">metadata</span><span class="p">.</span><span class="nx">avatars</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">inventory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'an error occurred while reaching for player data'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fetchPlayerData</span><span class="p">()</span>
+</span></span></code></pre></div><h2 id="player-data-components">
+Player data components
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#player-data-components">#</a>
+</h2>
+<p>Instead of using <code>getPlayer()</code>, you can read data directly from a series of components that store the data on each player entity. The following components exist:</p>
+<ul>
+<li><code>PlayerIdentityData</code>: Stores the player address and an <code>isGuest</code> property to flag guest accounts.</li>
+<li><code>AvatarBase</code>: Stores data about the base avatar, including:
+<ul>
+<li><code>name</code>: The player’s name.</li>
+<li><code>bodyShapeUrn</code>: The ids corresponding to male or female body type.</li>
+<li><code>skinColor</code>: Player skin color as a <code>Color4</code></li>
+<li><code>eyeColor</code>: Player eye color as a <code>Color4</code></li>
+<li><code>hairColor</code>: Player hair color as a <code>Color4</code></li>
+</ul>
+</li>
+<li><code>AvatarEquippedData</code>: The list of equipped wearables and emotes.
+<ul>
+<li><code>wearableUrns</code>: The list of wearables that the player currently has equipped.</li>
+<li><code>emoteUrns</code>: The list of emotes that the player currently has equipped in the quick access wheel.</li>
+</ul>
+</li>
+<li><code>AvatarEmoteCommand</code>: Info about emotes that the player is currently playing. It includes:
+<ul>
+<li><code>emoteUrn</code>: The URN for the last emote played by the player, since they entered the scene</li>
+<li><code>loop</code>: True if the emote is being looped</li>
+<li><code>timestamp</code>: The time when this emote was triggered</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="nx">attach</span><span class="p">,</span> <span class="nx">transform</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PlayerIdentityData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">AvatarBase</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">AvatarEquippedData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Transform</span>
+</span></span><span class="line"><span class="cl"><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'PLAYER DATA: '</span><span class="p">,</span> <span class="p">{</span> <span class="nx">entity</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">transform</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="nx">attach</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: All of these components are read-only. You cannot change their values from the scene.
+</blockquote>
+<h2 id="get-portable-experiences">
+Get Portable Experiences
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#get-portable-experiences">#</a>
+</h2>
+<p>Portable experiences are essentially scenes that are not constrained to parcels of land. Players can carry these with them anywhere they go in Decentraland, adding a new layer of content over the world. Smart Wearables are examples of portable experiences. You may want to know if a player is wearing one of these, since a smart wearable may enable players to have abilities that could be considered cheating in a competitive game. For example, in a platform game, a player that wears a jetpack has a very unfair advantage over others.</p>
+<p>As a scene creator, you may want to limit what players wearing portable experiences can do in your scene. Use <code>getPortableExperiencesLoaded()</code> to check if the player has any portable experiences currently activated.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPortableExperiencesLoaded</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'~system/PortableExperiences'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">executeTask</span><span class="p">(</span><span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">portableExperiences</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPortableExperiencesLoaded</span><span class="p">({})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">portableExperiences</span><span class="p">.</span><span class="nx">loaded</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p><code>getPortableExperiencesLoaded()</code> returns an array of objects, each of these objects includes an <code>id</code> attribute. In the case of wearables, the id is the wearable’s URN.</p>
+<h2 id="get-detailed-info-about-a-players-wearables">
+Get detailed info about a player’s wearables
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#get-detailed-info-about-a-players-wearables">#</a>
+</h2>
+<p>The <code>getPlayer()</code> function returns only a list of wearable ids, without information about each wearable. Maybe you want to check for any wearable of a specific category (eg: hats), or any wearable of a specific rarity (eg: Mythic), for that you’ll need to fetch more detailed information about the player’s wearables.</p>
+<p>Make a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/#call-a-rest-api">
+REST API call
+</a> to the following URL, to obtain a full updated list of all wearables that are currently usable, with details about each.</p>
+<p><code>${playerRealm.realmInfo.baseUrl}/lambdas/collections/wearables-by-owner/${userData.userId}?includeDefinitions</code></p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: To construct this URL, you must obtain the realm (likely with with <code>getRealm()</code>) and the player’s id (likely with <code>getPlayer()</code>)
+</blockquote>
+<p>This feature could be used together with fetching info about the player, to for example only allow players to enter a place if they are wearing any wearable from the halloween collection, or any wearable that is of <em>legendary</em> rarity.</p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: Try the URL out in a browser to see how the response is structured.
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getPlayer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'@dcl/sdk/src/players'</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">getRealm</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">'~system/Runtime'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">fetchWearablesData() {</span>
+</span></span><span class="line"><span class="cl">	<span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">let</span> <span class="nx">userData</span> <span class="o">=</span> <span class="nx">getPlayer</span><span class="p">({})</span>
+</span></span><span class="line"><span class="cl">		<span class="kr">const</span> <span class="nx">realm</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getRealm</span><span class="p">({})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">			<span class="sb">`</span><span class="si">${</span><span class="nx">realm</span><span class="p">.</span><span class="nx">realmInfo</span><span class="o">?</span><span class="p">.</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/lambdas/collections/wearables-by-owner/</span><span class="si">${</span><span class="nx">userData</span><span class="p">.</span><span class="nx">userId</span><span class="si">}</span><span class="sb">?includeDefinitions`</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'using URL: '</span><span class="p">,</span> <span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">let</span> <span class="nx">json</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'full response: '</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'an error occurred while reaching for wearables data'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">executeTask</span><span class="p">(</span><span class="nx">fetchWearablesData</span><span class="p">)</span>
+</span></span></code></pre></div><p>TODO: Update snippet</p>
+<h2 id="check-the-players-camera-mode">
+Check the player’s camera mode
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#check-the-players-camera-mode">#</a>
+</h2>
+<p>Players can either be using a 1st or 3rd person camera when exploring Decentraland. Check which of these the player is using by checking the value <code>CameraMode</code> component of the <code>engine.CameraEntity</code> entity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">checkCameraMode() {</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Transform</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">))</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">let</span> <span class="nx">cameraEntity</span> <span class="o">=</span> <span class="nx">CameraMode</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nx">cameraEntity</span><span class="p">.</span><span class="nx">mode</span> <span class="o">==</span> <span class="nx">CameraType</span><span class="p">.</span><span class="nx">CT_THIRD_PERSON</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'The player is using the 3rd person camera'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'The player is using the 1st person camera'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">checkCameraMode</span><span class="p">)</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: Camera information is only available for the current player running the scene. You can’t query for the camera data of any other player.
+</blockquote>
+<p>The camera mode uses a value from the <code>CameraType</code> enum. The following values are possible:</p>
+<ul>
+<li><code>CameraType.CT_FIRST_PERSON</code></li>
+<li><code>CameraType.CT_THIRD_PERSON</code></li>
+</ul>
+<p>The <code>CameraMode</code> component of the <code>engine.CameraEntity</code> is read-only, you can’t force the player to change camera mode through this.</p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: To change the player’s camera mode, use a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/#camera-modifiers" target="_blank">
+Camera modifier area
+</a>.
+</blockquote>
+<p>Knowing the camera mode can be very useful to fine-tune the mechanics of your scene to better adjust to what’s more comfortable using this mode. For example, small targets are harder to click when in 3rd person.</p>
+<blockquote class="book-hint warning">
+<p><strong>📔 Note</strong>: Avoid referring to the <code>engine.CameraEntity</code> on the initial scene loading, because that can result in errors if the entities are not initialized yet. To avoid this problem, use these inside the <code>main()</code> function, or on a function indirectly called by <code>main()</code>. You can also encapsulate the behavior in an async <a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/#the-executetask-function" target="_blank">
+<code>executeTask</code> block
+</a>.</p>
+<p>Another option is to refer to this entity inside a system. It will always be available, because the first execution of the system is called once the scene is already properly initialized.</p>
+</blockquote>
+<h2 id="check-if-the-player-has-the-cursor-locked">
+Check if the player has the cursor locked
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/#check-if-the-player-has-the-cursor-locked">#</a>
+</h2>
+<p>Players can switch between two cursor modes: <em>locked cursor</em> mode to control the camera or <em>unlocked cursor</em> mode for moving the cursor freely over the UI.</p>
+<p>Players unlock the cursor by clicking the <em>Right mouse button</em> or pressing the <em>Esc</em> key, and lock the cursor back by clicking anywhere in the screen.</p>
+<p>Check the <code>PointerLock</code> component of the scene’s <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/#reserved-entities">
+camera entity
+</a> to find out what the current cursor mode is.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">main() {</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">const</span> <span class="nx">isLocked</span> <span class="o">=</span> <span class="nx">PointerLock</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">).</span><span class="nx">isPointerLocked</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isLocked</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/#player-locks-or-unlocks-cursor">
+Event listeners
+</a> to see how to easily react to changes in the cursor state.</p>
+<p>The <code>PointerLock</code> component of the <code>engine.CameraEntity</code> is read-only, you can’t force the player to lock or unlock the cursor.</p>
+<blockquote class="book-hint warning">
+<p><strong>📔 Note</strong>: Avoid referring to the <code>engine.CameraEntity</code> on the initial scene loading, because that can result in errors if the entities are not initialized yet. To avoid this problem, use these inside the <code>main()</code> function, or on a function indirectly called by <code>main()</code>. You can also encapsulate the behavior in an async <a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/#the-executetask-function" target="_blank">
+<code>executeTask</code> block
+</a>.</p>
+<p>Another option is to refer to the entity inside a system. It will always be available, because the first execution of the system is called once the scene is already properly initialized.</p>
+</blockquote>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Player data _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/creator/sdk7/interactivity/user-data.md" target="_blank" rel="noopener">
+<img src="./Player data _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Player data _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Player data _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

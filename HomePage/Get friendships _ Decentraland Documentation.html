@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://docs.decentraland.org/contributor/social-service/get-friends/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Details about using the Social Service API to retrieve friendships, requests, and mutual friends in the Decentraland platform. The API allows developers to interact with the Social Service to retrieve friendships-related information.
+REST API # To retrieve friendships, the Social Service exposes a REST API :
+GET /friendships/me - Retrieve the current user’s friendships. Requires the access token in the Authorization header. GET /friendships/{other-address}/mutuals - Retrieve mutual friends with another user.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Get friendships">
+<meta property="og:description" content="Details about using the Social Service API to retrieve friendships, requests, and mutual friends in the Decentraland platform. The API allows developers to interact with the Social Service to retrieve friendships-related information.
+REST API # To retrieve friendships, the Social Service exposes a REST API :
+GET /friendships/me - Retrieve the current user’s friendships. Requires the access token in the Authorization header. GET /friendships/{other-address}/mutuals - Retrieve mutual friends with another user.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/contributor/social-service/get-friends/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="contributor">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Get friendships | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Get friendships _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Get friendships _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Get friendships _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Get friendships _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Get friendships _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Get friendships _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+<div class="active-bar" style="border-color: #EE834A;"></div>
+<style>
+                :root {
+                  --primary: #EE834A;
+                }
+              </style>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Get friendships _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Introduction</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/welcome/" class="">Welcome!</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/architecture/" class="">Architecture</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Identity</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/authchain/" class="">Authentication Chain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/signed-fetch/" class="">Signed Fetch</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Content</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/filesystem/" class="">File System</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities/" class="">Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/pointers/" class="">Pointers</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/snapshots/" class="">Snapshots</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/collections/" class="">Collections</a>
+</li>
+<li>
+<input type="checkbox" id="section-78d857344d9976cb2d2de1aa922ff1d0" class="toggle">
+<label for="section-78d857344d9976cb2d2de1aa922ff1d0" class="flex justify-between">
+<a role="button" class="">Entity Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/scenes/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/outfits/" class="">Outfits</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/profiles/" class="">Profiles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/wearables/" class="">Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/emotes/" class="">Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/stores/" class="">Stores</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/practice/" class="">Practice</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Scene Runtime</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/globals/" class="">Globals</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/execution/" class="">Execution</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/permissions/" class="">Permissions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/entities/" class="">Basic Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/components/" class="">Basic Components</a>
+</li>
+<li>
+<input type="checkbox" id="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="toggle">
+<label for="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="flex justify-between">
+<a role="button" class="">Modules</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/" class="">EngineApi</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/restricted_actions/" class="">RestrictedActions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/user_identity/" class="">UserIdentity</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/" class="">SignedFetch</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Communications</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/main/" class="">MAIN Realm</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/archipelago/" class="">Archipelago</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/messages/" class="">Messages</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transports/" class="">Transports</a>
+</li>
+<li>
+<input type="checkbox" id="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="toggle">
+<label for="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="flex justify-between">
+<a role="button" class="">Transport Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/livekit/" class="">LiveKit</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/websocket/" class="">Websocket</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/signed-login/" class="">Signed Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/offline/" class="">Offline</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/simulator/" class="">Simulator</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Catalyst Nodes</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/realm-selection/" class="">Realm Selection</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Explorer Renderer</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="toggle">
+<label for="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="flex justify-between">
+<a role="button" class="">Components</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/unity-renderer/components/how-to-create-components/" class="">Component Creation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Social Service</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/js-client/" class="">Javascript Client</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/login/" class="">Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/get-friends/" class="active">Get friendships</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/put-friends/" class="">Act on events and users</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-create-new-entity-type/" class="">New entity type</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/" class="">Run a Catalyst Node</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Get friendships _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Get friendships</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Get friendships</h1><p>Details about using the Social Service API to retrieve friendships, requests, and mutual friends in the Decentraland platform. The API allows developers to interact with the Social Service to retrieve friendships-related information.</p>
+<h3 id="rest-api">
+REST API
+<a class="anchor" href="https://docs.decentraland.org/contributor/social-service/get-friends/#rest-api">#</a>
+</h3>
+<p>To retrieve friendships, the Social Service exposes a <a href="https://social-service-api-specs.pages.dev/" target="_blank">
+REST API
+</a>:</p>
+<ul>
+<li><code>GET /friendships/me</code> - Retrieve the current user’s friendships. Requires the access token in the Authorization header.</li>
+<li><code>GET /friendships/{other-address}/mutuals</code> - Retrieve mutual friends with another user. Requires the access token in the Authorization header.</li>
+</ul>
+<h3 id="websocket-rpc-server">
+WebSocket RPC Server
+<a class="anchor" href="https://docs.decentraland.org/contributor/social-service/get-friends/#websocket-rpc-server">#</a>
+</h3>
+<p>The Social Service WebSocket API provides two message types for retrieving friendships and mutual friends. You need first to establish a WebSocket connection and then use those methods to stream user-related information.</p>
+<ul>
+<li><code>GetFriends</code> - Retrieve a user’s friends. Returns a stream of user responses.</li>
+<li><code>GetMutualFriends</code> - Retrieve mutual friends with another user. Returns a stream of user responses.</li>
+</ul>
+<p>Refer to the <a href="https://github.com/decentraland/protocol/blob/main/proto/decentraland/social/friendships/friendships.proto#L7" target="_blank">
+friendships.proto file
+</a> for more details about these message types.</p>
+<h2 id="javascript-code-examples">
+JavaScript Code Examples
+<a class="anchor" href="https://docs.decentraland.org/contributor/social-service/get-friends/#javascript-code-examples">#</a>
+</h2>
+<p>To interact with the Social Service WebSocket API using JavaScript, you can use the provided RPC client as explained before. But if you need to implement it yourself, below there are code examples demonstrating how to retrieve friends and mutual friends:</p>
+<h3 id="getting-all-friends">
+Getting All Friends
+<a class="anchor" href="https://docs.decentraland.org/contributor/social-service/get-friends/#getting-all-friends">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createRpcClient</span><span class="p">,</span> <span class="nx">createWebSocketsTransport</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'@dcl/rpc/dist/client'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">FriendshipsServiceDefinition</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'./protobuff-types/decentraland/social/friendships/friendships.gen'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">socialClientRpcUrl</span> <span class="o">=</span> <span class="s1">'wss://social.decentraland.org'</span><span class="p">;</span> <span class="c1">// Replace with the actual URL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">webSocketsTransport</span> <span class="o">=</span> <span class="nx">createWebSocketsTransport</span><span class="p">(</span><span class="nx">socialClientRpcUrl</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">service</span> <span class="o">=</span> <span class="nx">loadService</span><span class="p">(</span><span class="nx">FriendshipsServiceDefinition</span><span class="p">,</span> <span class="nx">webSocketsTransport</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">service</span><span class="p">.</span><span class="nx">getFriends</span><span class="p">(</span><span class="nx">Payload</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span> <span class="nx">synapseToken</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="kr">await</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">friends</span> <span class="k">of</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">processErrors</span><span class="p">(</span><span class="nx">friends</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">userList</span> <span class="o">=</span> <span class="nx">friends</span><span class="p">.</span><span class="nx">users</span><span class="o">?</span><span class="p">.</span><span class="nx">users</span> <span class="o">??</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Process the list of friends
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="getting-mutual-friends">
+Getting Mutual Friends
+<a class="anchor" href="https://docs.decentraland.org/contributor/social-service/get-friends/#getting-mutual-friends">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">service</span><span class="p">.</span><span class="nx">getMutualFriends</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MutualFriendsPayload</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">user</span><span class="o">:</span> <span class="p">{</span> <span class="nx">address</span> <span class="p">},</span> 
+</span></span><span class="line"><span class="cl">    <span class="nx">authToken</span><span class="o">:</span> <span class="p">{</span> <span class="nx">synapseToken</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="kr">await</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">mutualFriend</span> <span class="k">of</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">processErrors</span><span class="p">(</span><span class="nx">mutualFriend</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">mutualFriendList</span> <span class="o">=</span> <span class="nx">mutualFriend</span><span class="p">.</span><span class="nx">users</span><span class="o">?</span><span class="p">.</span><span class="nx">users</span> <span class="o">??</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Process the list of mutual friends
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>For more code examples and details, visit the <a href="https://github.com/decentraland/social-rpc-client-js" target="_blank">
+social-rpc-client-js GitHub repository
+</a></p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Get friendships _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/contributor/social-service/get-friends.md" target="_blank" rel="noopener">
+<img src="./Get friendships _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Get friendships _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Get friendships _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

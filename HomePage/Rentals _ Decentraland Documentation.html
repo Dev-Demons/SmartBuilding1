@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://docs.decentraland.org/player/market/rentals/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LAND Rentals">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Rentals">
+<meta property="og:description" content="LAND Rentals">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/player/market/rentals/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="player">
+<meta property="article:published_time" content="2022-11-29T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Rentals | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Rentals _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Rentals _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Rentals _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Rentals _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Rentals _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+<style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      width: 1000px !important;
+      margin-left: -500px !important;
+      position: fixed !important;
+      z-index: 100000200 !important;
+      background: none !important;
+      pointer-events: none !important;
+      display: inline-block !important;
+      visibility: visible  !important;
+      white-space: pre-line;
+    }
+    .tippy-box[data-theme~="custom"] {
+      font-size: 14px  !important;
+      max-width: 200px  !important;
+      text-align: center !important;
+      backdrop-filter: blur(2px) !important;
+      background-color: #000000b8 !important;
+      color: #ffffffff !important;
+      overflow-wrap: break-word !important;
+      font-family: 
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif  !important;
+      border: 1px solid #ffffff00;
+      white-space: pre-line;
+    }
+    [data-tippy-root] {
+      display: inline-block !important;
+      visibility: visible  !important;
+      position: absolute !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='top'] > .tippy-arrow::before { 
+      border-top-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='bottom'] > .tippy-arrow::before {
+      border-bottom-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='left'] > .tippy-arrow::before {
+      border-left-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='right'] > .tippy-arrow::before {
+      border-right-color: #000000b8 !important;
+    }
+    .mtt-highlight{
+      background-color: #21dc6d40  !important;
+      position: absolute !important;   
+      z-index: 100000100 !important;
+      pointer-events: none !important;
+      display: inline !important;
+      border-radius: 3px !important;
+    }
+    .mtt-image{
+      width: 180px  !important;
+      border-radius: 3px !important;
+    }
+    .ocr_text_div{
+      position: absolute;
+      opacity: 0.5;
+      color: transparent !important;
+      border: 2px solid CornflowerBlue;
+      background: none !important;
+      border-radius: 3px !important;
+    }</style><style id="mttstyleSubtitle">
+    #ytp-caption-window-container .ytp-caption-segment {
+      cursor: text !important;
+      user-select: text !important;
+      font-family: 
+      -apple-system, BlinkMacSystemFont,
+      "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif  !important;
+    }
+    .caption-visual-line{
+      display: flex  !important;
+      align-items: stretch  !important;
+    }
+    .captions-text .caption-visual-line:first-of-type:after {
+      content: '⣿⣿';
+      background-color: #000000b8;
+      display: inline-block;
+      vertical-align: top;
+      opacity:0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    .captions-text:hover .caption-visual-line:first-of-type:after {
+      opacity:1;
+    }
+    .ytp-pause-overlay {
+      display: none !important;
+    }
+    .ytp-expand-pause-overlay .caption-window {
+      display: block !important;
+    }
+  </style><style>
+			@-webkit-keyframes spin {
+				0% { -webkit-transform: rotate(0deg); }
+				100% { -webkit-transform: rotate(360deg); }
+			}
+		
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			input.bito-email-input:-webkit-autofill,
+			input.bito-email-input:-webkit-autofill:hover,
+			input.bito-email-input:-webkit-autofill:focus {
+			  -webkit-text-fill-color: rgb(255, 255, 255);
+			  transition: background-color 5000s ease-in-out 0s;
+			}
+			
+			#bito-body::-webkit-scrollbar,
+			#emptyDiv-inner::-webkit-scrollbar,
+			#loginParentDiv-outer::-webkit-scrollbar {
+			  width: 4px;
+			  border-radius: 24px;
+			  color: #7a8084;
+			}
+			
+			#bito-body::-webkit-scrollbar-thumb,
+			#emptyDiv-inner::-webkit-scrollbar-thumb,
+			#loginParentDiv-outer::-webkit-scrollbar-thumb {
+			  background: #888; 
+			}
+			
+			#bito-body::-webkit-scrollbar-thumb:hover,
+			#emptyDiv-inner::-webkit-scrollbar-thumb:hover,
+			#loginParentDiv-outer::-webkit-scrollbar-thumb:hover {
+			  background: #555; 
+			}
+
+			.login-network-error-container {
+				padding: 10px 16px 8px;
+				color: rgb(255 0 0);
+			}		
+			
+			#loader {
+				background-color: #00000085;
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				left: 0px;
+				height: 300px;
+				align-items: center;
+				justify-content: center;
+				display: grid;
+				z-index: 3002;
+				opacity: 9999;
+			}
+			
+			.spinner {
+			  display: inline-block;
+				  width: 1.5rem;
+				  height: 1.5rem;
+				  vertical-align: text-bottom;
+				  border: 1.75px solid #fff;
+				  border-right-color: transparent;
+				  border-radius: 50%;
+				  animation: spinner-border .75s linear infinite;
+				  margin-top:-30px
+			}
+			
+			@keyframes spinner-border {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			  }
+		</style></head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+<div class="active-bar" style="border-color: #FF2D55;"></div>
+<style>
+                :root {
+                  --primary: #FF2D55;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Rentals _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>General</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/introduction/" class="">Introduction</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/faq/" class="">FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/whitepaper/" class="">Whitepaper</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/hardware-requirements/" class="">Hardware requirements</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/hardware-acceleration/" class="">Hardware acceleration</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/meet-with-friends/" class="">Meeting with friends</a>
+</li>
+<li>
+<input type="checkbox" id="section-0076a0fde0d8da5411851bee7bf1fd1d" class="toggle">
+<label for="section-0076a0fde0d8da5411851bee7bf1fd1d" class="flex justify-between">
+<a role="button" class="">In World Features</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/in-world-features/age-rating-scene-reporting/" class="">Age Rating and Scene Reporting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/in-world-features/voice-chat/" class="">Voice Chat</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Marketplace</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/market/marketplace/" class="">Marketplace</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/land-manager/" class="">LAND Manager</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/info-from-land/" class="">Get parcel info</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/api/" class="">LAND API Reference</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/rentals/" class="active">Rentals</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Events</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/events/faq/" class="">FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<span>DAO</span>
+<ul>
+<li>
+<input type="checkbox" id="section-91f2a8130ea8ff7fa167189fa8ae9850" class="toggle">
+<label for="section-91f2a8130ea8ff7fa167189fa8ae9850" class="flex justify-between">
+<a role="button" class="">Overview</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-is-the-dao/" class="">What is the DAO</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-can-you-do-with-the-dao/" class="">What can you do with the DAO</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/" class="">How the DAO works</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-smart-contracts-does-the-dao-control/" class="">The DAO Smart Contracts</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/the-dao-fund/" class="">The DAO Fund</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/the-daos-limitations/" class="">DAO Limitations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-do-you-need-to-participate/" class="">Participation Requirements</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-be648e0dec5a5927848a593509e9eedc" class="toggle">
+<label for="section-be648e0dec5a5927848a593509e9eedc" class="flex justify-between">
+<a role="button" class="">Grants</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/grants-program/" class="">Grants Program</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/receiving-grants/" class="">Receiving Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/requesting-grants/" class="">Requesting Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/grants-faq/" class="">Grants FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/security-recommendations/" class="">Security Recommendations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d20ebc1f4098b55560b6a2e98ba01123" class="toggle">
+<label for="section-d20ebc1f4098b55560b6a2e98ba01123" class="flex justify-between">
+<a role="button" class="">Grants (Legacy)</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/community-grants/" class="">Community Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/receiving-grants/" class="">Receiving Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/requesting-grants/" class="">Requesting Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/grants-faq/" class="">Grants FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/dao-userguide/" class="">DAO User Guide</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Blockchain Integration</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/get-a-wallet/" class="">Get a Wallet For Beginners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/ethereum-essentials/" class="">About the blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/transactions-in-polygon/" class="">Transactions in Polygon</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/buying-nfts/" class="">Buying NFTs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/estates-marketplace-integrations/" class="">Integrating Decentraland's Estate in your Marketplace</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Rentals _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Rentals</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Rentals</h1><h1 id="glossary">
+Glossary
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#glossary">#</a>
+</h1>
+<p><strong>Land Owner:</strong> Account (address) that owns LAND, it could be a Parcel, an Estate, or both.</p>
+<p><strong>Tenant:</strong> Account (address) that rents LAND from a LAND Owner. This is also the only Account that can change the Address that has Operator Permissions.</p>
+<p><strong>Operator Permission:</strong> The address with this permission is the only one that can deploy scenes in that LAND.</p>
+<p><strong>Transactions:</strong> Ethereum Blockchain transactions that cost gas.</p>
+<h1 id="intro">
+Intro
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#intro">#</a>
+</h1>
+<p>The new Renting System allows LAND Owners and Tenants to <strong>Rent LAND in a secure and trustless way</strong> by using a combination of signatures that are stored in a server handled by the Decentraland Foundation (off-chain) and Ethereum transactions (on-chain).</p>
+<p>For instance, a DJ could find a cool plot of LAND, rent it and deploy a nightclub to play every Saturday. A University could rent an Estate and build a campus for its students.</p>
+<p>Below you will find all the steps you need to follow to Rent a LAND, and the transactions involved for both parties.</p>
+<h1 id="for-land-owners">
+For LAND Owners
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#for-land-owners">#</a>
+</h1>
+<h2 id="list-land-for-rent">
+List LAND for Rent
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#list-land-for-rent">#</a>
+</h2>
+<p>As a LAND Owner, you can list your LAND (Parcels or Estates) for Rent in the <a href="https://market.decentraland.org/" target="_blank">
+Marketplace
+</a> &gt; My Assets &gt; LAND.</p>
+<p>In order to do this on-chain, the LAND Owner has to approve the Rent Smart Contract to use the LAND on their behalf. Then every listing would need a signature from the Owner as well.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image1.png" alt="" data-xblocker="passed" style="visibility: visible;"></p>
+<p>You can set a rental price per day in MANA and the amount of days you want to allow people to rent it. The price per day times the number of days in the period is what the tenant will pay <strong>upfront, and in total</strong> for that rent.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image2.png" alt="" data-xblocker="passed" style="visibility: visible;"></p>
+<p>After defining the Price per Day, you need to select the number of days that Users can rent your LAND. For example, if you select 7 and 30 days only, the Tenant can only choose between those 2 options. In case 30 days option is selected by the Tenant, that would be the duration of the rent from the day it is confirmed.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image3.png" alt="" data-xblocker="passed" style="visibility: visible;"></p>
+<p>You can also set an expiration date for the listing. This means that, if the LAND wasn’t rented until the selected date, the listing will be removed from the Marketplace. Also, the smart contract will reject the expired signature so that no one can rent it for the listing price and duration previously selected. This is a security measure to prevent it to be rented for an undesired price or duration.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image4.png" alt="" data-xblocker="passed" style="visibility: visible;"></p>
+<p>After the price, rent period and listing expiration date are set, your LAND will appear as available for rent in the Marketplace.</p>
+<aside>
+💡 When LAND is rented by a Tenant, it can not be sold until it’s claimed back. Bids from potential buyers can not be received either.
+</aside>
+<aside>
+💡 Voting Power is kept by the LAND Owner, even if it is rented.
+</aside>
+<h2 id="edit-or-cancel-a-listing">
+Edit or Cancel a Listing
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#edit-or-cancel-a-listing">#</a>
+</h2>
+<p>After the LAND is Listed for Rent in the Marketplace, and before anybody rents it, you can edit the conditions of the Listing by clicking on the pencil icon in the LAND detail. You can also remove the Listing from the Marketplace and the blockchain.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image5.png" alt=""></p>
+<aside>
+💡 Edit and cancel require a transaction, which costs gas. See Transactions section below for more details.
+</aside>
+<h2 id="after-the-rent-is-over">
+After the Rent is over
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#after-the-rent-is-over">#</a>
+</h2>
+<p>After the Rent is over, you can either <strong>Claim your LAND Back, or List it for Rent Again</strong>.</p>
+<p><strong>Operator Permissions are not transferred automatically back to the LAND Owner</strong>. In order to get them back, the LAND Owner has to Claim the LAND back by sending that transaction and paying for the gas fee. Confirming the transaction will take out Operator Permissions from the Tenant and give them back to the LAND Owner.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image6.png" alt="" data-xblocker="passed" style="visibility: visible;"></p>
+<p>The other possibility is to List the LAND for Rent Again, instead of claiming it back. This will not require paying for another transaction, but <strong>Operator Permissions will be kept by the previous Tenant until a new Tenant confirms a new Rent.</strong></p>
+<p>The LAND Owner can edit the price, rent period, and listing expiration date for the new listing.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image7.png" alt="" data-xblocker="passed" style="visibility: visible;"></p>
+<p>Both actions can be done from the LAND detail page in the Marketpalce.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image8.png" alt=""></p>
+<h2 id="renting-status">
+Renting Status
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#renting-status">#</a>
+</h2>
+<p>You can check the Status of any rented LAND in My Assets &gt; Store &gt; On Rent. The possible status are:</p>
+<ul>
+<li>Listed for Rent - The listing was confirmed and it’s available for users to rent in the Marketplace</li>
+<li>Rented Period Over - At this stage, the LAND is available to Claim Back or List Again for Rent by the LAND Owner</li>
+<li>Rented until <em>“date”</em> - The LAND is already rented and the Tenant has Operator Permissions until it’s claimed back or rented by another user</li>
+</ul>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image9.png" alt=""></p>
+<h1 id="for-tenants">
+For Tenants
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#for-tenants">#</a>
+</h1>
+<h2 id="rent-land">
+Rent LAND
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#rent-land">#</a>
+</h2>
+<p>All users can find LAND listed for rent in the Marketplace under the LAND section.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image10.png" alt=""></p>
+<p>There are LANDs that are available for Sale or Rent. In case both options are available, you can see the conditions available for each one by clicking on the toggle Sale/Rent.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image11.png" alt=""></p>
+<p>Once you find the LAND you want to rent, you need to select the Rent Period, this is the days you will have the LAND. After selecting the Rent Period, you will see the total price to be paid for the Rent.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image12.png" alt=""></p>
+<p>You’ll need to approve the Rent Smart Contract to take the MANA from your account before you proceed.</p>
+<p>Before you confirm the Rent, you can decide who will manage the LAND (Operator Permission). It can be yourself or any other address you choose.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image13.png" alt=""></p>
+<p>Operator Permission can be changed later by the Tenant (the address who rented the LAND in the first place) from the <a href="https://builder.decentraland.org/" target="_blank">
+Builder
+</a>.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image14.png" alt=""></p>
+<p>After selecting all the details and approving the Rent Smart Contract to handle your MANA, you can confirm the Rent by sending a transaction.</p>
+<p>And you are all set! you can start working on your LAND, and deploy a scene using the Builder or the SDK.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image15.png" alt=""></p>
+<p>Note: after the Rent ends, the Tenant will still have Operator Permissions until the LAND Owner Claims it back, or somebody else rents it. <strong>Make sure you save your content before the end of the rent, otherwise it could be lost.</strong></p>
+<aside>
+💡 Renting LAND does not transfer Voting Power to the Tenant. Voting Power is kept by the LAND Owner as defined by the DAO in this [Proposal]([https://market.decentraland.org/](https://governance.decentraland.org/proposal/?id=c98bd010-74b1-11ed-a9bf-f772a12a0556))
+</aside>
+<h1 id="transactions">
+Transactions
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#transactions">#</a>
+</h1>
+<p>For the sake of <strong>security and decentralization</strong>, the Renting system relies on the Ethereum blockchain as a source of truth.</p>
+<p>But, not every action involved requires an entry in the blockchain. If that was the case, it would be too expensive for both parties.</p>
+<p>Transactions in the blockchain are minimum in order to provide a <strong>robust and trustless system for LAND renting while keeping it affordable.</strong> These are all the transactions to consider:</p>
+<h2 id="for-land-owners-1">
+For Land Owners
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#for-land-owners-1">#</a>
+</h2>
+<h3 id="list-for-rent">
+List for Rent
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#list-for-rent">#</a>
+</h3>
+<p>Before Listing the first Parcel or Estate for rent, LAND Owners need to allow the Rents Smart Contract to operate LAND on their behalf. This has to be done only once for Parcels and only once for Estates.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image16.png" alt=""></p>
+<h3 id="claim-land-back-or-list-for-rent-again">
+Claim LAND Back or List for Rent Again
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#claim-land-back-or-list-for-rent-again">#</a>
+</h3>
+<p>After the renting period ends, <strong>Operator Permissions are not transferred automatically back to the LAND Owner</strong>. In order to get them back, the LAND Owner has to Claim the LAND back by sending that transaction and paying for the gas fee.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image17.png" alt=""></p>
+<p>Another possibility is to List the LAND for Rent Again, instead of claiming it back. This will not require paying for another transaction, but Operator Permissions will be kept by the previous Tenant until a new Tenant confirms a new Rent.</p>
+<h3 id="edit-listing">
+Edit Listing
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#edit-listing">#</a>
+</h3>
+<p>If either the Price, Rent Period, or Expiration Date is changed, a transaction has to be sent by the LAND Owner in order to protect themselves from somebody using the previous listing signature on the Smart Contract directly (not from the Marketplace UI) and getting it from a lower price than desired or for an undesired duration.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image18.png" alt=""></p>
+<h2 id="for-tenants-1">
+For Tenants
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#for-tenants-1">#</a>
+</h2>
+<h3 id="allow-rent-contract-to-operate-your-mana">
+Allow Rent Contract to operate your MANA
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#allow-rent-contract-to-operate-your-mana">#</a>
+</h3>
+<p>Whether it’s a Parcel or an Estate, every user that wants to Rent LAND has to send one transaction to allow the Rent Smart Contract to operate MANA on their behalf. This is needed because the Smart Contract has to pull the MANA and transfer it to the LAND Owner when the rent is activated. This is done only once for all LAND to be rented from that moment onwards.</p>
+<h3 id="rent-land-1">
+Rent LAND
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#rent-land-1">#</a>
+</h3>
+<p>After approving the Rent Smart Contract to operate your MANA, you are ready to confirm your first Rent. Once you find the LAND you want, choose the rent period, and confirm the Rent transaction, Operator Permissions are transferred to the selected address.</p>
+<p>If you want to rent another Parcel or Estate, you only need to send one transaction to confirm it, there is no need to approve the Smart Contract to operate your MANA again.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image19.png" alt=""></p>
+<h3 id="change-operator">
+Change Operator
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#change-operator">#</a>
+</h3>
+<p>At the moment of renting the LAND, the user can choose which address will have Operator Permissions for that LAND. If that address wants to be changed, a transaction has to be sent.</p>
+<p><img src="./Rentals _ Decentraland Documentation_files/Image20.png" alt=""></p>
+<h1 id="smart-contract-wallets">
+Smart Contract Wallets
+<a class="anchor" href="https://docs.decentraland.org/player/market/rentals/#smart-contract-wallets">#</a>
+</h1>
+<p>The Rentals feature relies heavily on off-chain signatures. Off-chain actions allow Land Owners to list LANDs for rent without paying the transaction cost.</p>
+<p>By signing a listing, the Rent Smart Contract can verify that the listing was created by the signer.</p>
+<p>Signing has the particularity that it requires a private key. All EOA (Externally Owned Accounts) have one, and they can sign listings with it. The Rentals Smart Contract will then verify the EOA generated signature when executing a rental.</p>
+<p>Smart Contracts Wallets, which are Smart Contracts. Do not have a private key, thus, they are unable to sign messages. Instead, an EOA authorized by the Smart Contract Wallet has to sign.</p>
+<p>To support these signatures, the Rent Smart Contract verifies with the Smart Contract Wallet if the signature is valid by following the <a href="https://eips.ethereum.org/EIPS/eip-1271" target="_blank">
+EIP-1271
+</a> standard. If the signature is valid, the rental can be executed.</p>
+<p>The Smart Contract Wallet not only has to have the standard signature verification method defined in the EIP-1271 but also the token receiver method defined in the <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">
+EIP-721 standard
+</a>. This is required while claiming LAND back because the Rent Smart Contract will call a <code>safeTransferFrom</code> to return the NFT to the Smart Contract Wallet, and if it has not implemented the appropriate <code>onERC721Received</code> function, it will fail to recover the LAND.</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Rentals _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/player/marketplace/rentals.md" target="_blank" rel="noopener">
+<img src="./Rentals _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Rentals _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+</body></html>

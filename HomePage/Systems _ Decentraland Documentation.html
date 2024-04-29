@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)https://docs.decentraland.org/creator/development-guide/sdk7/systems/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn how systems are used to update the scene state">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Systems">
+<meta property="og:description" content="Learn how systems are used to update the scene state">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/creator/development-guide/sdk7/systems/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="creator">
+<meta property="article:published_time" content="2018-01-16T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Systems | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Systems _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Systems _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Systems _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Systems _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Systems _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+<div class="active-bar" style="border-color: #4947CD;"></div>
+<style>
+                :root {
+                  --primary: #4947CD;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Systems _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Wearables &amp; Emotes</span>
+<ul>
+<li>
+<input type="checkbox" id="section-5238408129bdbe7a41bd58cdbed95be1" class="toggle">
+<label for="section-5238408129bdbe7a41bd58cdbed95be1" class="flex justify-between">
+<a role="button" class="">Wearables</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/wearables-overview/" class="">Wearables Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/" class="">Creating Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/linked-wearables/" class="">Linked wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17f08e4e58ad69e23f1096996f5c4e64" class="toggle">
+<label for="section-17f08e4e58ad69e23f1096996f5c4e64" class="flex justify-between">
+<a role="button" class="">Emotes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/emotes-overview/" class="">Emotes Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/creating-and-exporting-emotes/" class="">Creating Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/avatar-rig/" class="">Avatar Rig</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/rig-features/" class="">Rigging Features</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/props-and-sounds/" class="">Adding Props and Sounds to your Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/particles-in-emotes/" class="">Particles in Emotes 2.0</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-57010a4fb000b586393ef3ac0e4c708e" class="toggle">
+<label for="section-57010a4fb000b586393ef3ac0e4c708e" class="flex justify-between">
+<a role="button" class="">Manage Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/creating-collection/" class="">Creating a Collection</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-wearables/" class="">Uploading Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-emotes/" class="">Uploading Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-smart-wearables/" class="">Uploading Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b3bac40672f08584afca2b1951d77ffa" class="toggle">
+<label for="section-b3bac40672f08584afca2b1951d77ffa" class="flex justify-between">
+<a role="button" class="">Publishing Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/publishing-collections/" class="">Publishing Collections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/curation-committee/" class="">Curation committee</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials &amp; Examples</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/examples/7/" class="">Example scenes</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GP_K8WN7csnKnImK4R2TgMA" class="external-link " target="_blank" rel="noopener">SDK &amp; Editor Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GN8LcnnQk2BByo9L2Orvp9c" class="external-link " target="_blank" rel="noopener">Emote Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://github.com/decentraland-scenes/awesome-repository#tutorials" class="external-link " target="_blank" rel="noopener">Awesome Repository (Deprecated)<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Scenes (SDK7)</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b525100342227191f7fcea7ba56bb803" class="toggle">
+<label for="section-b525100342227191f7fcea7ba56bb803" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sdk-101/" class="">Quick start</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dev-workflow/" class="">Development workflow</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/installation-guide/" class="">Editor Installation Guide</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/editor/" class="">Decentraland Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-from-example/" class="">Scene from example</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/" class="">Coding essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-107b6725d990df022e2ce15c90ba14e8" class="toggle">
+<label for="section-107b6725d990df022e2ce15c90ba14e8" class="flex justify-between">
+<a role="button" class="">Designing the experience</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/mvp-guidelines/" class="">Scene MVP Guidelines</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/ux-ui-guide/" class="">UX and UI guide for creators</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/design-games/" class="">Design constraints for games</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="toggle" checked="">
+<label for="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/" class="active">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/" class="">Querying components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/data-oriented-programming/" class="">Data oriented programming</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-26d2ff837ef33c0c864da60b58012b08" class="toggle">
+<label for="section-26d2ff837ef33c0c864da60b58012b08" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/color-types/" class="">Color types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/text/" class="">Text shapes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/special-types/" class="">Geometry types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/" class="">Colliders</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-e2a5c62fa44576cfaf37400c3afd999c" class="toggle">
+<label for="section-e2a5c62fa44576cfaf37400c3afd999c" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/troubleshooting/" class="">Troubleshooting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/report-a-bug/" class="">Report a bug</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="toggle">
+<label for="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17cf12281279261a57549d3a62bf1f9b" class="toggle">
+<label for="section-17cf12281279261a57549d3a62bf1f9b" class="flex justify-between">
+<a role="button" class="">Optimizing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/performance-optimization/" class="">Performance optimization</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-limitations/" class="">Scene limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d988b988b9f10b302e874ddf848f6ba3" class="toggle">
+<label for="section-d988b988b9f10b302e874ddf848f6ba3" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/make-discoverable/" class="">Make your scene discoverable</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploy-third-party/" class="">Upload a preview</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="toggle">
+<label for="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/kinds-of-projects/" class="">Kinds of Projects</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/" class="">Files in a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/workspaces/" class="">Workspaces</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" class="">Portable experiences</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" class="">Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0c95a08d2936e4fb6641631c7518e5c9" class="toggle">
+<label for="section-0c95a08d2936e4fb6641631c7518e5c9" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-62db854699a952e0bb38c11370531240" class="toggle">
+<label for="section-62db854699a952e0bb38c11370531240" class="flex justify-between">
+<a role="button" class="">Input actions</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" class="">About input actions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/register-callback/" class="">Register callback</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/system-based-events/" class="">System based events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/advanced-button-events/" class="">Advanced button events</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/npc-avatars/" class="">NPC Avatars</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/" class="">Modifier Areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/runtime-data/" class="">Runtime data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deprecated-functions/" class="">Deprecated functions</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-8aced72970aba367ccb620ac0774d739" class="toggle">
+<label for="section-8aced72970aba367ccb620ac0774d739" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/serverless-multiplayer/" class="">Serverless Multiplayer</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/authoritative-server/" class="">3rd party servers</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-7c22809946dca82b52a0416bb19bee94" class="toggle">
+<label for="section-7c22809946dca82b52a0416bb19bee94" class="flex justify-between">
+<a role="button" class="">2D UI</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/onscreen-ui/" class="">2D UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dynamic-ui/" class="">Dynamic UIs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-button-events/" class="">UI Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-positioning/" class="">UI Positioning</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-text/" class="">UI Text</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-background/" class="">UI Background</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-special-elements/" class="">UI special types</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-3339f980e82707ed3f2ac8f0b7215bc6" class="toggle">
+<label for="section-3339f980e82707ed3f2ac8f0b7215bc6" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/second-layer/" class="">Second layer blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-a-dapp/" class="">Create a dApp</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploying-your-own-transactions-server/" class="">Deploying your own transactions server</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a9e2088c8e67585827711b1700609398" class="toggle">
+<label for="section-a9e2088c8e67585827711b1700609398" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/libraries/7/" class="">Library catalog</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-libraries/" class="">Create a library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cfc35d405c7d6b713873bbaa8ed9e303" class="toggle">
+<label for="section-cfc35d405c7d6b713873bbaa8ed9e303" class="flex justify-between">
+<a role="button" class="">Programming patterns</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" class="">Asynchronous code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/mutable-data/" class="">Data mutability</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/game-objects/" class="">Game objects</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-90195531610f61ac8dbe0e10d5e228a6" class="toggle">
+<label for="section-90195531610f61ac8dbe0e10d5e228a6" class="flex justify-between">
+<a role="button" class="">Web Editor</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/web-editor/" class="">Web Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items/" class="">Smart Items - Basic</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items-advanced/" class="">Smart Items - Advanced</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/editor-plus-code/" class="">Combine with code</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-76e89a14e1691ab97e791c67b7a232c7" class="toggle">
+<label for="section-76e89a14e1691ab97e791c67b7a232c7" class="flex justify-between">
+<a role="button" class="">API Reference</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/releases/7/" class="">API Reference SDK7</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/version-agreement/" class="">Version support agreement</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/testing-guidelines/" class="">SDK7 feedback guidelines</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-203470ceeef126c8dd8cbc9c390f57b4" class="toggle">
+<label for="section-203470ceeef126c8dd8cbc9c390f57b4" class="flex justify-between">
+<a role="button" class="">Other</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-analytics/" class="">Scene Analytics</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-bb199fbca80691618b9d243fc3dbf186" class="toggle">
+<label for="section-bb199fbca80691618b9d243fc3dbf186" class="flex justify-between">
+<a role="button" class="">SDK6 Scenes</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-370e2ddc65b07bfae1e1a4e45be7210f" class="toggle">
+<label for="section-370e2ddc65b07bfae1e1a4e45be7210f" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="toggle">
+<label for="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/component-groups/" class="">Component groups</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-70bcd3586e0bd17ab633662850238c9f" class="toggle">
+<label for="section-70bcd3586e0bd17ab633662850238c9f" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/special-types/" class="">Special types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/text/" class="">Text shapes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-1794a8ff3dcff28148759d9edbe03975" class="toggle">
+<label for="section-1794a8ff3dcff28148759d9edbe03975" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/troubleshooting/" class="">Troubleshooting</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-734c2c5e0f885d60ad25da7416a93698" class="toggle">
+<label for="section-734c2c5e0f885d60ad25da7416a93698" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d41c9e9dd257ad935b0ecac1a637344b" class="toggle">
+<label for="section-d41c9e9dd257ad935b0ecac1a637344b" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/deploy-third-party/" class="">Preview in Heroku</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-81e5ae4e449e727ffdfdda3212d2ec63" class="toggle">
+<label for="section-81e5ae4e449e727ffdfdda3212d2ec63" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-files/" class="">Files in a scene</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b65cbb78800cb595cbabf490d7aae0da" class="toggle">
+<label for="section-b65cbb78800cb595cbabf490d7aae0da" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/click-events/" class="">Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/avatar-modifiers/" class="">Modifier areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/onscreen-ui/" class="">2D UI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="toggle">
+<label for="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/remote-scene-considerations/" class="">About multiplayer scenes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-53f68a24178a8634051243575ac00389" class="toggle">
+<label for="section-53f68a24178a8634051243575ac00389" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/second-layer/" class="">Second layer blockchain</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a80cdadec202411af177a687b9de8c81" class="toggle">
+<label for="section-a80cdadec202411af177a687b9de8c81" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/utils/" class="">Utils library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0126a50da098471b50d6d433c560540a" class="toggle">
+<label for="section-0126a50da098471b50d6d433c560540a" class="flex justify-between">
+<a role="button" class="">Release notes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>3D Modeling and Animations</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/3d-models/" class="">3D Model Essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/meshes/" class="">Meshes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/materials/" class="">Materials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/textures/" class="">Textures</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/colliders/" class="">Colliders</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/animations/" class="">Animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/create-a-rig/" class="">Create a Rig</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Worlds</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/about/" class="">Worlds Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/cast/" class="">Decentraland Cast</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Builder</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-faq/" class="">Builder FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-101/" class="">Builder 101</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/export/" class="">Export as code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/import-items/" class="">Import custom items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/manage-scenes/" class="">Manage Builder scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/smart-items/" class="">Smart items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/nfts/" class="">NFTs</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Quests</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/overview/" class="">Quests Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/define/" class="">Defining a Quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/rewards/" class="">Quest Rewards</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/sdk-client/" class="">Quests SDK Library</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/quest-ui/" class="">Quest HUD - SDK UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/cli/" class="">Quests CLI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/walkthrough/" class="">Create your first quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/manager/" class="">Quests Manager</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Rewards</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/overview/" class="">Rewards Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/getting-started/" class="">Rewards - Getting Starting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/users/" class="">Rewards Users and Roles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/tx/" class="">Rewards Transactions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/api/" class="">Rewards API</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/integrations/" class="">Rewards API Integrations</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Places</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/places/faq/" class="">Places FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://studios.decentraland.org/" class="external-link " target="_blank" rel="noopener">Metaverse Studios<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+<ul>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Systems _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Systems</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Systems</h1><p>Decentraland scenes rely on <em>systems</em> to update any data over time, including information stored in each entity’s <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/">
+components
+</a>.</p>
+<p><img src="./Systems _ Decentraland Documentation_files/ecs-big-picture.png" alt=""></p>
+<p><em>systems</em> are what make scenes dynamic, they’re functions that are executed periodically on every tick of the scene’s game loop, changing what will be rendered.</p>
+<p>The following example shows a basic system declaration:</p>
+<style>
+  .code-playground {
+    position: relative;
+  }
+
+  .external-button {
+    display: none;
+  }
+
+  .code-playground:hover .external-button {
+    display: inline-block;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background-color: var(--primary);
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    text-decoration: unset;
+  }
+</style>
+<div class="code-playground">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// Define the system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">mySystem() {</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Performed on every tick. My system is running"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Add system to engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">mySystem</span><span class="p">)</span>
+</span></span></code></pre></div>
+<a href="https://playground.decentraland.org/?code=CgovLyBDdWJlIGZhY3RvcnkKZnVuY3Rpb24gY3JlYXRlQ3ViZSh4OiBudW1iZXIsIHk6IG51bWJlciwgejogbnVtYmVyKTogRW50aXR5IHsKICBjb25zdCBtZXNoRW50aXR5ID0gZW5naW5lLmFkZEVudGl0eSgpCiAgVHJhbnNmb3JtLmNyZWF0ZShtZXNoRW50aXR5LCB7IHBvc2l0aW9uOiB7IHgsIHksIHogfSB9KQogIE1lc2hSZW5kZXJlci5jcmVhdGUobWVzaEVudGl0eSwgeyBtZXNoOiB7ICRjYXNlOiAnYm94JywgYm94OiB7IHV2czogW10gfSB9IH0pCiAgTWVzaENvbGxpZGVyLmNyZWF0ZShtZXNoRW50aXR5LCB7IG1lc2g6IHsgJGNhc2U6ICdib3gnLCBib3g6IHt9IH0gfSkKCiAgcmV0dXJuIG1lc2hFbnRpdHkKfQoKLy8gU3lzdGVtcwpmdW5jdGlvbiBjaXJjdWxhclN5c3RlbShkdDogbnVtYmVyKSB7CiAgY29uc29sZS5sb2coJ015IHN5c3RlbSBpcyBydW5uaW5nJykKICBmb3IgKGNvbnN0IFtlbnRpdHksIF9tZXNoUmVuZGVyZXIsIF90cmFuc2Zvcm1dIG9mIGVuZ2luZS5nZXRFbnRpdGllc1dpdGgoTWVzaFJlbmRlcmVyLCBUcmFuc2Zvcm0pKSB7CiAgICBjb25zdCBtdXRhYmxlVHJhbnNmb3JtID0gVHJhbnNmb3JtLmdldE11dGFibGUoZW50aXR5KQoKICAgIG11dGFibGVUcmFuc2Zvcm0ucm90YXRpb24gPSBRdWF0ZXJuaW9uLm11bHRpcGx5KAogICAgICBtdXRhYmxlVHJhbnNmb3JtLnJvdGF0aW9uLAogICAgICBRdWF0ZXJuaW9uLmZyb21BbmdsZUF4aXMoZHQgKiAxMCwgVmVjdG9yMy5VcCgpKQogICAgKQogIH0KfQoKLy8gSW5pdApjb25zdCBpbml0RW50aXR5ID0gY3JlYXRlQ3ViZSg4LCAxLCA4KQoKZW5naW5lLmFkZFN5c3RlbShjaXJjdWxhclN5c3RlbSkK" target="_blank" rel="noopener" class="external-button">Try in playground</a>
+</div>
+<p>The function in a system can perform anything you want. Typically, it will act upon all the entities that meet certain <a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/">
+query
+</a>, following certain logic to change the values stored in the entity’s components.</p>
+<style>
+  .code-playground {
+    position: relative;
+  }
+
+  .external-button {
+    display: none;
+  }
+
+  .code-playground:hover .external-button {
+    display: inline-block;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background-color: var(--primary);
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    text-decoration: unset;
+  }
+</style>
+<div class="code-playground">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">moveSystem</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// iterate over all entiities with a Transform
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span><span class="nx">Transform</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// fetch a mutable Transform component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">entity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// update the position value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">z</span> <span class="o">+=</span> <span class="mf">0.01</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">moveSystem</span><span class="p">)</span>
+</span></span></code></pre></div>
+<a href="https://playground.decentraland.org/?code=CgovLyBDdWJlIGZhY3RvcnkKZnVuY3Rpb24gY3JlYXRlQ3ViZSh4OiBudW1iZXIsIHk6IG51bWJlciwgejogbnVtYmVyKTogRW50aXR5IHsKICBjb25zdCBtZXNoRW50aXR5ID0gZW5naW5lLmFkZEVudGl0eSgpCiAgVHJhbnNmb3JtLmNyZWF0ZShtZXNoRW50aXR5LCB7IHBvc2l0aW9uOiB7IHgsIHksIHogfSB9KQogIE1lc2hSZW5kZXJlci5jcmVhdGUobWVzaEVudGl0eSwgeyBtZXNoOiB7ICRjYXNlOiAnYm94JywgYm94OiB7IHV2czogW10gfSB9IH0pCiAgTWVzaENvbGxpZGVyLmNyZWF0ZShtZXNoRW50aXR5LCB7IG1lc2g6IHsgJGNhc2U6ICdib3gnLCBib3g6IHt9IH0gfSkKCiAgcmV0dXJuIG1lc2hFbnRpdHkKfQoKZnVuY3Rpb24gbW92ZVN5c3RlbShkdDogbnVtYmVyKSB7CgkvLyBpdGVyYXRlIG92ZXIgYWxsIGVudGlpdGllcyB3aXRoIGEgVHJhbnNmb3JtCiAgZm9yIChjb25zdCBbZW50aXR5XSBvZiBlbmdpbmUuZ2V0RW50aXRpZXNXaXRoKFRyYW5zZm9ybSwgTWVzaFJlbmRlcmVyKSkgewoKCS8vIGZldGNoIGEgbXV0YWJsZSBUcmFuc2Zvcm0gY29tcG9uZW50Cgljb25zdCB0cmFuc2Zvcm0gPSBUcmFuc2Zvcm0uZ2V0TXV0YWJsZShlbnRpdHkpCgoJLy8gdXBkYXRlIHRoZSBwb3NpdGlvbiB2YWx1ZQogIAl0cmFuc2Zvcm0ucG9zaXRpb24ueiArPSAwLjAxCiAgfQp9CgovLyBJbml0CmNvbnN0IGluaXRFbnRpdHkgPSBjcmVhdGVDdWJlKDgsIDEsIDgpCgplbmdpbmUuYWRkU3lzdGVtKG1vdmVTeXN0ZW0pCg%3D%3D" target="_blank" rel="noopener" class="external-button">Try in playground</a>
+</div>
+<p>In the example above, the system <code>MoveSystem</code> is a function that runs on each tick of the game loop, changing position of every entity in the scene that has a Transform.</p>
+<p><img src="./Systems _ Decentraland Documentation_files/ecs-system-new.png" alt=""></p>
+
+<p>You can have multiple systems in your scene to decouple different behaviors, making your code cleaner and easier to scale and reuse. For example, one system might handle physics, another might make an obstacle entity move back and forth continuously, another could handle the AI of characters.</p>
+<p>Multiple systems can act on a single entity. For example a non-player character might move on its own based on an AI, but also be affected by gravity when accidentally walking from off a cliff. In that scenario, the physics and the AI systems don’t even need to know about each other. They independently reassess their current state on each tick of the game loop and implement their own separate logic.</p>
+<h2 id="the-system-function">
+The system function
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#the-system-function">#</a>
+</h2>
+<p>A system’s function is executed periodically, once per every tick of the game loop. This happens automatically, you don’t need to explicitly call this function from anywhere in your code.</p>
+<p>In a Decentraland scene, you can think of the game loop as the aggregation of all the system functions in your scene.</p>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: If you add multiple instances of a same system to the engine, the function will be executed multiple times per tick of the game loop. For example, adding a system twice could result in an entity moving at twice the speed as expected, as it advances two increments on each tick.
+</blockquote>
+<h2 id="handle-entities-by-reference">
+Handle entities by reference
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#handle-entities-by-reference">#</a>
+</h2>
+<p>Some components and systems are meant for using only on one entity in the scene. For example, on an entity that stores a game’s score or perhaps a main gate that is unique in the scene. To access one of those entities within a system, you can simply refer to the entity or its components by name in the system’s functions.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kd">function</span> <span class="nx">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// create a new entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kr">const</span> <span class="nx">game</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// add component to that entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">ScoreComponent</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Define the system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">UpdateScore() {</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// call reference to individual entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">ScoreComponent</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">game</span><span class="p">).</span><span class="nx">points</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">points</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Add system to engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">UpdateScore</span><span class="p">)</span>
+</span></span></code></pre></div><p>For larger projects, we recommend that you keep system definitions on separate files from the instancing of entities and components.</p>
+<h2 id="loop-over-a-component-query">
+Loop over a component query
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#loop-over-a-component-query">#</a>
+</h2>
+<p>A lot of times, your scene will have multiple entities of the same type that will have similar behaviors. For example many doors that can be opened, or many enemies that can attack the player. It makes sense to handle all of these similar entities in a single system, iterating over the list and performing the same checks on each.</p>
+<p>You don’t want a system’s function to iterate over <em>the entire</em> set of entities in the scene, as this could be very costly in terms of processing power. To avoid this, you can <a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/">
+query components
+</a>, to only iterate over the relevant entities.</p>
+<p>For example, your scene can have a <code>PhysicsSystem</code> that calculates the effect of gravity over the entities of your scene. Some entities in your scene, such as trees, are not meant to ever move; so it would be smart to avoid calculating the effects of gravity on these. You can define a <code>HasPhysics</code> component to mark entities that could be affected by gravity, and then have <code>PhysicsSystem</code> only deal with the entities returned by this query.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// Define the system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">PhysicsSystem() {</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// iterate over all entiities with a HasPhysics
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span><span class="nx">HasPhysics</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// fetch a mutable Transform component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">entity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Calculate effect of physics
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Add system to engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">PhysicsSystem</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="delta-time-between-frames">
+Delta time between frames
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#delta-time-between-frames">#</a>
+</h2>
+<p>The function in a system can optionally include an argument called <code>dt</code>, of type <code>number</code> (representing <em>delta time</em>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">MySystem</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Udate scene
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"time since last tick: "</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">MySystem</span><span class="p">)</span>
+</span></span></code></pre></div><p><em>delta time</em> represents time that passed since the last tick of the game loop, in seconds.</p>
+<p>Decentraland scenes are updated by default at 30 ticks per second. This means that the <code>dt</code> argument passed to all systems will tend to equal to <em>1/30</em> (0.0333…).</p>
+<p>If the processing of a frame takes less time than this interval, then the engine will wait the remaining time to keep updates regularly paced and <code>dt</code> will remain equal to <em>1/30</em> .</p>
+<p><img src="./Systems _ Decentraland Documentation_files/ecs-framerate.png" alt=""></p>
+<p>If the processing of a frame takes longer than <em>1/30</em> seconds, the drawing of that frame is delayed. The engine then tries to finish that frame and show it as soon as possible. It then proceeds to the next frame and tries to show it <em>1/30</em> seconds after the last frame. It doesn’t compensate for the previous delay.</p>
+<p><img src="./Systems _ Decentraland Documentation_files/ecs-framerate-heavy.png" alt=""></p>
+<p>Ideally, you should avoid your scene dropping frames, as it impacts the quality of the player’s experience. Since this is dependant on the processing power of the player’s machine, it’s always a possibility that your scene should be ready to handle gracefully.</p>
+<p>The <code>dt</code> variable is useful when frame processing exceeds the default time. Assuming that the current frame will take as much time as the previous one, this information may be used to calculate how much to adjust a gradual change, so that the rate of change appears steady and in proportion to the lag between frames.</p>
+<p>See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/">
+entity positioning
+</a> for examples of how to use <code>dt</code> to make movement smoother.</p>
+<h2 id="loop-at-a-timed-interval">
+Loop at a timed interval
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#loop-at-a-timed-interval">#</a>
+</h2>
+<p>If you want a system to execute something at a regular time interval, you can do this by combining the <code>dt</code> argument with a timer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">timer</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">LoopSystem</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">timer</span> <span class="o">-=</span> <span class="nx">dt</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">timer</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// DO SOMETHING
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">LoopSystem</span><span class="p">)</span>
+</span></span></code></pre></div><p>For more complex use cases, where there may be multiple delays and loops being created dynamically, it may be worth defining a custom component to store an individual timer value for each entity. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/">
+Custom components
+</a>.</p>
+<h2 id="system-execution-order">
+System execution order
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#system-execution-order">#</a>
+</h2>
+<p>In some cases, when you have multiple systems running, you might care about what system is executed first by your scene.</p>
+<p>For example, you might have a <em>physics</em> system that updates the position of entities in the scene, and another <em>boundaries</em> system that ensures that none of the entities are positioned outside the scene boundaries. In this case, you want to make sure that the <em>boundaries</em> system is executed last. Otherwise, the <em>physics</em> system could move entities outside the bounds of the scene but the <em>boundaries</em> system won’t find out till it’s executed again in the next frame.</p>
+<p>When adding a system to the engine, set an optional <code>priority</code> field to determine when the system is executed in relation to other systems.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">PhysicsSystem</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">BoundariesSystem</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span></code></pre></div><p>Systems with a lower priority number are executed first, so a system with a priority of <em>1</em> is executed before one of priority <em>5</em>.</p>
+<p>Systems that aren’t given an explicit priority have a default priority of <em>0</em>, so these are executed first.</p>
+<p>If two systems have the same priority number, there’s no way to know for certain which of them will be executed first.</p>
+<h2 id="remove-a-system">
+Remove a system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/#remove-a-system">#</a>
+</h2>
+<p>An instance of a system can be added or removed from the engine to turn it on or off.</p>
+<p>If a system is defined but isn’t added to the engine, its function isn’t called by the engine.</p>
+<p>To remove a system, you must first give it a name when adding it to the engine, so that you can refer to the system later.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// declare system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">mySystem</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"delay since last tick: "</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// add system (giving it a priority and name)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">mySystem</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"DelaySystem"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// remove system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">removeSystem</span><span class="p">(</span><span class="s2">"DelaySystem"</span><span class="p">)</span>
+</span></span></code></pre></div><p>A scene can potentially have multiple instances of a same system running together, so you need to tell the engine which one of those to remove.</p>
+<p>Another way to delete a system is to declare a pointer to the system, and then pass that pointer to the <code>engine.removeSystem()</code> method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// declare system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">mySystem</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"delay since last tick: "</span><span class="p">,</span> <span class="nx">dt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// add system (making a pointer)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">mySystemInstance</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">mySystem</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// remove system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">removeSystem</span><span class="p">(</span><span class="nx">mySystemInstance</span><span class="p">)</span>
+</span></span></code></pre></div><p>Note that the pointer is to the <em>instance</em> of the system, not to the system’s class. In the above example, <code>engine.removeSystem()</code> is not being passed <code>mySystem</code> (the system class declaration). It’s being passed <code>mySystemInstance</code> (the instance that was added to the engine).</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Systems _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/creator/sdk7/architecture/systems.md" target="_blank" rel="noopener">
+<img src="./Systems _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Systems _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+</body></html>

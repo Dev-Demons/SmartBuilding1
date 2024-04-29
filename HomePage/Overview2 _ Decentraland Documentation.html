@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://docs.decentraland.org/contributor/comms/overview/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Decentraland communications system, or simply comms, is the real-time messaging protocol that handles interaction between players in a realm.
+Some of these interactions are initiated by players, others are automatically handled by clients under the hood. Some examples:
+Text and voice chat Position updates as players move around Avatar updates when players change their appearance You can see the comms protocol in action and experiment with it using the open-source Comms Station .">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Overview">
+<meta property="og:description" content="The Decentraland communications system, or simply comms, is the real-time messaging protocol that handles interaction between players in a realm.
+Some of these interactions are initiated by players, others are automatically handled by clients under the hood. Some examples:
+Text and voice chat Position updates as players move around Avatar updates when players change their appearance You can see the comms protocol in action and experiment with it using the open-source Comms Station .">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/contributor/comms/overview/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="contributor">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Overview | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Overview2 _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Overview2 _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Overview2 _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Overview2 _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Overview2 _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Overview2 _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+<div class="active-bar" style="border-color: #EE834A;"></div>
+<style>
+                :root {
+                  --primary: #EE834A;
+                }
+              </style>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Overview2 _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Introduction</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/welcome/" class="">Welcome!</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/architecture/" class="">Architecture</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Identity</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/authchain/" class="">Authentication Chain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/signed-fetch/" class="">Signed Fetch</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Content</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/filesystem/" class="">File System</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities/" class="">Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/pointers/" class="">Pointers</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/snapshots/" class="">Snapshots</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/collections/" class="">Collections</a>
+</li>
+<li>
+<input type="checkbox" id="section-78d857344d9976cb2d2de1aa922ff1d0" class="toggle">
+<label for="section-78d857344d9976cb2d2de1aa922ff1d0" class="flex justify-between">
+<a role="button" class="">Entity Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/scenes/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/outfits/" class="">Outfits</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/profiles/" class="">Profiles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/wearables/" class="">Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/emotes/" class="">Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/stores/" class="">Stores</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/practice/" class="">Practice</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Scene Runtime</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/globals/" class="">Globals</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/execution/" class="">Execution</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/permissions/" class="">Permissions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/entities/" class="">Basic Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/components/" class="">Basic Components</a>
+</li>
+<li>
+<input type="checkbox" id="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="toggle">
+<label for="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="flex justify-between">
+<a role="button" class="">Modules</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/" class="">EngineApi</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/restricted_actions/" class="">RestrictedActions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/user_identity/" class="">UserIdentity</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/" class="">SignedFetch</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Communications</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/overview/" class="active">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/main/" class="">MAIN Realm</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/archipelago/" class="">Archipelago</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/messages/" class="">Messages</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transports/" class="">Transports</a>
+</li>
+<li>
+<input type="checkbox" id="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="toggle">
+<label for="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="flex justify-between">
+<a role="button" class="">Transport Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/livekit/" class="">LiveKit</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/websocket/" class="">Websocket</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/signed-login/" class="">Signed Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/offline/" class="">Offline</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/simulator/" class="">Simulator</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Catalyst Nodes</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/realm-selection/" class="">Realm Selection</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Explorer Renderer</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="toggle">
+<label for="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="flex justify-between">
+<a role="button" class="">Components</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/unity-renderer/components/how-to-create-components/" class="">Component Creation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Social Service</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/js-client/" class="">Javascript Client</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/login/" class="">Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/get-friends/" class="">Get friendships</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/put-friends/" class="">Act on events and users</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-create-new-entity-type/" class="">New entity type</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/" class="">Run a Catalyst Node</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Overview2 _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Overview</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Overview</h1><p>The Decentraland communications system, or simply <em>comms</em>, is the real-time messaging protocol that handles interaction between players in a realm.</p>
+<p>Some of these interactions are initiated by players, others are automatically handled by clients under the hood. Some examples:</p>
+<ul>
+<li>Text and voice chat</li>
+<li>Position updates as players move around</li>
+<li>Avatar updates when players change their appearance</li>
+</ul>
+<div class="ui blue message">
+<div class="content">
+<p>You can see the comms protocol in action and experiment with it using the open-source <a href="https://decentraland.github.io/comms-station/" target="_blank">
+Comms Station
+</a>.</p>
+</div>
+</div>
+<p>Since most of this functionality requires broadcasting messages to all nearby players, they are automatically grouped into proximity-based clusters named <em>islands</em>. Each player is assigned to a single island at a time, which changes as they travel the world and move relative to others.</p>
+<p>The realm service that manages and assigns players to islands is called <em>Archipelago</em>. It takes care of creating islands as they are needed, keeping their population at a reasonable number and dynamically reassigning players in response to their movements.</p>
+<div class="goat svg-container ">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Lucida Console,monospace" viewBox="0 0 808 233">
+<g transform="translate(8,16)">
+<path d="M 0,0 L 616,0" fill="none" stroke="currentColor"></path>
+<path d="M 440,32 L 576,32" fill="none" stroke="currentColor"></path>
+<path d="M 376,48 L 408,48" fill="none" stroke="currentColor"></path>
+<path d="M 16,64 L 176,64" fill="none" stroke="currentColor"></path>
+<path d="M 440,64 L 576,64" fill="none" stroke="currentColor"></path>
+<path d="M 216,80 L 344,80" fill="none" stroke="currentColor"></path>
+<path d="M 440,80 L 576,80" fill="none" stroke="currentColor"></path>
+<path d="M 176,96 L 216,96" fill="none" stroke="currentColor"></path>
+<path d="M 344,96 L 376,96" fill="none" stroke="currentColor"></path>
+<path d="M 376,96 L 408,96" fill="none" stroke="currentColor"></path>
+<path d="M 216,112 L 344,112" fill="none" stroke="currentColor"></path>
+<path d="M 440,112 L 576,112" fill="none" stroke="currentColor"></path>
+<path d="M 16,128 L 176,128" fill="none" stroke="currentColor"></path>
+<path d="M 440,144 L 576,144" fill="none" stroke="currentColor"></path>
+<path d="M 376,160 L 408,160" fill="none" stroke="currentColor"></path>
+<path d="M 440,176 L 576,176" fill="none" stroke="currentColor"></path>
+<path d="M 0,208 L 616,208" fill="none" stroke="currentColor"></path>
+<path d="M 0,0 L 0,208" fill="none" stroke="currentColor"></path>
+<path d="M 16,64 L 16,128" fill="none" stroke="currentColor"></path>
+<path d="M 176,64 L 176,96" fill="none" stroke="currentColor"></path>
+<path d="M 176,96 L 176,128" fill="none" stroke="currentColor"></path>
+<path d="M 216,80 L 216,96" fill="none" stroke="currentColor"></path>
+<path d="M 216,96 L 216,112" fill="none" stroke="currentColor"></path>
+<path d="M 344,80 L 344,96" fill="none" stroke="currentColor"></path>
+<path d="M 344,96 L 344,112" fill="none" stroke="currentColor"></path>
+<path d="M 376,48 L 376,96" fill="none" stroke="currentColor"></path>
+<path d="M 376,96 L 376,160" fill="none" stroke="currentColor"></path>
+<path d="M 616,0 L 616,208" fill="none" stroke="currentColor"></path>
+<polygon points="416.000000,48.000000 404.000000,42.400002 404.000000,53.599998" fill="currentColor" transform="rotate(0.000000, 408.000000, 48.000000)"></polygon>
+<polygon points="416.000000,96.000000 404.000000,90.400002 404.000000,101.599998" fill="currentColor" transform="rotate(0.000000, 408.000000, 96.000000)"></polygon>
+<polygon points="416.000000,160.000000 404.000000,154.399994 404.000000,165.600006" fill="currentColor" transform="rotate(0.000000, 408.000000, 160.000000)"></polygon>
+<path d="M 440,32 A 16,16 0 0,0 424,48" fill="none" stroke="currentColor"></path>
+<path d="M 576,32 A 16,16 0 0,1 592,48" fill="none" stroke="currentColor"></path>
+<path d="M 424,48 A 16,16 0 0,0 440,64" fill="none" stroke="currentColor"></path>
+<path d="M 592,48 A 16,16 0 0,1 576,64" fill="none" stroke="currentColor"></path>
+<path d="M 440,80 A 16,16 0 0,0 424,96" fill="none" stroke="currentColor"></path>
+<path d="M 576,80 A 16,16 0 0,1 592,96" fill="none" stroke="currentColor"></path>
+<path d="M 424,96 A 16,16 0 0,0 440,112" fill="none" stroke="currentColor"></path>
+<path d="M 592,96 A 16,16 0 0,1 576,112" fill="none" stroke="currentColor"></path>
+<path d="M 440,144 A 16,16 0 0,0 424,160" fill="none" stroke="currentColor"></path>
+<path d="M 576,144 A 16,16 0 0,1 592,160" fill="none" stroke="currentColor"></path>
+<path d="M 424,160 A 16,16 0 0,0 440,176" fill="none" stroke="currentColor"></path>
+<path d="M 592,160 A 16,16 0 0,1 576,176" fill="none" stroke="currentColor"></path>
+<circle cx="32" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="48" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="64" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="80" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="96" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="112" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="128" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="144" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="160" cy="112" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="528" cy="48" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="528" cy="96" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="528" cy="160" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="544" cy="48" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="544" cy="96" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="544" cy="160" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="560" cy="48" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="560" cy="96" r="6" stroke="currentColor" fill="#fff"></circle>
+<circle cx="560" cy="160" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="576" cy="48" r="6" stroke="currentColor" fill="currentColor"></circle>
+<circle cx="576" cy="96" r="6" stroke="currentColor" fill="#fff"></circle>
+<circle cx="576" cy="160" r="6" stroke="currentColor" fill="#fff"></circle>
+<text text-anchor="middle" x="16" y="20" fill="currentColor" style="font-size:1em">R</text>
+<text text-anchor="middle" x="24" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="32" y="20" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="40" y="20" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="48" y="20" fill="currentColor" style="font-size:1em">m</text>
+<text text-anchor="middle" x="72" y="100" fill="currentColor" style="font-size:1em">P</text>
+<text text-anchor="middle" x="80" y="100" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="88" y="100" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="96" y="100" fill="currentColor" style="font-size:1em">y</text>
+<text text-anchor="middle" x="104" y="100" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="112" y="100" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="120" y="100" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="240" y="100" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="248" y="100" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="256" y="100" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="264" y="100" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="272" y="100" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="280" y="100" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="288" y="100" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="296" y="100" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="304" y="100" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="312" y="100" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="320" y="100" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="440" y="52" fill="currentColor" style="font-size:1em">I</text>
+<text text-anchor="middle" x="440" y="100" fill="currentColor" style="font-size:1em">I</text>
+<text text-anchor="middle" x="440" y="164" fill="currentColor" style="font-size:1em">I</text>
+<text text-anchor="middle" x="448" y="52" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="448" y="100" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="448" y="164" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="456" y="52" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="456" y="100" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="456" y="164" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="464" y="52" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="464" y="100" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="464" y="164" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="472" y="52" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="472" y="100" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="472" y="164" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="480" y="52" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="480" y="100" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="480" y="164" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="496" y="52" fill="currentColor" style="font-size:1em">1</text>
+<text text-anchor="middle" x="496" y="100" fill="currentColor" style="font-size:1em">2</text>
+<text text-anchor="middle" x="496" y="164" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="512" y="52" fill="currentColor" style="font-size:1em">|</text>
+<text text-anchor="middle" x="512" y="100" fill="currentColor" style="font-size:1em">|</text>
+<text text-anchor="middle" x="512" y="132" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="512" y="164" fill="currentColor" style="font-size:1em">|</text>
+</g>
+</svg>
+</div>
+<p>When assigned to an island, clients are given an island-specific URI to connect to the actual backend that will relay messages between them. This connection lasts until Archipelago reassigns the client to a different island.</p>
+<p>This means that, in addition to the <a href="https://docs.decentraland.org/contributor/comms/archipelago/">
+Archipelago
+</a> protocol, clients must implement a number of <em>transports</em>, each wrapping one of the supported backends in a unified interface.</p>
+<h2 id="lifecycle">
+Client Life-cycle
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/overview/#lifecycle">#</a>
+</h2>
+<p>The life-cycle of a comms client can be summarized in a few steps:</p>
+<ol>
+<li><strong>Select a realm</strong>: obtain a URI for the <a href="https://docs.decentraland.org/contributor/comms/archipelago/">
+Archipelago
+</a> service.</li>
+<li><strong>Join Archipelago</strong>: open a persistent connection with the service.</li>
+<li><strong>Get an island (re)assignment</strong>: report the current position and obtain an island-specific URI.</li>
+<li><strong>Connect a transport</strong>: open a second connection to the island-specific backend.</li>
+<li><strong>Repeat</strong>: continue going through steps 3 and 4, periodically reporting new positions.</li>
+</ol>
+<p>When the client ends their session, they simply disconnect from the Archipelago service. They will be automatically removed from their current island.</p>
+<div class="goat svg-container ">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Lucida Console,monospace" viewBox="0 0 808 729">
+<g transform="translate(8,16)">
+<path d="M 0,0 L 112,0" fill="none" stroke="currentColor"></path>
+<path d="M 192,0 L 264,0" fill="none" stroke="currentColor"></path>
+<path d="M 344,0 L 480,0" fill="none" stroke="currentColor"></path>
+<path d="M 0,32 L 48,32" fill="none" stroke="currentColor"></path>
+<path d="M 48,32 L 112,32" fill="none" stroke="currentColor"></path>
+<path d="M 192,32 L 224,32" fill="none" stroke="currentColor"></path>
+<path d="M 224,32 L 264,32" fill="none" stroke="currentColor"></path>
+<path d="M 344,32 L 408,32" fill="none" stroke="currentColor"></path>
+<path d="M 408,32 L 480,32" fill="none" stroke="currentColor"></path>
+<path d="M 64,80 L 72,80" fill="none" stroke="currentColor"></path>
+<path d="M 80,80 L 88,80" fill="none" stroke="currentColor"></path>
+<path d="M 96,80 L 104,80" fill="none" stroke="currentColor"></path>
+<path d="M 112,80 L 120,80" fill="none" stroke="currentColor"></path>
+<path d="M 128,80 L 136,80" fill="none" stroke="currentColor"></path>
+<path d="M 144,80 L 152,80" fill="none" stroke="currentColor"></path>
+<path d="M 160,80 L 168,80" fill="none" stroke="currentColor"></path>
+<path d="M 176,80 L 184,80" fill="none" stroke="currentColor"></path>
+<path d="M 192,80 L 200,80" fill="none" stroke="currentColor"></path>
+<path d="M 208,80 L 216,80" fill="none" stroke="currentColor"></path>
+<path d="M 56,144 L 224,144" fill="none" stroke="currentColor"></path>
+<path d="M 48,160 L 216,160" fill="none" stroke="currentColor"></path>
+<path d="M 56,240 L 224,240" fill="none" stroke="currentColor"></path>
+<path d="M 48,256 L 216,256" fill="none" stroke="currentColor"></path>
+<path d="M 232,320 L 240,320" fill="none" stroke="currentColor"></path>
+<path d="M 248,320 L 256,320" fill="none" stroke="currentColor"></path>
+<path d="M 264,320 L 272,320" fill="none" stroke="currentColor"></path>
+<path d="M 280,320 L 288,320" fill="none" stroke="currentColor"></path>
+<path d="M 296,320 L 304,320" fill="none" stroke="currentColor"></path>
+<path d="M 312,320 L 320,320" fill="none" stroke="currentColor"></path>
+<path d="M 328,320 L 336,320" fill="none" stroke="currentColor"></path>
+<path d="M 344,320 L 352,320" fill="none" stroke="currentColor"></path>
+<path d="M 360,320 L 368,320" fill="none" stroke="currentColor"></path>
+<path d="M 376,320 L 384,320" fill="none" stroke="currentColor"></path>
+<path d="M 392,320 L 400,320" fill="none" stroke="currentColor"></path>
+<path d="M 224,384 L 400,384" fill="none" stroke="currentColor"></path>
+<path d="M 232,400 L 408,400" fill="none" stroke="currentColor"></path>
+<path d="M 224,480 L 400,480" fill="none" stroke="currentColor"></path>
+<path d="M 232,496 L 408,496" fill="none" stroke="currentColor"></path>
+<path d="M 56,576 L 224,576" fill="none" stroke="currentColor"></path>
+<path d="M 48,592 L 216,592" fill="none" stroke="currentColor"></path>
+<path d="M 232,656 L 240,656" fill="none" stroke="currentColor"></path>
+<path d="M 248,656 L 256,656" fill="none" stroke="currentColor"></path>
+<path d="M 264,656 L 272,656" fill="none" stroke="currentColor"></path>
+<path d="M 280,656 L 288,656" fill="none" stroke="currentColor"></path>
+<path d="M 296,656 L 304,656" fill="none" stroke="currentColor"></path>
+<path d="M 312,656 L 320,656" fill="none" stroke="currentColor"></path>
+<path d="M 328,656 L 336,656" fill="none" stroke="currentColor"></path>
+<path d="M 344,656 L 352,656" fill="none" stroke="currentColor"></path>
+<path d="M 360,656 L 368,656" fill="none" stroke="currentColor"></path>
+<path d="M 376,656 L 384,656" fill="none" stroke="currentColor"></path>
+<path d="M 392,656 L 400,656" fill="none" stroke="currentColor"></path>
+<path d="M 32,704 L 192,704" fill="none" stroke="currentColor"></path>
+<path d="M 264,704 L 424,704" fill="none" stroke="currentColor"></path>
+<path d="M 0,0 L 0,32" fill="none" stroke="currentColor"></path>
+<path d="M 48,80 L 48,160" fill="none" stroke="currentColor"></path>
+<path d="M 48,160 L 48,256" fill="none" stroke="currentColor"></path>
+<path d="M 48,256 L 48,592" fill="none" stroke="currentColor"></path>
+<path d="M 48,592 L 48,688" fill="none" stroke="currentColor"></path>
+<path d="M 112,0 L 112,32" fill="none" stroke="currentColor"></path>
+<path d="M 192,0 L 192,32" fill="none" stroke="currentColor"></path>
+<path d="M 224,32 L 224,144" fill="none" stroke="currentColor"></path>
+<path d="M 224,144 L 224,240" fill="none" stroke="currentColor"></path>
+<path d="M 224,240 L 224,384" fill="none" stroke="currentColor"></path>
+<path d="M 224,384 L 224,480" fill="none" stroke="currentColor"></path>
+<path d="M 224,480 L 224,576" fill="none" stroke="currentColor"></path>
+<path d="M 224,576 L 224,688" fill="none" stroke="currentColor"></path>
+<path d="M 264,0 L 264,32" fill="none" stroke="currentColor"></path>
+<path d="M 344,0 L 344,32" fill="none" stroke="currentColor"></path>
+<path d="M 408,320 L 408,400" fill="none" stroke="currentColor"></path>
+<path d="M 408,400 L 408,496" fill="none" stroke="currentColor"></path>
+<path d="M 408,496 L 408,656" fill="none" stroke="currentColor"></path>
+<path d="M 480,0 L 480,32" fill="none" stroke="currentColor"></path>
+<path d="M 48,688 L 48,696" fill="none" stroke="currentColor"></path>
+<polygon points="64.000000,144.000000 52.000000,138.399994 52.000000,149.600006" fill="currentColor" transform="rotate(180.000000, 56.000000, 144.000000)"></polygon>
+<polygon points="64.000000,240.000000 52.000000,234.399994 52.000000,245.600006" fill="currentColor" transform="rotate(180.000000, 56.000000, 240.000000)"></polygon>
+<polygon points="64.000000,576.000000 52.000000,570.400024 52.000000,581.599976" fill="currentColor" transform="rotate(180.000000, 56.000000, 576.000000)"></polygon>
+<polygon points="224.000000,160.000000 212.000000,154.399994 212.000000,165.600006" fill="currentColor" transform="rotate(0.000000, 216.000000, 160.000000)"></polygon>
+<polygon points="224.000000,256.000000 212.000000,250.399994 212.000000,261.600006" fill="currentColor" transform="rotate(0.000000, 216.000000, 256.000000)"></polygon>
+<polygon points="224.000000,592.000000 212.000000,586.400024 212.000000,597.599976" fill="currentColor" transform="rotate(0.000000, 216.000000, 592.000000)"></polygon>
+<polygon points="240.000000,400.000000 228.000000,394.399994 228.000000,405.600006" fill="currentColor" transform="rotate(180.000000, 232.000000, 400.000000)"></polygon>
+<polygon points="240.000000,496.000000 228.000000,490.399994 228.000000,501.600006" fill="currentColor" transform="rotate(180.000000, 232.000000, 496.000000)"></polygon>
+<polygon points="408.000000,384.000000 396.000000,378.399994 396.000000,389.600006" fill="currentColor" transform="rotate(0.000000, 400.000000, 384.000000)"></polygon>
+<polygon points="408.000000,480.000000 396.000000,474.399994 396.000000,485.600006" fill="currentColor" transform="rotate(0.000000, 400.000000, 480.000000)"></polygon>
+<circle cx="48" cy="80" r="6" stroke="currentColor" fill="#fff"></circle>
+<circle cx="408" cy="320" r="6" stroke="currentColor" fill="#fff"></circle>
+<circle cx="408" cy="656" r="6" stroke="currentColor" fill="#fff"></circle>
+<text text-anchor="middle" x="16" y="20" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="24" y="20" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="32" y="20" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="40" y="20" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="48" y="20" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="48" y="52" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="48" y="68" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="56" y="20" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="64" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="64" y="180" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="64" y="276" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="64" y="612" fill="currentColor" style="font-size:1em">R</text>
+<text text-anchor="middle" x="72" y="20" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="72" y="180" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="72" y="276" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="72" y="612" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="80" y="20" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="80" y="180" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="80" y="276" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="80" y="612" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="88" y="20" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="88" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="88" y="276" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="88" y="612" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="96" y="20" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="96" y="180" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="96" y="228" fill="currentColor" style="font-size:1em">R</text>
+<text text-anchor="middle" x="96" y="276" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="96" y="564" fill="currentColor" style="font-size:1em">U</text>
+<text text-anchor="middle" x="96" y="612" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="104" y="180" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="104" y="228" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="104" y="276" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="104" y="564" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="104" y="612" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="112" y="228" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="112" y="564" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="112" y="612" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="120" y="132" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="120" y="228" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="120" y="276" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="120" y="564" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="120" y="612" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="128" y="132" fill="currentColor" style="font-size:1em">u</text>
+<text text-anchor="middle" x="128" y="228" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="128" y="276" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="128" y="564" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="136" y="132" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="136" y="228" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="136" y="276" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="136" y="564" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="136" y="612" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="144" y="132" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="144" y="276" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="144" y="612" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="152" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="152" y="228" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="152" y="276" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="152" y="564" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="152" y="612" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="160" y="68" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="160" y="132" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="160" y="228" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="160" y="276" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="160" y="564" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="160" y="612" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="168" y="68" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="168" y="132" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="168" y="228" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="168" y="564" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="168" y="612" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="176" y="68" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="176" y="132" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="176" y="228" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="176" y="564" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="176" y="612" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="184" y="68" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="184" y="132" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="184" y="228" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="184" y="564" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="192" y="68" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="192" y="132" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="192" y="228" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="192" y="564" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="200" y="68" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="200" y="132" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="200" y="228" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="200" y="564" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="208" y="20" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="208" y="68" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="208" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="208" y="228" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="208" y="564" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="208" y="708" fill="currentColor" style="font-size:1em">R</text>
+<text text-anchor="middle" x="216" y="20" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="216" y="708" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="224" y="20" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="224" y="708" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="232" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="232" y="708" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="240" y="20" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="240" y="308" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="240" y="372" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="240" y="468" fill="currentColor" style="font-size:1em">P</text>
+<text text-anchor="middle" x="240" y="644" fill="currentColor" style="font-size:1em">D</text>
+<text text-anchor="middle" x="240" y="708" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="248" y="20" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="248" y="308" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="248" y="372" fill="currentColor" style="font-size:1em">u</text>
+<text text-anchor="middle" x="248" y="468" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="248" y="644" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="248" y="708" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="256" y="308" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="256" y="372" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="256" y="468" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="256" y="644" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="264" y="308" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="264" y="372" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="264" y="468" fill="currentColor" style="font-size:1em">y</text>
+<text text-anchor="middle" x="264" y="644" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="272" y="308" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="272" y="372" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="272" y="468" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="272" y="516" fill="currentColor" style="font-size:1em">P</text>
+<text text-anchor="middle" x="272" y="644" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="280" y="308" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="280" y="372" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="280" y="468" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="280" y="516" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="280" y="644" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="288" y="308" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="288" y="372" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="288" y="516" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="288" y="644" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="296" y="372" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="296" y="468" fill="currentColor" style="font-size:1em">m</text>
+<text text-anchor="middle" x="296" y="516" fill="currentColor" style="font-size:1em">y</text>
+<text text-anchor="middle" x="296" y="644" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="304" y="308" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="304" y="372" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="304" y="468" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="304" y="516" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="304" y="644" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="312" y="308" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="312" y="372" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="312" y="468" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="312" y="516" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="312" y="644" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="320" y="308" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="320" y="372" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="320" y="468" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="328" y="308" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="328" y="372" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="328" y="468" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="328" y="516" fill="currentColor" style="font-size:1em">m</text>
+<text text-anchor="middle" x="328" y="644" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="336" y="308" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="336" y="468" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="336" y="516" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="336" y="644" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="344" y="308" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="344" y="468" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="344" y="516" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="344" y="644" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="352" y="308" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="352" y="420" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="352" y="468" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="352" y="516" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="352" y="644" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="360" y="20" fill="currentColor" style="font-size:1em">I</text>
+<text text-anchor="middle" x="360" y="308" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="360" y="420" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="360" y="468" fill="currentColor" style="font-size:1em">…</text>
+<text text-anchor="middle" x="360" y="516" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="360" y="644" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="368" y="20" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="368" y="308" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="368" y="420" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="368" y="516" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="368" y="644" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="376" y="20" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="376" y="420" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="376" y="516" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="376" y="644" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="384" y="20" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="384" y="420" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="384" y="516" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="384" y="644" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="392" y="20" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="392" y="420" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="392" y="516" fill="currentColor" style="font-size:1em">…</text>
+<text text-anchor="middle" x="392" y="644" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="400" y="20" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="408" y="52" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="68" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="84" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="100" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="116" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="132" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="148" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="164" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="180" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="196" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="212" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="228" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="244" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="260" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="276" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="292" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="308" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="676" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="408" y="692" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="416" y="20" fill="currentColor" style="font-size:1em">B</text>
+<text text-anchor="middle" x="424" y="20" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="432" y="20" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="440" y="20" fill="currentColor" style="font-size:1em">k</text>
+<text text-anchor="middle" x="448" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="456" y="20" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="464" y="20" fill="currentColor" style="font-size:1em">d</text>
+</g>
+</svg>
+</div>
+<h2 id="connections">
+Connections
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/overview/#connections">#</a>
+</h2>
+<p>Comms connections are mainly websocket-based, although some transports may use other strategies.</p>
+<p>Go to the <a href="https://docs.decentraland.org/contributor/comms/transports/">
+Transports
+</a> or <a href="https://docs.decentraland.org/contributor/comms/archipelago/">
+Archipelago
+</a> sections to learn more, or a specific transport page for details about it.</p>
+<h2 id="authentication">
+Authentication
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/overview/#authentication">#</a>
+</h2>
+<p>Connections to comms are authenticated by having clients sign a server-provided challenge, using the scheme described in the <a href="https://docs.decentraland.org/contributor/auth/authchain/">
+authentication chain
+</a> section.</p>
+<p>Head over to the <a href="https://docs.decentraland.org/contributor/comms/archipelago/">
+Archipelago
+</a> page or see a specific transport to learn more about authentication flows.</p>
+<h2 id="islands">
+Islands
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/overview/#islands">#</a>
+</h2>
+<p>Islands are highly dynamic groups of players that can broadcast messages among themselves, created and maintained by <a href="https://docs.decentraland.org/contributor/comms/archipelago/">
+Archipelago
+</a> in response to their movements in the world.</p>
+<p>There is no predefined area or central point for an island. They are not stable geographical features, only temporary associations of nearby players. If an island can be said to cover a region, it’s only because its members are currently spread in that zone.</p>
+<p>There can be zero islands in a region without players, and several overlapping islands in densly populated areas, where assigning everyone to the same group would make real-time broadcasting impossible.</p>
+<p>Each server in the Decentraland network can configure the maximum island population and the distance at which players are considered to be nearby. By default, islands can host up to 100 players within 100 meters of each other.</p>
+<p>The flow for getting assigned to an island and joining it is detailed in the <a href="https://docs.decentraland.org/contributor/comms/archipelago/">
+Archipelago
+</a> section.</p>
+<h2 id="messages">
+Messages
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/overview/#messages">#</a>
+</h2>
+<p>Messages in the comms protocol are binary blobs serialized using <a href="https://github.com/protocolbuffers/protobuf" target="_blank">
+protocol buffers
+</a>, wrapped in a <a href="https://docs.decentraland.org/contributor/comms/messages/#Packet">
+Packet
+</a> structure.</p>
+<div class="ui blue message">
+<div class="content">
+<p>When using the word <em>message</em> in the context of comms, we’ll always be referring to the binary message protocol, not to chat messages exchanged between players.</p>
+</div>
+</div>
+<p>There are several different message types, for a variety of real-time interaction flows. Head over to the <a href="https://docs.decentraland.org/contributor/comms/messages/">
+messages
+</a> section to learn more.</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Overview2 _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/contributor/comms/overview.md" target="_blank" rel="noopener">
+<img src="./Overview2 _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Overview2 _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Overview2 _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

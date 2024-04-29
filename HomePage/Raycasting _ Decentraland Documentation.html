@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Use raycasting to trace a line in space and query for collisions with entities in the scene.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Raycasting">
+<meta property="og:description" content="Use raycasting to trace a line in space and query for collisions with entities in the scene.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="creator">
+<meta property="article:published_time" content="2018-02-27T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Raycasting | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Raycasting _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Raycasting _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Raycasting _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Raycasting _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Raycasting _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Raycasting _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+<div class="active-bar" style="border-color: #4947CD;"></div>
+<style>
+                :root {
+                  --primary: #4947CD;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Raycasting _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Wearables &amp; Emotes</span>
+<ul>
+<li>
+<input type="checkbox" id="section-5238408129bdbe7a41bd58cdbed95be1" class="toggle">
+<label for="section-5238408129bdbe7a41bd58cdbed95be1" class="flex justify-between">
+<a role="button" class="">Wearables</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/wearables-overview/" class="">Wearables Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/" class="">Creating Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/linked-wearables/" class="">Linked wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17f08e4e58ad69e23f1096996f5c4e64" class="toggle">
+<label for="section-17f08e4e58ad69e23f1096996f5c4e64" class="flex justify-between">
+<a role="button" class="">Emotes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/emotes-overview/" class="">Emotes Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/creating-and-exporting-emotes/" class="">Creating Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/avatar-rig/" class="">Avatar Rig</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/rig-features/" class="">Rigging Features</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/props-and-sounds/" class="">Adding Props and Sounds to your Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/particles-in-emotes/" class="">Particles in Emotes 2.0</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-57010a4fb000b586393ef3ac0e4c708e" class="toggle">
+<label for="section-57010a4fb000b586393ef3ac0e4c708e" class="flex justify-between">
+<a role="button" class="">Manage Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/creating-collection/" class="">Creating a Collection</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-wearables/" class="">Uploading Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-emotes/" class="">Uploading Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-smart-wearables/" class="">Uploading Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b3bac40672f08584afca2b1951d77ffa" class="toggle">
+<label for="section-b3bac40672f08584afca2b1951d77ffa" class="flex justify-between">
+<a role="button" class="">Publishing Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/publishing-collections/" class="">Publishing Collections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/curation-committee/" class="">Curation committee</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials &amp; Examples</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/examples/7/" class="">Example scenes</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GP_K8WN7csnKnImK4R2TgMA" class="external-link " target="_blank" rel="noopener">SDK &amp; Editor Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GN8LcnnQk2BByo9L2Orvp9c" class="external-link " target="_blank" rel="noopener">Emote Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://github.com/decentraland-scenes/awesome-repository#tutorials" class="external-link " target="_blank" rel="noopener">Awesome Repository (Deprecated)<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Scenes (SDK7)</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b525100342227191f7fcea7ba56bb803" class="toggle">
+<label for="section-b525100342227191f7fcea7ba56bb803" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sdk-101/" class="">Quick start</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dev-workflow/" class="">Development workflow</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/installation-guide/" class="">Editor Installation Guide</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/editor/" class="">Decentraland Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-from-example/" class="">Scene from example</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/" class="">Coding essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-107b6725d990df022e2ce15c90ba14e8" class="toggle">
+<label for="section-107b6725d990df022e2ce15c90ba14e8" class="flex justify-between">
+<a role="button" class="">Designing the experience</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/mvp-guidelines/" class="">Scene MVP Guidelines</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/ux-ui-guide/" class="">UX and UI guide for creators</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/design-games/" class="">Design constraints for games</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="toggle">
+<label for="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/" class="">Querying components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/data-oriented-programming/" class="">Data oriented programming</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-26d2ff837ef33c0c864da60b58012b08" class="toggle">
+<label for="section-26d2ff837ef33c0c864da60b58012b08" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/color-types/" class="">Color types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/text/" class="">Text shapes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/special-types/" class="">Geometry types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/" class="">Colliders</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-e2a5c62fa44576cfaf37400c3afd999c" class="toggle">
+<label for="section-e2a5c62fa44576cfaf37400c3afd999c" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/troubleshooting/" class="">Troubleshooting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/report-a-bug/" class="">Report a bug</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="toggle">
+<label for="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17cf12281279261a57549d3a62bf1f9b" class="toggle">
+<label for="section-17cf12281279261a57549d3a62bf1f9b" class="flex justify-between">
+<a role="button" class="">Optimizing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/performance-optimization/" class="">Performance optimization</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-limitations/" class="">Scene limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d988b988b9f10b302e874ddf848f6ba3" class="toggle">
+<label for="section-d988b988b9f10b302e874ddf848f6ba3" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/make-discoverable/" class="">Make your scene discoverable</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploy-third-party/" class="">Upload a preview</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="toggle">
+<label for="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/kinds-of-projects/" class="">Kinds of Projects</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/" class="">Files in a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/workspaces/" class="">Workspaces</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" class="">Portable experiences</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" class="">Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0c95a08d2936e4fb6641631c7518e5c9" class="toggle" checked="">
+<label for="section-0c95a08d2936e4fb6641631c7518e5c9" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-62db854699a952e0bb38c11370531240" class="toggle">
+<label for="section-62db854699a952e0bb38c11370531240" class="flex justify-between">
+<a role="button" class="">Input actions</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" class="">About input actions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/register-callback/" class="">Register callback</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/system-based-events/" class="">System based events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/advanced-button-events/" class="">Advanced button events</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/npc-avatars/" class="">NPC Avatars</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/" class="">Modifier Areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/runtime-data/" class="">Runtime data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/" class="active">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deprecated-functions/" class="">Deprecated functions</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-8aced72970aba367ccb620ac0774d739" class="toggle">
+<label for="section-8aced72970aba367ccb620ac0774d739" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/serverless-multiplayer/" class="">Serverless Multiplayer</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/authoritative-server/" class="">3rd party servers</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-7c22809946dca82b52a0416bb19bee94" class="toggle">
+<label for="section-7c22809946dca82b52a0416bb19bee94" class="flex justify-between">
+<a role="button" class="">2D UI</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/onscreen-ui/" class="">2D UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dynamic-ui/" class="">Dynamic UIs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-button-events/" class="">UI Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-positioning/" class="">UI Positioning</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-text/" class="">UI Text</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-background/" class="">UI Background</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-special-elements/" class="">UI special types</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-3339f980e82707ed3f2ac8f0b7215bc6" class="toggle">
+<label for="section-3339f980e82707ed3f2ac8f0b7215bc6" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/second-layer/" class="">Second layer blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-a-dapp/" class="">Create a dApp</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploying-your-own-transactions-server/" class="">Deploying your own transactions server</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a9e2088c8e67585827711b1700609398" class="toggle">
+<label for="section-a9e2088c8e67585827711b1700609398" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/libraries/7/" class="">Library catalog</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-libraries/" class="">Create a library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cfc35d405c7d6b713873bbaa8ed9e303" class="toggle">
+<label for="section-cfc35d405c7d6b713873bbaa8ed9e303" class="flex justify-between">
+<a role="button" class="">Programming patterns</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" class="">Asynchronous code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/mutable-data/" class="">Data mutability</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/game-objects/" class="">Game objects</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-90195531610f61ac8dbe0e10d5e228a6" class="toggle">
+<label for="section-90195531610f61ac8dbe0e10d5e228a6" class="flex justify-between">
+<a role="button" class="">Web Editor</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/web-editor/" class="">Web Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items/" class="">Smart Items - Basic</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items-advanced/" class="">Smart Items - Advanced</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/editor-plus-code/" class="">Combine with code</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-76e89a14e1691ab97e791c67b7a232c7" class="toggle">
+<label for="section-76e89a14e1691ab97e791c67b7a232c7" class="flex justify-between">
+<a role="button" class="">API Reference</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/releases/7/" class="">API Reference SDK7</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/version-agreement/" class="">Version support agreement</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/testing-guidelines/" class="">SDK7 feedback guidelines</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-203470ceeef126c8dd8cbc9c390f57b4" class="toggle">
+<label for="section-203470ceeef126c8dd8cbc9c390f57b4" class="flex justify-between">
+<a role="button" class="">Other</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-analytics/" class="">Scene Analytics</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-bb199fbca80691618b9d243fc3dbf186" class="toggle">
+<label for="section-bb199fbca80691618b9d243fc3dbf186" class="flex justify-between">
+<a role="button" class="">SDK6 Scenes</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-370e2ddc65b07bfae1e1a4e45be7210f" class="toggle">
+<label for="section-370e2ddc65b07bfae1e1a4e45be7210f" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="toggle">
+<label for="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/component-groups/" class="">Component groups</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-70bcd3586e0bd17ab633662850238c9f" class="toggle">
+<label for="section-70bcd3586e0bd17ab633662850238c9f" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/special-types/" class="">Special types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/text/" class="">Text shapes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-1794a8ff3dcff28148759d9edbe03975" class="toggle">
+<label for="section-1794a8ff3dcff28148759d9edbe03975" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/troubleshooting/" class="">Troubleshooting</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-734c2c5e0f885d60ad25da7416a93698" class="toggle">
+<label for="section-734c2c5e0f885d60ad25da7416a93698" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d41c9e9dd257ad935b0ecac1a637344b" class="toggle">
+<label for="section-d41c9e9dd257ad935b0ecac1a637344b" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/deploy-third-party/" class="">Preview in Heroku</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-81e5ae4e449e727ffdfdda3212d2ec63" class="toggle">
+<label for="section-81e5ae4e449e727ffdfdda3212d2ec63" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-files/" class="">Files in a scene</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b65cbb78800cb595cbabf490d7aae0da" class="toggle">
+<label for="section-b65cbb78800cb595cbabf490d7aae0da" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/click-events/" class="">Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/avatar-modifiers/" class="">Modifier areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/onscreen-ui/" class="">2D UI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="toggle">
+<label for="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/remote-scene-considerations/" class="">About multiplayer scenes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-53f68a24178a8634051243575ac00389" class="toggle">
+<label for="section-53f68a24178a8634051243575ac00389" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/second-layer/" class="">Second layer blockchain</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a80cdadec202411af177a687b9de8c81" class="toggle">
+<label for="section-a80cdadec202411af177a687b9de8c81" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/utils/" class="">Utils library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0126a50da098471b50d6d433c560540a" class="toggle">
+<label for="section-0126a50da098471b50d6d433c560540a" class="flex justify-between">
+<a role="button" class="">Release notes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>3D Modeling and Animations</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/3d-models/" class="">3D Model Essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/meshes/" class="">Meshes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/materials/" class="">Materials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/textures/" class="">Textures</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/colliders/" class="">Colliders</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/animations/" class="">Animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/create-a-rig/" class="">Create a Rig</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Worlds</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/about/" class="">Worlds Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/cast/" class="">Decentraland Cast</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Builder</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-faq/" class="">Builder FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-101/" class="">Builder 101</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/export/" class="">Export as code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/import-items/" class="">Import custom items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/manage-scenes/" class="">Manage Builder scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/smart-items/" class="">Smart items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/nfts/" class="">NFTs</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Quests</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/overview/" class="">Quests Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/define/" class="">Defining a Quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/rewards/" class="">Quest Rewards</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/sdk-client/" class="">Quests SDK Library</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/quest-ui/" class="">Quest HUD - SDK UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/cli/" class="">Quests CLI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/walkthrough/" class="">Create your first quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/manager/" class="">Quests Manager</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Rewards</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/overview/" class="">Rewards Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/getting-started/" class="">Rewards - Getting Starting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/users/" class="">Rewards Users and Roles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/tx/" class="">Rewards Transactions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/api/" class="">Rewards API</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/integrations/" class="">Rewards API Integrations</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Places</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/places/faq/" class="">Places FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://studios.decentraland.org/" class="external-link " target="_blank" rel="noopener">Metaverse Studios<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+<ul>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Raycasting _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Raycasting</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Raycasting</h1><p>Raycasting is a fundamental tool in game development. With raycasting, you can trace an imaginary line in space, and query if any entities are intersected by that line. This is useful for calculating lines of sight, trajectories of bullets, pathfinding algorithms and many other applications.</p>
+<p>When a player pushes the pointer button, or the primary or secondary button, a ray is traced from the player’s position in the direction they are looking, see <a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/">
+button events
+</a> for more details about this. This document covers how to trace an invisible ray from any arbitrary position and direction, independent of player actions, which you can use in many other scenarios.</p>
+<p>Please note that raycasts only hit objects with colliders. So if you want to detect ray hits against a 3D model, either:</p>
+<ul>
+<li>The model must contain <a href="https://docs.decentraland.org/creator/3d-modeling/colliders/">
+collider meshes
+</a>.</li>
+<li>The <code>GLTFContainer</code> must be configured to use the <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/#colliders-on-3d-models">
+visible geometry with collision masks
+</a>.</li>
+<li>Add a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/">
+MeshCollider component
+</a>.</li>
+</ul>
+<p>It’s also a good practice to assign custom <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/#collision-layers">
+collision layers
+</a> to 3D models, so that rays only need to calculate collisions against the relevant entities, instead of against everything that has a collider.</p>
+<h2 id="create-a-ray">
+Create a ray
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#create-a-ray">#</a>
+</h2>
+<p>All rays have a point of origin and a direction. The point of origin is based on an entity’s position, taking the values on the entity’s Transform component. The direction of a ray can be defined in 4 different ways:</p>
+<ul>
+<li><strong>local</strong>: A direction relative to the forward-facing direction of the entity, affected also by the transformation of any parent entities. This is useful to detect obstacles in front of vehicles honoring their heading.</li>
+<li><strong>global</strong>: Ignores the entity’s rotation, and faces a direction as if the entity’s rotation was 0. This is useful to i.e. always point down.</li>
+<li><strong>global target</strong>: Traces a line between the entity’s position and a target global position in the scene. It ignores the entity’s rotation. Useful for example to create tower defense games, each tower’s turret can point to a pin-pointed coordinate in space.</li>
+<li><strong>target entity</strong>: Traces a line between the entity’s position and the position of a second target entity. It ignores the rotation of either entities.</li>
+</ul>
+<p>The following code creates a raycast with a local direction:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerLocalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span> <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">()</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// callback function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>Use the following functions to create raycasts by providing the direction in different ways:</p>
+<ul>
+<li><code>raycastSystem.registerLocalDirectionRaycast()</code>: creates a raycast with a <strong>local</strong> direction. The <code>direction</code> field expects a <code>Vector3</code> that describes a vector relative to the entity and its rotation (e.g. <code>Vector3.Forward()</code> would end up using the entity’s transform forward vector)</li>
+<li><code>raycastSystem.registerGlobalDirectionRaycast()</code>: creates a raycast with a <strong>global</strong> direction. The <code>direction</code> field expects a <code>Vector3</code> that describes the global direction.</li>
+<li><code>raycastSystem.registerGlobalTargetRaycast()</code>: creates a raycast with a direction defined by a <strong>global target</strong> position. The <code>target</code> field expects a <code>Vector3</code> that describes a global position in the scene.</li>
+<li><code>raycastSystem.registerTargetEntityRaycast()</code>: creates a raycast with a direction defined towards a <strong>target entity</strong> position. The <code>targetEntity</code> field expects a reference to an entity, this entity’s position will be used as the target of the ray.</li>
+</ul>
+<p>The following optional fields are available when creating a ray with any of the above methods:</p>
+<ul>
+<li>
+<p><code>maxDistance</code>: <em>number</em> to set the length with which this ray will be traced. If not set, the default is 16 meters.</p>
+</li>
+<li>
+<p><code>queryType</code>: <em>RaycastQueryType</em> enum value, to define if the ray will return all hit entities or just the first. The following options are available:</p>
+<ul>
+<li><code>RaycastQueryType.RQT_HIT_FIRST</code>: <em>(default)</em> only returns the first hit entity, starting from the origin point.</li>
+<li><code>RaycastQueryType.RQT_QUERY_ALL</code>: returns all hit entities, from the origin through to the max distance of the ray.</li>
+</ul>
+</li>
+<li>
+<p><code>originOffset</code>: Instead of starting the raycast from the entity’s origin position, add an offset to start the query from a relative position. You can for example use a small offset to prevent the ray colliding against the entity’s own collider. If not set, the default is <code>Vector3.Zero()</code>.</p>
+</li>
+<li>
+<p><code>collisionMask</code>: Only detect collisions with certain collision layers. Use this together with a custom collision layer, or to only detect the physics or pointer events layer. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/#collision-layers">
+collision layers
+</a>. If not set, the default layer used is <code>ColliderLayer.CL_PHYSICS</code>.</p>
+</li>
+<li>
+<p><code>continuous</code>: If true, will keep running a raycast query on every frame. If false, the ray will only be used on the current frame. If not set, the default is false.</p>
+</li>
+<li>
+<p>When setting the direction with a local or glocal direction, the <code>direction</code> field defaults to <code>Vector3.Forward()</code>.</p>
+</li>
+<li>
+<p>When setting the direction with a global target, the <code>globalTarget</code> field defaults to <code>Vector3.Zero()</code>.</p>
+</li>
+<li>
+<p>When setting the direction with an entity target, the <code>targetEntity</code> field defaults to the scene’s root entity, located at <code>Vector3.Zero()</code>.</p>
+</li>
+</ul>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The <code>continuous</code> property should be used with caution, as running a raycast query on every frame can be very expensive for performance. When possible, use a system (or the <code>interval</code> function in the Utils library) to run raycast queries at a regular more sparse interval, see <a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#recurrent-raycasting">
+recurrent raycasting
+</a>.
+</blockquote>
+<p>Below are examples using each of the four methods to determine the ray direction:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// LOCAL DIRECTION RAYCAST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerLocalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">maxDistance</span>: <span class="kt">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// GLOBAL DIRECTION RAYCAST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerGlobalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">maxDistance</span>: <span class="kt">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// GLOBAL TARGET POSITION RAYCAST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerGlobalTargetRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">globalTarget</span>: <span class="kt">Vector3.Zero</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// TARGET ENTITY RAYCAST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">targetEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">targetEntity</span><span class="p">,</span> <span class="p">{</span> <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerTargetEntityRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">targetEntity</span>: <span class="kt">targetEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<p><strong>📔 Note</strong>: <code>raycastSystem</code>, <code>RaycastQueryType</code> and <code>ColliderLayer</code> must be imported via</p>
+<blockquote>
+<p><code>import { raycastSystem, RaycastQueryType, ColliderLayer } from "@dcl/sdk/ecs"</code></p>
+</blockquote>
+<p>See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/#imports" target="_blank">
+Imports
+</a> for how to handle these easily.</p>
+</blockquote>
+<h2 id="raycast-result">
+Raycast result
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#raycast-result">#</a>
+</h2>
+<p>The callback function that handles the raycast receives an object containing data about the ray itself, and any entities that were hit.</p>
+<ul>
+<li><code>globalOrigin</code>: The position where the ray was originated, relative to the scene.</li>
+<li><code>direction</code>: The global direction that the ray was pointing, as a <code>Vector3</code>.</li>
+<li><code>hits</code>: An array with one object for each entity that was hit. If there were no hit entities, this array is empty. If the raycast used <code>RaycastQueryType.RQT_HIT_FIRST</code>, this array will only contain one object.</li>
+</ul>
+<p>Each object in the <code>hits</code> array includes:</p>
+<ul>
+<li><code>entityId</code>: Id number of the entity that was hit by the ray.</li>
+<li><code>meshName</code>: <em>String</em> with the internal name of the specific mesh in the 3D model that was hit. This is useful when a 3D model is composed of multiple meshes.</li>
+<li><code>position</code>: <em>Vector3</em> for the position where the ray intersected with the hit entity (relative to the scene)</li>
+<li><code>length</code>: Length of the ray from its origin to the position where the hit against the entity occurred.</li>
+<li><code>normalHit</code>: <em>Quaternion</em> for the angle of the normal of the hit in world space.</li>
+<li><code>globalOrigin</code>: <em>Vector3</em> for the position where the ray originates (relative to the scene)</li>
+<li><code>direction</code>: The global direction that the ray was pointing, as a <code>Vector3</code>.</li>
+</ul>
+<p>The following example iterates over the entities that were hit:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerLocalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">maxDistance</span>: <span class="kt">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">hit</span> <span class="k">of</span> <span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">hit</span><span class="p">.</span><span class="nx">entityId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hit entity '</span><span class="p">,</span> <span class="nx">hit</span><span class="p">.</span><span class="nx">entityId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'no entities hit'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<p><strong>📔 Note</strong>: You can get a raycast result from hitting an entity on a different scene. This may be especially useful when creating portable experiences or smart wearables, that can react to the surroundings.</p>
+<p>However, note that currently you can only obtain raycast responses when the collision is with conent in a scene done with SDK7. Older SDK6 scenes won’t return any hit result.</p>
+</blockquote>
+<h2 id="collision-layers">
+Collision layers
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#collision-layers">#</a>
+</h2>
+<p>It’s a good practice to only check for collisions against entities that are relevant, to make the scene more performant. The <code>collisionMask</code> field allows to to list only specific collision layers, which can include the physics layer (that blocks player movement), the pointer layer (which is used for pointer events), and 8 custom layers that you can assign freely to whatever your needs are. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/#collision-layers">
+collision layers
+</a>. By default, all layers are detected.</p>
+<p>By default, the <code>collisionMask</code> field is set to respond to both the layers <code>ColliderLayer.CL_POINTER</code> and <code>ColliderLayer.CL_PHYSICS</code>. You can change this value to list only one of those, or to include custom layers. Use the <code>|</code> separator to list multiple options.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerLocalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">maxDistance</span>: <span class="kt">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">collisionMask</span>:
+</span></span><span class="line"><span class="cl">        <span class="kt">ColliderLayer.CL_CUSTOM1</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ColliderLayer</span><span class="p">.</span><span class="nx">CL_CUSTOM3</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ColliderLayer</span><span class="p">.</span><span class="nx">CL_POINTER</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><h2 id="recurrent-raycasting">
+Recurrent raycasting
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#recurrent-raycasting">#</a>
+</h2>
+<p>When using the functions of the <code>raycastSystem</code>, the default behavior is to create a single ray, that will query for collisions once. As an alternative, you can set the <code>continuous</code> field to <em>true</em> to run a query and the callback function on every tick of the game loop.</p>
+<p>The following example will keep running the raycast query from this point onwards</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerLocalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">maxDistance</span>: <span class="kt">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">continuous</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The <code>continuous</code> property should be used with caution, as running a raycast query on every frame can be very expensive for performance.
+</blockquote>
+<p>When not needed anymore, remove any recurrent raycasts. To do so, you must use <code>raycastSystem.removeRaycasterEntity</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">removeRaycasterEntity</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>When possible, use a system (or the <code>interval</code> function in the Utils library) to run raycast queries at a regular more sparse interval, like just once a second, or every fifth of a second.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// custom components
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">CubeOscilator</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span><span class="s1">'CubeOscilator'</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">t</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">TimerComponent</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span><span class="s1">'TimerComponent'</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">t</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">RAY_INTERVAL</span> <span class="o">=</span> <span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// check rays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">((</span><span class="nx">dt</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span><span class="nx">TimerComponent</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">TimerComponent</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">entity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">timer</span><span class="p">.</span><span class="nx">t</span> <span class="o">+=</span> <span class="nx">dt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span><span class="p">.</span><span class="nx">t</span> <span class="o">&gt;</span> <span class="nx">RAY_INTERVAL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">timer</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerGlobalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">entity</span>: <span class="kt">myEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_HIT_FIRST</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">direction</span>: <span class="kt">Vector3.Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">maxDistance</span>: <span class="kt">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">TimerComponent</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// oscillating cube system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">((</span><span class="nx">dt</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">entity</span><span class="p">,</span> <span class="nx">cube</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CubeOscilator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Transform</span>
+</span></span><span class="line"><span class="cl">  <span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CubeOscilator</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">entity</span><span class="p">).</span><span class="nx">t</span> <span class="o">+=</span> <span class="nx">dt</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">entity</span><span class="p">).</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">cube</span><span class="p">.</span><span class="nx">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create cube
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">cubeEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">cubeEntity</span><span class="p">,</span> <span class="p">{</span> <span class="nx">position</span><span class="o">:</span> <span class="p">{</span> <span class="nx">x</span>: <span class="kt">8</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">1</span><span class="p">,</span> <span class="nx">z</span>: <span class="kt">8</span> <span class="p">}</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">CubeOscilator</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">cubeEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">cubeEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshCollider</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">cubeEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>The example above runs a recurring raycast every 0.1 seconds. It uses a timer component and a system’s <code>dt</code> property to time these evenly. It also includes a cube that oscillates up and down, controlled by another system, to move in and out of the path of the ray.</p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: Use the <code>interval</code> function in the <a href="https://github.com/decentraland/sdk7-utils" target="_blank">
+SDK Utils library
+</a> for a simpler way to run a function at a fixed interval.
+</blockquote>
+<h2 id="raycasts-via-a-system">
+Raycasts via a system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#raycasts-via-a-system">#</a>
+</h2>
+<p>Another way to perform recurrent raycasts is to execute them from within the recurring function of a system. This allows you to have a lot more control about when and how these work. Instead of registering a callback function, you can perform a raycast query with <code>raycastSystem.registerRaycast</code> and then check the data returned by this operation, all within the function of the system.</p>
+<p>Please note that since the raycast is executed in a system, the result will only be available the next tick, needing two runs of the system. One to register the raycast for the next frame, and the next frame process its result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">((</span><span class="nx">deltaTime</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">entity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">localDirectionOptions</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">collisionMask</span>: <span class="kt">ColliderLayer.CL_CUSTOM1</span> <span class="o">|</span> <span class="nx">ColliderLayer</span><span class="p">.</span><span class="nx">CL_CUSTOM3</span> <span class="o">|</span> <span class="nx">ColliderLayer</span><span class="p">.</span><span class="nx">CL_POINTER</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">originOffset</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">maxDistance</span>: <span class="kt">RAY_POWER</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">queryType</span>: <span class="kt">raycastQueryType</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">direction</span>: <span class="kt">Vector.forward</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">continuous</span>: <span class="kt">true</span> <span class="c1">// don't overuse the 'continuous' property as raycasting is expensive on performance
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">})</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="c1">// do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span></code></pre></div><h2 id="collide-with-the-player">
+Collide with the player
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#collide-with-the-player">#</a>
+</h2>
+<p>You can’t directly hit the player’s avatar or those of other players with a ray, but what you can do as a workaround is position an invisible entity occupying the same space as a player using the <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/#attach-an-entity-to-an-avatar">
+AvatarAttach component
+</a>, and check collisions with that cube.</p>
+<h2 id="raycasts-from-the-player">
+Raycasts from the player
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#raycasts-from-the-player">#</a>
+</h2>
+<p>To trace a ray from the player’s position in the direction faced by the camera, you can trace a ray using the camera or the avatar <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/#reserved-entities">
+Reserved entities
+</a>.</p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: For most cases, you might be better off using <a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" target="_blank">
+Pointer eveents
+</a> instead of raycasts.
+</blockquote>
+<p>The following example traces a ray from the player’s camera position forward, using the <code>engine.CameraEntity</code> entity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">raycastSystem</span><span class="p">.</span><span class="nx">registerGlobalDirectionRaycast</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">engine.CameraEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_HIT_FIRST</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">direction</span>: <span class="kt">Vector3.rotate</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Vector3</span><span class="p">.</span><span class="nx">Forward</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Transform</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">engine</span><span class="p">.</span><span class="nx">CameraEntity</span><span class="p">).</span><span class="nx">rotation</span>
+</span></span><span class="line"><span class="cl">      <span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">raycastResult</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: Keep in mind that in 3rd person the cursor could in the future not behave the same as in 1st person. It’s recommended to only use this if the player is in 1st person.
+</blockquote>
+<h2 id="advanced-syntax">
+Advanced syntax
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#advanced-syntax">#</a>
+</h2>
+<h3 id="create-a-raycast-component">
+Create a raycast component
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#create-a-raycast-component">#</a>
+</h3>
+<p>A Raycast component describes the invisible ray that is used to query for intersecting entities. The ray is traced starting at the entity’s position, as defined by the Transform component and affected by that of any parent entities. The direction can be defined in various ways,</p>
+<p>Rays are defined using the following data:</p>
+<ul>
+<li><code>direction</code>: An object that contains a <code>$case</code> field to select the type of direction, and an additional field that will depend on this type, that determines this direction. The following are the accepted values for <code>$case</code>:
+<ul>
+<li><code>LOCAL_DIRECTION</code>: A direction relative to the forward-facing direction of the entity, affected also by the transformation of any parent entities. This is useful to detect obstacles in front of vehicles honoring their heading. The rotation is defined by the <code>localDirection</code> field, as a <code>Vector3</code> that describes a rotation.</li>
+<li><code>GLOBAL_DIRECTION</code>: Ignores the entity’s rotation, and faces a direction as if the entity’s rotation was 0. This is useful to i.e. always point down. The rotation is defined by the <code>globalDirection</code> field, as a <code>Vector3</code> that describes a rotation.</li>
+<li><code>GLOBAL_TARGET</code>: Traces a line between the entity’s position and a target global position in the scene. It ignores the entity’s rotation. Useful to create tower defense games, each tower’s turret can point to a pin-pointed coordinate in space. The target is defined by the <code>globalTarget</code> field, as a <code>Vector3</code> that describes the global position.</li>
+<li><code>TARGET_ENTITY</code>: Traces a line between the entity’s position and the position of a second target entity. It ignores the rotation of either entities. The target is defined by the <code>targetEntity</code> field, holding a reference to the entity.</li>
+</ul>
+</li>
+<li><code>maxDistance</code>: <em>number</em> to set the length with which this ray will be traced.</li>
+<li><code>queryType</code>: <em>RaycastQueryType</em> enum value, to define if the ray will return all hit entities or just the first. The following options are available:
+<ul>
+<li><code>RaycastQueryType.RQT_QUERY_ALL</code>: only returns the first hit entity, starting from the origin point.</li>
+<li><code>RaycastQueryType.RQT_HIT_FIRST</code>: returns all hit entities, from the origin through to the max distance of the ray.</li>
+</ul>
+</li>
+<li><code>collisionMask</code>: Only detect collisions with certain collision layers. Use this together with a custom collision layer, or to only detect the physics or pointer events layer. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/#collision-layers">
+collision layers
+</a>. By default, all layers are detected.</li>
+<li><code>originOffset</code>: Instead of starting the raycast from the entity’s origin position, add an offset to start the query from a relative position. You can for example use a small offset to prevent the ray colliding against the entity’s own 3D model.</li>
+<li><code>continuous</code>: If true, will keep running a raycast query on every frame. If false, the ray will only be used on the current frame. By default this value is false.</li>
+</ul>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The <code>continuous</code> property should be used with caution, as running a raycast query on every frame can be very expensive for performance. When possible, use a system (or the <code>interval</code> function in the Utils library) to run raycast queries at a regular more sparse interval, see <a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#recurrent-raycasting">
+recurrent raycasting
+</a>.
+</blockquote>
+<p>The following example uses a global rotation to determine the direction, and only returns the first entity that is hit on the frame that the ray is sent.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">entity1</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">entity1</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Raycast</span><span class="p">.</span><span class="nx">createOrReplace</span><span class="p">(</span><span class="nx">entity1</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">direction</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$case</span><span class="o">:</span> <span class="s2">"globalDirection"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">globalDirection</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">maxDistance</span>: <span class="kt">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_HIT_FIRST</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The example below launches a ray in the forward-facing direction of the entity, returning only the first item hit. It does so continuously. It also includes a minor offset of 0.5 to prevent the ray from hitting the entity’s own collider.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">entity1</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">entity1</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Raycast</span><span class="p">.</span><span class="nx">createOrReplace</span><span class="p">(</span><span class="nx">entity1</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">direction</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$case</span><span class="o">:</span> <span class="s2">"localDirection"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">localDirection</span>: <span class="kt">Vector3.Forward</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">maxDistance</span>: <span class="kt">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_HIT_FIRST</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">originOffset</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">continuous</span>: <span class="kt">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>This example traces a ray between two entities. It returns all entities that are hit in between.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">entity1</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">entity1</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">entity2</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">entity2</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Raycast</span><span class="p">.</span><span class="nx">createOrReplace</span><span class="p">(</span><span class="nx">entity1</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">direction</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$case</span><span class="o">:</span> <span class="s2">"targetEntity"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">targetEntity</span>: <span class="kt">entity2</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">maxDistance</span>: <span class="kt">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h3 id="raycast-results-component">
+Raycast results component
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/#raycast-results-component">#</a>
+</h3>
+<blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The easiest way to deal with raycast results is to use <code>raycastEventSystem</code>, and register a callback function as part of the same statement that creates the ray. The<code>RaycastResult</code> component is used internally by that that interface, but also exposed to enable more advanced custom logic.
+</blockquote>
+<p>After creating a Raycast component, the entity that this component is added to will have a <code>RaycastResult</code> component. This component includes information about any hits of the ray. Set up a system to check for this data.</p>
+<p>The <code>RaycastResult</code> component contains the following data:</p>
+<ul>
+<li><code>globalOrigin</code>: The position where the ray was originated, relative to the scene.</li>
+<li><code>direction</code>: The global direction that the ray was pointing, as a <code>Vector3</code>.</li>
+<li><code>hits</code>: An array with one object for each entity that was hit. If there were no hit entities, this array is empty. If the raycast used <code>RaycastQueryType.RQT_HIT_FIRST</code>, this array will only contain one object.</li>
+</ul>
+<p>Each object in the <code>hits</code> array includes:</p>
+<ul>
+<li><code>entityId</code>: Id number of the entity that was hit by the ray.</li>
+<li><code>meshName</code>: <em>String</em> with the internal name of the specific mesh in the 3D model that was hit. This is useful when a 3D model is composed of multiple meshes.</li>
+<li><code>position</code>: <em>Vector3</em> for the position where the ray intersected with the hit entity (relative to the scene)</li>
+<li><code>length</code>: Length of the ray from its origin to the position where the hit against the entity occurred.</li>
+<li><code>normalHit</code>: <em>Quaternion</em> for the angle of the normal of the hit in world space.</li>
+<li><code>globalOrigin</code>: <em>Vector3</em> for the position where the ray originates (relative to the scene)</li>
+<li><code>direction</code>: The global direction that the ray was pointing, as a <code>Vector3</code>.</li>
+</ul>
+<p>The example below shows how you can access results from an individual entity using a system:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">rayEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">rayEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// return all entities
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Raycast</span><span class="p">.</span><span class="nx">createOrReplace</span><span class="p">(</span><span class="nx">rayEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">direction</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$case</span><span class="o">:</span> <span class="s2">"globalDirection"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">globalDirection</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">maxDistance</span>: <span class="kt">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">queryType</span>: <span class="kt">RaycastQueryType.RQT_QUERY_ALL</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">rayResult</span> <span class="o">=</span> <span class="nx">RaycastResult</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">rayEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rayResult</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The next example shows how you can access <code>RaycastResult</code> components from all entities in the scene, using a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/">
+component query
+</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="p">[</span><span class="nx">_</span><span class="p">,</span> <span class="nx">result</span><span class="p">]</span> <span class="k">of</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">getEntitiesWith</span><span class="p">(</span><span class="nx">RaycastResult</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">hits</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: The results of a raycast do not arrive on the same tick of the game loop that you created the raycast. The results may take one or multiple ticks to arrive.
+</blockquote>
+<p>In a scene where you use multiple kinds of rays for different purposes (like for path finding, line-of-sight checking, projectile tracing, etc), you might want to use different <a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/#collision-layers">
+collision layers
+</a>, to avoid calculating irrelevant collisions.</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Raycasting _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/creator/sdk7/interactivity/raycasting.md" target="_blank" rel="noopener">
+<img src="./Raycasting _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Raycasting _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Raycasting _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://docs.decentraland.org/contributor/auth/authchain/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Many actions in the Decentraland protocol either require or benefit from authorization with a signature from the user’s Ethereum account. For example:
+Upload a new version of any Entity they own (such as their profile). Authenticate themselves to 3rd-party services. Authorize delegates to act on their behalf. To perform these actions, users and delegates must sign payloads describing their intent and produce an authentication chain.
+Introduction # Authentication chains encapsulate a series of verification steps, with each step depending on the succcessful verification of the previous one.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Authentication Chain">
+<meta property="og:description" content="Many actions in the Decentraland protocol either require or benefit from authorization with a signature from the user’s Ethereum account. For example:
+Upload a new version of any Entity they own (such as their profile). Authenticate themselves to 3rd-party services. Authorize delegates to act on their behalf. To perform these actions, users and delegates must sign payloads describing their intent and produce an authentication chain.
+Introduction # Authentication chains encapsulate a series of verification steps, with each step depending on the succcessful verification of the previous one.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/contributor/auth/authchain/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="contributor">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Authentication Chain | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Authentication Chain _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Authentication Chain _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Authentication Chain _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Authentication Chain _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Authentication Chain _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Authentication Chain _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+<div class="active-bar" style="border-color: #EE834A;"></div>
+<style>
+                :root {
+                  --primary: #EE834A;
+                }
+              </style>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Authentication Chain _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Introduction</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/welcome/" class="">Welcome!</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/architecture/" class="">Architecture</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Identity</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/authchain/" class="active">Authentication Chain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/signed-fetch/" class="">Signed Fetch</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Content</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/filesystem/" class="">File System</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities/" class="">Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/pointers/" class="">Pointers</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/snapshots/" class="">Snapshots</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/collections/" class="">Collections</a>
+</li>
+<li>
+<input type="checkbox" id="section-78d857344d9976cb2d2de1aa922ff1d0" class="toggle">
+<label for="section-78d857344d9976cb2d2de1aa922ff1d0" class="flex justify-between">
+<a role="button" class="">Entity Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/scenes/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/outfits/" class="">Outfits</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/profiles/" class="">Profiles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/wearables/" class="">Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/emotes/" class="">Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/stores/" class="">Stores</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/practice/" class="">Practice</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Scene Runtime</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/globals/" class="">Globals</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/execution/" class="">Execution</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/permissions/" class="">Permissions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/entities/" class="">Basic Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/components/" class="">Basic Components</a>
+</li>
+<li>
+<input type="checkbox" id="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="toggle">
+<label for="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="flex justify-between">
+<a role="button" class="">Modules</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/" class="">EngineApi</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/restricted_actions/" class="">RestrictedActions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/user_identity/" class="">UserIdentity</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/" class="">SignedFetch</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Communications</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/main/" class="">MAIN Realm</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/archipelago/" class="">Archipelago</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/messages/" class="">Messages</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transports/" class="">Transports</a>
+</li>
+<li>
+<input type="checkbox" id="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="toggle">
+<label for="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="flex justify-between">
+<a role="button" class="">Transport Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/livekit/" class="">LiveKit</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/websocket/" class="">Websocket</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/signed-login/" class="">Signed Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/offline/" class="">Offline</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/simulator/" class="">Simulator</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Catalyst Nodes</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/realm-selection/" class="">Realm Selection</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Explorer Renderer</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="toggle">
+<label for="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="flex justify-between">
+<a role="button" class="">Components</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/unity-renderer/components/how-to-create-components/" class="">Component Creation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Social Service</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/js-client/" class="">Javascript Client</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/login/" class="">Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/get-friends/" class="">Get friendships</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/put-friends/" class="">Act on events and users</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-create-new-entity-type/" class="">New entity type</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/" class="">Run a Catalyst Node</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Authentication Chain _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Authentication Chain</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Authentication Chain</h1><p>Many actions in the Decentraland protocol either require or benefit from authorization with a signature from the user’s Ethereum account. For example:</p>
+<ol>
+<li>Upload a new version of any <a href="https://docs.decentraland.org/contributor/content/entities/">
+Entity
+</a> they own (such as their profile).</li>
+<li>Authenticate themselves to 3rd-party services.</li>
+<li>Authorize delegates to act on their behalf.</li>
+</ol>
+<p>To perform these actions, users and delegates must sign payloads describing their intent and produce an <em>authentication chain</em>.</p>
+<h2 id="introduction">
+Introduction
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#introduction">#</a>
+</h2>
+<p>Authentication chains encapsulate a series of verification steps, with each step depending on the succcessful verification of the previous one. All steps must be deemed valid by the verifier for any restricted action to take place.</p>
+<p>Every chain begins by identifying the user, and ends with a signed payload representing the requested action. The smallest chain thus contains two elements, which indicate:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="k">1.</span> The authority is the Ethereum account <span class="p">&lt;</span><span class="nt">user-address</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> The payload is <span class="p">&lt;</span><span class="nt">payload</span><span class="p">&gt;</span>, authorized by <span class="p">&lt;</span><span class="nt">user-signature</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>This basic chain can be evaluated by verifying that the signature’s public key corresponds to the address. In this case, it’s equivalent to a plain signature.</p>
+<p>When users authorize delegates to act on their behalf, intermediate steps appear in the chain. For example, a chain with a single delegation would indicate:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="k">1.</span> The authority is the Ethereum account <span class="p">&lt;</span><span class="nt">user-address</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> The delegate is <span class="p">&lt;</span><span class="nt">delegate-address</span><span class="p">&gt;</span>, authorized by <span class="p">&lt;</span><span class="nt">user-signature</span><span class="p">&gt;</span> until <span class="p">&lt;</span><span class="nt">date</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">3.</span> The payload is <span class="p">&lt;</span><span class="nt">payload</span><span class="p">&gt;</span>, authorized by <span class="p">&lt;</span><span class="nt">delegate-signature</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>Chains are longer when delegates authorize their own delegates. In other words, authorization is transitive.</p>
+<div class="ui blue message">
+<div class="content">
+<p>You can think of authentication chains as analogous to the TLS certificate chains used in HTTPS. with the user as the equivalent of the root authority.</p>
+</div>
+</div>
+<p>This single-delegate chain is the most common form of authorization used in Decentraland, since users authorize a key for their World Explorer to avoid having to sign every individual action with their Ethereum account.</p>
+<h3 id="constructing">
+Constructing a Chain
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#constructing">#</a>
+</h3>
+<p>Each step in the authentication chain contains three pieces of information: a <code>type</code>, a <code>payload</code> and a corresponding <code>signature</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>The name of a type (<a href="https://docs.decentraland.org/contributor/auth/authchain/#types">
+see below
+</a>).</td>
+</tr>
+<tr>
+<td><code>payload</code></td>
+<td>A type-dependent string.</td>
+</tr>
+<tr>
+<td><code>signature</code></td>
+<td>The hex-encoded Ethereum signature of <code>payload</code>, beginning with <code>0x</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="ui blue message">
+<div class="content">
+<p>Since the most common serialization of an authentication chain is a JSON array, the examples below are presented in that form. See <a href="https://docs.decentraland.org/contributor/auth/authchain/#transmitting">
+Transmitting a Chain
+</a> for more details.</p>
+</div>
+</div>
+<h3 id="first-step-identification">
+First Step: Identification
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#first-step-identification">#</a>
+</h3>
+<p>The first step, which identifies the original authority (i.e the user), must meet these conditions:</p>
+<ol>
+<li>The <code>type</code> is <a href="https://docs.decentraland.org/contributor/auth/authchain/#SIGNER">
+<code>SIGNER</code>
+</a></li>
+<li>The <code>payload</code> is the encoded Ethereum account.</li>
+<li>The <code>signature</code> is empty.</li>
+</ol>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// First step in any authentication chain:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"SIGNER"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"payload"</span><span class="p">:</span> <span class="s2">"0xdB055877e6c13b6A6B25aBcAA29B393777dD0a73"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"signature"</span><span class="p">:</span> <span class="s2">""</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The second step must carry a <code>signature</code> from this account for its <code>payload</code>.</p>
+<h3 id="intermediate-steps-delegation">
+Intermediate Steps: Delegation
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#intermediate-steps-delegation">#</a>
+</h3>
+<p>When delegates are acting on the user’s behalf, an item is added to the middle of the chain for each of them. The conditions for these steps are:</p>
+<ol>
+<li>The type is <a href="https://docs.decentraland.org/contributor/auth/authchain/#ECDSA_EPHEMERAL">
+<code>ECDSA_EPHEMERAL</code>
+</a></li>
+<li>The <code>payload</code> is a specially crafted text (see below).</li>
+</ol>
+<p>The <code>payload</code> is designed to be easy to read and easy to parse, since both humans (when using their wallet UI) and programs (when crafting and validating) must work with it. It contains exactly 3 lines of case-sensitive plain text:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">purpose</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">Ephemeral address: <span class="p">&lt;</span><span class="nt">delegate-address</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">Expiration: <span class="p">&lt;</span><span class="nt">date</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>For example, this is a typical payload used by World Explorers during login, when they generate their temporary delegate key for the user to approve:</p>
+<pre tabindex="0"><code>Decentraland Login
+Ephemeral address: 0xBB9aDF0183b1742196A4Aa55622D5838f4f483a7
+Expiration: 2023-02-25T13:00:19.730Z
+</code></pre><p>Note that:</p>
+<ol>
+<li>
+<p>The <code>Ephemeral address</code> doesn’t need to be an actual Ethereum account with funds in the blockchain. The field may only represent a temporary public key.</p>
+</li>
+<li>
+<p>The <code>Expiration</code> is a serialized datetime in <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">
+ISO-8601
+</a> form. It doesn’t need to be UTC.</p>
+</li>
+<li>
+<p>The delegate key must be periodically renewed with a fresh signature from the user, due to this expiration date.</p>
+</li>
+</ol>
+<div class="ui blue message">
+<div class="content">
+<p>It’s standard practice (and highly recommended) to generate a new key for every renewal (thus the name <code>ECDSA_EPHEMERAL</code>).</p>
+</div>
+</div>
+<p>An example delegation step (values abbreviated for clarity):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"ECDSA_EPHEMERAL"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"payload"</span><span class="p">:</span> <span class="s2">"Decentraland Login\nEphemeral address: 0xBBa7...\nExpiration: 2021-01-25T..."</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"signature"</span><span class="p">:</span> <span class="s2">"0x1370a4120a7cb0d2f6e4a5..."</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The next step, whether it’s another delegation or the final authorization, carries a signature from this delegate’s key.</p>
+<h3 id="last-step-authorization">
+Last Step: Authorization
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#last-step-authorization">#</a>
+</h3>
+<p>After the <code>SIGNER</code> has been specified and all <code>ECDSA_EPHEMERAL</code> delegate keys were validated by verifying the chain of intermediate signatures, the final step is the actual action that needs to be authorized.</p>
+<p>The <code>payload</code> is dependent on the <code>type</code> of the step. For example, if a user is uploading a new profile (or any entity they own) to a content server, the last element will have this form:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// The type indicates that `payload` is an entity ID (details in the Content section):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"ECDSA_SIGNED_ENTITY"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The payload is the raw ID string:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nt">"payload"</span><span class="p">:</span> <span class="s2">"bafkreicfbg7ybpuoslkcf6x2vfnvzl5vwgqtb2pnheqiut2i4sgpblicqi"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The signature is produced by the account in the previous step (user or delegate):
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nt">"signature"</span><span class="p">:</span> <span class="s2">"0x7e71dbbab..."</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If this last signature is also valid, the action can proceed.</p>
+<h3 id="transmitting">
+Transmitting a Chain
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#transmitting">#</a>
+</h3>
+<p>As mentioned above, the most common serialization of an authentication chain is a JSON array. This is the recommended approach.</p>
+<p>However, the protocol does not impose this. Developers are allowed to use an alternative serialization strategy if it’s more convenient for a particular use-case, such as YAML, CSV files, optimized binary formats or simple strings with delimited fields.</p>
+<p>An example of alternative serialization from within the protocol itself can be found in the <a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/">
+<code>SignedFetch</code>
+</a> module, which uses a sequence of HTTP headers instead of a JSON array.</p>
+<h3 id="choosing-an-expiration-date">
+Choosing an Expiration Date
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#choosing-an-expiration-date">#</a>
+</h3>
+<p>When selecting the valid duration for a delegate key, there’s a tradeoff: shorter expirations increase security, but longer expirations improve user experience (since delegates have to be renewed with human interaction at a lower frequency).</p>
+<p>There is no universal strategy to decide what the valid time window should be. The Foundation’s World Explorer, for reference, requests authorization for its delegate key for one month.</p>
+<div class="ui blue message">
+<div class="content">
+<p>Ephemeral keys should never hold funds or possess the ability to transfer digital assets. It’s much safer for end-users if the leak of an ephemeral key cannot result in financial losses.</p>
+</div>
+</div>
+<h2 id="formalization">
+Formalization
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#formalization">#</a>
+</h2>
+<p>What follows is a more formal and precise definition of the processes involved. Follow these instructions to successfully handle authentication chains.</p>
+<h3 id="creation">
+Creation
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#creation">#</a>
+</h3>
+<p>Clients crafting an authentication chain for the user follow these steps:</p>
+<ol>
+<li>
+<p>Add the identification step:</p>
+<ol>
+<li>Set the <code>type</code> to <code>SIGNER</code>.</li>
+<li>Set the <code>payload</code> to the user’s Ethereum address.</li>
+<li>Set the <code>signature</code> to an empty string.</li>
+</ol>
+</li>
+<li>
+<p>Add delegations steps:</p>
+<ol>
+<li>Generate or use an existing delegate private key (may require interaction).</li>
+<li>Calculate the delegate Etherum address derived from the corresponding public key.</li>
+<li>Set the <code>type</code> to <code>ECDSA_EPHEMERAL</code>.</li>
+<li>Set the <code>expiration</code> to a date in the future.</li>
+<li>Choose a <code>purpose</code> for this key.</li>
+<li>Set the <code>payload</code> to this exact form:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">purpose</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">Ephemeral address: <span class="p">&lt;</span><span class="nt">delegate-address</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">Expiration: <span class="p">&lt;</span><span class="nt">date</span><span class="p">&gt;</span>
+</span></span></code></pre></div></li>
+<li>Set the <code>signature</code> field to the <code>payload</code> signature from the previous key (user or delegate).</li>
+<li>Repeat for all successive delegates.</li>
+</ol>
+</li>
+<li>
+<p>Add the action authorization step:</p>
+<ol>
+<li>Set the <code>type</code> to a valid value (<a href="https://docs.decentraland.org/contributor/auth/authchain/#types">
+see below
+</a>)</li>
+<li>Set the <code>payload</code> to the type-specific value (such as the entity ID).</li>
+<li>Set the <code>signature</code> field to the <code>payload</code> signature from the previous key (user or delegate).</li>
+</ol>
+</li>
+<li>
+<p>Send the authentication chain to the verifier.</p>
+</li>
+</ol>
+<h3 id="verification">
+Verification
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#verification">#</a>
+</h3>
+<p>Content servers and 3rd-party services implementing verification follow these steps:</p>
+<ol>
+<li>
+<p>Verify identification:</p>
+<ol>
+<li>Verify the <code>type</code> is <code>SIGNER</code>.</li>
+<li>Verify the <code>payload</code> is the Ethereum address of the user.</li>
+<li>Verify the <code>signature</code> is an empty string.</li>
+</ol>
+</li>
+<li>
+<p>Verify delegates:</p>
+<ol>
+<li>Verify the <code>type</code> is <code>ECDSA_EPHEMERAL</code>.</li>
+<li>Verify the <code>payload</code> is in this form and extract the fields:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">purpose</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">Ephemeral address: <span class="p">&lt;</span><span class="nt">delegate-address</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">Expiration: <span class="p">&lt;</span><span class="nt">date</span><span class="p">&gt;</span>
+</span></span></code></pre></div></li>
+<li>Verify the <code>date</code> is still in the future.</li>
+<li>Verify the <code>purpose</code> is supported by your service.</li>
+<li>Verify the <code>signature</code> is valid for the given <code>payload</code> and the previous public key.</li>
+<li>Repeat for all successive delegates.</li>
+</ol>
+</li>
+<li>
+<p>Verify action authorization:</p>
+<ol>
+<li>Verify the <code>type</code> is a valid value (<a href="https://docs.decentraland.org/contributor/auth/authchain/#types">
+see below
+</a>).</li>
+<li>Verify the <code>payload</code> is valid for this <code>type</code>.</li>
+<li>Verify the <code>signature</code> is valid for the given <code>payload</code> and the previous public key.</li>
+</ol>
+</li>
+<li>
+<p>Accept the authentication chain.</p>
+</li>
+</ol>
+<h3 id="types">
+Standard Action Types and Purposes
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#types">#</a>
+</h3>
+<p>The <code>type</code> and <code>payload</code> values for identification and delegation are standard and must be verified as laid out above, but clients and services can agree on any action <code>type</code>, and its <code>payload</code> structure, as well as set a <code>purpose</code> for their delegate keys that they consider valid.</p>
+<p>The protocol defines three standard types, and one standard purpose:</p>
+<h6 id="SIGNER">
+Type <code>SIGNER</code>
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#SIGNER">#</a>
+</h6>
+<p><strong>Must</strong> be the initial <code>type</code> in the chain, where <code>payload</code> is the user’s Ethereum address and <code>signature</code> is an empty string.</p>
+<h6 id="ECDSA_EPHEMERAL">
+Type <code>ECDSA_EPHEMERAL</code>
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#ECDSA_EPHEMERAL">#</a>
+</h6>
+<p><strong>Must</strong> be the <code>type</code> for intermediate steps in the chain, where <code>payload</code> is in the form described above.</p>
+<h6 id="ECDSA_SIGNED_ENTITY">
+Type <code>ECDSA_SIGNED_ENTITY</code>
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#ECDSA_SIGNED_ENTITY">#</a>
+</h6>
+<p>The final <code>type</code> in the chain for authorizing entity deployments, where <code>payload</code> is the ID of an entity owned by the user.</p>
+<h6 id="DecentralandLogin">
+Purpose <code>Decentraland Login</code>
+<a class="anchor" href="https://docs.decentraland.org/contributor/auth/authchain/#DecentralandLogin">#</a>
+</h6>
+<p>The usual <code>purpose</code> for World Explorers, signed both when logging into the world and when renewing their delegate key.</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Authentication Chain _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/contributor/auth/authchain.md" target="_blank" rel="noopener">
+<img src="./Authentication Chain _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Authentication Chain _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Authentication Chain _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

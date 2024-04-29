@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://docs.decentraland.org/contributor/runtime/components/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The World Explorer supports a list of basic components that share their definition with scenes, providing built-in support for positioning, animation, media, world state queries
+There are five types of components:
+Object components add visual and physical properties to Entities. Game components can request actions and receive information from the game engine. Media components can display images and play sounds. Area components alter the behavior of Entities in specific zones. UI components allow scenes to render floating interfaces.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Basic Components">
+<meta property="og:description" content="The World Explorer supports a list of basic components that share their definition with scenes, providing built-in support for positioning, animation, media, world state queries
+There are five types of components:
+Object components add visual and physical properties to Entities. Game components can request actions and receive information from the game engine. Media components can display images and play sounds. Area components alter the behavior of Entities in specific zones. UI components allow scenes to render floating interfaces.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/contributor/runtime/components/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="contributor">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Basic Components | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Basic Components _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Basic Components _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Basic Components _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Basic Components _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Basic Components _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Basic Components _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+<div class="active-bar" style="border-color: #EE834A;"></div>
+<style>
+                :root {
+                  --primary: #EE834A;
+                }
+              </style>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Basic Components _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Introduction</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/welcome/" class="">Welcome!</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/architecture/" class="">Architecture</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Identity</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/authchain/" class="">Authentication Chain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/signed-fetch/" class="">Signed Fetch</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Content</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/filesystem/" class="">File System</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities/" class="">Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/pointers/" class="">Pointers</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/snapshots/" class="">Snapshots</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/collections/" class="">Collections</a>
+</li>
+<li>
+<input type="checkbox" id="section-78d857344d9976cb2d2de1aa922ff1d0" class="toggle">
+<label for="section-78d857344d9976cb2d2de1aa922ff1d0" class="flex justify-between">
+<a role="button" class="">Entity Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/scenes/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/outfits/" class="">Outfits</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/profiles/" class="">Profiles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/wearables/" class="">Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/emotes/" class="">Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/stores/" class="">Stores</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/practice/" class="">Practice</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Scene Runtime</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/globals/" class="">Globals</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/execution/" class="">Execution</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/permissions/" class="">Permissions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/entities/" class="">Basic Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/components/" class="active">Basic Components</a>
+</li>
+<li>
+<input type="checkbox" id="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="toggle">
+<label for="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="flex justify-between">
+<a role="button" class="">Modules</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/" class="">EngineApi</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/restricted_actions/" class="">RestrictedActions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/user_identity/" class="">UserIdentity</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/" class="">SignedFetch</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Communications</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/main/" class="">MAIN Realm</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/archipelago/" class="">Archipelago</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/messages/" class="">Messages</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transports/" class="">Transports</a>
+</li>
+<li>
+<input type="checkbox" id="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="toggle">
+<label for="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="flex justify-between">
+<a role="button" class="">Transport Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/livekit/" class="">LiveKit</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/websocket/" class="">Websocket</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/signed-login/" class="">Signed Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/offline/" class="">Offline</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/simulator/" class="">Simulator</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Catalyst Nodes</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/realm-selection/" class="">Realm Selection</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Explorer Renderer</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="toggle">
+<label for="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="flex justify-between">
+<a role="button" class="">Components</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/unity-renderer/components/how-to-create-components/" class="">Component Creation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Social Service</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/js-client/" class="">Javascript Client</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/login/" class="">Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/get-friends/" class="">Get friendships</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/put-friends/" class="">Act on events and users</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-create-new-entity-type/" class="">New entity type</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/" class="">Run a Catalyst Node</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Basic Components _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Basic Components</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Basic Components</h1><p>The World Explorer supports a list of basic components that share their definition with scenes, providing built-in support for positioning, animation, media, world state queries</p>
+<p>There are five types of components:</p>
+<ol>
+<li><a href="https://docs.decentraland.org/contributor/runtime/components/#object">
+Object components
+</a> add visual and physical properties to Entities.</li>
+<li><a href="https://docs.decentraland.org/contributor/runtime/components/#game">
+Game components
+</a> can request actions and receive information from the game engine.</li>
+<li><a href="https://docs.decentraland.org/contributor/runtime/components/#media">
+Media components
+</a> can display images and play sounds.</li>
+<li><a href="https://docs.decentraland.org/contributor/runtime/components/#area">
+Area components
+</a> alter the behavior of Entities in specific zones.</li>
+<li><a href="https://docs.decentraland.org/contributor/runtime/components/#ui">
+UI components
+</a> allow scenes to render floating interfaces.</li>
+</ol>
+<p>Except for <a href="https://docs.decentraland.org/contributor/runtime/components/#Transform">
+<code>Transform</code>
+</a>, which is specified in detail below, the state of all components is serialized using protocol buffers. You can follow the link in each title to see the complete definition.</p>
+<h2 id="object">
+Object Components
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#object">#</a>
+</h2>
+<p>The most common components are those that attach visual and pyhisical properties to an Entity. They can be used to position, resize, paint and add collision to in-game objects.</p>
+<hr>
+<h6 id="Transform">
+<code>Transform</code> <small><a href="https://adr.decentraland.org/adr/ADR-153" target="_blank">
+↗ spec
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#Transform">#</a>
+</h6>
+<p>Adds position, rotation and scale to an entity.</p>
+<p>This component is, by a wide margin, the most commonly used and frequently updated during the lifespan of a scene. Because of this, <code>Transform</code> is not serialized using protocol buffers, and is instead packed into a custom structure.</p>
+<p><code>Transform</code> has a size of <code>44</code> bytes, with this exact layout:</p>
+<div class="goat svg-container ">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Lucida Console,monospace" viewBox="0 0 800 73">
+<g transform="translate(8,16)">
+<path d="M 0,0 L 192,0" fill="none" stroke="currentColor"></path>
+<path d="M 192,0 L 448,0" fill="none" stroke="currentColor"></path>
+<path d="M 448,0 L 640,0" fill="none" stroke="currentColor"></path>
+<path d="M 640,0 L 784,0" fill="none" stroke="currentColor"></path>
+<path d="M 0,32 L 192,32" fill="none" stroke="currentColor"></path>
+<path d="M 192,32 L 448,32" fill="none" stroke="currentColor"></path>
+<path d="M 448,32 L 640,32" fill="none" stroke="currentColor"></path>
+<path d="M 640,32 L 784,32" fill="none" stroke="currentColor"></path>
+<path d="M 0,0 L 0,32" fill="none" stroke="currentColor"></path>
+<path d="M 64,8 L 64,24" fill="none" stroke="currentColor"></path>
+<path d="M 128,8 L 128,24" fill="none" stroke="currentColor"></path>
+<path d="M 192,0 L 192,32" fill="none" stroke="currentColor"></path>
+<path d="M 256,8 L 256,24" fill="none" stroke="currentColor"></path>
+<path d="M 320,8 L 320,24" fill="none" stroke="currentColor"></path>
+<path d="M 384,8 L 384,24" fill="none" stroke="currentColor"></path>
+<path d="M 448,0 L 448,32" fill="none" stroke="currentColor"></path>
+<path d="M 512,8 L 512,24" fill="none" stroke="currentColor"></path>
+<path d="M 576,8 L 576,24" fill="none" stroke="currentColor"></path>
+<path d="M 640,0 L 640,32" fill="none" stroke="currentColor"></path>
+<path d="M 784,0 L 784,32" fill="none" stroke="currentColor"></path>
+<path d="M 64,8 L 64,16" fill="none" stroke="currentColor"></path>
+<path d="M 128,8 L 128,16" fill="none" stroke="currentColor"></path>
+<path d="M 256,8 L 256,16" fill="none" stroke="currentColor"></path>
+<path d="M 320,8 L 320,16" fill="none" stroke="currentColor"></path>
+<path d="M 384,8 L 384,16" fill="none" stroke="currentColor"></path>
+<path d="M 512,8 L 512,16" fill="none" stroke="currentColor"></path>
+<path d="M 576,8 L 576,16" fill="none" stroke="currentColor"></path>
+<text text-anchor="middle" x="0" y="52" fill="currentColor" style="font-size:1em">╵</text>
+<text text-anchor="middle" x="24" y="52" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="32" y="20" fill="currentColor" style="font-size:1em">x</text>
+<text text-anchor="middle" x="32" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="40" y="52" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="48" y="52" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="56" y="52" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="64" y="52" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="72" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="80" y="52" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="96" y="20" fill="currentColor" style="font-size:1em">y</text>
+<text text-anchor="middle" x="96" y="52" fill="currentColor" style="font-size:1em">(</text>
+<text text-anchor="middle" x="104" y="52" fill="currentColor" style="font-size:1em">3</text>
+<text text-anchor="middle" x="112" y="52" fill="currentColor" style="font-size:1em">x</text>
+<text text-anchor="middle" x="128" y="52" fill="currentColor" style="font-size:1em">f</text>
+<text text-anchor="middle" x="136" y="52" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="144" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="152" y="52" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="160" y="20" fill="currentColor" style="font-size:1em">z</text>
+<text text-anchor="middle" x="160" y="52" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="168" y="52" fill="currentColor" style="font-size:1em">)</text>
+<text text-anchor="middle" x="192" y="52" fill="currentColor" style="font-size:1em">╵</text>
+<text text-anchor="middle" x="224" y="20" fill="currentColor" style="font-size:1em">x</text>
+<text text-anchor="middle" x="248" y="52" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="256" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="264" y="52" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="272" y="52" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="280" y="52" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="288" y="20" fill="currentColor" style="font-size:1em">y</text>
+<text text-anchor="middle" x="288" y="52" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="296" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="304" y="52" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="320" y="52" fill="currentColor" style="font-size:1em">(</text>
+<text text-anchor="middle" x="328" y="52" fill="currentColor" style="font-size:1em">4</text>
+<text text-anchor="middle" x="336" y="52" fill="currentColor" style="font-size:1em">x</text>
+<text text-anchor="middle" x="352" y="20" fill="currentColor" style="font-size:1em">z</text>
+<text text-anchor="middle" x="352" y="52" fill="currentColor" style="font-size:1em">f</text>
+<text text-anchor="middle" x="360" y="52" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="368" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="376" y="52" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="384" y="52" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="392" y="52" fill="currentColor" style="font-size:1em">)</text>
+<text text-anchor="middle" x="416" y="20" fill="currentColor" style="font-size:1em">w</text>
+<text text-anchor="middle" x="448" y="52" fill="currentColor" style="font-size:1em">╵</text>
+<text text-anchor="middle" x="480" y="20" fill="currentColor" style="font-size:1em">x</text>
+<text text-anchor="middle" x="480" y="52" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="488" y="52" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="496" y="52" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="504" y="52" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="512" y="52" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="528" y="52" fill="currentColor" style="font-size:1em">(</text>
+<text text-anchor="middle" x="536" y="52" fill="currentColor" style="font-size:1em">3</text>
+<text text-anchor="middle" x="544" y="20" fill="currentColor" style="font-size:1em">y</text>
+<text text-anchor="middle" x="544" y="52" fill="currentColor" style="font-size:1em">x</text>
+<text text-anchor="middle" x="560" y="52" fill="currentColor" style="font-size:1em">f</text>
+<text text-anchor="middle" x="568" y="52" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="576" y="52" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="584" y="52" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="592" y="52" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="600" y="52" fill="currentColor" style="font-size:1em">)</text>
+<text text-anchor="middle" x="608" y="20" fill="currentColor" style="font-size:1em">z</text>
+<text text-anchor="middle" x="640" y="52" fill="currentColor" style="font-size:1em">╵</text>
+<text text-anchor="middle" x="656" y="20" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="664" y="20" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="672" y="20" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="680" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="688" y="20" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="696" y="20" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="712" y="20" fill="currentColor" style="font-size:1em">(</text>
+<text text-anchor="middle" x="720" y="20" fill="currentColor" style="font-size:1em">u</text>
+<text text-anchor="middle" x="728" y="20" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="736" y="20" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="744" y="20" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="752" y="20" fill="currentColor" style="font-size:1em">3</text>
+<text text-anchor="middle" x="760" y="20" fill="currentColor" style="font-size:1em">2</text>
+<text text-anchor="middle" x="768" y="20" fill="currentColor" style="font-size:1em">)</text>
+</g>
+</svg>
+</div>
+<p>This approach allows the runtime (especially in low-level code environments) to avoid intermediate serialization and deserialization steps. The memory where a <code>Transform</code> resides can be copied, shared and directly pointed to.</p>
+<p>Coordinates can be fractionary, and thus use a 4-byte floating point number.</p>
+<p>The <code>parent</code> field indicates that this Entity should be positioned relative to another one, identified by their ID.</p>
+<p>Since the null-value for <code>parent</code> is also the <a href="https://docs.decentraland.org/contributor/runtime/entities/#RootEntity">
+<code>RootEntity</code>
+</a> ID (<code>0</code>), any <code>Transform</code> is relative to it by default.</p>
+<p>By protocol, <code>Transform</code> must be serialized in big-endian byte order.</p>
+<hr>
+<h6 id="MeshRenderer">
+<code>MeshRenderer</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/mesh_renderer.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#MeshRenderer">#</a>
+</h6>
+<p>Provides basic rendering behavior for an Entity.</p>
+<p>It can be set to render a plane, a sphere, a cube or cylinder. To render arbitrary 3D shapes, use <a href="https://docs.decentraland.org/contributor/runtime/components/#GltfContainer">
+<code>GltfContainer</code>
+</a>.</p>
+<hr>
+<h6 id="MeshCollider">
+<code>MeshCollider</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/mesh_collider.proto#L15" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#MeshCollider">#</a>
+</h6>
+<p>Provides basic collision behavior and mouse pointer detection for an Entity.</p>
+<p>It can be set to behave like a plane, a sphere, a cube or cylinder. To have a custom collision mesh, use <a href="https://docs.decentraland.org/contributor/runtime/components/#GltfContainer">
+<code>GltfContainer</code>
+</a>.</p>
+<hr>
+<h6 id="Material">
+<code>Material</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/material.proto#L19" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#Material">#</a>
+</h6>
+<p>Sets the texture, lighting, color and transparency properties of an Entity that also has the <a href="https://docs.decentraland.org/contributor/runtime/components/#MeshRenderer">
+<code>MeshRenderer</code>
+</a> component.</p>
+<p>It’s a complex structure designed to cover all common cases, but every field has a reasonable default value and can be left unspecified.</p>
+<p>To completely customize the visual properties of an Entity, use <a href="https://docs.decentraland.org/contributor/runtime/components/#GltfContainer">
+<code>GltfContainer</code>
+</a>.</p>
+<hr>
+<h6 id="GltfContainer">
+<code>GltfContainer</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/gltf_container.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#GltfContainer">#</a>
+</h6>
+<p>Attaches a 3D model to this Entity, given the <a href="https://docs.decentraland.org/contributor/content/entities/#files">
+file path
+</a> of a <code>.gltf</code> asset in the scene’s manifest.</p>
+<p>Since the model has its own meshes and materials, this component overrides any behavior from <a href="https://docs.decentraland.org/contributor/runtime/components/#MeshRenderer">
+<code>MeshRenderer</code>
+</a>, <a href="https://docs.decentraland.org/contributor/runtime/components/#MeshCollider">
+<code>MeshCollider</code>
+</a> and <a href="https://docs.decentraland.org/contributor/runtime/components/#Material">
+<code>Material</code>
+</a>.</p>
+<hr>
+<h6 id="Billboard">
+<code>Billboard</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/billboard.proto#L17" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#Billboard">#</a>
+</h6>
+<p>Makes an Entity automatically reorient its <code>Transform</code> to face the camera. As the name indicates, it’s used to display in-game billboards and frequently combined with <a href="https://docs.decentraland.org/contributor/runtime/components/#TextShape">
+<code>TextShape</code>
+</a>.</p>
+<p>It affects all directions by default, but can be set to only rotate in one axis.</p>
+<hr>
+<h6 id="Animator">
+<code>Animator</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/animator.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#Animator">#</a>
+</h6>
+<p>Defines one or more animations that can be applied simultaneously to an entity.</p>
+<p>Scenes can set the component state to customize, play and transition between animations, as well as read it to check which animations are available or currently being played.</p>
+<hr>
+<h6 id="AvatarAttach">
+<code>AvatarAttach</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/avatar_attach.proto#L16" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#AvatarAttach">#</a>
+</h6>
+<p>Indicates that an Entity’s position must follow a particular anchor point in an avatar’s body.</p>
+<p>It can affect any avatar, not only the player’s, by setting a user ID.</p>
+<hr>
+<h6 id="TextShape">
+<code>TextShape</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/text_shape.proto#L11" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#TextShape">#</a>
+</h6>
+<p>Renders text on an Entity’s position, given by its <code>Transform</code>.</p>
+<p>It’s highly configurable, supporting parameters like size, margin, padding, color, shadow and more.</p>
+<hr>
+<h6 id="Visibility">
+<code>Visibility</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/visibility_component.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#Visibility">#</a>
+</h6>
+<p>Sets whether an Entity is visible (the default) or invisible.</p>
+<p>Invisible objects still exist, and will exhibit behavior from any other attached components.</p>
+<hr>
+<h6 id="AvatarShape">
+<code>AvatarShape</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/avatar_shape.proto#L8" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#AvatarShape">#</a>
+</h6>
+<p>Contains information about the player’s avatar, including their body shape, colors, wearables and transitory state.</p>
+<p>This component is attached to entities in the <a href="https://docs.decentraland.org/contributor/runtime/execution/#avatarScene">
+avatar scene
+</a>.</p>
+<h2 id="game">
+Game Components
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#game">#</a>
+</h2>
+<p>Some basic components can be used by the scene and the runtime to exchange information. They leverage the <a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/#synchronization">
+ECS synchronization mechanism
+</a> to guarantee consistency and ordering for any state changes or events.</p>
+<hr>
+<h6 id="CameraMode">
+<code>CameraMode</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/camera_mode.proto#L8" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#CameraMode">#</a>
+</h6>
+<p>Can be used to determine whether the player has a first-person o third-person view.</p>
+<hr>
+<h6 id="PointerLock">
+<code>PointerLock</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/pointer_lock.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#PointerLock">#</a>
+</h6>
+<p>Can be used to determine whether the mouse pointer is automatically following the camera’s point of focus (locked), or can move freely on the screen (unlocked).</p>
+<p>It’s attached to the <a href="https://docs.decentraland.org/contributor/runtime/entities/#CameraEntity">
+<code>CameraEntity</code>
+</a>, and its state can be read (but not written) from the scene.</p>
+<hr>
+<h6 id="PointerEvents">
+<code>PointerEvents</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/pointer_events.proto#L17" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#PointerEvents">#</a>
+</h6>
+<p>Shows visual feedback when the pointer clicks or hovers over an Entity.</p>
+<hr>
+<h6 id="PointerEventsResult">
+<code>PointerEventsResult</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/pointer_events_result.proto#L13" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#PointerEventsResult">#</a>
+</h6>
+<p>Contains information about recent input from the player, including keys and pointer actions.</p>
+<p>It’s attached to the <code>RootEntity</code>, and updated by the runtime with any new events on every frame.</p>
+<hr>
+<h6 id="Raycast">
+<code>Raycast</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/raycast.proto#L15" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#Raycast">#</a>
+</h6>
+<p>Can be attached to an Entity to request a raycast from the game engine. The <code>RaycastResult</code> component will later be attached to the same entity.</p>
+<p>The origin, direction and maximum length of the ray can be configured.</p>
+<hr>
+<h6 id="RaycastResult">
+<code>RaycastResult</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/raycast_result.proto#L9" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#RaycastResult">#</a>
+</h6>
+<p>Attached by the runtime to Entities that have a <a href="https://docs.decentraland.org/contributor/runtime/components/#Raycast">
+<code>Raycast</code>
+</a> component pending results.</p>
+<p>It contains information about the original ray and identifies any Entities that were hit.</p>
+<h2 id="media">
+Media Components
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#media">#</a>
+</h2>
+<p>Scenes can attach special components to display images, show video or play sounds.</p>
+<hr>
+<h6 id="AudioSource">
+<code>AudioSource</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/audio_source.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#AudioSource">#</a>
+</h6>
+<p>Plays an audio clip bundled with the scene, given the <a href="https://docs.decentraland.org/contributor/content/entities/#files">
+file’s path in its manifest
+</a>.</p>
+<p>The sound originates from the associated entity’s position. Its pitch, volume and looping behavior can be set, and the state of the audio player can be read.</p>
+<div class="ui blue message">
+<div class="content">
+<p>In preparation for future upgrades, the field in <code>AudioSource</code> is called <code>audio_clip_url</code>, but in the current protocol version it’s actually the manifest-defined path.</p>
+</div>
+</div>
+<hr>
+<h6 id="AudioStream">
+<code>AudioStream</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/audio_stream.proto#L7" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#AudioStream">#</a>
+</h6>
+<p>Similar to <a href="https://docs.decentraland.org/contributor/runtime/components/#AudioSource">
+AudioSource
+</a>, but the audio is streamed in real time from an external URL.</p>
+<p>Despite being attached to a particular entity, the sound is not affected by its position. Its volume can be set, and the state of the audio player can be read.</p>
+<hr>
+<h6 id="NftShape">
+<code>NftShape</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/nft_shape.proto#L36" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#NftShape">#</a>
+</h6>
+<p>Displays an NFT associated to an image or video asset.</p>
+<p>It renders a 2D canvas with a configurable decorative frame.</p>
+<h2 id="area-components">
+Area Components
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#area-components">#</a>
+</h2>
+<p>These components allow scenes to modify the default behavior of Entities within specified bounds.</p>
+<hr>
+<h6 id="AvatarModifierArea">
+<code>AvatarModifierArea</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/avatar_modifier_area.proto#L15" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#AvatarModifierArea">#</a>
+</h6>
+<p>Changes the behavior of avatars within a space centered around an Entity.</p>
+<p>It’s defined with a 3D size vector, and can affect whether avatars are visible or clickable. Specific avatars can be excluded from this effect given their user’s ID.</p>
+<hr>
+<h6 id="CameraModeArea">
+<code>CameraModeArea</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/camera_mode_area.proto#L11" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#CameraModeArea">#</a>
+</h6>
+<p>Changes the camera mode (1st-person or 3rd-person) within a space centered around an Entity.</p>
+<p>It’s defined with a 3D size vector and a desired camera mode.</p>
+<h2 id="ui">
+UI Components
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#ui">#</a>
+</h2>
+<p>The following components are used to create graphical interfaces that hover on top of the game world.</p>
+<p>They are usually attached to sets of Entities that have hierarchical <a href="https://docs.decentraland.org/contributor/runtime/components/#UiTransform">
+<code>UiTransform</code>
+</a> components, related to one another via the <code>parent</code> attribute.</p>
+<p>For example, a floating options window could be an Entity with a <a href="https://docs.decentraland.org/contributor/runtime/components/#UiTransform">
+<code>UiTransform</code>
+</a> and a <a href="https://docs.decentraland.org/contributor/runtime/components/#UiBackground">
+<code>UiBackground</code>
+</a> component, plus a Entity with a child <a href="https://docs.decentraland.org/contributor/runtime/components/#UiTransform">
+<code>UiTransform</code>
+</a> and a <a href="https://docs.decentraland.org/contributor/runtime/components/#UiDropdown">
+<code>UiDropdown</code>
+</a>.</p>
+<hr>
+<h6 id="UiTransform">
+<code>UiTransform</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_transform.proto#L77" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiTransform">#</a>
+</h6>
+<p>Describes the size, positioning, margin and padding of a UI component.</p>
+<p>It’s based on the flexbox model and highly customizable.</p>
+<hr>
+<h6 id="UiBackground">
+<code>UiBackground</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_background.proto#L11" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiBackground">#</a>
+</h6>
+<p>Describes a color or texture to use as background in a UI Entity.</p>
+<hr>
+<h6 id="UiDropdown">
+<code>UiDropdown</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_dropdown.proto#L11" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiDropdown">#</a>
+</h6>
+<p>Defines a list of mutually exclusive options to be displayed in a dropdown widget.</p>
+<hr>
+<h6 id="UiDropdownResult">
+<code>UiDropdownResult</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_dropdown_result.proto#L9" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiDropdownResult">#</a>
+</h6>
+<p>Contains the selected value from a <a href="https://docs.decentraland.org/contributor/runtime/components/#UiDropdown">
+<code>UiDropdown</code>
+</a>, set by the runtime and read by the scene.</p>
+<hr>
+<h6 id="UiInput">
+<code>UiInput</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_input.proto#L11" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiInput">#</a>
+</h6>
+<p>Defines a text input widget, with some margin for customization.</p>
+<hr>
+<h6 id="UiInputResult">
+<code>UiInputResult</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_input_result.proto#L9" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiInputResult">#</a>
+</h6>
+<p>Contains the text value of a <a href="https://docs.decentraland.org/contributor/runtime/components/#UiInput">
+<code>UiInput</code>
+</a>, set by the runtime and read by the scene.</p>
+<hr>
+<h6 id="UiText">
+<code>UiText</code> <small><a href="https://github.com/decentraland/protocol/blob/ccb88d679f20c0e22840c324879d7b2535f6c9a6/proto/decentraland/sdk/components/ui_text.proto#L11" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/runtime/components/#UiText">#</a>
+</h6>
+<p>Defines a simple text view, with some margin for customization.</p>
+<hr>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Basic Components _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/contributor/runtime/components.md" target="_blank" rel="noopener">
+<img src="./Basic Components _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Basic Components _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Basic Components _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

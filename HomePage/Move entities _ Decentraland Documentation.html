@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How to move, rotate and scale an entity gradually over time, with incremental changes.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Move entities">
+<meta property="og:description" content="How to move, rotate and scale an entity gradually over time, with incremental changes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="creator">
+<meta property="article:published_time" content="2018-02-12T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Move entities | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Move entities _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Move entities _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Move entities _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Move entities _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Move entities _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Move entities _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+<div class="active-bar" style="border-color: #4947CD;"></div>
+<style>
+                :root {
+                  --primary: #4947CD;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Move entities _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Wearables &amp; Emotes</span>
+<ul>
+<li>
+<input type="checkbox" id="section-5238408129bdbe7a41bd58cdbed95be1" class="toggle">
+<label for="section-5238408129bdbe7a41bd58cdbed95be1" class="flex justify-between">
+<a role="button" class="">Wearables</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/wearables-overview/" class="">Wearables Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/" class="">Creating Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/linked-wearables/" class="">Linked wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17f08e4e58ad69e23f1096996f5c4e64" class="toggle">
+<label for="section-17f08e4e58ad69e23f1096996f5c4e64" class="flex justify-between">
+<a role="button" class="">Emotes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/emotes-overview/" class="">Emotes Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/creating-and-exporting-emotes/" class="">Creating Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/avatar-rig/" class="">Avatar Rig</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/rig-features/" class="">Rigging Features</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/props-and-sounds/" class="">Adding Props and Sounds to your Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/particles-in-emotes/" class="">Particles in Emotes 2.0</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-57010a4fb000b586393ef3ac0e4c708e" class="toggle">
+<label for="section-57010a4fb000b586393ef3ac0e4c708e" class="flex justify-between">
+<a role="button" class="">Manage Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/creating-collection/" class="">Creating a Collection</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-wearables/" class="">Uploading Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-emotes/" class="">Uploading Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-smart-wearables/" class="">Uploading Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b3bac40672f08584afca2b1951d77ffa" class="toggle">
+<label for="section-b3bac40672f08584afca2b1951d77ffa" class="flex justify-between">
+<a role="button" class="">Publishing Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/publishing-collections/" class="">Publishing Collections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/curation-committee/" class="">Curation committee</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials &amp; Examples</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/examples/7/" class="">Example scenes</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GP_K8WN7csnKnImK4R2TgMA" class="external-link " target="_blank" rel="noopener">SDK &amp; Editor Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GN8LcnnQk2BByo9L2Orvp9c" class="external-link " target="_blank" rel="noopener">Emote Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://github.com/decentraland-scenes/awesome-repository#tutorials" class="external-link " target="_blank" rel="noopener">Awesome Repository (Deprecated)<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Scenes (SDK7)</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b525100342227191f7fcea7ba56bb803" class="toggle">
+<label for="section-b525100342227191f7fcea7ba56bb803" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sdk-101/" class="">Quick start</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dev-workflow/" class="">Development workflow</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/installation-guide/" class="">Editor Installation Guide</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/editor/" class="">Decentraland Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-from-example/" class="">Scene from example</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/" class="">Coding essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-107b6725d990df022e2ce15c90ba14e8" class="toggle">
+<label for="section-107b6725d990df022e2ce15c90ba14e8" class="flex justify-between">
+<a role="button" class="">Designing the experience</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/mvp-guidelines/" class="">Scene MVP Guidelines</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/ux-ui-guide/" class="">UX and UI guide for creators</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/design-games/" class="">Design constraints for games</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="toggle">
+<label for="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/" class="">Querying components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/data-oriented-programming/" class="">Data oriented programming</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-26d2ff837ef33c0c864da60b58012b08" class="toggle" checked="">
+<label for="section-26d2ff837ef33c0c864da60b58012b08" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/color-types/" class="">Color types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/text/" class="">Text shapes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/" class="active">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/special-types/" class="">Geometry types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/" class="">Colliders</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-e2a5c62fa44576cfaf37400c3afd999c" class="toggle">
+<label for="section-e2a5c62fa44576cfaf37400c3afd999c" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/troubleshooting/" class="">Troubleshooting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/report-a-bug/" class="">Report a bug</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="toggle">
+<label for="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17cf12281279261a57549d3a62bf1f9b" class="toggle">
+<label for="section-17cf12281279261a57549d3a62bf1f9b" class="flex justify-between">
+<a role="button" class="">Optimizing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/performance-optimization/" class="">Performance optimization</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-limitations/" class="">Scene limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d988b988b9f10b302e874ddf848f6ba3" class="toggle">
+<label for="section-d988b988b9f10b302e874ddf848f6ba3" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/make-discoverable/" class="">Make your scene discoverable</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploy-third-party/" class="">Upload a preview</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="toggle">
+<label for="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/kinds-of-projects/" class="">Kinds of Projects</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/" class="">Files in a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/workspaces/" class="">Workspaces</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" class="">Portable experiences</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" class="">Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0c95a08d2936e4fb6641631c7518e5c9" class="toggle">
+<label for="section-0c95a08d2936e4fb6641631c7518e5c9" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-62db854699a952e0bb38c11370531240" class="toggle">
+<label for="section-62db854699a952e0bb38c11370531240" class="flex justify-between">
+<a role="button" class="">Input actions</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" class="">About input actions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/register-callback/" class="">Register callback</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/system-based-events/" class="">System based events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/advanced-button-events/" class="">Advanced button events</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/npc-avatars/" class="">NPC Avatars</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/" class="">Modifier Areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/runtime-data/" class="">Runtime data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deprecated-functions/" class="">Deprecated functions</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-8aced72970aba367ccb620ac0774d739" class="toggle">
+<label for="section-8aced72970aba367ccb620ac0774d739" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/serverless-multiplayer/" class="">Serverless Multiplayer</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/authoritative-server/" class="">3rd party servers</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-7c22809946dca82b52a0416bb19bee94" class="toggle">
+<label for="section-7c22809946dca82b52a0416bb19bee94" class="flex justify-between">
+<a role="button" class="">2D UI</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/onscreen-ui/" class="">2D UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dynamic-ui/" class="">Dynamic UIs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-button-events/" class="">UI Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-positioning/" class="">UI Positioning</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-text/" class="">UI Text</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-background/" class="">UI Background</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-special-elements/" class="">UI special types</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-3339f980e82707ed3f2ac8f0b7215bc6" class="toggle">
+<label for="section-3339f980e82707ed3f2ac8f0b7215bc6" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/second-layer/" class="">Second layer blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-a-dapp/" class="">Create a dApp</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploying-your-own-transactions-server/" class="">Deploying your own transactions server</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a9e2088c8e67585827711b1700609398" class="toggle">
+<label for="section-a9e2088c8e67585827711b1700609398" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/libraries/7/" class="">Library catalog</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-libraries/" class="">Create a library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cfc35d405c7d6b713873bbaa8ed9e303" class="toggle">
+<label for="section-cfc35d405c7d6b713873bbaa8ed9e303" class="flex justify-between">
+<a role="button" class="">Programming patterns</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" class="">Asynchronous code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/mutable-data/" class="">Data mutability</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/game-objects/" class="">Game objects</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-90195531610f61ac8dbe0e10d5e228a6" class="toggle">
+<label for="section-90195531610f61ac8dbe0e10d5e228a6" class="flex justify-between">
+<a role="button" class="">Web Editor</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/web-editor/" class="">Web Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items/" class="">Smart Items - Basic</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items-advanced/" class="">Smart Items - Advanced</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/editor-plus-code/" class="">Combine with code</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-76e89a14e1691ab97e791c67b7a232c7" class="toggle">
+<label for="section-76e89a14e1691ab97e791c67b7a232c7" class="flex justify-between">
+<a role="button" class="">API Reference</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/releases/7/" class="">API Reference SDK7</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/version-agreement/" class="">Version support agreement</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/testing-guidelines/" class="">SDK7 feedback guidelines</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-203470ceeef126c8dd8cbc9c390f57b4" class="toggle">
+<label for="section-203470ceeef126c8dd8cbc9c390f57b4" class="flex justify-between">
+<a role="button" class="">Other</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-analytics/" class="">Scene Analytics</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-bb199fbca80691618b9d243fc3dbf186" class="toggle">
+<label for="section-bb199fbca80691618b9d243fc3dbf186" class="flex justify-between">
+<a role="button" class="">SDK6 Scenes</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-370e2ddc65b07bfae1e1a4e45be7210f" class="toggle">
+<label for="section-370e2ddc65b07bfae1e1a4e45be7210f" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="toggle">
+<label for="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/component-groups/" class="">Component groups</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-70bcd3586e0bd17ab633662850238c9f" class="toggle">
+<label for="section-70bcd3586e0bd17ab633662850238c9f" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/special-types/" class="">Special types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/text/" class="">Text shapes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-1794a8ff3dcff28148759d9edbe03975" class="toggle">
+<label for="section-1794a8ff3dcff28148759d9edbe03975" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/troubleshooting/" class="">Troubleshooting</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-734c2c5e0f885d60ad25da7416a93698" class="toggle">
+<label for="section-734c2c5e0f885d60ad25da7416a93698" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d41c9e9dd257ad935b0ecac1a637344b" class="toggle">
+<label for="section-d41c9e9dd257ad935b0ecac1a637344b" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/deploy-third-party/" class="">Preview in Heroku</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-81e5ae4e449e727ffdfdda3212d2ec63" class="toggle">
+<label for="section-81e5ae4e449e727ffdfdda3212d2ec63" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-files/" class="">Files in a scene</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b65cbb78800cb595cbabf490d7aae0da" class="toggle">
+<label for="section-b65cbb78800cb595cbabf490d7aae0da" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/click-events/" class="">Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/avatar-modifiers/" class="">Modifier areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/onscreen-ui/" class="">2D UI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="toggle">
+<label for="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/remote-scene-considerations/" class="">About multiplayer scenes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-53f68a24178a8634051243575ac00389" class="toggle">
+<label for="section-53f68a24178a8634051243575ac00389" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/second-layer/" class="">Second layer blockchain</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a80cdadec202411af177a687b9de8c81" class="toggle">
+<label for="section-a80cdadec202411af177a687b9de8c81" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/utils/" class="">Utils library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0126a50da098471b50d6d433c560540a" class="toggle">
+<label for="section-0126a50da098471b50d6d433c560540a" class="flex justify-between">
+<a role="button" class="">Release notes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>3D Modeling and Animations</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/3d-models/" class="">3D Model Essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/meshes/" class="">Meshes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/materials/" class="">Materials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/textures/" class="">Textures</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/colliders/" class="">Colliders</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/animations/" class="">Animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/create-a-rig/" class="">Create a Rig</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Worlds</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/about/" class="">Worlds Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/cast/" class="">Decentraland Cast</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Builder</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-faq/" class="">Builder FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-101/" class="">Builder 101</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/export/" class="">Export as code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/import-items/" class="">Import custom items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/manage-scenes/" class="">Manage Builder scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/smart-items/" class="">Smart items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/nfts/" class="">NFTs</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Quests</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/overview/" class="">Quests Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/define/" class="">Defining a Quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/rewards/" class="">Quest Rewards</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/sdk-client/" class="">Quests SDK Library</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/quest-ui/" class="">Quest HUD - SDK UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/cli/" class="">Quests CLI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/walkthrough/" class="">Create your first quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/manager/" class="">Quests Manager</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Rewards</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/overview/" class="">Rewards Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/getting-started/" class="">Rewards - Getting Starting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/users/" class="">Rewards Users and Roles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/tx/" class="">Rewards Transactions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/api/" class="">Rewards API</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/integrations/" class="">Rewards API Integrations</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Places</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/places/faq/" class="">Places FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://studios.decentraland.org/" class="external-link " target="_blank" rel="noopener">Metaverse Studios<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+<ul>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Move entities _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Move entities</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Move entities</h1><p>To move, rotate or resize an entity in your scene over a period of time, use the <code>Tween</code> component. The engine carries out the desired transformation smoothly, showing updates on every frame until the specified duration is over. Also the <code>Transform</code> component values of the affected entity gets updated in real time in case it’s needed to make proximity checks in the scene code.</p>
+<h2 id="move-between-two-points">
+Move between two points
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#move-between-two-points">#</a>
+</h2>
+<p>To move an entity between two points, create a <code>Tween</code> component with its mode set to <code>Tween.Mode.Move</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Move</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">2000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The movement tween takes the following information:</p>
+<ul>
+<li><code>start</code>: A Vector3 for the starting position</li>
+<li><code>end</code>: A Vector3 for the ending position</li>
+<li><code>faceDirection</code> <em>(optional)</em>: If true, the entity is rotated to face in the direction of the movement.</li>
+</ul>
+<p>Also, all tweens include the following required properties:</p>
+<ul>
+<li><code>duration</code>: How many milliseconds it takes to move between the two positions</li>
+<li><code>easingFunction</code>: What easing function to use. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#non-linear-tweens">
+Non-linear tweens
+</a></li>
+</ul>
+<h2 id="rotate-between-two-directions">
+Rotate between two directions
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#rotate-between-two-directions">#</a>
+</h2>
+<p>To rotate an entity between two points, create a <code>Tween</code> component with its mode set to <code>Tween.Mode.Rotate</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Rotate</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">700</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The rotate tween takes the following information:</p>
+<ul>
+<li><code>start</code>: A Quaternion for the starting rotation</li>
+<li><code>end</code>: A Quaternion for the ending rotation</li>
+</ul>
+<p>Also, all tweens include the following required properties:</p>
+<ul>
+<li><code>duration</code>: How many milliseconds it takes to move between the two positions</li>
+<li><code>easingFunction</code>: What easing function to use. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#non-linear-tweens">
+Non-linear tweens
+</a></li>
+</ul>
+<h3 id="rotate-with-a-pivot-point">
+Rotate with a pivot point
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#rotate-with-a-pivot-point">#</a>
+</h3>
+<p>When rotating an entity, the rotation is always in reference to the entity’s center coordinate. To rotate an entity using another set of coordinates as a pivot point, create a second (invisible) entity with the pivot point as its position and make it a parent of the entity you want to rotate.</p>
+<p>When rotating the parent entity, its children will be all rotated using the parent’s position as a pivot point. Note that the <code>position</code> of the child entity is in reference to that of the parent entity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">pivotEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">pivotEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">childEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">childEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parent</span>: <span class="kt">pivotEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">pivotEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Rotate</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">700</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>Note that in this example, the system is rotating the <code>pivotEntity</code> entity, that’s a parent of the <code>childEntity</code> entity.</p>
+<h2 id="scale-between-two-sizes">
+Scale between two sizes
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#scale-between-two-sizes">#</a>
+</h2>
+<p>To change the scale of an entity between two sizes, create a <code>Tween</code> component with its mode set to <code>Tween.Mode.Scale</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Scale</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">2000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The scale tween takes the following information:</p>
+<ul>
+<li><code>start</code>: A Vector3 for the starting size</li>
+<li><code>end</code>: A Vector3 for the ending size</li>
+</ul>
+<p>Also, all tweens include the following required properties:</p>
+<ul>
+<li><code>duration</code>: How many milliseconds it takes to move between the two positions</li>
+<li><code>easingFunction</code>: What easing function to use. See <a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#non-linear-tweens">
+Non-linear tweens
+</a></li>
+</ul>
+<h2 id="non-linear-tweens">
+Non-linear tweens
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#non-linear-tweens">#</a>
+</h2>
+<p>Tweens can follow different <strong>Easing Functions</strong> that affect the rate of change over time. A <strong>linear</strong> function, means that the speed of the change is constant from start to finish. There are plenty of options to chose, that draw differently shaped curves depending on if the beginning and/or end start slow, and how much. An <strong>easeinexpo</strong> curve starts slow and ends fast, increasing speed exponentially, on the contrary an <strong>easeoutexpo</strong> curve starts fast and ends slow.</p>
+<img src="./Move entities _ Decentraland Documentation_files/easing-functions.png" width="600">
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: Experiment with different movement curves. The differences are often subtle, but we subconsciously interpret information from how things move, like weight, friction, or even personality.
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Scale</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">2000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_EASEOUTBOUNCE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">playing</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The <code>easingFunction</code> field takes its value from the <code>EasingFunction</code> enum, that offers the following options:</p>
+<ul>
+<li><code>EF_EASEBACK</code></li>
+<li><code>EF_EASEBOUNCE</code></li>
+<li><code>EF_EASECIRC</code></li>
+<li><code>EF_EASECUBIC</code></li>
+<li><code>EF_EASEELASTIC</code></li>
+<li><code>EF_EASEEXPO</code></li>
+<li><code>EF_EASEINBACK</code></li>
+<li><code>EF_EASEINBOUNCE</code></li>
+<li><code>EF_EASEINCIRC</code></li>
+<li><code>EF_EASEINCUBIC</code></li>
+<li><code>EF_EASEINELASTIC</code></li>
+<li><code>EF_EASEINEXPO</code></li>
+<li><code>EF_EASEINQUAD</code></li>
+<li><code>EF_EASEINQUART</code></li>
+<li><code>EF_EASEINQUINT</code></li>
+<li><code>EF_EASEINSINE</code></li>
+<li><code>EF_EASEOUTBACK</code></li>
+<li><code>EF_EASEOUTBOUNCE</code></li>
+<li><code>EF_EASEOUTCIRC</code></li>
+<li><code>EF_EASEOUTCUBIC</code></li>
+<li><code>EF_EASEOUTELASTIC</code></li>
+<li><code>EF_EASEOUTEXPO</code></li>
+<li><code>EF_EASEOUTQUAD</code></li>
+<li><code>EF_EASEOUTQUART</code></li>
+<li><code>EF_EASEOUTQUINT</code></li>
+<li><code>EF_EASEOUTSINE</code></li>
+<li><code>EF_EASEQUAD</code></li>
+<li><code>EF_EASEQUART</code></li>
+<li><code>EF_EASEQUINT</code></li>
+<li><code>EF_EASESINE</code></li>
+<li><code>EF_LINEAR</code></li>
+</ul>
+<h2 id="tween-sequences">
+Tween sequences
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#tween-sequences">#</a>
+</h2>
+<p>To make an entity play a series of tweens in sequence, use the <code>TweenSequence</code> component. This component requires two fields:</p>
+<ul>
+<li><code>sequence</code>: An array with multiple tween definitions, that will be carried out sequentially. The array can be empty, in which case it only plays the current tween.</li>
+<li><code>loop</code> <em>(optional)</em>: If not provided, the sequence is only played once. If the field is present, the value must be a value of the <code>TweenLoop</code> enum. Accepted values are:
+<ul>
+<li><code>TL_RESTART</code>: When the sequence ends, it restarts. If the last state doesn’t match the first state, the entity instantly jumps from one to the other.</li>
+<li><code>TL_YOYO</code>: When the sequence ends, the it goes backwards, doing all tweens in reverse until it reaches the start again. Then it begins once more.</li>
+</ul>
+</li>
+</ul>
+<h3 id="move-back-and-forth">
+Move back and forth
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#move-back-and-forth">#</a>
+</h3>
+<p>To make a platform move constantly back and forth between two positions, leave the <code>sequence</code> array empty, and set <code>loop</code> to <code>TweenLoop.TL_YOYO</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Move</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">2000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">TweenSequence</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sequence</span><span class="o">:</span> <span class="p">[],</span> <span class="nx">loop</span>: <span class="kt">TweenLoop.TL_YOYO</span> <span class="p">})</span>
+</span></span></code></pre></div><p>The entity will move back and forth between the start point and the end point, with the same duration and the same easing function in both directions.</p>
+<h3 id="follow-a-path">
+Follow a path
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#follow-a-path">#</a>
+</h3>
+<p>To make an entity follow a more complex path with multiple points, provide a list of tween definitions in the <code>sequence</code> of a <code>TweenSequence</code> component.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">4000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">currentTime</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">playing</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Move</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">TweenSequence</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">sequence</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">duration</span>: <span class="kt">2000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">mode</span>: <span class="kt">Tween.Mode.Move</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">duration</span>: <span class="kt">3000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">mode</span>: <span class="kt">Tween.Mode.Move</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">duration</span>: <span class="kt">3000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">mode</span>: <span class="kt">Tween.Mode.Move</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">loop</span>: <span class="kt">TweenLoop.TL_RESTART</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h3 id="keep-spinning">
+Keep spinning
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#keep-spinning">#</a>
+</h3>
+<p>A basic “constant rotation” can be achieved with the <code>TweenSequence</code> component as well.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">mode</span>: <span class="kt">Tween.Mode.Rotate</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">start</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">end</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">duration</span>: <span class="kt">700</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">TweenSequence</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">loop</span>: <span class="kt">TweenLoop.TL_RESTART</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">sequence</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">mode</span>: <span class="kt">Tween.Mode.Rotate</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">start</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">end</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">duration</span>: <span class="kt">700</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span></code></pre></div><h2 id="on-tween-finished">
+On tween finished
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#on-tween-finished">#</a>
+</h2>
+<p>Use <code>tweenSystem.tweenCompleted</code> to detect when a tween has finished. This can be useful to perform actions when a tween ends, for example to open an elevator door.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">tweenCompleted</span> <span class="o">=</span> <span class="nx">tweenSystem</span><span class="p">.</span><span class="nx">tweenCompleted</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">tweenCompleted</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//play sound
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h2 id="simultaneous-tweens">
+Simultaneous tweens
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#simultaneous-tweens">#</a>
+</h2>
+<p>An entity can only have one <code>Tween</code> component, and each tween component can only perform one transformation at a time. For example, you can´t make an entity move sideways and also rotate at the same time. As a workaround, you can use parented entities. For example, you can have an invisible parent entity that moves sideways, with a visible child that rotates.</p>
+<p>In the following snippet, a parent entity rotates while a child scales up.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">parentEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">parentEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">parentEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">parentEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Rotate</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">5000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">childEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">childEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parent</span>: <span class="kt">parentEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">childEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Tween</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">childEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span>: <span class="kt">Tween.Mode.Scale</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">duration</span>: <span class="kt">5000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">easingFunction</span>: <span class="kt">EasingFunction.EF_LINEAR</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h2 id="pause-a-tween">
+Pause a tween
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#pause-a-tween">#</a>
+</h2>
+<p>To pause a tween, change the <code>playing</code> property to false. To resume it, change it back to true.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="nx">pointerEventsSystem</span><span class="p">.</span><span class="nx">onPointerDown</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">entity</span>: <span class="kt">button</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="o">:</span> <span class="p">{</span> <span class="nx">button</span>: <span class="kt">InputAction.IA_POINTER</span><span class="p">,</span> <span class="nx">hoverText</span><span class="o">:</span> <span class="s1">'pause'</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">tweenData</span> <span class="o">=</span> <span class="nx">Tween</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tweenData</span><span class="p">.</span><span class="nx">playing</span> <span class="o">=</span> <span class="o">!</span><span class="nx">tweenData</span><span class="p">.</span><span class="nx">playing</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><h2 id="tweens-based-on-a-system">
+Tweens based on a system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#tweens-based-on-a-system">#</a>
+</h2>
+<p>Instead of using the Tween component and letting the engine handle the transformation, you may prefer to do this transition incrementally, frame by frame, via a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/">
+system
+</a> in your scene. By moving the entity a small amount each time the function runs.</p>
+<p>On one hand, this gives you more control for re-calculating movements on every frame. On the other hand, the code is more complicated, and players with less performant machines might experience the tween as laggy, noticing each increment.</p>
+<h3 id="move-via-system">
+Move via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#move-via-system">#</a>
+</h3>
+<p>The easiest way to move an entity is to gradually modify the <em>position</em> value stored in the <code>Transform</code> component.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">SimpleMove() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Vector3</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">Vector3</span><span class="p">.</span><span class="nx">Forward</span><span class="p">(),</span> <span class="mf">0.05</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">SimpleMove</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>In this example we’re moving an entity by 0.1 meters per tick of the game loop.</p>
+<p><code>Vector3.Forward()</code> returns a vector that faces forward and measures 1 meter in length. In this example we’re then scaling this vector down to 1/10 of its length with <code>Vector3.scale()</code>. If our scene has 30 frames per second, the entity is moving at 3 meters per second in speed.</p>
+<img src="./Move entities _ Decentraland Documentation_files/move.gif" alt="Move entity" width="300">
+<h3 id="rotate-via-system">
+Rotate via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#rotate-via-system">#</a>
+</h3>
+<p>The easiest way to rotate an entity is to gradually change the values in the Transform component incrementally, and run this as part of a system’s function of a system.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">SimpleRotate() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromAngleAxis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">Up</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">SimpleRotate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>Note that in order to combine the current rotation with each increment, we’re using <code>Quaternion.multiply</code>. In quaternion math, you combine two rotations by multiplying them, NOT by adding them. The resulting rotation of multiplying one quaternion by another will be the equivalent final rotation after first performing one rotation and then the other.</p>
+<p>In this example, we’re rotating the entity by 1 degree in an upwards direction in each tick of the game loop.</p>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: To make an entity always rotate to face the player, you can add a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/#face-the-user" target="_blank">
+<code>Billboard</code> component
+</a>.
+</blockquote>
+<img src="./Move entities _ Decentraland Documentation_files/rotate.gif" alt="Move entity" width="300">
+<h3 id="rotate-via-system-over-a-pivot-point">
+Rotate via system over a pivot point
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#rotate-via-system-over-a-pivot-point">#</a>
+</h3>
+<p>When rotating an entity, the rotation is always in reference to the entity’s center coordinate. To rotate an entity using another set of coordinates as a pivot point, create a second (invisible) entity with the pivot point as its position and make it a parent of the entity you want to rotate.</p>
+<p>When rotating the parent entity, its children will be all rotated using the parent’s position as a pivot point. Note that the <code>position</code> of the child entity is in reference to that of the parent entity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">SimpleRotate() {</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">pivotEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromAngleAxis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">Up</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">SimpleRotate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">pivotEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">pivotEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">childEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">childEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parent</span>: <span class="kt">pivotEntity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>Note that in this example, the system is rotating the <code>pivotEntity</code> entity, that’s a parent of the <code>childEntity</code> entity.</p>
+<img src="./Move entities _ Decentraland Documentation_files/pivot-rotate.gif" alt="Move entity" width="300">
+<h3 id="adjust-movement-to-delay-time">
+Adjust movement to delay time
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#adjust-movement-to-delay-time">#</a>
+</h3>
+<p>Suppose that the player visiting your scene is struggling to keep up with the pace of the frame rate. That could result in the movement appearing jumpy, as not all frames are evenly timed but each moves the entity in the same amount.</p>
+<p>You can compensate for this uneven timing by using the <code>dt</code> parameter to adjust the scale the movement.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">SimpleMove</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Vector3</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">Vector3</span><span class="p">.</span><span class="nx">Forward</span><span class="p">(),</span> <span class="nx">dt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">SimpleMove</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>The example above keeps movement at approximately the same speed as the movement example above, even if the frame rate drops. When running at 30 frames per second, the value of <code>dt</code> is 1/30.</p>
+<p>You can also smoothen rotations in the same way by multiplying the rotation amount by <code>dt</code>.</p>
+<h3 id="move-between-two-points-via-system">
+Move between two points via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#move-between-two-points-via-system">#</a>
+</h3>
+<p>If you want an entity to move smoothly between two points, use the <em>lerp</em> (linear interpolation) algorithm. This algorithm is very well known in game development, as it’s really useful.</p>
+<p>The <code>lerp()</code> function takes three parameters:</p>
+<ul>
+<li>The vector for the origin position</li>
+<li>The vector for the target position</li>
+<li>The amount, a value from 0 to 1 that represents what fraction of the translation to do.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">originVector</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">Zero</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">targetVector</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">Forward</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">newPos</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">lerp</span><span class="p">(</span><span class="nx">originVector</span><span class="p">,</span> <span class="nx">targetVector</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+</span></span></code></pre></div><p>The linear interpolation algorithm finds an intermediate point in the path between both vectors that matches the provided amount.</p>
+<p>For example, if the origin vector is <em>(0, 0, 0)</em> and the target vector is <em>(10, 0, 10)</em>:</p>
+<ul>
+<li>Using an amount of 0 would return <em>(0, 0, 0)</em></li>
+<li>Using an amount of 0.3 would return <em>(3, 0, 3)</em></li>
+<li>Using an amount of 1 would return <em>(10, 0, 10)</em></li>
+</ul>
+<p>To implement this <code>lerp()</code> in your scene, we recommend creating a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/">
+custom component
+</a> to store the necessary information. You also need to define a system that implements the gradual movement in each frame.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// define custom component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">MoveTransportData</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Schemas.Vector3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Schemas.Vector3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">LerpTransformComponent</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">'LerpTransformComponent'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MoveTransportData</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// define system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">LerpMove</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">lerp</span> <span class="o">=</span> <span class="nx">LerpTransformComponent</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">+=</span> <span class="nx">dt</span> <span class="o">*</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">speed</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">lerp</span><span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">end</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">LerpMove</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">LerpTransformComponent</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><img src="./Move entities _ Decentraland Documentation_files/lerp-move.gif" alt="Move entity" width="300">
+<h3 id="rotate-between-two-angles-via-system">
+Rotate between two angles via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#rotate-between-two-angles-via-system">#</a>
+</h3>
+<p>To rotate smoothly between two angles, use the <em>slerp</em> (<em>spherical</em> linear interpolation) algorithm. This algorithm is very similar to a <em>lerp</em>, but it handles quaternion rotations.</p>
+<p>The <code>slerp()</code> function takes three parameters:</p>
+<ul>
+<li>The <a href="https://en.wikipedia.org/wiki/Quaternion" target="_blank">
+quaternion
+</a> angle for the origin rotation</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Quaternion" target="_blank">
+quaternion
+</a> angle for the target rotation</li>
+<li>The amount, a value from 0 to 1 that represents what fraction of the translation to do.</li>
+</ul>
+<blockquote class="book-hint info">
+<strong>💡 Tip</strong>: You can pass rotation values in <a href="https://en.wikipedia.org/wiki/Euler_angles" target="_blank">
+euler
+</a> degrees (from 0 to 360) by using <code>Quaternion.fromEulerDegrees()</code>.
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">originRotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">targetRotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">newRotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">slerp</span><span class="p">(</span><span class="nx">originRotation</span><span class="p">,</span> <span class="nx">targetRotation</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+</span></span></code></pre></div><p>To implement this in your scene, we recommend storing the data that goes into the <code>Slerp()</code> function in a <a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/">
+custom component
+</a>. You also need to define a system that implements the gradual rotation in each frame.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// define custom component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">RotateSlerpData</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Schemas.Quaternion</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Schemas.Quaternion</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">SlerpData</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span><span class="s1">'SlerpData'</span><span class="p">,</span> <span class="nx">RotateSlerpData</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// define system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">SlerpRotate</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">slerpData</span> <span class="o">=</span> <span class="nx">SlerpData</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">slerpData</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slerpData</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">+=</span> <span class="nx">dt</span> <span class="o">*</span> <span class="nx">slerpData</span><span class="p">.</span><span class="nx">speed</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">slerp</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">slerpData</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">slerpData</span><span class="p">.</span><span class="nx">end</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">slerpData</span><span class="p">.</span><span class="nx">fraction</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">SlerpRotate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">SlerpData</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">0.3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><blockquote class="book-hint warning">
+<strong>📔 Note</strong>: You could instead represent the rotation with euler angles as <code>Vector3</code> values and use a <code>Lerp()</code> function, but that would imply a conversion from <code>Vector3</code> to <code>Quaternion</code> on each frame. Rotation values are internally stored as quaternions in the <code>Transform</code> component, so it’s more efficient for the scene to work with quaternions.
+</blockquote>
+<img src="./Move entities _ Decentraland Documentation_files/lerp-rotate.gif" alt="Move entity" width="300">
+<p>A simpler but less efficient approach to this takes advantage of the <code>Quaternion.rotateTowards</code> function, and avoids using any custom components.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">SimpleRotate</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">rotateTowards</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromEulerDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">dt</span> <span class="o">*</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">transform</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">===</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromEulerDegrees</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'done'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">engine</span><span class="p">.</span><span class="nx">removeSystem</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">simpleRotateSystem</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">SimpleRotate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rotation</span>: <span class="kt">Quaternion.fromEulerDegrees</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span></code></pre></div><p>In the example above <code>Quaternion.rotateTowards</code> takes three arguments: the initial rotation, the final rotation that’s desired, and the maximum increment per frame. In this case, since the maximum increment is of <code>dt * 10</code> degrees, the rotation will be carried out over a period of a couple of 9 seconds.</p>
+<p>Note that the system also checks to see if the rotation is complete and if so it removes the system from the engine. Otherwise, the system would keep making calculations on every frame, even once the rotation is complete.</p>
+<h3 id="change-scale-between-two-sizes-via-system">
+Change scale between two sizes via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#change-scale-between-two-sizes-via-system">#</a>
+</h3>
+<p>If you want an entity to change size smoothly and without changing its proportions, use the <em>lerp</em> (linear interpolation) algorithm of the <code>Scalar</code> object.</p>
+<p>Otherwise, if you want to change the axis in different proportions, use <code>Vector3</code> to represent the origin scale and the target scale, and then use the <em>lerp</em> function of the <code>Vector3</code>.</p>
+<p>The <code>lerp()</code> function of the <code>Scalar</code> object takes three parameters:</p>
+<ul>
+<li>A number for the origin scale</li>
+<li>A number for the target scale</li>
+<li>The amount, a value from 0 to 1 that represents what fraction of the scaling to do.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">originScale</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">targetScale</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">newScale</span> <span class="o">=</span> <span class="nx">Scalar</span><span class="p">.</span><span class="nx">Lerp</span><span class="p">(</span><span class="nx">originScale</span><span class="p">,</span> <span class="nx">targetScale</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+</span></span></code></pre></div><p>To implement this lerp in your scene, we recommend creating a custom component to store the necessary information. You also need to define a system that implements the gradual scaling in each frame.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// define custom component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">ScaleTransportData</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Schemas.Number</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Schemas.Number</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">ScaleTransformComponent</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">'ScaleTransformComponent'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ScaleTransportData</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// define system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">LerpMove</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">lerp</span> <span class="o">=</span> <span class="nx">ScaleTransformComponent</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">+=</span> <span class="nx">dt</span> <span class="o">*</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">speed</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">newScale</span> <span class="o">=</span> <span class="nx">Scalar</span><span class="p">.</span><span class="nx">lerp</span><span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">end</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">scale</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">newScale</span><span class="p">,</span> <span class="nx">newScale</span><span class="p">,</span> <span class="nx">newScale</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">LerpMove</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span><span class="o">:</span> <span class="p">{</span> <span class="nx">x</span>: <span class="kt">4</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">1</span><span class="p">,</span> <span class="nx">z</span>: <span class="kt">4</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ScaleTransformComponent</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Vector3</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div> <img src="./Move entities _ Decentraland Documentation_files/lerp-scale.gif" alt="Move entity" width="300">
+<h3 id="move-at-irregular-speeds-between-two-points-via-system">
+Move at irregular speeds between two points via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#move-at-irregular-speeds-between-two-points-via-system">#</a>
+</h3>
+<p>While using the lerp method, you can make the movement speed non-linear. In the previous example we increment the lerp amount by a given amount each frame, but we could also use a mathematical function to increase the number exponentially or in other measures that give you a different movement pace.</p>
+<p>You could also use a function that gives recurring results, like a sine function, to describe a movement that comes and goes.</p>
+<p>Often these non-linear transitions can breathe a lot of life into a scene. A movement that speeds up over a curve or slows down gradually can say a lot about the nature of an object or character. You could even take advantage of mathematical functions that add bouncy effects.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// define custom component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">MoveTransportData</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Schemas.Vector3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Schemas.Vector3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">LerpTransformComponent</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">'LerpTransformComponent'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MoveTransportData</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// define system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">LerpMove</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">lerp</span> <span class="o">=</span> <span class="nx">LerpTransformComponent</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">+=</span> <span class="nx">dt</span> <span class="o">*</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">speed</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">interpolatedValue</span> <span class="o">=</span> <span class="nx">interpolate</span><span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">lerp</span><span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">end</span><span class="p">,</span> <span class="nx">interpolatedValue</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// map the lerp fraction to an exponential curve
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">interpolate</span><span class="p">(</span><span class="nx">t</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">t</span> <span class="o">*</span> <span class="nx">t</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">LerpMove</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span><span class="o">:</span> <span class="p">{</span> <span class="nx">x</span>: <span class="kt">4</span><span class="p">,</span> <span class="nx">y</span>: <span class="kt">1</span><span class="p">,</span> <span class="nx">z</span>: <span class="kt">4</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">LerpTransformComponent</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The example above is just like the linear lerp example we’ve shown before, but the <code>fraction</code> field mapped to a non-linear value on every tick. This non-linear value is used to calculate the <code>lerp</code> function, resulting in a movement that follows an exponential curve.</p>
+<p>You can also map a transition in rotation or in scale in the same way as shown above, by mapping a linear transition to a curve.</p>
+<img src="./Move entities _ Decentraland Documentation_files/lerp-speed-up.gif" alt="Move entity" width="300">
+<h3 id="follow-a-path-via-system">
+Follow a path via system
+<a class="anchor" href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/#follow-a-path-via-system">#</a>
+</h3>
+<p>You can have an entity loop over an array of vectors, performing a lerp movement between each to follow a more complex path.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="c1">// define custom component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">PathTransportData</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">path</span>: <span class="kt">Schemas.Array</span><span class="p">(</span><span class="nx">Schemas</span><span class="p">.</span><span class="nx">Vector3</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Schemas.Vector3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Schemas.Vector3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">Schemas.Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">pathTargetIndex</span>: <span class="kt">Schemas.Int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">LerpTransformComponent</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">defineComponent</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">'LerpTransformComponent'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">PathTransportData</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// define system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">PathMove</span><span class="p">(</span><span class="nx">dt</span>: <span class="kt">number</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">lerp</span> <span class="o">=</span> <span class="nx">LerpTransformComponent</span><span class="p">.</span><span class="nx">getMutable</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">+=</span> <span class="nx">dt</span> <span class="o">*</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">speed</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">transform</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">lerp</span><span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">end</span><span class="p">,</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">pathTargetIndex</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">pathTargetIndex</span> <span class="o">&gt;=</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">path</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">lerp</span><span class="p">.</span><span class="nx">pathTargetIndex</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">end</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">end</span> <span class="o">=</span> <span class="nx">lerp</span><span class="p">.</span><span class="nx">path</span><span class="p">[</span><span class="nx">lerp</span><span class="p">.</span><span class="nx">pathTargetIndex</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lerp</span><span class="p">.</span><span class="nx">fraction</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">engine</span><span class="p">.</span><span class="nx">addSystem</span><span class="p">(</span><span class="nx">PathMove</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// create entity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">myEntity</span> <span class="o">=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">addEntity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Transform</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">position</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">MeshRenderer</span><span class="p">.</span><span class="nx">setBox</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">point1</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">point2</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">point3</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">point4</span> <span class="o">=</span> <span class="nx">Vector3</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">myPath</span> <span class="o">=</span> <span class="p">[</span><span class="nx">point1</span><span class="p">,</span> <span class="nx">point2</span><span class="p">,</span> <span class="nx">point3</span><span class="p">,</span> <span class="nx">point4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">LerpTransformComponent</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">myEntity</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">path</span>: <span class="kt">myPath</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">start</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">end</span>: <span class="kt">Vector3.create</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fraction</span>: <span class="kt">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">speed</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">pathTargetIndex</span>: <span class="kt">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>The example above defines a 3D path that’s made up of four 3D vectors. The <code>PathTransportData</code> custom component holds the same data used by the custom component in the <em>lerp</em> example above, but adds a <code>path</code> array, with all of the points in our path, and a <code>pathTargetIndex</code> field to keep track of what segment of the path is currently in use.</p>
+<p>The system is very similar to the system in the <em>lerp</em> example, but when a lerp action is completed, it sets the <code>target</code> and <code>origin</code> fields to new values. If we reach the end of the path, we return to the first value in the path.</p>
+<img src="./Move entities _ Decentraland Documentation_files/lerp-path.gif" alt="Move entity" width="300">
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Move entities _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/creator/sdk7/3d-essentials/move-entities.md" target="_blank" rel="noopener">
+<img src="./Move entities _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Move entities _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+</body></html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://docs.decentraland.org/player/general/dao/overview/the-daos-limitations/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The DAO is a specific governance tool with a finite amount of power.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="DAO Limitations">
+<meta property="og:description" content="The DAO is a specific governance tool with a finite amount of power.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/player/general/dao/overview/the-daos-limitations/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="player">
+<meta property="article:published_time" content="2021-05-21T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>DAO Limitations | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./DAO Limitations _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./DAO Limitations _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./DAO Limitations _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./DAO Limitations _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./DAO Limitations _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./DAO Limitations _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+<style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      width: 1000px !important;
+      margin-left: -500px !important;
+      position: fixed !important;
+      z-index: 100000200 !important;
+      background: none !important;
+      pointer-events: none !important;
+      display: inline-block !important;
+      visibility: visible  !important;
+      white-space: pre-line;
+    }
+    .tippy-box[data-theme~="custom"] {
+      font-size: 14px  !important;
+      max-width: 200px  !important;
+      text-align: center !important;
+      backdrop-filter: blur(2px) !important;
+      background-color: #000000b8 !important;
+      color: #ffffffff !important;
+      overflow-wrap: break-word !important;
+      font-family: 
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif  !important;
+      border: 1px solid #ffffff00;
+      white-space: pre-line;
+    }
+    [data-tippy-root] {
+      display: inline-block !important;
+      visibility: visible  !important;
+      position: absolute !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='top'] > .tippy-arrow::before { 
+      border-top-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='bottom'] > .tippy-arrow::before {
+      border-bottom-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='left'] > .tippy-arrow::before {
+      border-left-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='right'] > .tippy-arrow::before {
+      border-right-color: #000000b8 !important;
+    }
+    .mtt-highlight{
+      background-color: #21dc6d40  !important;
+      position: absolute !important;   
+      z-index: 100000100 !important;
+      pointer-events: none !important;
+      display: inline !important;
+      border-radius: 3px !important;
+    }
+    .mtt-image{
+      width: 180px  !important;
+      border-radius: 3px !important;
+    }
+    .ocr_text_div{
+      position: absolute;
+      opacity: 0.5;
+      color: transparent !important;
+      border: 2px solid CornflowerBlue;
+      background: none !important;
+      border-radius: 3px !important;
+    }</style><style id="mttstyleSubtitle">
+    #ytp-caption-window-container .ytp-caption-segment {
+      cursor: text !important;
+      user-select: text !important;
+      font-family: 
+      -apple-system, BlinkMacSystemFont,
+      "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif  !important;
+    }
+    .caption-visual-line{
+      display: flex  !important;
+      align-items: stretch  !important;
+    }
+    .captions-text .caption-visual-line:first-of-type:after {
+      content: '⣿⣿';
+      background-color: #000000b8;
+      display: inline-block;
+      vertical-align: top;
+      opacity:0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    .captions-text:hover .caption-visual-line:first-of-type:after {
+      opacity:1;
+    }
+    .ytp-pause-overlay {
+      display: none !important;
+    }
+    .ytp-expand-pause-overlay .caption-window {
+      display: block !important;
+    }
+  </style><style>
+			@-webkit-keyframes spin {
+				0% { -webkit-transform: rotate(0deg); }
+				100% { -webkit-transform: rotate(360deg); }
+			}
+		
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			input.bito-email-input:-webkit-autofill,
+			input.bito-email-input:-webkit-autofill:hover,
+			input.bito-email-input:-webkit-autofill:focus {
+			  -webkit-text-fill-color: rgb(255, 255, 255);
+			  transition: background-color 5000s ease-in-out 0s;
+			}
+			
+			#bito-body::-webkit-scrollbar,
+			#emptyDiv-inner::-webkit-scrollbar,
+			#loginParentDiv-outer::-webkit-scrollbar {
+			  width: 4px;
+			  border-radius: 24px;
+			  color: #7a8084;
+			}
+			
+			#bito-body::-webkit-scrollbar-thumb,
+			#emptyDiv-inner::-webkit-scrollbar-thumb,
+			#loginParentDiv-outer::-webkit-scrollbar-thumb {
+			  background: #888; 
+			}
+			
+			#bito-body::-webkit-scrollbar-thumb:hover,
+			#emptyDiv-inner::-webkit-scrollbar-thumb:hover,
+			#loginParentDiv-outer::-webkit-scrollbar-thumb:hover {
+			  background: #555; 
+			}
+
+			.login-network-error-container {
+				padding: 10px 16px 8px;
+				color: rgb(255 0 0);
+			}		
+			
+			#loader {
+				background-color: #00000085;
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				left: 0px;
+				height: 300px;
+				align-items: center;
+				justify-content: center;
+				display: grid;
+				z-index: 3002;
+				opacity: 9999;
+			}
+			
+			.spinner {
+			  display: inline-block;
+				  width: 1.5rem;
+				  height: 1.5rem;
+				  vertical-align: text-bottom;
+				  border: 1.75px solid #fff;
+				  border-right-color: transparent;
+				  border-radius: 50%;
+				  animation: spinner-border .75s linear infinite;
+				  margin-top:-30px
+			}
+			
+			@keyframes spinner-border {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			  }
+		</style></head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+<div class="active-bar" style="border-color: #FF2D55;"></div>
+<style>
+                :root {
+                  --primary: #FF2D55;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./DAO Limitations _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>General</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/introduction/" class="">Introduction</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/faq/" class="">FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/whitepaper/" class="">Whitepaper</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/hardware-requirements/" class="">Hardware requirements</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/hardware-acceleration/" class="">Hardware acceleration</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/meet-with-friends/" class="">Meeting with friends</a>
+</li>
+<li>
+<input type="checkbox" id="section-0076a0fde0d8da5411851bee7bf1fd1d" class="toggle">
+<label for="section-0076a0fde0d8da5411851bee7bf1fd1d" class="flex justify-between">
+<a role="button" class="">In World Features</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/in-world-features/age-rating-scene-reporting/" class="">Age Rating and Scene Reporting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/in-world-features/voice-chat/" class="">Voice Chat</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Marketplace</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/market/marketplace/" class="">Marketplace</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/land-manager/" class="">LAND Manager</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/info-from-land/" class="">Get parcel info</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/api/" class="">LAND API Reference</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/rentals/" class="">Rentals</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Events</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/events/faq/" class="">FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<span>DAO</span>
+<ul>
+<li>
+<input type="checkbox" id="section-91f2a8130ea8ff7fa167189fa8ae9850" class="toggle" checked="">
+<label for="section-91f2a8130ea8ff7fa167189fa8ae9850" class="flex justify-between">
+<a role="button" class="">Overview</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-is-the-dao/" class="">What is the DAO</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-can-you-do-with-the-dao/" class="">What can you do with the DAO</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/" class="">How the DAO works</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-smart-contracts-does-the-dao-control/" class="">The DAO Smart Contracts</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/the-dao-fund/" class="">The DAO Fund</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/the-daos-limitations/" class="active">DAO Limitations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-do-you-need-to-participate/" class="">Participation Requirements</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-be648e0dec5a5927848a593509e9eedc" class="toggle">
+<label for="section-be648e0dec5a5927848a593509e9eedc" class="flex justify-between">
+<a role="button" class="">Grants</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/grants-program/" class="">Grants Program</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/receiving-grants/" class="">Receiving Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/requesting-grants/" class="">Requesting Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/grants-faq/" class="">Grants FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/security-recommendations/" class="">Security Recommendations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d20ebc1f4098b55560b6a2e98ba01123" class="toggle">
+<label for="section-d20ebc1f4098b55560b6a2e98ba01123" class="flex justify-between">
+<a role="button" class="">Grants (Legacy)</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/community-grants/" class="">Community Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/receiving-grants/" class="">Receiving Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/requesting-grants/" class="">Requesting Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/grants-faq/" class="">Grants FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/dao-userguide/" class="">DAO User Guide</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Blockchain Integration</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/get-a-wallet/" class="">Get a Wallet For Beginners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/ethereum-essentials/" class="">About the blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/transactions-in-polygon/" class="">Transactions in Polygon</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/buying-nfts/" class="">Buying NFTs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/estates-marketplace-integrations/" class="">Integrating Decentraland's Estate in your Marketplace</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./DAO Limitations _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>DAO Limitations</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>DAO Limitations</h1><p>The most important thing to remember about the Decentraland DAO is that it is a specific governance tool with limited capabilities. Like a vending machine, the DAO is mostly automated. However, this automation leads to limited options.</p>
+<p>There is a finite number of functions within the DAO’s smart contracts. These functions can easily be called by passing one of the binding proposals in the Governance dApp, but the process for adding or modifying functions or Governance mechanisms within the DAO is much more complex. For that, DAO members can embark on the path of getting through the Governance proposal process by going from a pre-proposal poll to a binding Governance proposal (Read more <a href="https://docs.decentraland.org/player/general/dao/overview/what-can-you-do-with-the-dao/">
+here
+</a></p>
+<p>Making changes to how this kind of organization runs, takes time and social momentum. This can only be built up through fostering productive relationships and dialogue with the broader Decentraland community by taking advantage of all the social interaction spaces available (The <a href="https://forum.decentraland.org/" target="_blank">
+forum
+</a>, <a href="https://dcl.gg/daodiscord" target="_blank">
+Discord
+</a>, Twitter, the <a href="https://governance.decentraland.org/" target="_blank">
+Governance dApp
+</a> and any others).</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./DAO Limitations _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/player/dao/overview/the-daos-limitations.md" target="_blank" rel="noopener">
+<img src="./DAO Limitations _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./DAO Limitations _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./DAO Limitations _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

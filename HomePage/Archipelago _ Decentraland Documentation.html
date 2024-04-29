@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://docs.decentraland.org/contributor/comms/archipelago/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Archipelago is the realm service that groups nearby players into islands, reassigning them as they move around and providing the information required to connect to the actual backend that will relay their messages.
+You can see the Archipelago protocol in action and experiment with it using the open-source Comms Station .
+To use the service, clients must connect to their realm’s Archipelago websocket endpoint and authenticate to begin their session. They can then start sending positional updates and receiving island assignments (see the client life-cycle ).">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Archipelago">
+<meta property="og:description" content="Archipelago is the realm service that groups nearby players into islands, reassigning them as they move around and providing the information required to connect to the actual backend that will relay their messages.
+You can see the Archipelago protocol in action and experiment with it using the open-source Comms Station .
+To use the service, clients must connect to their realm’s Archipelago websocket endpoint and authenticate to begin their session. They can then start sending positional updates and receiving island assignments (see the client life-cycle ).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/contributor/comms/archipelago/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="contributor">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Archipelago | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Archipelago _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Archipelago _ Decentraland Documentation_files/z0h94kay"></script><script type="text/javascript" async="" src="./Archipelago _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Archipelago _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Archipelago _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Archipelago _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+<div class="active-bar" style="border-color: #EE834A;"></div>
+<style>
+                :root {
+                  --primary: #EE834A;
+                }
+              </style>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Archipelago _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Introduction</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/welcome/" class="">Welcome!</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/introduction/architecture/" class="">Architecture</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Identity</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/authchain/" class="">Authentication Chain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/auth/signed-fetch/" class="">Signed Fetch</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Content</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/filesystem/" class="">File System</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities/" class="">Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/pointers/" class="">Pointers</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/snapshots/" class="">Snapshots</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/collections/" class="">Collections</a>
+</li>
+<li>
+<input type="checkbox" id="section-78d857344d9976cb2d2de1aa922ff1d0" class="toggle">
+<label for="section-78d857344d9976cb2d2de1aa922ff1d0" class="flex justify-between">
+<a role="button" class="">Entity Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/scenes/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/outfits/" class="">Outfits</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entities-types/profiles/" class="">Profiles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/wearables/" class="">Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/emotes/" class="">Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/entity-types/stores/" class="">Stores</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/content/practice/" class="">Practice</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Scene Runtime</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/globals/" class="">Globals</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/execution/" class="">Execution</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/permissions/" class="">Permissions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/entities/" class="">Basic Entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/components/" class="">Basic Components</a>
+</li>
+<li>
+<input type="checkbox" id="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="toggle">
+<label for="section-10168aa810fc3bbfe8a69b8fd3fa7a80" class="flex justify-between">
+<a role="button" class="">Modules</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/engine_api/" class="">EngineApi</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/restricted_actions/" class="">RestrictedActions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/user_identity/" class="">UserIdentity</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/runtime/modules/signed_fetch/" class="">SignedFetch</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Communications</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/main/" class="">MAIN Realm</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/archipelago/" class="active">Archipelago</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/messages/" class="">Messages</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transports/" class="">Transports</a>
+</li>
+<li>
+<input type="checkbox" id="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="toggle">
+<label for="section-fd25a60f0b8f77e70711dd8d5ea6ec37" class="flex justify-between">
+<a role="button" class="">Transport Types</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/livekit/" class="">LiveKit</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/websocket/" class="">Websocket</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/signed-login/" class="">Signed Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/offline/" class="">Offline</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/comms/transport-types/simulator/" class="">Simulator</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Catalyst Nodes</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/catalyst/realm-selection/" class="">Realm Selection</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Explorer Renderer</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="toggle">
+<label for="section-b9181de4c3c755fb3fc9f6afcd6fedde" class="flex justify-between">
+<a role="button" class="">Components</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/unity-renderer/components/how-to-create-components/" class="">Component Creation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Social Service</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/overview/" class="">Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/js-client/" class="">Javascript Client</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/login/" class="">Login</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/get-friends/" class="">Get friendships</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/social-service/put-friends/" class="">Act on events and users</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-create-new-entity-type/" class="">New entity type</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/contributor/tutorials/how-to-run-a-catalyst/" class="">Run a Catalyst Node</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Archipelago _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Archipelago</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Archipelago</h1><p>Archipelago is the realm service that groups nearby players into islands, reassigning them as they move around and providing the information required to connect to the actual backend that will relay their messages.</p>
+<div class="ui blue message">
+<div class="content">
+<p>You can see the Archipelago protocol in action and experiment with it using the open-source <a href="https://decentraland.github.io/comms-station/" target="_blank">
+Comms Station
+</a>.</p>
+</div>
+</div>
+<p>To use the service, clients must connect to their realm’s Archipelago websocket endpoint and authenticate to begin their session. They can then start sending positional updates and receiving island assignments (see the <a href="https://docs.decentraland.org/contributor/comms/overview/#lifecycle">
+client life-cycle
+</a>).</p>
+<p>All messages exchanged with the Archipelago service are encoded using protocol buffers, as defined in the Decentraland <a href="https://github.com/decentraland/protocol" target="_blank">
+protocol repository
+</a>.</p>
+<h2 id="connecting">
+Connecting
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#connecting">#</a>
+</h2>
+<p>To begin, clients must open a secure websocket connection (<code>wss:</code>) to the <code>/archipelago/ws</code> endpoint of the realm.</p>
+<p>Once connected, clients have a time window defined by realm policy (60 seconds, by default) to send each message of the <a href="https://docs.decentraland.org/contributor/comms/archipelago/#authenticating">
+authentication
+</a> flow.</p>
+<p><strong>Fixed Adapters</strong><br>!!
+!!While the larger realms run the Archipelago service, smaller ones may choose to provide a fixed backend connection string for all players. The URI, if present, can be found in the <code>comms.fixedAdapter</code> property of the realm’s <code>/about</code>.!!</p>
+<p>In these cases, dynamic island assignment won’t be available, and the realm’s RPC interface should not be used for that purpose.</p>
+<h2 id="authenticating">
+Authenticating
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#authenticating">#</a>
+</h2>
+<p>After opening a connection to Archipelago, clients must begin by requesting and signing a challenge from the service to verify their identity.</p>
+<p>The first message a client sends is a <a href="https://docs.decentraland.org/contributor/comms/archipelago/ChallengeRequestMessage">
+<code>ChallengeRequestMessage</code>
+</a> with their Ethereum address (i.e. their public key). They will receive a <a href="https://docs.decentraland.org/contributor/comms/archipelago/ChallengeResponseMessage">
+<code>ChallengeResponseMessage</code>
+</a> with a randomly generated string to sign, and must respond with a <a href="https://docs.decentraland.org/contributor/comms/archipelago/#SignedChallengeMessage">
+<code>SignedChallengeMessage</code>
+</a>.</p>
+<p>The <a href="https://docs.decentraland.org/contributor/comms/archipelago/#SignedChallengeMessage">
+<code>SignedChallengeMessage</code>
+</a> carries a JSON-serialized <a href="https://docs.decentraland.org/contributor/auth/authchain/">
+authentication chain
+</a> that begins with the provided address, and ends with the challenge signature.</p>
+<p>If the signature is successfully verified by the service, the client is authenticated and will receive a <a href="https://docs.decentraland.org/contributor/comms/archipelago/#WelcomeMessage">
+<code>WelcomeMessage</code>
+</a>.</p>
+<div class="goat svg-container ">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Lucida Console,monospace" viewBox="0 0 808 313">
+<g transform="translate(8,16)">
+<path d="M 8,0 L 120,0" fill="none" stroke="currentColor"></path>
+<path d="M 272,0 L 344,0" fill="none" stroke="currentColor"></path>
+<path d="M 8,32 L 48,32" fill="none" stroke="currentColor"></path>
+<path d="M 48,32 L 120,32" fill="none" stroke="currentColor"></path>
+<path d="M 272,32 L 304,32" fill="none" stroke="currentColor"></path>
+<path d="M 304,32 L 344,32" fill="none" stroke="currentColor"></path>
+<path d="M 72,80 L 80,80" fill="none" stroke="currentColor"></path>
+<path d="M 88,80 L 96,80" fill="none" stroke="currentColor"></path>
+<path d="M 104,80 L 112,80" fill="none" stroke="currentColor"></path>
+<path d="M 120,80 L 128,80" fill="none" stroke="currentColor"></path>
+<path d="M 136,80 L 144,80" fill="none" stroke="currentColor"></path>
+<path d="M 152,80 L 160,80" fill="none" stroke="currentColor"></path>
+<path d="M 168,80 L 176,80" fill="none" stroke="currentColor"></path>
+<path d="M 184,80 L 192,80" fill="none" stroke="currentColor"></path>
+<path d="M 200,80 L 208,80" fill="none" stroke="currentColor"></path>
+<path d="M 216,80 L 224,80" fill="none" stroke="currentColor"></path>
+<path d="M 232,80 L 240,80" fill="none" stroke="currentColor"></path>
+<path d="M 248,80 L 256,80" fill="none" stroke="currentColor"></path>
+<path d="M 264,80 L 272,80" fill="none" stroke="currentColor"></path>
+<path d="M 280,80 L 288,80" fill="none" stroke="currentColor"></path>
+<path d="M 296,80 L 304,80" fill="none" stroke="currentColor"></path>
+<path d="M 64,144 L 304,144" fill="none" stroke="currentColor"></path>
+<path d="M 56,160 L 296,160" fill="none" stroke="currentColor"></path>
+<path d="M 64,240 L 304,240" fill="none" stroke="currentColor"></path>
+<path d="M 56,256 L 296,256" fill="none" stroke="currentColor"></path>
+<path d="M 8,0 L 8,32" fill="none" stroke="currentColor"></path>
+<path d="M 56,80 L 56,160" fill="none" stroke="currentColor"></path>
+<path d="M 56,160 L 56,256" fill="none" stroke="currentColor"></path>
+<path d="M 56,256 L 56,288" fill="none" stroke="currentColor"></path>
+<path d="M 120,0 L 120,32" fill="none" stroke="currentColor"></path>
+<path d="M 272,0 L 272,32" fill="none" stroke="currentColor"></path>
+<path d="M 304,32 L 304,144" fill="none" stroke="currentColor"></path>
+<path d="M 304,144 L 304,240" fill="none" stroke="currentColor"></path>
+<path d="M 304,240 L 304,288" fill="none" stroke="currentColor"></path>
+<path d="M 344,0 L 344,32" fill="none" stroke="currentColor"></path>
+<polygon points="72.000000,144.000000 60.000000,138.399994 60.000000,149.600006" fill="currentColor" transform="rotate(180.000000, 64.000000, 144.000000)"></polygon>
+<polygon points="72.000000,240.000000 60.000000,234.399994 60.000000,245.600006" fill="currentColor" transform="rotate(180.000000, 64.000000, 240.000000)"></polygon>
+<polygon points="304.000000,160.000000 292.000000,154.399994 292.000000,165.600006" fill="currentColor" transform="rotate(0.000000, 296.000000, 160.000000)"></polygon>
+<polygon points="304.000000,256.000000 292.000000,250.399994 292.000000,261.600006" fill="currentColor" transform="rotate(0.000000, 296.000000, 256.000000)"></polygon>
+<circle cx="56" cy="80" r="6" stroke="currentColor" fill="#fff"></circle>
+<text text-anchor="middle" x="24" y="20" fill="currentColor" style="font-size:1em">A</text>
+<text text-anchor="middle" x="32" y="20" fill="currentColor" style="font-size:1em">r</text>
+<text text-anchor="middle" x="40" y="20" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="48" y="20" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="56" y="20" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="56" y="52" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="56" y="68" fill="currentColor" style="font-size:1em">⋮</text>
+<text text-anchor="middle" x="64" y="20" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="72" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="72" y="180" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="72" y="276" fill="currentColor" style="font-size:1em">W</text>
+<text text-anchor="middle" x="80" y="20" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="80" y="180" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="80" y="276" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="88" y="20" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="88" y="180" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="88" y="276" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="96" y="20" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="96" y="180" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="96" y="276" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="104" y="20" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="104" y="180" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="104" y="276" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="112" y="132" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="112" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="112" y="276" fill="currentColor" style="font-size:1em">m</text>
+<text text-anchor="middle" x="120" y="132" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="120" y="180" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="120" y="228" fill="currentColor" style="font-size:1em">S</text>
+<text text-anchor="middle" x="120" y="276" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="128" y="132" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="128" y="180" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="128" y="228" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="128" y="276" fill="currentColor" style="font-size:1em">M</text>
+<text text-anchor="middle" x="136" y="132" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="136" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="136" y="228" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="136" y="276" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="144" y="132" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="144" y="180" fill="currentColor" style="font-size:1em">R</text>
+<text text-anchor="middle" x="144" y="228" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="144" y="276" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="152" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="152" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="152" y="228" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="152" y="276" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="160" y="132" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="160" y="180" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="160" y="228" fill="currentColor" style="font-size:1em">d</text>
+<text text-anchor="middle" x="160" y="276" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="168" y="132" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="168" y="180" fill="currentColor" style="font-size:1em">p</text>
+<text text-anchor="middle" x="168" y="228" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="168" y="276" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="176" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="176" y="180" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="176" y="228" fill="currentColor" style="font-size:1em">h</text>
+<text text-anchor="middle" x="176" y="276" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="184" y="132" fill="currentColor" style="font-size:1em">R</text>
+<text text-anchor="middle" x="184" y="180" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="184" y="228" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="192" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="192" y="180" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="192" y="228" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="200" y="132" fill="currentColor" style="font-size:1em">q</text>
+<text text-anchor="middle" x="200" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="200" y="228" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="208" y="68" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="208" y="132" fill="currentColor" style="font-size:1em">u</text>
+<text text-anchor="middle" x="208" y="180" fill="currentColor" style="font-size:1em">M</text>
+<text text-anchor="middle" x="208" y="228" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="216" y="68" fill="currentColor" style="font-size:1em">o</text>
+<text text-anchor="middle" x="216" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="216" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="216" y="228" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="224" y="68" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="224" y="132" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="224" y="180" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="224" y="228" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="232" y="68" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="232" y="132" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="232" y="180" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="232" y="228" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="240" y="68" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="240" y="132" fill="currentColor" style="font-size:1em">M</text>
+<text text-anchor="middle" x="240" y="180" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="240" y="228" fill="currentColor" style="font-size:1em">M</text>
+<text text-anchor="middle" x="248" y="68" fill="currentColor" style="font-size:1em">c</text>
+<text text-anchor="middle" x="248" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="248" y="180" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="248" y="228" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="256" y="68" fill="currentColor" style="font-size:1em">t</text>
+<text text-anchor="middle" x="256" y="132" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="256" y="180" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="256" y="228" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="264" y="132" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="264" y="228" fill="currentColor" style="font-size:1em">s</text>
+<text text-anchor="middle" x="272" y="132" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="272" y="228" fill="currentColor" style="font-size:1em">a</text>
+<text text-anchor="middle" x="280" y="132" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="280" y="228" fill="currentColor" style="font-size:1em">g</text>
+<text text-anchor="middle" x="288" y="20" fill="currentColor" style="font-size:1em">C</text>
+<text text-anchor="middle" x="288" y="132" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="288" y="228" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="296" y="20" fill="currentColor" style="font-size:1em">l</text>
+<text text-anchor="middle" x="304" y="20" fill="currentColor" style="font-size:1em">i</text>
+<text text-anchor="middle" x="312" y="20" fill="currentColor" style="font-size:1em">e</text>
+<text text-anchor="middle" x="320" y="20" fill="currentColor" style="font-size:1em">n</text>
+<text text-anchor="middle" x="328" y="20" fill="currentColor" style="font-size:1em">t</text>
+</g>
+</svg>
+</div>
+<h2 id="heartbeat">
+Sending Heartbeat
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#heartbeat">#</a>
+</h2>
+<p>During their session, clients must periodically send a <a href="https://docs.decentraland.org/contributor/comms/archipelago/#Heartbeat">
+<code>Heartbeat</code>
+</a> message to keep Archipelago updated with the necessary information to issue island assignments.</p>
+<div class="ui blue message">
+<div class="content">
+<p>The recommended heartbeat frequency for comms clients is about one update per second.</p>
+</div>
+</div>
+<p>If a client stops sending <a href="https://docs.decentraland.org/contributor/comms/archipelago/#Heartbeat">
+<code>Heartbeat</code>
+</a> messages, Archipelago (depending on its current policy) may close the connection.</p>
+<h2 id="assignment">
+Getting Island Assignments
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#assignment">#</a>
+</h2>
+<p>Shortly after the first heartbeat, Archipelago will send the client their first <a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L17" target="_blank">
+<code>IslandChangedMessage</code>
+</a>.</p>
+<p>The main field is <code>conn_str</code>, which can be used to initialize a transport and connect to the island. Values typically look like this:</p>
+<pre tabindex="0"><code>livekit:wss://comms.example.com?access_token=eyJhbGciOiJI...
+</code></pre><p>The label before the first <code>:</code> is the transport type, the rest is a specialized URI for it. It can include pre-authorized tokens or other parameters.</p>
+<p>During the session, Archipelago may send a new assignment at any time, for a number of reasons:</p>
+<ol>
+<li>Position changes: the client reported moving away from others in the island.</li>
+<li>Island requests: the client requested being assigned to a specific island.</li>
+<li>Archipelago policy: the service decided to create or divide islands to better balance the population.</li>
+</ol>
+<p>Clients must listen for these assignments, closing and opening transport connections as indicated, and changing the type of transport in use when required.</p>
+<h2 id="client-messages">
+Client Messages
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#client-messages">#</a>
+</h2>
+<h6 id="ChallengeRequestMessage">
+<code>ChallengeRequestMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L54" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#ChallengeRequestMessage">#</a>
+</h6>
+<p>Sent by the client as the first message of a session, to start the authentication flow.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>address</code></td>
+<td><code>string</code></td>
+<td>The user’s address.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>address</code> field must be derived from the first private key of the <a href="https://docs.decentraland.org/contributor/auth/authchain/">
+authentication chain
+</a> that will be presented.</p>
+<hr>
+<h6 id="SignedChallengeMessage">
+<code>SignedChallengeMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L58" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#SignedChallengeMessage">#</a>
+</h6>
+<p>Sent by the client after receiving a <a href="https://docs.decentraland.org/contributor/comms/archipelago/#ChallengeResponseMessage">
+<code>ChallengeResponseMessage</code>
+</a>, to complete the authentication flow.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auth_chain_json</code></td>
+<td><code>string</code></td>
+<td>A JSON-serialized <a href="https://docs.decentraland.org/contributor/auth/authchain/">
+authentication chain
+</a> ending with the challenge signature.</td>
+</tr>
+</tbody>
+</table>
+<p>The first key in the <a href="https://docs.decentraland.org/contributor/auth/authchain/">
+authentication chain
+</a> must correspond to the address sent in the original <a href="https://docs.decentraland.org/contributor/comms/archipelago/#ChallengeRequestMessage">
+<code>ChallengeRequestMessage</code>
+</a>.</p>
+<hr>
+<h6 id="Heartbeat">
+<code>Heartbeat</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L62" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#Heartbeat">#</a>
+</h6>
+<p>Sent by the client at regular intervals (typically once per second), to update Archipelago on their position and/or request an island assignment.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>position</code></td>
+<td><code>Position</code></td>
+<td>The client’s 3D position in the world map</td>
+</tr>
+<tr>
+<td><code>desired_room</code></td>
+<td><code>string?</code></td>
+<td>The ID of an island the client would like to be assigned to</td>
+</tr>
+</tbody>
+</table>
+<p>The first <code>Heartbeat</code> message a client sends is quickly followed by an <a href="https://docs.decentraland.org/contributor/comms/archipelago/#IslandChangedMessage">
+<code>IslandChangedMessage</code>
+</a> from Archipelago. Subsequent updates, however, are independent of island assignments. Clients should not expect a <code>Heartbeat</code> to be responded.</p>
+<p>When the <code>desired_room</code> parameter is included, the service will attempt to honor the request, but a reassignment to that island is not guaranteed. It depends on Archipelago’s policy (e.g. limits on island population).</p>
+<h2 id="server-messages">
+Server Messages
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#server-messages">#</a>
+</h2>
+<h6 id="ChallengeResponseMessage">
+<code>ChallengeResponseMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L8" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#ChallengeResponseMessage">#</a>
+</h6>
+<p>Sent by Archipelago in response to a <a href="https://docs.decentraland.org/contributor/comms/archipelago/#ChallengeRequestMessage">
+<code>ChallengeRequestMessage</code>
+</a></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>challenge_to_sign</code></td>
+<td><code>string</code></td>
+<td>A generated string to sign and create an <a href="https://docs.decentraland.org/contributor/auth/authchain/">
+authentication chain
+</a></td>
+</tr>
+<tr>
+<td><code>already_connected</code></td>
+<td><code>bool</code></td>
+<td>Whether an existing connection for this user’s key</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h6 id="WelcomeMessage">
+<code>WelcomeMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L13" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#WelcomeMessage">#</a>
+</h6>
+<p>Sent by Archipelago after successful authentication.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>peer_id</code></td>
+<td><code>string</code></td>
+<td>A unique identifier for the authenticated client (typically their address)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h6 id="IslandChangedMessage">
+<code>IslandChangedMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L17" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#IslandChangedMessage">#</a>
+</h6>
+<p>Sent by Archipelago when the client is (re)assigned to an island.</p>
+<p>Description.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>island_id</code></td>
+<td><code>string</code></td>
+<td>The ID of the new island</td>
+</tr>
+<tr>
+<td><code>from_island_id</code></td>
+<td><code>string?</code></td>
+<td>The ID of the old island, if this is a reassignment</td>
+</tr>
+<tr>
+<td><code>conn_str</code></td>
+<td><code>string</code></td>
+<td>The connection string for the island <a href="https://docs.decentraland.org/contributor/comms/transports/">
+transport
+</a>.</td>
+</tr>
+<tr>
+<td><code>peers</code></td>
+<td><code>map&lt;string, Position&gt;</code></td>
+<td>Description.</td>
+</tr>
+</tbody>
+</table>
+<p>Clients that receive an <code>IslandChangedMessage</code> should end their connection to the island backend, and connect to the one given in <code>conn_str</code>.</p>
+<p>The <code>peers</code> field contains the current identities and positions of all peers in the island, so that clients can populate their initial set. After this point, they should rely on messages received via the island <a href="https://docs.decentraland.org/contributor/comms/transports/">
+transport
+</a> to get positional updates.</p>
+<hr>
+<h6 id="KickedMessage">
+<code>KickedMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#LL37C1-L38C1" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#KickedMessage">#</a>
+</h6>
+<p>Sent by Archipelago before closing a connection.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reason</code></td>
+<td><code>KickedReason</code></td>
+<td>Archipelago’s reason for closing the connection</td>
+</tr>
+</tbody>
+</table>
+<p>The standard values for the <code>reason</code> field are:</p>
+<ul>
+<li><code>KR_NEW_SESSION</code>: another connection authenticated with the same key.</li>
+</ul>
+<hr>
+<h6 id="JoinIslandMessage">
+<code>JoinIslandMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L29" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#JoinIslandMessage">#</a>
+</h6>
+<p>Sent by Archipelago when a peer is assigned to the client’s island.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>island_id</code></td>
+<td><code>string</code></td>
+<td>The identifier for the island</td>
+</tr>
+<tr>
+<td><code>peer_id</code></td>
+<td><code>string</code></td>
+<td>The unique identifier for the peer (typically their address)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>island_id</code> field will match the client’s current assignment.</p>
+<hr>
+<h6 id="LeftIslandMessage">
+<code>LeftIslandMessage</code> <small><a href="https://github.com/decentraland/protocol/blob/9a568b16b2eafb134177329ba670c1451be8a169/proto/decentraland/kernel/comms/v3/archipelago.proto#L24" target="_blank">
+↗ source
+</a></small>
+<a class="anchor" href="https://docs.decentraland.org/contributor/comms/archipelago/#LeftIslandMessage">#</a>
+</h6>
+<p>Sent by Archipelago when a peer is removed from the client’s island.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>island_id</code></td>
+<td><code>string</code></td>
+<td>The identifier for the island</td>
+</tr>
+<tr>
+<td><code>peer_id</code></td>
+<td><code>string</code></td>
+<td>The unique identifier for the peer (typically their address)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>island_id</code> field will match the client’s current assignment.</p>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Archipelago _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/contributor/comms/archipelago.md" target="_blank" rel="noopener">
+<img src="./Archipelago _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Archipelago _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+<iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom" src="./Archipelago _ Decentraland Documentation_files/saved_resource.html"></iframe><div class="intercom-lightweight-app"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger" aria-live="polite"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.601 8.39897C18.269 8.06702 17.7309 8.06702 17.3989 8.39897L12 13.7979L6.60099 8.39897C6.26904 8.06702 5.73086 8.06702 5.39891 8.39897C5.06696 8.73091 5.06696 9.2691 5.39891 9.60105L11.3989 15.601C11.7309 15.933 12.269 15.933 12.601 15.601L18.601 9.60105C18.9329 9.2691 18.9329 8.73091 18.601 8.39897Z" fill="white"></path>
+</svg>
+</div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none;
+    bottom: 20px;
+    right: 20px;
+    max-width: 48px;
+    width: 48px;
+    max-height: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FF2D55;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    transition: transform 167ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    box-sizing: content-box;
+  }
+
+
+  .intercom-lightweight-app-launcher:hover {
+    transition: transform 250ms cubic-bezier(0.33, 0.00, 0.00, 1.00);
+    transform: scale(1.1)
+  }
+
+  .intercom-lightweight-app-launcher:active {
+    transform: scale(0.85);
+    transition: transform 134ms cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+
+    
+  }
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 44px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 24px;
+    max-width: 24px;
+
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms cubic-bezier(0, 1, 1, 1);
+    transform-origin: bottom right;
+
+    
+        width: 400px;
+        height: calc(100% - 104px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 84px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      
+
+    border-radius: 16px;
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 64px;
+    border-bottom: none;
+    background: #FF2D55
+
+    
+  }
+
+  .intercom-lightweight-app-messenger-footer{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+    
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

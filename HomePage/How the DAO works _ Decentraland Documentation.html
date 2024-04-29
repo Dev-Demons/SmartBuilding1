@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Overview of the different platforms and entities that make up the Decentraland DAO.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="How the DAO works">
+<meta property="og:description" content="Overview of the different platforms and entities that make up the Decentraland DAO.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="player">
+<meta property="article:published_time" content="2021-05-21T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>How the DAO works | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./How the DAO works _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./How the DAO works _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./How the DAO works _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./How the DAO works _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./How the DAO works _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+<style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      width: 1000px !important;
+      margin-left: -500px !important;
+      position: fixed !important;
+      z-index: 100000200 !important;
+      background: none !important;
+      pointer-events: none !important;
+      display: inline-block !important;
+      visibility: visible  !important;
+      white-space: pre-line;
+    }
+    .tippy-box[data-theme~="custom"] {
+      font-size: 14px  !important;
+      max-width: 200px  !important;
+      text-align: center !important;
+      backdrop-filter: blur(2px) !important;
+      background-color: #000000b8 !important;
+      color: #ffffffff !important;
+      overflow-wrap: break-word !important;
+      font-family: 
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif  !important;
+      border: 1px solid #ffffff00;
+      white-space: pre-line;
+    }
+    [data-tippy-root] {
+      display: inline-block !important;
+      visibility: visible  !important;
+      position: absolute !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='top'] > .tippy-arrow::before { 
+      border-top-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='bottom'] > .tippy-arrow::before {
+      border-bottom-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='left'] > .tippy-arrow::before {
+      border-left-color: #000000b8 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='right'] > .tippy-arrow::before {
+      border-right-color: #000000b8 !important;
+    }
+    .mtt-highlight{
+      background-color: #21dc6d40  !important;
+      position: absolute !important;   
+      z-index: 100000100 !important;
+      pointer-events: none !important;
+      display: inline !important;
+      border-radius: 3px !important;
+    }
+    .mtt-image{
+      width: 180px  !important;
+      border-radius: 3px !important;
+    }
+    .ocr_text_div{
+      position: absolute;
+      opacity: 0.5;
+      color: transparent !important;
+      border: 2px solid CornflowerBlue;
+      background: none !important;
+      border-radius: 3px !important;
+    }</style><style id="mttstyleSubtitle">
+    #ytp-caption-window-container .ytp-caption-segment {
+      cursor: text !important;
+      user-select: text !important;
+      font-family: 
+      -apple-system, BlinkMacSystemFont,
+      "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif  !important;
+    }
+    .caption-visual-line{
+      display: flex  !important;
+      align-items: stretch  !important;
+    }
+    .captions-text .caption-visual-line:first-of-type:after {
+      content: '⣿⣿';
+      background-color: #000000b8;
+      display: inline-block;
+      vertical-align: top;
+      opacity:0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    .captions-text:hover .caption-visual-line:first-of-type:after {
+      opacity:1;
+    }
+    .ytp-pause-overlay {
+      display: none !important;
+    }
+    .ytp-expand-pause-overlay .caption-window {
+      display: block !important;
+    }
+  </style><style>
+			@-webkit-keyframes spin {
+				0% { -webkit-transform: rotate(0deg); }
+				100% { -webkit-transform: rotate(360deg); }
+			}
+		
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			input.bito-email-input:-webkit-autofill,
+			input.bito-email-input:-webkit-autofill:hover,
+			input.bito-email-input:-webkit-autofill:focus {
+			  -webkit-text-fill-color: rgb(255, 255, 255);
+			  transition: background-color 5000s ease-in-out 0s;
+			}
+			
+			#bito-body::-webkit-scrollbar,
+			#emptyDiv-inner::-webkit-scrollbar,
+			#loginParentDiv-outer::-webkit-scrollbar {
+			  width: 4px;
+			  border-radius: 24px;
+			  color: #7a8084;
+			}
+			
+			#bito-body::-webkit-scrollbar-thumb,
+			#emptyDiv-inner::-webkit-scrollbar-thumb,
+			#loginParentDiv-outer::-webkit-scrollbar-thumb {
+			  background: #888; 
+			}
+			
+			#bito-body::-webkit-scrollbar-thumb:hover,
+			#emptyDiv-inner::-webkit-scrollbar-thumb:hover,
+			#loginParentDiv-outer::-webkit-scrollbar-thumb:hover {
+			  background: #555; 
+			}
+
+			.login-network-error-container {
+				padding: 10px 16px 8px;
+				color: rgb(255 0 0);
+			}		
+			
+			#loader {
+				background-color: #00000085;
+				position: absolute;
+				width: 100%;
+				top: 0px;
+				left: 0px;
+				height: 300px;
+				align-items: center;
+				justify-content: center;
+				display: grid;
+				z-index: 3002;
+				opacity: 9999;
+			}
+			
+			.spinner {
+			  display: inline-block;
+				  width: 1.5rem;
+				  height: 1.5rem;
+				  vertical-align: text-bottom;
+				  border: 1.75px solid #fff;
+				  border-right-color: transparent;
+				  border-radius: 50%;
+				  animation: spinner-border .75s linear infinite;
+				  margin-top:-30px
+			}
+			
+			@keyframes spinner-border {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			  }
+		</style></head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+<div class="active-bar" style="border-color: #FF2D55;"></div>
+<style>
+                :root {
+                  --primary: #FF2D55;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./How the DAO works _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>General</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/introduction/" class="">Introduction</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/faq/" class="">FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/whitepaper/" class="">Whitepaper</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/hardware-requirements/" class="">Hardware requirements</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/hardware-acceleration/" class="">Hardware acceleration</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/glossary/" class="">Glossary</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/meet-with-friends/" class="">Meeting with friends</a>
+</li>
+<li>
+<input type="checkbox" id="section-0076a0fde0d8da5411851bee7bf1fd1d" class="toggle">
+<label for="section-0076a0fde0d8da5411851bee7bf1fd1d" class="flex justify-between">
+<a role="button" class="">In World Features</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/in-world-features/age-rating-scene-reporting/" class="">Age Rating and Scene Reporting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/in-world-features/voice-chat/" class="">Voice Chat</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Marketplace</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/market/marketplace/" class="">Marketplace</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/land-manager/" class="">LAND Manager</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/info-from-land/" class="">Get parcel info</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/api/" class="">LAND API Reference</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/market/rentals/" class="">Rentals</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Events</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/events/faq/" class="">FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<span>DAO</span>
+<ul>
+<li>
+<input type="checkbox" id="section-91f2a8130ea8ff7fa167189fa8ae9850" class="toggle" checked="">
+<label for="section-91f2a8130ea8ff7fa167189fa8ae9850" class="flex justify-between">
+<a role="button" class="">Overview</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-is-the-dao/" class="">What is the DAO</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-can-you-do-with-the-dao/" class="">What can you do with the DAO</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/" class="active">How the DAO works</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-smart-contracts-does-the-dao-control/" class="">The DAO Smart Contracts</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/the-dao-fund/" class="">The DAO Fund</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/the-daos-limitations/" class="">DAO Limitations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/what-do-you-need-to-participate/" class="">Participation Requirements</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-be648e0dec5a5927848a593509e9eedc" class="toggle">
+<label for="section-be648e0dec5a5927848a593509e9eedc" class="flex justify-between">
+<a role="button" class="">Grants</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/grants-program/" class="">Grants Program</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/receiving-grants/" class="">Receiving Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/requesting-grants/" class="">Requesting Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/grants-faq/" class="">Grants FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/overview/security-recommendations/" class="">Security Recommendations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d20ebc1f4098b55560b6a2e98ba01123" class="toggle">
+<label for="section-d20ebc1f4098b55560b6a2e98ba01123" class="flex justify-between">
+<a role="button" class="">Grants (Legacy)</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/community-grants/" class="">Community Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/receiving-grants/" class="">Receiving Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/requesting-grants/" class="">Requesting Grants</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/grants-v1/grants-faq/" class="">Grants FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/general/dao/dao-userguide/" class="">DAO User Guide</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Blockchain Integration</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/get-a-wallet/" class="">Get a Wallet For Beginners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/ethereum-essentials/" class="">About the blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/transactions-in-polygon/" class="">Transactions in Polygon</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/buying-nfts/" class="">Buying NFTs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/player/blockchain-integration/estates-marketplace-integrations/" class="">Integrating Decentraland's Estate in your Marketplace</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./How the DAO works _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>How the DAO works</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>How the DAO works</h1><p>To circumvent the very high gas fees associated with full on-chain governance, Decentraland’s DAO uses a combination of free, off-chain voting for the community and a multi-sig wallet controlled by a “DAO Committee” to enact those off-chain decisions on the Ethereum blockchain. This allows everyone who holds MANA, NAMES or LAND to participate in the DAO without having to pay any fees everytime they want to vote or open a proposal.</p>
+<p>The use of a multi-sig wallet controlled by a committee of trusted persons guarantees the security of the DAO along with guaranteeing that passed proposals result in an on-chain action. A second multisig owned by the SAB provides a second layer of protection on top of the DAO Committee.</p>
+<p>The DAO is a complex system created from several layers of entities and platforms, each of which is listed and described below:</p>
+<h2 id="governance-dapp">
+Governance dApp
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#governance-dapp">#</a>
+</h2>
+<p>The main interface for the Decentraland DAO is located at <a href="https://governance.decentraland.org/" target="_blank">
+governance.decentraland.org
+</a>. This is where users log-in, create proposals, and vote.
+<br></p>
+<p><em>This is currently maintained by a development team funded by a <a href="https://governance.decentraland.org/proposal/?id=ed53e850-5e70-11ec-8188-4352ce3d30e7" target="_blank">
+DAO grant
+</a>.</em></p>
+<h2 id="snapshot">
+Snapshot
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#snapshot">#</a>
+</h2>
+<p><a href="https://snapshot.org/#/" target="_blank">
+Snapshot
+</a> is an off-chain voting platform that provides a free way for token holders to vote on proposals. By storing both the proposals and the votes on IPFS as cryptographically signed messages, Snapshot allows for secure and easily contested results.</p>
+<p>Decentraland’s DAO uses Snapshot to host the proposals and votes generated by the community.</p>
+<p>Whenever a proposal is opened at governance.decentraland.org, it is also created automatically on <a href="https://snapshot.org/#/snapshot.dcl.eth" target="_blank">
+Decentraland’s Snapshot space
+</a>. This allows the DAO to record and store proposals, votes, and results in a secure and decentralized manner - with the results displayed back on governance.decentraland.org. From the Snapshot space users can also <a href="https://snapshot.org/#/delegate/snapshot.dcl.eth" target="_blank">
+delegate their VP
+</a> to other community members.</p>
+<h2 id="aragon">
+Aragon
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#aragon">#</a>
+</h2>
+<p><a href="https://aragon.org/" target="_blank">
+Aragon
+</a> is a secure platform for creating and managing the collection of smart contracts needed to run a DAO. The backend of Decentraland’s DAO is built using Aragon, so anytime a proposal that results in a binding action is passed by the community in Snapshot, it is committed to the Ethereum mainnet in Aragon by the DAO Committee.</p>
+<h2 id="dao-committee">
+DAO Committee
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#dao-committee">#</a>
+</h2>
+<p>The DAO Committee is a group of three trusted individuals who have been selected by the community to hold keys in a multi-sig wallet. This multi-sig is responsible for enacting any passed votes with a binding action, like funding a Grant, banning a name, adding or removing a POI, implementing a Governance proposal or adding a Catalyst node.</p>
+<p>The DAO Committee is overseen by the SAB, which has the ability to pause and cancel any action initiated by the Committee.</p>
+<p>Every on-chain transaction initiated by the DAO Committee has an automatic 24-hour delay before it is completed, allowing the SAB or the Committee to revoke the transaction.</p>
+<p><img src="./How the DAO works _ Decentraland Documentation_files/DAO Committee.png" alt="Photo 1"></p>
+<h2 id="security-advisory-board-sab">
+Security Advisory Board (SAB)
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#security-advisory-board-sab">#</a>
+</h2>
+<p>The Security Advisory Board acts as a guarantor of Decentraland’s smart contract security, and is tasked with overseeing the work of the DAO Committee and responding to vulnerability and bug reports in any of Decentraland’s contracts.</p>
+<p>The SAB includes 5 Solidity experts that have initially been selected by the Decentraland development team.</p>
+<p>Any time a modification is to be made to the LAND or Estate contracts, the update must be unanimously supported by the SAB’s multi-sig. At least three signatories are required with no dissenting votes in order to make any changes to the LAND or Estate contracts.</p>
+<p>The SAB has the ability to pause, resume, or cancel any action taken by the DAO Committee.</p>
+<p>Initiating the addition or removal of a member of the SAB can be done by kickstarting a Governance proposal process on <a href="https://governance.decentraland.org/" target="_blank">
+governance.decentraland.org
+</a>.
+<img src="./How the DAO works _ Decentraland Documentation_files/Security Advisory Board.png" alt="Photo 2"></p>
+<h2 id="wearables-curation-committee">
+Wearables Curation Committee
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#wearables-curation-committee">#</a>
+</h2>
+<p>The Curation Committee is responsible for reviewing and approving wearables and emotes submitted by the Decentraland community.
+<img src="./How the DAO works _ Decentraland Documentation_files/Wearables Curation Last.png" alt="Photo 3"></p>
+<h2 id="revocations-committee">
+Revocations Committee
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#revocations-committee">#</a>
+</h2>
+<p>The Revocations Committee is responsible for reviewing cases raised by the community regarding Grants Program and has the responsibility to provide a resolution, which may be to revoke a vesting contract as a final action.
+<img src="./How the DAO works _ Decentraland Documentation_files/Revocation.png" alt="Photo 4"></p>
+<h2 id="governance-squad">
+Governance Squad
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#governance-squad">#</a>
+</h2>
+<p>Governance Squad is responsible for developing, enhancing and maintaining the technological infrastructure and decision-making tools of the DAO.
+<img src="./How the DAO works _ Decentraland Documentation_files/Governance Squad.png" alt="Photo 5"></p>
+<h2 id="facilitation-squad">
+Facilitation Squad
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#facilitation-squad">#</a>
+</h2>
+<p>Facilitation Squad is responsible for managing communications and aligning different stakeholders, fostering collective decision-making and efficient governance operations.
+<img src="./How the DAO works _ Decentraland Documentation_files/Facilitation last.png" alt="Photo 6"></p>
+<h2 id="grants-support-squad">
+Grants Support Squad
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#grants-support-squad">#</a>
+</h2>
+<p>Grants Support Squad has the responsibility of being in constant dialogue with the grantees community, to understand their needs and provide support to their blockers and requests.
+<img src="./How the DAO works _ Decentraland Documentation_files/Grant Support.png" alt="Photo 7"></p>
+<h2 id="strategic-unit-squad">
+Strategic Unit Squad
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#strategic-unit-squad">#</a>
+</h2>
+<p>Strategic Unit Squad is responsible for building consensus around strategic DAO operations and developing governance guidelines.
+<img src="./How the DAO works _ Decentraland Documentation_files/Strategic Unit.png" alt="Photo 8"></p>
+<h2 id="the-forum">
+The Forum
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#the-forum">#</a>
+</h2>
+<p>The <a href="https://forum.decentraland.org/" target="_blank">
+Decentraland Forum
+</a> is the communication hub for the DAO. Everytime a new proposal is created, an accompanying thread is opened automatically on the Forum under the <a href="https://forum.decentraland.org/c/governance/" target="_blank">
+Governance section
+</a>. These proposal topics can be found either by browsing the Forum, or by clicking the “Discuss in the Forum’’ button on any proposal’s detail page in the Governance UI. These threads are a space where voters can discuss the various impacts and issues that might result from a proposal.</p>
+<h2 id="discord-servers">
+Discord Servers
+<a class="anchor" href="https://docs.decentraland.org/player/general/dao/overview/how-does-the-dao-work/#discord-servers">#</a>
+</h2>
+<p>The DAO operates on two Discord servers:</p>
+<ul>
+<li><a href="https://discord.com/channels/417796904760639509/538106198419832844" target="_blank">
+#dao channel
+</a> on the Decentraland Discord server for general announcements, discussions and questions.</li>
+<li>A <a href="https://dcl.gg/daodiscord" target="_blank">
+dedicated Discord server
+</a> only for the DAO operations with more in-depth discussions, specific channels for working groups tacking complex issues and spaces for the community grant owners to post updates on their project. In this channel the DAO also host their monthly Town Hall.</li>
+</ul>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./How the DAO works _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/player/dao/overview/how-does-the-dao-work.md" target="_blank" rel="noopener">
+<img src="./How the DAO works _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./How the DAO works _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+</body></html>

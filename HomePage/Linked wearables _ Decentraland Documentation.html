@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)https://docs.decentraland.org/creator/wearables/linked-wearables/ -->
+<html lang="en-us" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wearable Representations Of 3rd Party Tokens">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Linked wearables">
+<meta property="og:description" content="Wearable Representations Of 3rd Party Tokens">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://docs.decentraland.org/creator/wearables/linked-wearables/"><meta property="og:image" content="https://docs.decentraland.org/images/og-logo.png"><meta property="article:section" content="creator">
+<meta property="article:published_time" content="2022-04-05T00:00:00+00:00">
+<meta property="article:modified_time" content="2024-04-26T15:50:40-03:00">
+<title>Linked wearables | Decentraland Documentation</title>
+<link rel="manifest" href="https://docs.decentraland.org/manifest.json">
+<link rel="icon" href="https://docs.decentraland.org/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="./Linked wearables _ Decentraland Documentation_files/book.min.f4a0fa25275edf7eefd0c816f2b982b64e30ef636c0f9b489628b69493e386d8.css" integrity="sha256-9KD6JSde337v0MgW8rmCtk4w72NsD5tIlii2lJPjhtg=" crossorigin="anonymous">
+<script type="text/javascript" async="" src="./Linked wearables _ Decentraland Documentation_files/analytics.min.js.download"></script><script defer="" src="./Linked wearables _ Decentraland Documentation_files/lunr.min.js.download"></script>
+<script defer="" src="./Linked wearables _ Decentraland Documentation_files/en.search.min.6b52c5e340880f4d4309bc4e386aa11630e533e615b71c3010e55438bc701f63.js.download" integrity="sha256-a1LF40CID01DCbxOOGqhFjDlM+YVtxwwEOVUOLxwH2M=" crossorigin="anonymous"></script>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH";;analytics.SNIPPET_VERSION="4.15.3";
+  analytics.load("ZHLrnVct1IQCx7yLeOzxSic7G1Duy0HH");
+  analytics.page();
+  }}();
+</script>
+<script defer="" src="./Linked wearables _ Decentraland Documentation_files/intercom.min.47bd2edf568b96bf76004cf88a0feac89cc3aa30d7e89a0aaf8fa0e22627387c.js.download" integrity="sha256-R70u31aLlr92AEz4ig/qyJzDqjDX6JoKr4+g4iYnOHw=" crossorigin="anonymous"></script>
+
+</head>
+<body dir="ltr">
+<input type="checkbox" class="hidden toggle" id="menu-control">
+<input type="checkbox" class="hidden toggle" id="toc-control">
+<div class="dcl navbar fullscreen" role="navigation">
+<div class="ui container">
+<div class="dcl navbar-menu">
+<div class="ui secondary stackable menu">
+<a class="dcl navbar-logo" href="https://decentraland.org/">
+<i class="dcl logo"></i>
+</a>
+<div class="item">
+<a href="https://market.decentraland.org/" class="item">Marketplace</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://market.decentraland.org/" class="item">Overview</a>
+<a href="https://market.decentraland.org/browse" class="item">Collectibles</a>
+<a href="https://market.decentraland.org/lands" class="item">LAND</a>
+<a href="https://market.decentraland.org/account" class="item">My Assets</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://builder.decentraland.org/" class="item">Builder</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://builder.decentraland.org/" class="item">Overview</a>
+<a href="https://builder.decentraland.org/collections" class="item">Collections</a>
+<a href="https://builder.decentraland.org/scenes" class="item">Scenes</a>
+<a href="https://builder.decentraland.org/land" class="item">Land</a>
+<a href="https://builder.decentraland.org/names" class="item">Names</a>
+<a href="https://builder.decentraland.org/worlds" class="item">Worlds</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://docs.decentraland.org/" class="active item">Docs</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://docs.decentraland.org/player" class="item">Players</a>
+<a href="https://docs.decentraland.org/creator" class="item">Content Creators</a>
+<a href="https://docs.decentraland.org/contributor" class="item">Contributors</a>
+<a href="https://studios.decentraland.org/" class="item">Studios</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://places.decentraland.org/" class="item">Places</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://places.decentraland.org/" class="item">Overview</a>
+<a href="https://places.decentraland.org/places" class="item">Places</a>
+<a href="https://places.decentraland.org/worlds" class="item">Worlds</a>
+<a href="https://docs.decentraland.org/creator/places/faq" class="item">FAQ</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://events.decentraland.org/" class="item">Events</a>
+</div>
+<div class="item">
+<a href="https://dao.decentraland.org/" class="item">DAO</a>
+<div class="item submenu">
+<div class="ui vertical menu">
+<a href="https://dao.decentraland.org/" class="item">Overview</a>
+<a href="https://governance.decentraland.org/" class="item">Governance</a>
+<a href="https://governance.decentraland.org/transparency" class="item">Transparency</a>
+</div>
+</div>
+</div>
+<div class="item">
+<a href="https://decentraland.org/blog" class="item">Blog</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function(){var e=document.querySelectorAll(".dcl.navbar .dcl.navbar-menu .ui.menu > div.item");e.forEach(e=>{e.querySelectorAll("a.item").forEach(t=>{var n=e.querySelector("a.item");t.addEventListener("click",function(e){window.analytics&&window.analytics.track("Clicked on navbar",{section:n.textContent.toLowerCase(),submenu:n.textContent!==e.target.textContent?e.target.textContent.toLowerCase():void 0})})})})})()
+</script>
+<div class="tabs-header">
+<div class="dcl tabs ">
+<div class="ui container">
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/player">Players</a>
+</div>
+<div class="dcl tab active">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/creator">Content Creators</a>
+<div class="active-bar" style="border-color: #4947CD;"></div>
+<style>
+                :root {
+                  --primary: #4947CD;
+                }
+              </style>
+</div>
+<div class="dcl tab active" style="border-color: transparent">
+<a aria-current="page" class="tabs-navigation" href="https://docs.decentraland.org/contributor">Contributors</a>
+</div>
+<div class="book-search">
+<div id="search-overlay" class="hidden"></div>
+<div id="book-search-input">
+<img src="./Linked wearables _ Decentraland Documentation_files/search.svg" class="book-icon" alt="Search">
+<input type="text" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/">
+</div>
+<div class="book-search-spinner hidden"></div>
+<div id="book-search-results">
+<div id="book-search-hits" class="hidden" tabindex="0">
+<ul id="book-search-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="container flex">
+<aside class="book-menu sidebar">
+<div class="book-menu-content">
+<nav>
+<ul>
+<li>
+<span>Wearables &amp; Emotes</span>
+<ul>
+<li>
+<input type="checkbox" id="section-5238408129bdbe7a41bd58cdbed95be1" class="toggle" checked="">
+<label for="section-5238408129bdbe7a41bd58cdbed95be1" class="flex justify-between">
+<a role="button" class="">Wearables</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/wearables-overview/" class="">Wearables Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/" class="">Creating Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/linked-wearables/" class="active">Linked wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17f08e4e58ad69e23f1096996f5c4e64" class="toggle">
+<label for="section-17f08e4e58ad69e23f1096996f5c4e64" class="flex justify-between">
+<a role="button" class="">Emotes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/emotes-overview/" class="">Emotes Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/creating-and-exporting-emotes/" class="">Creating Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/avatar-rig/" class="">Avatar Rig</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/rig-features/" class="">Rigging Features</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/props-and-sounds/" class="">Adding Props and Sounds to your Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/emotes/particles-in-emotes/" class="">Particles in Emotes 2.0</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-57010a4fb000b586393ef3ac0e4c708e" class="toggle">
+<label for="section-57010a4fb000b586393ef3ac0e4c708e" class="flex justify-between">
+<a role="button" class="">Manage Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/creating-collection/" class="">Creating a Collection</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-wearables/" class="">Uploading Wearables</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-emotes/" class="">Uploading Emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables-and-emotes/manage-collections/uploading-smart-wearables/" class="">Uploading Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b3bac40672f08584afca2b1951d77ffa" class="toggle">
+<label for="section-b3bac40672f08584afca2b1951d77ffa" class="flex justify-between">
+<a role="button" class="">Publishing Collections</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/publishing-collections/" class="">Publishing Collections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/wearables/curation-committee/" class="">Curation committee</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Tutorials &amp; Examples</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/examples/7/" class="">Example scenes</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GP_K8WN7csnKnImK4R2TgMA" class="external-link " target="_blank" rel="noopener">SDK &amp; Editor Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/playlist?list=PLAcRraQmr_GN8LcnnQk2BByo9L2Orvp9c" class="external-link " target="_blank" rel="noopener">Emote Videos<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+<li>
+<a href="https://github.com/decentraland-scenes/awesome-repository#tutorials" class="external-link " target="_blank" rel="noopener">Awesome Repository (Deprecated)<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Scenes (SDK7)</span>
+<ul>
+<li>
+<input type="checkbox" id="section-b525100342227191f7fcea7ba56bb803" class="toggle">
+<label for="section-b525100342227191f7fcea7ba56bb803" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sdk-101/" class="">Quick start</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dev-workflow/" class="">Development workflow</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/installation-guide/" class="">Editor Installation Guide</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/editor/" class="">Decentraland Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-from-example/" class="">Scene from example</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/coding-scenes/" class="">Coding essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-107b6725d990df022e2ce15c90ba14e8" class="toggle">
+<label for="section-107b6725d990df022e2ce15c90ba14e8" class="flex justify-between">
+<a role="button" class="">Designing the experience</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/mvp-guidelines/" class="">Scene MVP Guidelines</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/ux-ui-guide/" class="">UX and UI guide for creators</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/design-experience/design-games/" class="">Design constraints for games</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="toggle">
+<label for="section-0031fb5ca3e1a9901dcc4dd08b2d9fb2" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/querying-components/" class="">Querying components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/data-oriented-programming/" class="">Data oriented programming</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-26d2ff837ef33c0c864da60b58012b08" class="toggle">
+<label for="section-26d2ff837ef33c0c864da60b58012b08" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/color-types/" class="">Color types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/text/" class="">Text shapes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/special-types/" class="">Geometry types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/colliders/" class="">Colliders</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-e2a5c62fa44576cfaf37400c3afd999c" class="toggle">
+<label for="section-e2a5c62fa44576cfaf37400c3afd999c" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/troubleshooting/" class="">Troubleshooting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/report-a-bug/" class="">Report a bug</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="toggle">
+<label for="section-6a9fe17d8c1556df0ad792ec0a1ee263" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-17cf12281279261a57549d3a62bf1f9b" class="toggle">
+<label for="section-17cf12281279261a57549d3a62bf1f9b" class="flex justify-between">
+<a role="button" class="">Optimizing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/performance-optimization/" class="">Performance optimization</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-limitations/" class="">Scene limitations</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d988b988b9f10b302e874ddf848f6ba3" class="toggle">
+<label for="section-d988b988b9f10b302e874ddf848f6ba3" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/make-discoverable/" class="">Make your scene discoverable</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploy-third-party/" class="">Upload a preview</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="toggle">
+<label for="section-cc0b75c7e09cf8ac4f972125fa95c4aa" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/kinds-of-projects/" class="">Kinds of Projects</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-files/" class="">Files in a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/workspaces/" class="">Workspaces</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/portable-experiences/" class="">Portable experiences</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/smart-wearables/" class="">Smart Wearables</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0c95a08d2936e4fb6641631c7518e5c9" class="toggle">
+<label for="section-0c95a08d2936e4fb6641631c7518e5c9" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-62db854699a952e0bb38c11370531240" class="toggle">
+<label for="section-62db854699a952e0bb38c11370531240" class="flex justify-between">
+<a role="button" class="">Input actions</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/click-events/" class="">About input actions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/register-callback/" class="">Register callback</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/system-based-events/" class="">System based events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/advanced-button-events/" class="">Advanced button events</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/npc-avatars/" class="">NPC Avatars</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/avatar-modifiers/" class="">Modifier Areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/runtime-data/" class="">Runtime data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deprecated-functions/" class="">Deprecated functions</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-8aced72970aba367ccb620ac0774d739" class="toggle">
+<label for="section-8aced72970aba367ccb620ac0774d739" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/serverless-multiplayer/" class="">Serverless Multiplayer</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/authoritative-server/" class="">3rd party servers</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-7c22809946dca82b52a0416bb19bee94" class="toggle">
+<label for="section-7c22809946dca82b52a0416bb19bee94" class="flex justify-between">
+<a role="button" class="">2D UI</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/onscreen-ui/" class="">2D UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/dynamic-ui/" class="">Dynamic UIs</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-button-events/" class="">UI Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-positioning/" class="">UI Positioning</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-text/" class="">UI Text</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-background/" class="">UI Background</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/ui-special-elements/" class="">UI special types</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-3339f980e82707ed3f2ac8f0b7215bc6" class="toggle">
+<label for="section-3339f980e82707ed3f2ac8f0b7215bc6" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/second-layer/" class="">Second layer blockchain</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-a-dapp/" class="">Create a dApp</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/deploying-your-own-transactions-server/" class="">Deploying your own transactions server</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a9e2088c8e67585827711b1700609398" class="toggle">
+<label for="section-a9e2088c8e67585827711b1700609398" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/libraries/7/" class="">Library catalog</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/create-libraries/" class="">Create a library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-cfc35d405c7d6b713873bbaa8ed9e303" class="toggle">
+<label for="section-cfc35d405c7d6b713873bbaa8ed9e303" class="flex justify-between">
+<a role="button" class="">Programming patterns</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/async-functions/" class="">Asynchronous code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/mutable-data/" class="">Data mutability</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/game-objects/" class="">Game objects</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-90195531610f61ac8dbe0e10d5e228a6" class="toggle">
+<label for="section-90195531610f61ac8dbe0e10d5e228a6" class="flex justify-between">
+<a role="button" class="">Web Editor</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/web-editor/" class="">Web Editor</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items/" class="">Smart Items - Basic</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/smart-items-advanced/" class="">Smart Items - Advanced</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/editor-plus-code/" class="">Combine with code</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-76e89a14e1691ab97e791c67b7a232c7" class="toggle">
+<label for="section-76e89a14e1691ab97e791c67b7a232c7" class="flex justify-between">
+<a role="button" class="">API Reference</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/sdk7/releases/7/" class="">API Reference SDK7</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/version-agreement/" class="">Version support agreement</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/testing-guidelines/" class="">SDK7 feedback guidelines</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-203470ceeef126c8dd8cbc9c390f57b4" class="toggle">
+<label for="section-203470ceeef126c8dd8cbc9c390f57b4" class="flex justify-between">
+<a role="button" class="">Other</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sdk7/scene-analytics/" class="">Scene Analytics</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-bb199fbca80691618b9d243fc3dbf186" class="toggle">
+<label for="section-bb199fbca80691618b9d243fc3dbf186" class="flex justify-between">
+<a role="button" class="">SDK6 Scenes</a>
+</label>
+<ul>
+<li>
+<input type="checkbox" id="section-370e2ddc65b07bfae1e1a4e45be7210f" class="toggle">
+<label for="section-370e2ddc65b07bfae1e1a4e45be7210f" class="flex justify-between">
+<a role="button" class="">Getting started</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/preview-scene/" class="">Preview your scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/cli/" class="">Using the CLI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="toggle">
+<label for="section-59945f441e3ad1a11e4f4ad4dea8a6c1" class="flex justify-between">
+<a role="button" class="">ECS</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entities-components/" class="">Entities and components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/systems/" class="">Systems</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/custom-components/" class="">Custom components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/component-groups/" class="">Component groups</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-70bcd3586e0bd17ab633662850238c9f" class="toggle">
+<label for="section-70bcd3586e0bd17ab633662850238c9f" class="flex justify-between">
+<a role="button" class="">3D content essentials</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/entity-positioning/" class="">Set entity positions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/shape-components/" class="">Shape components</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/materials/" class="">Materials via code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/sounds/" class="">Sounds</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/3d-model-animations/" class="">Handle animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/special-types/" class="">Special types</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-entities/" class="">Move entities</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/text/" class="">Text shapes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-1794a8ff3dcff28148759d9edbe03975" class="toggle">
+<label for="section-1794a8ff3dcff28148759d9edbe03975" class="flex justify-between">
+<a role="button" class="">Debugging</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-preview/" class="">Debug in preview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/debug-in-prod/" class="">Debug in production</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/troubleshooting/" class="">Troubleshooting</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-734c2c5e0f885d60ad25da7416a93698" class="toggle">
+<label for="section-734c2c5e0f885d60ad25da7416a93698" class="flex justify-between">
+<a role="button" class="">Media</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/audio-streaming/" class="">Audio streaming</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/video-playing/" class="">Play videos</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/display-a-certified-nft/" class="">Display an NFT</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-d41c9e9dd257ad935b0ecac1a637344b" class="toggle">
+<label for="section-d41c9e9dd257ad935b0ecac1a637344b" class="flex justify-between">
+<a role="button" class="">Publishing</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing-permissions/" class="">Publishing options</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/publishing/" class="">Publishing a scene</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/deploy-third-party/" class="">Preview in Heroku</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-81e5ae4e449e727ffdfdda3212d2ec63" class="toggle">
+<label for="section-81e5ae4e449e727ffdfdda3212d2ec63" class="flex justify-between">
+<a role="button" class="">Decentraland projects</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-metadata/" class="">Scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-files/" class="">Files in a scene</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b65cbb78800cb595cbabf490d7aae0da" class="toggle">
+<label for="section-b65cbb78800cb595cbabf490d7aae0da" class="flex justify-between">
+<a role="button" class="">Interactivity</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/click-events/" class="">Button events</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/move-player/" class="">Move a player</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/avatar-modifiers/" class="">Modifier areas</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/trigger-emotes/" class="">Trigger emotes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/user-data/" class="">Player data</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/external-links/" class="">Outbound links</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/raycasting/" class="">Raycasting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/event-listeners/" class="">Event listeners</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/onscreen-ui/" class="">2D UI</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="toggle">
+<label for="section-b2ab1e1b77b780d74d0da9e7ac193da8" class="flex justify-between">
+<a role="button" class="">Networking</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/network-connections/" class="">Network connections</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/remote-scene-considerations/" class="">About multiplayer scenes</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-53f68a24178a8634051243575ac00389" class="toggle">
+<label for="section-53f68a24178a8634051243575ac00389" class="flex justify-between">
+<a role="button" class="">Blockchain</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene-blockchain-operations/" class="">Scene blockchain operations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/second-layer/" class="">Second layer blockchain</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-a80cdadec202411af177a687b9de8c81" class="toggle">
+<label for="section-a80cdadec202411af177a687b9de8c81" class="flex justify-between">
+<a role="button" class="">Libraries</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/scene/libraries/manage-dependencies/" class="">Manage dependencies</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/development-guide/utils/" class="">Utils library</a>
+</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" id="section-0126a50da098471b50d6d433c560540a" class="toggle">
+<label for="section-0126a50da098471b50d6d433c560540a" class="flex justify-between">
+<a role="button" class="">Release notes</a>
+</label>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/releases/releases/" class="">Release notes</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>3D Modeling and Animations</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/3d-models/" class="">3D Model Essentials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/meshes/" class="">Meshes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/materials/" class="">Materials</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/textures/" class="">Textures</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/colliders/" class="">Colliders</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/animations/" class="">Animations</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/3d-modeling/create-a-rig/" class="">Create a Rig</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Worlds</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/about/" class="">Worlds Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/worlds/cast/" class="">Decentraland Cast</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Builder</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-faq/" class="">Builder FAQ</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/builder-101/" class="">Builder 101</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/export/" class="">Export as code</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/import-items/" class="">Import custom items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/manage-scenes/" class="">Manage Builder scenes</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/smart-items/" class="">Smart items</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/builder/nfts/" class="">NFTs</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Quests</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/overview/" class="">Quests Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/define/" class="">Defining a Quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/rewards/" class="">Quest Rewards</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/sdk-client/" class="">Quests SDK Library</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/quest-ui/" class="">Quest HUD - SDK UI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/cli/" class="">Quests CLI</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/walkthrough/" class="">Create your first quest</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/quests/manager/" class="">Quests Manager</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Rewards</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/overview/" class="">Rewards Overview</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/getting-started/" class="">Rewards - Getting Starting</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/users/" class="">Rewards Users and Roles</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/tx/" class="">Rewards Transactions</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/api/" class="">Rewards API</a>
+</li>
+<li>
+<a href="https://docs.decentraland.org/creator/rewards/integrations/" class="">Rewards API Integrations</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Places</span>
+<ul>
+<li>
+<a href="https://docs.decentraland.org/creator/places/faq/" class="">Places FAQ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://studios.decentraland.org/" class="external-link " target="_blank" rel="noopener">Metaverse Studios<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.311 0H11.6822C11.8577 0 12 0.142299 12 0.317821V3.68889C12 3.86441 11.8577 4.00671 11.6822 4.00671H10.8346C10.6591 4.00671 10.5168 3.86441 10.5168 3.68889V2.53189L6.16285 6.88583C6.10327 6.94545 6.02242 6.97893 5.93813 6.97893C5.8538 6.97893 5.77299 6.94545 5.71337 6.88583L5.11408 6.28651C4.98996 6.16234 4.98996 5.96114 5.11408 5.83702L9.46805 1.48317H8.311C8.13548 1.48317 7.99318 1.34087 7.99318 1.16534V0.317821C7.99318 0.142299 8.13548 0 8.311 0ZM9.95046 5.96288H10.798C10.9735 5.96288 11.1158 6.10518 11.1158 6.28074V10.1449C11.1158 11.1678 10.2835 12 9.26057 12H1.85503C0.832189 12 0 11.1678 0 10.1449V2.73941C0 1.71645 0.832147 0.884179 1.85503 0.884179H5.91703C6.09255 0.884179 6.23485 1.02648 6.23485 1.202V2.04952C6.23485 2.22505 6.09255 2.36734 5.91703 2.36734H1.85503C1.64997 2.36734 1.48318 2.53426 1.48318 2.73941V10.1448C1.48318 10.3499 1.64997 10.5168 1.85503 10.5168H9.26062C9.46572 10.5168 9.63264 10.3499 9.63264 10.1448V6.2807C9.63264 6.10518 9.77494 5.96288 9.95046 5.96288Z" fill="#0d0d17"></path>
+</svg>
+</a>
+<ul>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class="book-page">
+<header class="book-header">
+<div class="flex align-center justify-between">
+<label for="menu-control">
+<img src="./Linked wearables _ Decentraland Documentation_files/menu.svg" class="book-icon" alt="Menu">
+</label>
+<strong>Linked wearables</strong>
+<label for="toc-control">
+</label>
+</div>
+</header>
+<article class="markdown">
+<h1>Linked wearables</h1><h3 id="table-of-contents">
+Table of Contents
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#table-of-contents">#</a>
+</h3>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#introduction">
+Introduction
+</a>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#about">
+About
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#what-are-linked-wearables">
+What are Linked Wearables?
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#costs">
+Costs
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#getting-started---dao-proposal">
+Getting started - DAO Proposal
+</a></li>
+</ul>
+</li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#linked-wearables">
+<strong>Linked Wearables</strong>
+</a>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-a-linked-wearable-collection">
+<strong>Creating a Linked Wearable Collection</strong>
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-one-by-one">
+<strong>Creating Linked Wearables One By One</strong>
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-in-bulk">
+<strong>Creating Linked Wearables In Bulk</strong>
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#seeing-the-wearables-in-world">
+Seeing the wearables in world
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-the-collection-name">
+Editing the collection name
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-the-collection-id-or-urn">
+Editing the collection ID or URN
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#deleting-the-collection">
+Deleting the collection
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-a-single-wearable">
+Editing a single wearable
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-a-wearables-id-or-urn">
+Editing a wearable’s ID or URN
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-wearables-in-bulk">
+Editing wearables in bulk
+</a></li>
+</ul>
+</li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#submitting-your-linked-wearables">
+Submitting your Linked Wearables
+</a>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#publishing-wearables">
+Publishing wearables
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#curation">
+Curation
+</a>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#handcrafted-wearables">
+Handcrafted wearables
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#programmatic-collections">
+Programmatic collections
+</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#building-the-api">
+Building the API
+</a>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#endpoint-get-registryregistry-idaddressaddressassets">
+Endpoint <code>@GET /registry/:registry-id/address/:address/assets</code>
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#endpoint-get-registryregistry-idaddressaddressassetsid">
+Endpoint <code>@GET /registry/:registry-id/address/:address/assets/:id</code>
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#endpoint-post-registryregistry-idownership">
+Endpoint <code>@POST /registry/:registry-id/ownership</code>
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#important-notice-and-considerations">
+Important notice and considerations
+</a></li>
+</ul>
+</li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#closing-up">
+Closing up
+</a>
+<ul>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#summary">
+Summary
+</a></li>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#additional-comments">
+Additional comments
+</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="introduction">
+Introduction
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#introduction">#</a>
+</h1>
+<h2 id="about">
+About
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#about">#</a>
+</h2>
+<p>In accordance with the <a href="https://governance.decentraland.org/proposal/?id=14e76cc0-2bc7-11ec-ac84-77607720a240" target="_blank">
+initial DAO proposal for Linked Wearables
+</a> (previously called: Third Party Wearables) and the last approved <a href="https://governance.decentraland.org/proposal/?id=f69c4d40-aaaf-11ec-87a7-6d2a41508231" target="_blank">
+Draft Proposal with final definitions
+</a>, this document will serve as documentation to cover all the relevant details around the Linked Wearables feature.</p>
+<p>This document is mostly oriented for representatives of Third Parties that want to give their communities the ability to wear their NFTs as wearables when strolling through Decentraland.</p>
+<h2 id="what-are-linked-wearables">
+What are Linked Wearables?
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#what-are-linked-wearables">#</a>
+</h2>
+<p>Linked Wearables are 3D representations of NFTs that originate from outside Decentraland that can be used as wearables in-world, can be equipped on the avatar, and are found in the backpack.</p>
+<p>Linked Wearables are not <a href="https://docs.decentraland.org/creator/wearables/wearables-overview/">
+regular wearables
+</a>. They look the same, but carry a completely different meaning.</p>
+<p>Linked Wearables do not exist inside traditional wearable collections, have no rarity, and can not be sold in <a href="https://market.decentraland.org/browse?assetType=item&amp;section=wearables" target="_blank">
+primary
+</a> or <a href="https://market.decentraland.org/browse?assetType=nft&amp;section=wearables&amp;vendor=decentraland&amp;page=1&amp;sortBy=recently_listed&amp;onlyOnSale=true&amp;viewAsGuest=false&amp;onlySmart=false" target="_blank">
+secondary
+</a> markets. They are only <strong>in-world representations mapped to external NFTs by a Third Party.</strong></p>
+<blockquote>
+<p>Imagine that you have an NFT project called ‘Cryptojackets’ where every NFT is a different kind of 2D jacket and you want your users to have a 3D representation of their jacket in their Decentraland backpack. Linked Wearables will allow you to submit 3D representations of your NFTs inside Decentraland. There is no need to mint a new token, and your current NFT project will have a new out-of-the-box feature to offer!</p>
+</blockquote>
+<h2 id="costs">
+Costs
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#costs">#</a>
+</h2>
+<p>It’s free! Yes. Converting your NFTs in to Linked Wearables is free for all Third Parties that were approved by the DAO (4M VP).</p>
+<p>Even though there is a storage cost to upload the 3D representations of your Linked Wearables and a cost for the Curation of your 3D models, the DAO will cover these fees in order to encourage new communities to bring their NFTs to Decentraland!</p>
+<h2 id="getting-started---dao-proposal">
+Getting started - DAO Proposal
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#getting-started---dao-proposal">#</a>
+</h2>
+<p>The <strong>first step</strong> to registering your NFTs as Linked Wearables is to be admitted by the DAO as an enabled <em>Third Party</em> <em>(the original creator of the external NFT)</em> by submitting a proposal using the template in the new category <a href="https://governance.decentraland.org/submit/linked-wearables/" target="_blank">
+Linked Wearables Registry
+</a>.</p>
+<p>Third Parties will need to share details about their project, collection, and define the managers that will later upload the 3D models of their NFTs in the <a href="https://builder.decentraland.org/" target="_blank">
+Builder
+</a>.</p>
+<p>The passage threshold to become approved is 4 million Voting Power and the Voting Period is 1 week. Resubmission is allowed.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/linkedw-proposal.png" alt=""></p>
+<p>After the DAO has approved the proposal, a group of Third Party managers will be assigned to operate with all of the Linked Wearables features.</p>
+<h1 id="linked-wearables">
+<strong>Linked Wearables</strong>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#linked-wearables">#</a>
+</h1>
+<p>Linked Wearables are regular wearables mapped to external NFTs. The 3D model version of your NFTs that will be used as in-world wearables will have to be compliant with the same
+<a href="https://docs.decentraland.org/creator/wearables/creating-wearables/">
+guidelines
+</a> as regular wearables.</p>
+<p>To create a Linked Wearable, you will need to:</p>
+<ol>
+<li>Create a Linked Wearable Collection</li>
+<li>Upload you Wearables either in bulk or individually</li>
+</ol>
+<p>We’ll be seeing how to work with Linked Wearables in the sections down below.</p>
+<h2 id="creating-a-linked-wearable-collection">
+<strong>Creating a Linked Wearable Collection</strong>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-a-linked-wearable-collection">#</a>
+</h2>
+<p>Creating a Linked Wearable collection is the first step into creating our Linked Wearables.</p>
+<p>Linked wearables are grouped in collections that can be created, edited and deleted by Third Party Managers. Each collection can contain an arbitrary number of Linked Wearables.</p>
+<p>To create a new Linked Wearable follow these steps:</p>
+<ol>
+<li>
+<p>Create a new Linked Wearables Collection.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/linkedw-collection.png" alt=""></p>
+</li>
+<li>
+<p>Choose a name for the collection and an ID.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/linkedw-name-collection.png" alt=""></p>
+</li>
+</ol>
+<p>We strongly recommend that you choose a name that is unique and descriptive for the collection and as the ID or URN of the collection, <strong>the address of the NFT contract that will be mapped to the Linked Wearables</strong>.
+Using the NFT address as the ID of your collection will prove to be helpful when creating the API.</p>
+<h2 id="creating-linked-wearables-one-by-one">
+<strong>Creating Linked Wearables One By One</strong>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-one-by-one">#</a>
+</h2>
+<p>It’s possible to, as it already happens with standard wearables, upload your wearables’ 3D models one by one.</p>
+<p>To do so, follow these steps:</p>
+<ol>
+<li>
+<p>Click on the <em>New items</em> button.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/new-items-collection.png" alt=""></p>
+</li>
+<li>
+<p>Select the <em>Singe items</em> option.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-items-upload.png" alt=""></p>
+</li>
+<li>
+<p>Follow the steps to upload and configure your wearable as it is described in the <a href="https://docs.decentraland.org/creator/wearables/creating-wearables/">
+creating wearables guidelines
+</a></p>
+</li>
+</ol>
+<h2 id="creating-linked-wearables-in-bulk">
+<strong>Creating Linked Wearables In Bulk</strong>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-in-bulk">#</a>
+</h2>
+<p>As Linked Wearable collections can contain a big number of items, it is possible to upload the 3D models and the information of the wearables in bulk.</p>
+<p>The process of uploading wearables in bulk involves uploading a ZIP file for each wearable containing the following:</p>
+<ul>
+<li>The <strong>required</strong> 3D model files of the wearable (GLB, GLTFs, texture files, etc).</li>
+<li>A <strong>required</strong> <code>wearable.json</code> file containing the information of the wearable.</li>
+<li>An <strong>optional</strong> <code>thumbnail.png</code> file containing the thumbnail of the wearable that will be seen in the Builder and the world. If it is not provided, one will be generated using the 3D model.</li>
+</ul>
+<p>The 3D models and the optional <code>thumbnail.png</code> follow the <a href="https://docs.decentraland.org/creator/wearables/creating-wearables/">
+creating wearables guidelines
+</a> on how to create a custom thumbnail.</p>
+<p>The <code>wearable.json</code> accompanying the content of the wearables has the following format (typed as Typescript would):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">WearableConfiguration</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** The URN of the wearable */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">id?</span>: <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Name of the wearable */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span>: <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Description of the wearable */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">description?</span>: <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Wearables to replace when equipping the wearable */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">replaces</span>: <span class="kt">WearableCategory</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Wearables to hide when equipping the wearable */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hides</span>: <span class="kt">WearableCategory</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Tags to identify the wearable */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tags</span>: <span class="kt">string</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Representations of the wearable */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">representations</span>: <span class="kt">WearableRepresentation</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Category of the wearable */</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">category</span>: <span class="kt">WearableCategory</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">WearableRepresentation</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Body shape of the representation */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">bodyShapes</span>: <span class="kt">BodyShape</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** File path to the main file of the representation (GLB, GLTF, etc) */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mainFile</span>: <span class="kt">string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** A list of the file paths of the files that belong to the representation */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">contents</span>: <span class="kt">string</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Wearables to hide when equipping this representation */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">overrideHides</span>: <span class="kt">WearableCategory</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/** Wearables to replace when equipping this representation */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">overrideReplaces</span>: <span class="kt">WearableCategory</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">WearableCategory</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">EYEBROWS</span> <span class="o">=</span> <span class="s1">'eyebrows'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">EYES</span> <span class="o">=</span> <span class="s1">'eyes'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">FACIAL_HAIR</span> <span class="o">=</span> <span class="s1">'facial_hair'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">HAIR</span> <span class="o">=</span> <span class="s1">'hair'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">HEAD</span> <span class="o">=</span> <span class="s1">'head'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">BODY_SHAPE</span> <span class="o">=</span> <span class="s1">'body_shape'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MOUTH</span> <span class="o">=</span> <span class="s1">'mouth'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">UPPER_BODY</span> <span class="o">=</span> <span class="s1">'upper_body'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">LOWER_BODY</span> <span class="o">=</span> <span class="s1">'lower_body'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">FEET</span> <span class="o">=</span> <span class="s1">'feet'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">EARRING</span> <span class="o">=</span> <span class="s1">'earring'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">EYEWEAR</span> <span class="o">=</span> <span class="s1">'eyewear'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">HAT</span> <span class="o">=</span> <span class="s1">'hat'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">HELMET</span> <span class="o">=</span> <span class="s1">'helmet'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MASK</span> <span class="o">=</span> <span class="s1">'mask'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">TIARA</span> <span class="o">=</span> <span class="s1">'tiara'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">TOP_HEAD</span> <span class="o">=</span> <span class="s1">'top_head'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">SKIN</span> <span class="o">=</span> <span class="s1">'skin'</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">WearableBodyShape</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">MALE</span> <span class="o">=</span> <span class="s1">'urn:decentraland:off-chain:base-avatars:BaseMale'</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">FEMALE</span> <span class="o">=</span> <span class="s1">'urn:decentraland:off-chain:base-avatars:BaseFemale'</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Some things to consider about the <code>wearable.json</code> file:</p>
+<ul>
+<li>All the information about the wearable categories and which to choose can be found in the <a href="https://docs.decentraland.org/creator/wearables/creating-wearables/">
+creating wearables guidelines
+</a>.</li>
+<li>The <code>id</code> field is optional and can be used to:
+<ul>
+<li>Create a wearable with an specific ID.</li>
+<li>Update a wearable in Bulk (which will be seen in the <a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-wearables-in-bulk">
+Editing wearables in bulk
+</a></li>
+</ul>
+</li>
+<li>The <code>id</code> field must contain the whole ID of the wearable, that is, the third party record id, the collection id and the item id <code>urn:decentraland:matic:collections-thirdparty:third-party-id:collection-id:item-id</code>. We recommend the id to be formed as <code>urn:decentraland:matic:collections-thirdparty:third-party-id:contract-address:token-id</code>, that is, if our wearable will be mapped to the token <code>1</code> in the NFT contract <code>0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d</code>, taking that into consideration, the URN for
+the example would be <code>urn:decentraland:matic:collections-thirdparty:third-party-id:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d:1</code>.</li>
+<li>The representations array will contain the information about how each body shape will look like. Each wearable MUST contain at least one representation (it can have one or the two of them), that is, taking
+into consideration the body shapes that we currently have, either <code>urn:decentraland:off-chain:base-avatars:BaseMale</code> or <code>urn:decentraland:off-chain:base-avatars:BaseFemale</code>. Each representation will describe which models will be used for each body shape.</li>
+</ul>
+<p>The following is an example of a <code>wearable.json</code> file that contains a model for each body shape:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:third-party-id:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d:1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Special hat"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"description"</span><span class="p">:</span> <span class="s2">"A description of the wearable"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"data"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"replaces"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"hides"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"hair"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"special"</span><span class="p">,</span> <span class="s2">"new"</span><span class="p">,</span> <span class="s2">"hat"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"representations"</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"bodyShapes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"urn:decentraland:off-chain:base-avatars:BaseMale"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"mainFile"</span><span class="p">:</span> <span class="s2">"aMaleModelFile.glb"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"contents"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"aMaleModelFile.glb"</span><span class="p">,</span> <span class="s2">"aTextureFile.png"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideHides"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideReplaces"</span><span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"bodyShapes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"urn:decentraland:off-chain:base-avatars:BaseFemale"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"mainFile"</span><span class="p">:</span> <span class="s2">"aFemaleModelFile.glb"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"contents"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"aFemaleModelFile.glb"</span><span class="p">,</span> <span class="s2">"anotherTextureFile.png"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideHides"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideReplaces"</span><span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"category"</span><span class="p">:</span> <span class="s2">"hat"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This file will be zipped alongside the <code>aMaleModelFile.glb</code>, <code>aTextureFile.png</code>, <code>aFemaleModelFile.glb</code> and <code>anotherTextureFile.png</code>.</p>
+<p>To add a custom thumbnail to the wearable, you can add a <code>thumbnail.png</code> file.</p>
+<p>Once all the files are ready, to upload the wearables in bulk, follow these steps:</p>
+<ol>
+<li>
+<p>Click on the <em>New items</em> button.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/new-items-collection.png" alt=""></p>
+</li>
+<li>
+<p>Select the <em>Multiple items</em> option.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-items-upload.png" alt=""></p>
+</li>
+<li>
+<p>Click on the <em>Browse yor computer</em> link to open your file manager and elect all the zips containing your wearables.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-select-in-bulk.png" alt=""></p>
+</li>
+<li>
+<p>Review if all the files are correct or if they need to be fixed. In this case, the model of the wearable isn’t set or the <code>wearable.json</code> file has an incorrectly set representation.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-with-errors.png" alt=""></p>
+</li>
+<li>
+<p>Fix any errors by clicking the <em>Add more</em> button and re-uploading the failed files with the same name or by dismissing the errors using the trash icon on the top right section of the modal.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-upload-correct-file.png" alt=""></p>
+</li>
+<li>
+<p>Upload all wearables by clicking <em>Upload items</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-without-errors.png" alt=""></p>
+</li>
+<li>
+<p>Be patient, this might take a while!</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-uploading.png" alt=""></p>
+</li>
+<li>
+<p>Success! Your items are now available in your collection.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-upload-success.png" alt=""></p>
+</li>
+</ol>
+<p>Common errors that must be avoided when uploading batched items:</p>
+<ul>
+<li>The <code>id</code> field is set to a value that is already being used by another wearable.</li>
+<li>The <code>id</code> field is set to a value that is not a valid ID. For example, the third party id or collection id belong to another third party or collection.</li>
+<li>There’s no <code>wearable.json</code> file in the zip.</li>
+<li>The ZIP file doesn’t have in its root directory the <code>wearable.json</code> file.</li>
+<li>The <code>wearable.json</code> has an incorrect format or values.</li>
+<li>The file is bigger than 3MBs. Linked Wearables have the same limitation as regular wearables in terms of size as the standard ones.</li>
+<li>The custom optional thumbnail image is not a png file.</li>
+</ul>
+<h2 id="seeing-the-wearables-in-world">
+Seeing the wearables in world
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#seeing-the-wearables-in-world">#</a>
+</h2>
+<p>Linked Wearables can be seen in world to review how the model will work once published and approved.</p>
+<p>To be able to see a wearable in world, follow these steps:</p>
+<ol>
+<li>
+<p>Click on the meatballs menu (three horizontal dots) on the right of the item that you want to see in world. A dropdown will appear. Select <em>See in world</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/see-in-world-button.png" alt=""></p>
+</li>
+<li>
+<p>The Decentraland World will open. Navigate to your backpack to see the wearable.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/see-in-world-item.png" alt=""></p>
+</li>
+</ol>
+<h2 id="editing-the-collection-name">
+Editing the collection name
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-the-collection-name">#</a>
+</h2>
+<p>A collection can be renamed at any time by a Third Party manager.</p>
+<p>To edit the name of a Linked Wearable Collection follow these steps:</p>
+<ol>
+<li>
+<p>Move the mouse over the collection name and click on the red pencil icon that appears on hover.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-collection-name.png" alt=""></p>
+</li>
+<li>
+<p>Choose a new name for the collection and click on the save button.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-collection-name-modal.png" alt=""></p>
+</li>
+</ol>
+<h2 id="editing-the-collection-id-or-urn">
+Editing the collection ID or URN
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-the-collection-id-or-urn">#</a>
+</h2>
+<p>The collection’s ID or URN can be changed by a Third Party manager <strong>only if the collection has no published wearables</strong>.</p>
+<p>To edit the ID or URN of a Linked Wearable Collection follow these steps:</p>
+<ol>
+<li>
+<p>Click on the meatballs menu (three horizontal dots) on the far right of the set of buttons. A dropdown will appear. Select <em>Edit URN</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-collection-urn.png" alt=""></p>
+</li>
+<li>
+<p>Write the new ID or URN for the collection and click <em>Save</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-collection-urn-modal.png" alt=""></p>
+</li>
+</ol>
+<p>The ID or URN of the collection <strong>MUST be unique</strong>, changing it to an existent one will fail.</p>
+<h2 id="deleting-the-collection">
+Deleting the collection
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#deleting-the-collection">#</a>
+</h2>
+<p>A collection can be delete by a Third Party manager <strong>only if the collection has no published wearables</strong>.</p>
+<p>To delete Linked Wearable Collection follow these steps:</p>
+<ol>
+<li>
+<p>Click on the meatballs menu (three horizontal dots) on the far right of the set of buttons. A dropdown will appear. Select <em>Delete</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/delete-collection.png" alt=""></p>
+</li>
+<li>
+<p>A Confirmation modal will appear, if you wish to proceed, click <em>Ok</em>, otherwise click on <em>Cancel</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/delete-collection-confirmation-modal.png" alt=""></p>
+</li>
+</ol>
+<h2 id="editing-a-single-wearable">
+Editing a single wearable
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-a-single-wearable">#</a>
+</h2>
+<p>To edit a single wearable, follow these steps:</p>
+<ol>
+<li>
+<p>Click on the meatballs menu (three horizontal dots) on the right of the item that you want to see in world. A dropdown will appear. Select <em>Open in editor</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-single-wearable.png" alt=""></p>
+</li>
+<li>
+<p>Edit the wearable as standard wearables are edited. Follow the <em>Editing items</em> section in <a href="https://docs.decentraland.org/creator/wearables/creating-wearables/">
+creating wearables guidelines
+</a> on how to create a custom thumbnail.</p>
+</li>
+</ol>
+<h2 id="editing-a-wearables-id-or-urn">
+Editing a wearable’s ID or URN
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-a-wearables-id-or-urn">#</a>
+</h2>
+<p>Wearables can have their ID or URN changed manually by following the steps below:</p>
+<ol>
+<li>
+<p>Click on the meatballs menu (three horizontal dots) on the right of the item that you want to see in world. A dropdown will appear. Select <em>Edit URN</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-urn-wearable.png" alt=""></p>
+</li>
+<li>
+<p>Use the <em>Edit URN</em> modal to write the new URN.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-urn-wearable-modal.png" alt=""></p>
+</li>
+</ol>
+<p>To consider when updating the ID or URN of a wearable:</p>
+<ul>
+<li>The input will receive only the ID for the wearable.</li>
+<li>The ID can’t be repeated in the same collection.</li>
+<li>We recommend the ID of the wearable to be the same as the token ID of the NFT it will be mapped to.</li>
+</ul>
+<h2 id="editing-wearables-in-bulk">
+Editing wearables in bulk
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#editing-wearables-in-bulk">#</a>
+</h2>
+<p>Following the same idea previously seen in the <a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-in-bulk">
+Creating wearables in bulk
+</a> section, third party managers can make changes to the wearables in bulk.</p>
+<p>To make changes in bulk to wearables, it is necessary to create a ZIP file for each of the wearables that will be changed.</p>
+<p>These ZIP files must be created following the format described in <a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-in-bulk">
+Creating wearables in bulk
+</a> with one exception, in the <code>wearable.json</code> file, the <code>id</code>
+property <strong>MUST</strong> be set to the <code>id</code> or URN of the wearable that will be changed. This is mandatory as it’s the only way to identify the wearable to be changed.</p>
+<p>Taking into consideration the example in the <a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-in-bulk">
+Creating wearables in bulk
+</a> section, if we would like to change some of the properties of a wearable, for example,
+the name where we forgot to add a number to it, we should include a <code>wearable.json</code> file in the zip as the next example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:third-party-id:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d:1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"A hat 1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"description"</span><span class="p">:</span> <span class="s2">"A description of the wearable"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"data"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"replaces"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"hides"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"hair"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"special"</span><span class="p">,</span> <span class="s2">"new"</span><span class="p">,</span> <span class="s2">"hat"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"representations"</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"bodyShapes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"urn:decentraland:off-chain:base-avatars:BaseMale"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"mainFile"</span><span class="p">:</span> <span class="s2">"aMaleModelFile.glb"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"contents"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"aMaleModelFile.glb"</span><span class="p">,</span> <span class="s2">"aTextureFile.png"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideHides"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideReplaces"</span><span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"bodyShapes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"urn:decentraland:off-chain:base-avatars:BaseFemale"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"mainFile"</span><span class="p">:</span> <span class="s2">"aFemaleModelFile.glb"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"contents"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"aFemaleModelFile.glb"</span><span class="p">,</span> <span class="s2">"anotherTextureFile.png"</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideHides"</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"overrideReplaces"</span><span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"category"</span><span class="p">:</span> <span class="s2">"hat"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Where the <code>id</code> field is set to the <code>id</code> or URN of the wearable that will be changed and the <code>name</code> field is set to the new name of the wearable.</p>
+<p>Once the ZIP files are ready, follow these steps to edit the items in bulk:</p>
+<ol>
+<li>
+<p>Click on the meatballs menu (three horizontal dots) on the far right of the set of buttons. A dropdown will appear. Select <em>Edit in bulk</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-multiple-files-bulk-button.png" alt=""></p>
+</li>
+<li>
+<p>A modal similar to de one in the <em>Uploading models in bulk</em> will appear. Click on the <em>Browse your computer</em> link to open your file manager.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-multiple-files-modal.png" alt=""></p>
+</li>
+<li>
+<p>Select all the ZIP files of the items that will be edited.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-select-in-bulk.png" alt=""></p>
+</li>
+<li>
+<p>Review if all the files are correct or if they need to be fixed. In this case, the model of the wearable isn’t set or the <code>wearable.json</code> file has an incorrectly set representation.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-multiple-files-with-errors.png" alt=""></p>
+</li>
+<li>
+<p>Fix any errors by clicking the <em>Add more</em> button and re-uploading the failed files with the same name or by dismissing the errors using the trash icon on the top right section of the modal.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/multiple-files-upload-correct-file.png" alt=""></p>
+</li>
+<li>
+<p>Upload all wearables by clicking <em>Upload items</em>.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-multiple-files-without-errors.png" alt=""></p>
+</li>
+<li>
+<p>Be patient, this might take a while!</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-multiple-files-uploading.png" alt=""></p>
+</li>
+<li>
+<p>Success! Your items are now available in your collection.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/edit-multiple-files-success.png" alt=""></p>
+</li>
+</ol>
+<h1 id="submitting-your-linked-wearables">
+Submitting your Linked Wearables
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#submitting-your-linked-wearables">#</a>
+</h1>
+<p>Your Linked Wearables need to go through a publishing and curation process as the regular wearables do. Although the publication and curation process is not the same
+as the one for the regular wearables, it keeps the same steps, all items must be first be published to later be curated by an assigned curator.</p>
+<p>The following sections will show you how to publish your Linked Wearables to be curated.</p>
+<h2 id="publishing-wearables">
+Publishing wearables
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#publishing-wearables">#</a>
+</h2>
+<p>Once your wearables are ready, they must be published for curation. Your wearables are published in groups of items, you can choose which items are ready to be curated
+by selecting them and clicking the <code>Publish</code> button. A slot per wearables will be consumed upon publishing and the third party managers won’t be able to publish any
+more wearables until the ones that are already published are curated.</p>
+<p>To publish your wearables, you need to:</p>
+<ol>
+<li>
+<p>Select the items to be published and wait for the Curators Committee to approve them</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/linkedw-publish.png" alt=""></p>
+</li>
+</ol>
+<h2 id="curation">
+Curation
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#curation">#</a>
+</h2>
+<p>As with regular wearables, your 3D models will need to get the Curators Committee’s approval. You are not excluded from this rule as Decentraland’s aesthetic and gameplay still needs to be safe guarded.</p>
+<p>The curation process will differ according to the process used to generate the wearables. Linked Wearables collections admit handcrafted and programmatically generated wearables.</p>
+<h3 id="handcrafted-wearables">
+Handcrafted wearables
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#handcrafted-wearables">#</a>
+</h3>
+<p>For 3D models that were made individually without any automated process (the usual method for most regular wearables) the Curator will need to go through all items in the collection individually to make sure they are all compliant with the <a href="https://docs.decentraland.org/creator/wearables/creating-wearables/">
+Wearable Guidelines
+</a>.</p>
+<h3 id="programmatic-collections">
+Programmatic collections
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#programmatic-collections">#</a>
+</h3>
+<p>Your collection is a Programmatic Collection if each 3D model was not crafted individually by hand, but automatically generated with code, many times from traits that were previously designed and modeled. For example: <a href="https://opensea.io/collection/cryptopunks" target="_blank">
+CryptoPunks
+</a> and <a href="https://opensea.io/collection/boredapeyachtclub" target="_blank">
+BAYC
+</a> are examples of 2D pfp NFT Collections that were created programmatically.</p>
+<p>Third Parties that make a <strong>collection for Linked Wearables</strong> programmatically (3D models to upload), will need to include this information in their Linked Wearables Registry proposal.</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/linkedw-programatic.png" alt=""></p>
+<p>For programmatic collections, not all items have to be curated individually. The number of items to be curated in each collection depends on the collection’s size, this was defined by the DAO in <a href="https://governance.decentraland.org/proposal/?id=f69c4d40-aaaf-11ec-87a7-6d2a41508231" target="_blank">
+this proposal
+</a>.</p>
+<h1 id="building-the-api">
+Building the API
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#building-the-api">#</a>
+</h1>
+<p>In order for Linked Wearables to work, the third parties need to provide an API that will be queried by the Decentraland services (Catalyst) with 3 endpoints:</p>
+<ol>
+<li><code>@GET /registry/:registry-id/address/:address/assets</code> - Retrieves a list of assets associated with a given address</li>
+<li><code>@GET /registry/:registry-id/address/:address/assets/:id</code> - Validates if a DCL asset is owned by a user.</li>
+<li><code>@POST /registry/:registry-id/ownership</code>that receives an array of data and performs validations in batch.</li>
+</ol>
+<p>It’s important to note that these endpoints are used to validate a user profile and what they are wearing, therefore there are performance SLA requirements to avoid harming the platform experience.</p>
+<p>Considering that the client validates user profiles in batches so any delay in processing a single profile with LinkedWearables will impact the entire batch of users. This means that if the API performs slowly, it will negatively affect the overall performance of all users within that batch.</p>
+<p>To avoid damaging the platform performance all these endpoints <strong>must have an average response below the 500ms</strong>. This benchmark is crucial to prevent any degradation in the platform’s overall performance.</p>
+<p><strong>Technical details and examples <a href="https://adr.decentraland.org/adr/ADR-42" target="_blank">
+here
+</a>.</strong></p>
+<p>In the next sub-sections we’ll provide an explanation on how to build the mentioned API by using an implementation example of the many possible ones.</p>
+<h2 id="endpoint-get-registryregistry-idaddressaddressassets">
+Endpoint <code>@GET /registry/:registry-id/address/:address/assets</code>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#endpoint-get-registryregistry-idaddressaddressassets">#</a>
+</h2>
+<p>If you’ve followed the steps to create a new collection and the steps to either edit the item’s id or URN or to create items in bulk, you already have:</p>
+<ul>
+<li>Created a collection which its ID or URN is the contract address of the NFTs that will represent or map to the Linked Wearables.</li>
+<li>Created wearables which IDs or URNs are the token ids of the NFTs that will represent or map to the Linked Wearables.</li>
+</ul>
+<p>By doing this, you can query your NFT contract or indexer to build the information required to respond to the API as it contains the information about who owns which wearable:</p>
+<p>Let’s say your contract implements the <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">
+ERC721 standard
+</a> with the enumeration extension. If we would like to get the tokens owned by the
+address <code>0x0f5d2fb29fb7d3cfee444a200298f468908cc942</code>, your API can query (as one of the sources) the contract using the <code>balanceOf</code> to get the amount of tokens owned by the address and later loop the
+tokens with the <code>tokenOfOwnerByIndex</code> to get the information about the tokens the address has.</p>
+<p>Having all the tokens that an address owns, the API can easily build the response by mapping each of the assets:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:0"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"amount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"urn"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"decentraland"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:cryptohats:0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:0"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The <code>id</code> property will be set to the <code>contract_address:token_id</code> of each of the retrieved tokens, the <code>amount</code> to 1 and the <code>urn</code> property will be set to have the
+decentraland property with the value <code>urn:decentraland:matic:collections-thirdparty:registry_id:contract_address:token_id</code>, where the <code>registry_id</code> and <code>contract_address</code> can be retrieved
+from the query itself (<code>contract_address</code> must be previously set in the code) and the other values from the contract.</p>
+<p>As an example, by querying the API to get the assets owned by <code>0x0f5d2fb29fb7d3cfee444a200298f468908cc942</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://api.cryptohats.io/registry/cryptohats/address/0x0f5d2fb29fb7d3cfee444a200298f468908cc942/assets
+</span></span></code></pre></div><p>The API can do the following:</p>
+<ol>
+<li>Query the contract <code>0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd</code> with the user’s address by using <code>balanceOf(0x0f5d2fb29fb7d3cfee444a200298f468908cc942)</code>, retrieving the amount of
+tokens owned by the user, in this case, 2.</li>
+<li>Query the contract <code>0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd</code> two times <code>tokenOfOwnerByIndex(0x0f5d2fb29fb7d3cfee444a200298f468908cc942, 0)</code>, <code>tokenOfOwnerByIndex(0x0f5d2fb29fb7d3cfee444a200298f468908cc942, 1)</code>
+returning the token ids 58 and 59.</li>
+<li>Respond with:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"address"</span><span class="p">:</span> <span class="s2">"0x0f5d2fb29fb7d3cfee444a200298f468908cc942"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"assets"</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:58"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"amount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"urn"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"decentraland"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:cryptohats:0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:58"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:59"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"amount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">"urn"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">"decentraland"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:cryptohats:0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:59"</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"total"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"page"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"next"</span><span class="p">:</span> <span class="s2">"https://....&amp;startAt=1234"</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="endpoint-get-registryregistry-idaddressaddressassetsid">
+Endpoint <code>@GET /registry/:registry-id/address/:address/assets/:id</code>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#endpoint-get-registryregistry-idaddressaddressassetsid">#</a>
+</h2>
+<p>If you’ve followed the steps to create a new collection and the steps to either edit the item’s id or URN or to create items in bulk, you already have:</p>
+<ul>
+<li>Created a collection whose ID or URN is the contract address of the NFTs that will represent or map to the Linked Wearables.</li>
+<li>Created wearables whose IDs or URNs are the token ids of the NFTs that will represent or map to the Linked Wearables.</li>
+</ul>
+<p>By doing this, you can query your NFT contract or indexer to build the information required to respond to the API as it contains the information about who owns which wearable:</p>
+<p>Let’s say your contract implements the <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">
+ERC721 standard
+</a> and you’re asked to retrieve information about an asset with an id if the asset is owned by an address.
+By querying the contract using the <code>ownerOf</code> method, as we can extract the token id from the asset it because of the requirements assumed above (contract_address:token_id), it is possible to get the
+address of the owner of the token and, if it matches, respond with the required information about the asset.</p>
+<p>As an example, by querying the API to get the information about the asset with id <code>0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:1</code> owned by the <code>0x0f5d2fb29fb7d3cfee444a200298f468908cc942</code> address:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://api.cryptohats.io/registry/cryptohats/address/0x0f5d2fb29fb7d3cfee444a200298f468908cc942/assets/0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:1
+</span></span></code></pre></div><p>The API can do the following:</p>
+<ol>
+<li>Query the contract <code>0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd</code> retrieved from the query by splitting the asset id by <code>:</code>, with the user’s address also retrieved from the query, by using
+the method <code>ownerOf(1)</code> that will return the address <code>0x0f5d2fb29fb7d3cfee444a200298f468908cc942</code> if the asset is owned by the user.</li>
+<li>Respond with:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:1"</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"amount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">"urn"</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">"decentraland"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:cryptohats:0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:1"</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="endpoint-post-registryregistry-idownership">
+Endpoint <code>@POST /registry/:registry-id/ownership</code>
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#endpoint-post-registryregistry-idownership">#</a>
+</h2>
+<p>The client performs profile validations in batches, where multiple users’ profiles are validated simultaneously. This endpoint is crucial to optimize performance and minimize the number of requests made to the resolver API. It enables parallel processing by sending a list of users and their corresponding items to be validated together. Its performance needs to be prioritized to prevent delays in rendering avatars within the virtual world.</p>
+<p>Example <strong>body</strong> for the POST would be:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">   <span class="nt">"urn_decentraland"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:cryptohats:0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:1"</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">   <span class="nt">"address"</span><span class="p">:</span> <span class="s2">"0x0f5d2fb29fb7d3cfee444a200298f468908cc942"</span> 
+</span></span><span class="line"><span class="cl"> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">"urn_decentraland"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">   <span class="nt">"address"</span><span class="p">:</span> <span class="s2">"..."</span>
+</span></span><span class="line"><span class="cl"> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"> <span class="err">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><p>and the expected response:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">   <span class="nt">"urn_decentraland"</span><span class="p">:</span> <span class="s2">"urn:decentraland:matic:collections-thirdparty:cryptohats:0xc04528c14c8ffd84c7c1fb6719b4a89853035cdd:1"</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">   <span class="nt">"address"</span><span class="p">:</span> <span class="s2">"0x0f5d2fb29fb7d3cfee444a200298f468908cc942"</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">   <span class="nt">"owned"</span><span class="p">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">"urn_decentraland"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">"address"</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">"owned"</span><span class="p">:</span> <span class="err">&lt;</span><span class="kc">true</span><span class="err">|</span><span class="kc">false</span><span class="err">&gt;</span> 
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><h2 id="important-notice-and-considerations">
+Important notice and considerations
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#important-notice-and-considerations">#</a>
+</h2>
+<p>The examples provided above on how to build the API are just examples, it’s not required to follow them. The implementations of the API can vary completely, for example, the information can be retrieved from different sources (an indexer like <a href="https://thegraph.com/" target="_blank">
+TheGraph
+</a>, a Database previously populated or multiple indexers or contracts) and a NFT can be mapped to multiple decentraland wearables instead of having a 1:1 mapping with the NFTs.</p>
+<p>Note that the URNs in the examples use <code>matic</code> for the protocol. This means that the third party registry smart contract has been deployed in the Matic network <strong>BUT</strong> it is not related to or limiting where your project can be created. Every urn for linked wearables items will use <code>matic</code> as the protocol. Remember that linked wearables work for any NFT project created at any network (Ethereum, Polygon, Binance, etc). So, if your project has been created in Ethereum, the urn of the item will have <code>matic</code> in the protocol and it is ok.</p>
+<p>The purpose of the API is to map an owner of an NFT with a wearable (or multiple wearables) submitted to Decentraland and this mapping is done through the ID or URN of the wearable which can be found on each item detail page:</p>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/item-urn.png" alt=""></p>
+<h1 id="closing-up">
+Closing up
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#closing-up">#</a>
+</h1>
+<h2 id="summary">
+Summary
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#summary">#</a>
+</h2>
+<p>These are the steps that Third Parties need to follow, in summary:</p>
+<ol>
+<li>
+<p><strong><a href="https://governance.decentraland.org/submit/linked-wearables/" target="_blank">
+Create a DAO proposal
+</a></strong> in the category “Linked Wearables Registry”. You’ll need to:</p>
+<ol>
+<li>Request to be added to the Linked Wearables Registry</li>
+<li>Describe your company or community</li>
+<li>Describe your collection and the number of NFTs in it</li>
+<li>Define Managers</li>
+</ol>
+</li>
+<li>
+<p>Wait one week for DAO’s approval. <strong>Ask your community for help!</strong> they can vote for you to be accepted. Remember that MANA, Names, Lands, and/or Estates are needed to vote in the DAO.</p>
+</li>
+<li>
+<p><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#publishing-wearables">
+<strong>Submit your linked wearables</strong>
+</a> in the <a href="https://builder.decentraland.org/" target="_blank">
+Builder
+</a> using your available Slots.</p>
+<ol>
+<li><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-a-linked-wearable-collection">
+Create a linked wearable collection
+</a>. We recommend using as its ID or URN the contract address of the NFTs that will represent or be mapped to the Linked Wearables.</li>
+<li>Create or upload your wearables either by <a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-one-by-one">
+uploading them one by one
+</a> or <a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#creating-linked-wearables-in-bulk">
+in bulk
+</a>.</li>
+<li>Use the <strong>URN</strong> of the wearables in the Builder to build your API. We recommend that your URN or ID to be set as the token id of the NFT that will be represented by the wearable.</li>
+</ol>
+<p><img src="./Linked wearables _ Decentraland Documentation_files/linkedw-submit.png" alt=""></p>
+</li>
+<li>
+<p><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#building-the-api">
+Build the API
+</a>.</p>
+</li>
+<li>
+<p><a href="https://docs.decentraland.org/creator/wearables/linked-wearables/#curation">
+Wait for the Curators Committee to approve the items in your collection
+</a>.</p>
+</li>
+<li>
+<p>Spread the word! Tell your community that they can <strong>enjoy their brand new Linked Wearables in Decentraland!</strong></p>
+</li>
+</ol>
+<h2 id="additional-comments">
+Additional comments
+<a class="anchor" href="https://docs.decentraland.org/creator/wearables/linked-wearables/#additional-comments">#</a>
+</h2>
+<ul>
+<li>The DAO is the authority that will approve the addition of new Third Parties on the Linked Wearables Registry.</li>
+<li>The Curation Committee always has the power to reject specific items or all items within a collection.</li>
+<li>Linked Wearables work with any NFT project running at any blockchain, if the API provided can match the user address with the 3D model to show as Linked Wearable.</li>
+</ul>
+</article>
+<footer class="book-footer">
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href="https://github.com/decentraland/documentation/commit/86dbc267b62c3ff66b32b916ace28b735033bc59" title="Last modified by Gabriel Díaz | April 26, 2024" target="_blank" rel="noopener">
+<img src="./Linked wearables _ Decentraland Documentation_files/calendar.svg" class="book-icon" alt="Calendar">
+<span>April 26, 2024</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href="https://github.com/decentraland/documentation/edit/main/content/creator/wearables-and-emotes/wearables/linked-wearables.md" target="_blank" rel="noopener">
+<img src="./Linked wearables _ Decentraland Documentation_files/edit.svg" class="book-icon" alt="Edit">
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer>
+<label for="menu-control" class="hidden book-menu-overlay"></label>
+</div>
+</main>
+<div class="ui container dcl footer">
+<div class="main-footer">
+<div role="listbox" aria-expanded="false" class="ui upward dropdown dcl language-dropdown" tabindex="0">
+<div aria-atomic="true" aria-live="polite" role="alert" class="divider text">
+<div class="dcl language-icon-wrapper">
+<i class="dcl language-icon en"> </i>
+<div class="language-icon-label">English</div>
+</div>
+</div>
+</div>
+<div class="links">
+<a href="https://decentraland.org/">Home</a>
+<a href="https://decentraland.org/privacy">Privacy Policy</a>
+<a href="https://decentraland.org/terms">Terms of Use</a>
+<a href="https://decentraland.org/content">Content Policy</a>
+<a href="https://decentraland.org/ethics">Code of Ethics</a>
+</div>
+</div>
+<div class="secondary-footer">
+<div class="social-links">
+<a href="https://dcl.gg/discord">
+<i class="social-icon discord"></i>
+</a>
+<a href="https://reddit.com/r/decentraland">
+<i class="social-icon reddit"></i>
+</a>
+<a href="https://github.com/decentraland">
+<i class="social-icon github"></i>
+</a>
+<a href="https://twitter.com/decentraland">
+<i class="social-icon twitter"></i>
+</a>
+</div>
+<div class="copyright">© 2023 Decentraland</div>
+</div>
+</div>
+<script defer="" src="./Linked wearables _ Decentraland Documentation_files/beacon.min.js.download" data-cf-beacon="{&quot;token&quot;: &quot;ef470b4862c74992aaa278b7c4d4c969&quot;}"></script>
+
+</body></html>
