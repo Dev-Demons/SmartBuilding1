@@ -1,0 +1,47 @@
+{
+  "id": "6d694c78-6dd5-4a4d-acee-21dbf67dd464",
+  "name": "SciFi Chest",
+  "tags": ["door"],
+  "category": "structures",
+  "parameters": [
+    {
+      "id": "onClickText",
+      "label": "Hover text",
+      "type": "text",
+      "default": "Open/Close"
+    },
+    {
+      "id": "onClick",
+      "label": "When clicked",
+      "type": "actions",
+      "default": "toggle"
+    },
+    {
+      "id": "onOpen",
+      "label": "When opened",
+      "type": "actions"
+    },
+    {
+      "id": "onClose",
+      "label": "When closed",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "open",
+      "label": "Open",
+      "parameters": []
+    },
+    {
+      "id": "close",
+      "label": "Close",
+      "parameters": []
+    },
+    {
+      "id": "toggle",
+      "label": "Open or Close",
+      "parameters": []
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+.loading {
+  display: none;
+}
+
+.editor {
+  display: flex;
+  height: 100vh;
+  background-color: #222;
+}
+
+.preview {
+  position: relative;
+  width: 40%;
+  height: 100vh;
+}
+
+.preview > div {
+  height: 100%;
+}
+
+.ui-monaco-editor {
+  height: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.editor-wrapper {
+  background-color: #222;
+  width: 60%;
+  height: calc(100vh - 50px);
+}
+
+.editor-buttons {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 18px;
+}
+
+.dcl.header-menu {
+  margin-bottom: unset !important ;
+}
+.header-menu-right > div {
+  margin-left: 16px;
+}
+
+.header-menu-right > div:last-child {
+  margin-right: 14px;
+}
+
+.ui-dropdown {
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 18px;
+  border: 1px solid var(--primary);
+  padding: 7px 20px;
+  margin-left: 16px;
+}
+
+.ui-dropdown.examples .menu {
+  display: none !important;
+}

@@ -1,0 +1,47 @@
+{
+  "id": "dd9fb5a1-7530-4e07-ac3f-3e50572c239f",
+  "name": "Chest",
+  "tags": ["door"],
+  "category": "structures",
+  "parameters": [
+    {
+      "id": "onClickText",
+      "label": "Hover text",
+      "type": "text",
+      "default": "Open/Close"
+    },
+    {
+      "id": "onClick",
+      "label": "When clicked",
+      "type": "actions",
+      "default": "toggle"
+    },
+    {
+      "id": "onOpen",
+      "label": "When opened",
+      "type": "actions"
+    },
+    {
+      "id": "onClose",
+      "label": "When closed",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "open",
+      "label": "Open",
+      "parameters": []
+    },
+    {
+      "id": "close",
+      "label": "Close",
+      "parameters": []
+    },
+    {
+      "id": "toggle",
+      "label": "Open or Close",
+      "parameters": []
+    }
+  ]
+}

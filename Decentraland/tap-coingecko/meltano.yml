@@ -1,0 +1,26 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: "tap-coingecko"
+plugins:
+  extractors:
+    - name: "tap-coingecko"
+      namespace: "tap_coingecko"
+      executable: ./tap-coingecko.sh
+      capabilities:
+        - state
+        - catalog
+        - discover
+      config:
+        start_date: "2023-04-01T00:00:00Z"
+        tokens: "ethereum,dai"
+        api_url: "https://api.coingecko.com/api/v3"
+      settings:
+        - name: start_date
+        - name: tokens
+        - name: api_url
+        - name: wait_time_between_requests
+        - name: token_mapping
+  loaders:
+    - name: target-jsonl
+      variant: andyh1203
+      pip_url: target-jsonl

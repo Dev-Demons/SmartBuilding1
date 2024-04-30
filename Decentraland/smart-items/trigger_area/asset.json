@@ -1,0 +1,36 @@
+{
+  "id": "1ab2733f-1782-4521-9eda-6aa8ad684277",
+  "name": "Trigger Area",
+  "tags": ["area", "trigger"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onEnter",
+      "label": "When Player Enters",
+      "type": "actions"
+    },
+    {
+      "id": "onLeave",
+      "label": "When Player Leaves",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

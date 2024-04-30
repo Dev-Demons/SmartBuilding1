@@ -1,0 +1,32 @@
+{
+  "id": "649d5d96-18be-4f89-b592-f2dfce64b7fe",
+  "name": "Fantasy Lever",
+  "tags": [
+    "lever"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "onActivate",
+      "label": "When activated",
+      "type": "actions"
+    },
+    {
+      "id": "onDeactivate",
+      "label": "When deactivated",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Activate",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Deactivate",
+      "parameters": []
+    }
+  ]
+}

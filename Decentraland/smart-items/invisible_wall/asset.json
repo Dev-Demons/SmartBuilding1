@@ -1,0 +1,26 @@
+{
+  "id": "6ff6b3aa-083a-4e8c-bdd8-b4d64e1f2db1",
+  "name": "Invisible Wall",
+  "tags": ["invisible", "wall", "collider"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

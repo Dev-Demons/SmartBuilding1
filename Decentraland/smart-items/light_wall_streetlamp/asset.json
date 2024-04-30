@@ -1,0 +1,50 @@
+{
+  "id": "a0c742c7-c376-465c-832d-305deb1c4b78",
+  "name": "Wall Light Streetlamp",
+  "model": "models/StreetLampWall_On.glb",
+  "tags": [
+    "lights",
+    "lamp", "lighting", "wall", "streetlamp"
+  ],
+  "category": "decorations",
+  "parameters": [
+
+	{
+		"id": "startOn",
+		"label": "Start On",
+		"type": "boolean",
+		"default": true
+	  },
+
+	  {
+		"id": "clickable",
+		"label": "Click on/off",
+		"type": "boolean",
+		"default": true
+	  },
+
+
+    {
+      "id": "onActivate",
+      "label": "When activated",
+      "type": "actions"
+    },
+    {
+      "id": "onDeactivate",
+      "label": "When deactivated",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Activate",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Deactivate",
+      "parameters": []
+    }
+  ]
+}

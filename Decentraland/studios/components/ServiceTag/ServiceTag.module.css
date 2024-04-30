@@ -1,0 +1,64 @@
+.container {
+  color: #37333D;
+  border: 1px solid #F3F2F5;
+  border-radius: 100px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+}
+
+.container--active {
+  border-color: transparent;
+}
+
+.service_name {
+  font-size: 12px;
+  margin-right: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.container:hover .tooltip_container .tooltip{
+  display: block;
+}
+
+.tooltip_container {
+  display: block;
+  position: absolute;
+}
+
+.tooltip {
+  position: absolute;
+  display: none;
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  left: 0px;
+  width: 230px;
+  top: 1.5rem;
+  box-shadow: var(--card_shadow);
+  font-weight: 400;
+  z-index: 10;
+  color: black;
+  font-size: 14px;
+  line-height: 1.5rem;
+}
+
+.tooltip--name {
+  width: auto;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .container {
+    font-size: 12px;
+  }
+
+  .container svg {
+    width: 20px;
+    height: 20px;
+  }
+}

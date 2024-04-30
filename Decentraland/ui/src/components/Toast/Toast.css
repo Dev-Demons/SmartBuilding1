@@ -1,0 +1,42 @@
+.dcl.toast {
+  margin: 10px;
+  padding: 15px 25px;
+  min-width: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 10px;
+  position: relative;
+  background-color: var(--toast);
+  color: var(--toast-text);
+  width: 100vw;
+  z-index: 2147483002; /* Appear over intercom */
+}
+
+.dcl.toast .toast-info {
+  display: flex;
+}
+
+.dcl.toast .toast-info .toast-icon {
+  margin-right: 15px;
+}
+
+.dcl.toast .dcl.close {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+}
+
+.dcl.toast .title {
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--toast-text);
+}
+
+@media (max-width: 768px) {
+  .dcl.toast {
+    margin: auto;
+    width: 100vw;
+    max-width: initial;
+  }
+}

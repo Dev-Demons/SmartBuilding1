@@ -1,0 +1,50 @@
+{
+  "id": "37fee343-47dd-48c4-98f5-f83aff579699",
+  "name": "Fluorescent Light",
+  "model": "models/FluorescentLight_On.glb",
+  "tags": [
+    "lights",
+    "lamp", "lighting", "ceiling", "fluorescent"
+  ],
+  "category": "decorations",
+  "parameters": [
+
+	{
+		"id": "startOn",
+		"label": "Start On",
+		"type": "boolean",
+		"default": true
+	  },
+
+	  {
+		"id": "clickable",
+		"label": "Click on/off",
+		"type": "boolean",
+		"default": true
+	  },
+
+
+    {
+      "id": "onActivate",
+      "label": "When activated",
+      "type": "actions"
+    },
+    {
+      "id": "onDeactivate",
+      "label": "When deactivated",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Activate",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Deactivate",
+      "parameters": []
+    }
+  ]
+}

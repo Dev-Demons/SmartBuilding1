@@ -1,0 +1,54 @@
+{
+  "id": "9d1d8101-5c1f-4a92-9603-b8e01b06bb48",
+  "name": "Head Access Card",
+  "tags": [
+    "key",
+    "interactive"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "target",
+      "label": "Used on",
+      "type": "entity"
+    },
+    {
+      "id": "respawns",
+      "label": "Respawn on use",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onUse",
+      "label": "When used",
+      "type": "actions"
+    },
+    {
+      "id": "onEquip",
+      "label": "When picked up",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "use",
+      "label": "Use",
+      "parameters": []
+    },
+    {
+      "id": "equip",
+      "label": "Pick up",
+      "parameters": []
+    },
+    {
+      "id": "unequip",
+      "label": "Drop",
+      "parameters": []
+    },
+    {
+      "id": "respawn",
+      "label": "Respawn",
+      "parameters": []
+    }
+  ]
+}

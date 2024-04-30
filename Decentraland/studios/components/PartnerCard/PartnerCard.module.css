@@ -1,0 +1,79 @@
+.container {
+  border: var(--card_border);
+  border-radius: 20px;
+  box-shadow: var(--card_shadow);
+  padding: 1rem;
+  margin-bottom: 24px;
+  min-height: 12rem;
+  cursor: pointer;
+}
+
+.container:hover {
+  transform: var(--card_animation);
+}
+
+.name {
+  margin: 0;
+  margin-bottom: 0.2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.name a,
+.name a:hover {
+  color: black;
+}
+
+.image {
+  width: 10rem;
+  height: 10rem;
+  float: left;
+  margin-right: 1rem;
+  border-radius: 1rem;
+
+  object-fit: contain;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.services {
+  margin: 0.4rem 0.4rem 0 0;
+}
+
+.info_container {
+  flex: 1;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 0.5em;
+}
+
+.pills {
+  margin-right: 1rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.description_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  display: -moz-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  /* display: box;  */
+  /* box-orient: vertical; */
+  white-space: normal;
+  margin-bottom: 0.5em;
+}

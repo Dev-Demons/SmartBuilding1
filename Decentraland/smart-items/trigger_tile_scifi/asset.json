@@ -1,0 +1,37 @@
+{
+  "id": "d95fdce8-51e5-41b9-91a9-8c8a74011b31",
+  "name": "Trigger Tile SciFi",
+  "model": "models/sci_fi_trigger_EditMode.glb",
+  "tags": ["area", "trigger"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onEnter",
+      "label": "When Player Enters",
+      "type": "actions"
+    },
+    {
+      "id": "onLeave",
+      "label": "When Player Leaves",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

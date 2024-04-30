@@ -1,0 +1,54 @@
+get:
+  operationId: getConfiguration
+  summary: Get the configured level of exposure of each feature
+  tags:
+    - Configuration
+  description: >-
+    Retrieves the configured level of exposure for each feature available that the user has configured 
+    or the default value in case there's no configured value.
+  responses:
+    "200":
+      description: A map with the configured level of exposure for each feature
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: ../components/schemas/friends/200-get-account-configuration.yaml
+          examples:
+            default:
+              $ref: ../components/examples/friends/200-get-account-configuration.json
+    "401":
+      description: >-
+        "Unauthorized request: This means that the user is not correctly authenticated"
+
+put:
+  operationId: setConfiguration
+  summary: Set the configured level of exposure of each feature
+  tags:
+    - Configuration
+  description: >-
+    Stores the level of exposure of each available feature, if a value is undefined, the default value will be configured.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            config:
+              type: object
+              additionalProperties:
+                type: string
+                enum: [EVERYONE, FRIENDS_OF_FRIENDS, FRIENDS, ONLY_ME]
+
+  responses:
+    "200":
+      description: A map with the configured level of exposure for each feature
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: ../components/schemas/friends/200-get-account-configuration.yaml
+          examples:
+            default:
+              $ref: ../components/examples/friends/200-get-account-configuration.json
+    "401":
+      description: >-
+        "Unauthorized request: This means that the user is not correctly authenticated"

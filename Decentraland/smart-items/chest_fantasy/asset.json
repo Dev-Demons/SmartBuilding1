@@ -1,0 +1,47 @@
+{
+  "id": "ff9257ec-9d62-404f-97c7-cf19c4035761",
+  "name": "Fantasy Chest",
+  "tags": ["door"],
+  "category": "structures",
+  "parameters": [
+    {
+      "id": "onClickText",
+      "label": "Hover text",
+      "type": "text",
+      "default": "Open/Close"
+    },
+    {
+      "id": "onClick",
+      "label": "When clicked",
+      "type": "actions",
+      "default": "toggle"
+    },
+    {
+      "id": "onOpen",
+      "label": "When opened",
+      "type": "actions"
+    },
+    {
+      "id": "onClose",
+      "label": "When closed",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "open",
+      "label": "Open",
+      "parameters": []
+    },
+    {
+      "id": "close",
+      "label": "Close",
+      "parameters": []
+    },
+    {
+      "id": "toggle",
+      "label": "Open or Close",
+      "parameters": []
+    }
+  ]
+}

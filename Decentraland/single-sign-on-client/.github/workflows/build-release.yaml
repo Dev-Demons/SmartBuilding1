@@ -1,0 +1,41 @@
+name: Build and release
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - created
+
+jobs:
+  build-release:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ./packages/lib
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Delete root package.json
+        # In order to publish the lib package, we need to delete the root package.json.
+        # Otherwise, oddish will pick that one up and try to publish it.
+        run: rm ../../package.json
+      - name: Install
+        # No need to ci as it is a package and packages don't use lock files.
+        # Also, given that we are using workspaces, we don't have the lockfile available.
+        run: npm i
+      - name: Build
+        run: npm run build
+      - name: Publish
+        uses: menduz/oddish-action@3.1.0
+        with:
+          cwd: ./packages/lib
+          deterministic-snapshot: true
+          registry-url: "https://registry.npmjs.org"
+          access: public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

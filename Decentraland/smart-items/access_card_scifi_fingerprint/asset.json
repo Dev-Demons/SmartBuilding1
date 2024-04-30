@@ -1,0 +1,54 @@
+{
+  "id": "274df603-dd2b-4a32-b2a0-c4ad758cb037",
+  "name": "Fingerprint Access Card",
+  "tags": [
+    "key",
+    "interactive"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "target",
+      "label": "Used on",
+      "type": "entity"
+    },
+    {
+      "id": "respawns",
+      "label": "Respawn on use",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onUse",
+      "label": "When used",
+      "type": "actions"
+    },
+    {
+      "id": "onEquip",
+      "label": "When picked up",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "use",
+      "label": "Use",
+      "parameters": []
+    },
+    {
+      "id": "equip",
+      "label": "Pick up",
+      "parameters": []
+    },
+    {
+      "id": "unequip",
+      "label": "Drop",
+      "parameters": []
+    },
+    {
+      "id": "respawn",
+      "label": "Respawn",
+      "parameters": []
+    }
+  ]
+}

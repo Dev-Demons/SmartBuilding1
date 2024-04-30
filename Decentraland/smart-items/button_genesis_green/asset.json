@@ -1,0 +1,15 @@
+{
+  "id": "76d3a347-02b1-4c74-bbf3-7787ede6a3b1",
+  "name": "Green Button",
+  "tags": [
+    "button"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "onClick",
+      "label": "When clicked",
+      "type": "actions"
+    }
+  ]
+}

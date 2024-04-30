@@ -1,0 +1,27 @@
+{
+  "id": "9abf3cc1-dd4b-471d-a2d5-655fb61a6d03",
+  "name": "Invisible Ramp",
+  "model": "models/Ramp_EditMode.glb",
+  "tags": ["invisible", "wall", "ramp", "collider"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

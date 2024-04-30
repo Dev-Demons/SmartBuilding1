@@ -1,0 +1,50 @@
+{
+  "id": "a3401af9-8e2b-4b2b-915e-ccb8ed611c88",
+  "name": "Spotlight Strip Light",
+  "model": "models/SpotlightStrip_On.glb",
+  "tags": [
+    "lights",
+    "lamp", "lighting", "ceiling", "spotlight", "strip", "striplight"
+  ],
+  "category": "decorations",
+  "parameters": [
+
+	{
+		"id": "startOn",
+		"label": "Start On",
+		"type": "boolean",
+		"default": true
+	  },
+
+	  {
+		"id": "clickable",
+		"label": "Click on/off",
+		"type": "boolean",
+		"default": true
+	  },
+
+
+    {
+      "id": "onActivate",
+      "label": "When activated",
+      "type": "actions"
+    },
+    {
+      "id": "onDeactivate",
+      "label": "When deactivated",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Activate",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Deactivate",
+      "parameters": []
+    }
+  ]
+}

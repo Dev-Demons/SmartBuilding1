@@ -1,0 +1,32 @@
+{
+  "id": "0764e129-9fff-4158-98f0-6db8665dcf7b",
+  "name": "SciFi Lever",
+  "tags": [
+    "lever"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "onActivate",
+      "label": "When activated",
+      "type": "actions"
+    },
+    {
+      "id": "onDeactivate",
+      "label": "When deactivated",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Activate",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Deactivate",
+      "parameters": []
+    }
+  ]
+}

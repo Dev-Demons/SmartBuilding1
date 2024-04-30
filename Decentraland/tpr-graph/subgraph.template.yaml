@@ -1,0 +1,43 @@
+specVersion: 0.0.2
+description: Decentraland TPR
+#graft:
+#  base: QmYf4h6nbvohbxUAXF6U3sVsNvQrZz5zkNgeh6Ah4S7vts # Subgraph ID of base subgraph
+#  block: 18290388 # Block number
+repository: https://github.com/decentraland/tpr-graph
+schema:
+  file: ./schema.graphql
+dataSources:
+  # ---------------------------------------------------------
+  # Third Party Registry --------------------------------------
+  # ---------------------------------------------------------
+  - kind: ethereum/contract
+    name: ThirdPartyRegistry
+    network: {{network}}
+    source:
+      abi: ThirdPartyRegistry
+      startBlock: {{startBlock_tpr}}
+      address: '{{address_tpr}}'
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/handlers/thirdparty.ts
+      entities:
+        - ThirdParty
+        - Item
+      abis:
+        - name: ThirdPartyRegistry
+          file: ./abis/ThirdPartyRegistry.json
+      eventHandlers:
+        - event: ThirdPartyAdded(string,string,string,bool,address[],uint256,address)
+          handler: handleThirdPartyAdded
+        - event: ThirdPartyUpdated(string,string,string,address[],bool[],uint256,address)
+          handler: handleThirdPartyUpdated
+        - event: ThirdPartyItemSlotsBought(string,uint256,uint256,address)
+          handler: handleThirdPartyItemSlotsBought
+        - event: ThirdPartyReviewedWithRoot(string,bytes32,bool,address)
+          handler: handleThirdPartyReviewedWithRoot
+        - event: ThirdPartyReviewed(string,bool,address)
+          handler: handleThirdPartyReviewed
+        - event: ItemSlotsConsumed(string,uint256,indexed address,bytes32,indexed address)
+          handler: handleItemSlotsConsumed

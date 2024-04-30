@@ -1,0 +1,7 @@
+type: object
+properties:
+  config:
+    type: object
+    additionalProperties:
+      type: string
+      enum: [EVERYONE, FRIENDS_OF_FRIENDS, FRIENDS, ONLY_ME]

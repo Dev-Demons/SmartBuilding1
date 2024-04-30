@@ -1,0 +1,37 @@
+get:
+  operationId: getMutualFriendsBetweenUsers
+  summary: List of addresses of the friends shared between two users
+  tags:
+    - Friends
+  description: >-
+    Retrieves the addresses of the friends shared between the authenticated user and the specified user in the body.
+    </br>
+    It's important to know that if the other user doesn't expose their friends to the authenticated user, the response will be an Forbidden error.
+
+  parameters:
+    - in: path
+      name: userId
+      required: true
+      schema:
+        type: string
+        example: 0x072Db72D13495635e353bdf6d8073b4Cd7DB3B10
+      description: >- 
+        Address of the other user to obtain the mutual friends with the authenticated user
+
+  responses:
+    "200":
+      description: >-
+        List of addresses of the mutual friends
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: ../components/schemas/friends/200-get-mutual-friends.yaml
+          examples:
+            default:
+              $ref: ../components/examples/friends/200-get-mutual-friends.json
+    "401":
+      description: >-
+        "Unauthorized request: This means that the user is not correctly authenticated"
+    "403":
+      description: >-
+        Forbidden request: The other user has not granted permission to the authenticated user to view their friends.

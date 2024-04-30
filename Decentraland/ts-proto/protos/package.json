@@ -1,0 +1,21 @@
+{
+  "name": "ts-proto-descriptors",
+  "version": "1.10.0",
+  "description": "",
+  "repository": "github:stephenh/ts-proto",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "dependencies": {
+    "protobufjs": "^7.2.4"
+  },
+  "devDependencies": {
+    "ts-proto": "^1.146.0",
+    "typescript": "^5.1.3"
+  }
+}

@@ -1,0 +1,26 @@
+.icon {
+  display: inline-block;
+  line-height: 16px;
+  margin-right: 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.arrowRight {
+  height: fit-content;
+}
+.arrowRight:hover rect {
+  stroke: #16141a;
+}
+
+.arrowRight svg {
+  margin-top: 4px;
+}
+
+.arrowRight--small svg {
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+

@@ -1,0 +1,32 @@
+{
+  "id": "d6dea640-b953-48b9-bfb0-d750c5f43ba1",
+  "name": "Parrot",
+  "tags": [
+    "parrot"
+  ],
+  "category": "nature",
+  "parameters": [
+    {
+      "id": "onActivate",
+      "label": "When screaming",
+      "type": "actions"
+    },
+    {
+      "id": "onDeactivate",
+      "label": "When quiet",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Scream",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Be quiet",
+      "parameters": []
+    }
+  ]
+}

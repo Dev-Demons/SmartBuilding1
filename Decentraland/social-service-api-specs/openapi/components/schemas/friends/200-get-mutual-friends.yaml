@@ -1,0 +1,9 @@
+type: object
+properties:
+  friends:
+    type: array
+    items:
+      type: object
+      properties:
+        address: 
+          type: string

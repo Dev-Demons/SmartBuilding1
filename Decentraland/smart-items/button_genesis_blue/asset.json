@@ -1,0 +1,15 @@
+{
+  "id": "504cd7ac-2873-40d8-9172-13c9c24304b0",
+  "name": "Blue Button",
+  "tags": [
+    "button"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "onClick",
+      "label": "When clicked",
+      "type": "actions"
+    }
+  ]
+}

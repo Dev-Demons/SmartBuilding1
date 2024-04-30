@@ -1,0 +1,21 @@
+{
+  "id": "c5f821af-a08f-4a88-bf8c-219f5038dc9a",
+  "name": "Image - NSFW",
+  "tags": ["signpost", "text", "interactive"],
+  "category": "decorations",
+  "model": "models/image_preview.glb",
+  "parameters": [
+    {
+      "id": "image",
+      "label": "External Image URL",
+      "type": "text",
+      "default": "https://i.imgur.com/d25gO61.jpg"
+    },
+    {
+      "id": "nsfw",
+      "label": "Not Safe For Work",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}

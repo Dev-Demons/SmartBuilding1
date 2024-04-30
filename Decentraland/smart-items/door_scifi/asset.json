@@ -1,0 +1,37 @@
+{
+  "id": "f7573b6c-f5d3-403c-ad74-2657adbe4a54",
+  "name": "Vertical Hallway Door",
+  "tags": [
+    "door"
+  ],
+  "category": "structures",
+  "parameters": [
+    {
+      "id": "onOpen",
+      "label": "When opened",
+      "type": "actions"
+    },
+    {
+      "id": "onClose",
+      "label": "When closed",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "open",
+      "label": "Open",
+      "parameters": []
+    },
+    {
+      "id": "close",
+      "label": "Close",
+      "parameters": []
+    },
+    {
+      "id": "toggle",
+      "label": "Open or Close",
+      "parameters": []
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+.container {
+  width: 100%;
+  padding: 40px 48px;
+  margin-top: 32px;
+  margin-bottom: 40px;
+  
+  position: relative;
+  
+  display: flex;
+  flex-direction: column;
+  
+  border-radius: var(--radius-banner-desktop, 32px);
+  
+  color: var(--general-pain-gray, #242129);
+  background: var(--tags-linked-wearables-secondary, #EBEEF6);
+  cursor: default;
+}
+
+
+
+.leftPanel {
+  max-width: 490px;
+}
+
+.image {
+  height: 240px;
+  position: absolute;
+  right: 10px;
+  bottom: -55px;
+  z-index: 0;
+}
+
+.factsContainer {
+  margin-top: 24px;
+  display: flex;
+
+  width: 100%;
+  place-content: space-between;
+}
+
+.factContainer {
+  width: 50%;
+  margin-right: 5px;
+}
+
+.mainText {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.smallText {
+  margin-top: 16px;
+  font-size: 16px;
+
+  /* font-weight: 700; */
+  line-height: 24px;
+}
+
+.smallText a {
+  color: #FF2D55;
+  font-weight: 700;
+}
+
+.smallText a:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 990px){
+  .leftPanel{
+    max-width: 65%;
+  }
+  /* .image{
+    opacity: 0.2;
+  } */
+}
+
+@media (max-width: 767px){
+  .leftPanel{
+    max-width: 100%;
+  }
+
+  .mainText{
+    font-size: 22px;
+    line-height: 24px;
+  }
+  .image{
+    display: none;
+  }
+
+  .container {
+    justify-content: center;
+  }
+}

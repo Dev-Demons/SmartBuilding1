@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: API Specification for the Social Service Server (BETA)
+  version: "0.1"
+  description: >-
+    The social service is a layer of abstraction on top of the chat of Decentraland, 
+    it handles all the information regarding friendships between players in-world. <br/>
+    Any Decentraland client that wants to have friends working will need to connect to a social service.
+    <br/><br/>
+    <br/>WARNING: So far this is what we have and it's public but the definition is still in development and 
+    won't respect backwards until version 1.0 is available so all endpoints might suffer changes
+  x-logo:
+    url: "https://cryptologos.cc/logos/decentraland-mana-logo.png"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: "https://social-service.decentraland.zone"
+    description: Social service development instance
+  - url: "https://social-service.decentraland.org"
+    description: Social service production instance
+
+components:
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      description: Access token
+
+security:
+  - bearerAuth: []
+
+paths:
+  /v1/friendships/{userId}:
+    $ref: "paths/friendships@{userId}.yaml"
+  /v1/friendships/{userId}/mutuals:
+    $ref: "paths/friendships@{userId}@mutuals.yaml"
+  /v1/friendships/{userId}/count:
+    $ref: "paths/friendships@{userId}@count.yaml"
+
+  /v1/friendships/me/requests:
+    $ref: "paths/friendships@me@requests.yaml"
+
+  /v1/account/config:
+    $ref: "paths/account@config.yaml"

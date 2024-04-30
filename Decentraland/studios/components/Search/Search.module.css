@@ -1,0 +1,48 @@
+.container {
+  margin-top: 32px;
+}
+
+.empty {
+  margin: auto;
+  margin-top: 10vh;
+  padding: 10px;
+  /* height: 50%; */
+  /* width: 50%; */
+  max-height: 200px;
+  max-width: 400px;
+  text-align: center;
+  font-size: medium;
+  color: #37333d;
+  opacity: 32%;
+  line-height: 32px;
+}
+
+.tag {
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border: 1px solid #F3F2F5;
+  cursor: default;
+}
+
+.tag_resource--active {
+  color: #5688E7;
+  background: #E3ECFA;
+  border: 1px solid #E3ECFA;
+}
+
+.tag_studio--active {
+  color: #C72B32;
+  background: #F6DFE3;
+  border: 1px solid #F6DFE3;
+}
+
+.tag_project--active {
+  color: #382AAC;
+  background: #EEEDF8;
+  border: 1px solid #EEEDF8;
+}
+

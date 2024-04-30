@@ -1,0 +1,27 @@
+{
+  "id": "8002162b-01cb-4958-a3e9-6c789d8b3c56",
+  "name": "Invisible Cylinder",
+  "model": "models/Cylinder_EditMode.glb",
+  "tags": ["invisible", "wall", "cylinder", "column", "pillar", "collider"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

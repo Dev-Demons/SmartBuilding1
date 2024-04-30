@@ -1,0 +1,8 @@
+.env
+dist/
+node_modules/
+**/.DS_Store
+coverage
+substreams-sink-postgres
+substreams-sink-postgres.tar.gz
+logs.txt

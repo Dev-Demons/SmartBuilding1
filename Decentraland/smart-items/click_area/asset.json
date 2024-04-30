@@ -1,0 +1,57 @@
+{
+  "id": "846479b0-75d3-450d-bbd6-7e6b3355a7a2",
+  "name": "Click Area",
+  "tags": ["click", "area"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onClickText",
+      "label": "Hover text",
+      "type": "text",
+      "default": "Interact"
+    },
+    {
+      "id": "button",
+      "label": "Button",
+      "type": "options",
+      "options": [
+        {
+          "value": "POINTER",
+          "label": "Click"
+        },
+        {
+          "value": "PRIMARY",
+          "label": "Primary Button"
+        },
+        {
+          "value": "SECONDARY",
+          "label": "Secondary Button"
+        }
+      ],
+      "default": "POINTER"
+    },
+    {
+      "id": "onClick",
+      "label": "When Clicked",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

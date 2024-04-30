@@ -1,0 +1,37 @@
+{
+  "id": "a5c32dfc-27c5-416b-bfbb-f66f871c8ea7",
+  "name": "Sign Rectangle",
+  "tags": ["signpost", "text", "interactive"],
+  "category": "decorations",
+  "model": "models/signpost/Sign_Square_Vertical.glb",
+  "parameters": [
+    {
+      "id": "text",
+      "label": "Text",
+      "type": "textarea",
+      "default": "Some text"
+    },
+    {
+      "id": "fontSize",
+      "label": "Font Size",
+      "type": "slider",
+      "min": 12,
+      "max": 60,
+      "step": 0.5,
+      "default": 30
+    }
+  ],
+  "actions": [
+    {
+      "id": "changeText",
+      "label": "Change Text",
+      "parameters": [
+        {
+          "id": "newText",
+          "label": "New Text",
+          "type": "textarea"
+        }
+      ]
+    }
+  ]
+}

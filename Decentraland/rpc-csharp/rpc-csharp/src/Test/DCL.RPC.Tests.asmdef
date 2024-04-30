@@ -1,0 +1,17 @@
+{
+  "name": "DCL.RPC.Tests",
+  "rootNamespace": "",
+  "references": [
+    "UniTask",
+    "DCL.RPC"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

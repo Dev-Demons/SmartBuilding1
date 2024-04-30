@@ -1,0 +1,20 @@
+version: "2"
+services:
+  target-snowflake:
+    image: python:3.7.7-stretch
+    working_dir: /code
+    entrypoint: /code/docker-entrypoint.sh
+    environment:
+      SNOWFLAKE_ACCOUNT: "${SNOWFLAKE_ACCOUNT}"
+      SNOWFLAKE_WAREHOUSE: "${SNOWFLAKE_WAREHOUSE}"
+      SNOWFLAKE_DATABASE: "${SNOWFLAKE_DATABASE}"
+      SNOWFLAKE_SCHEMA: "${SNOWFLAKE_SCHEMA}"
+      SNOWFLAKE_USERNAME: "${SNOWFLAKE_USERNAME}"
+      SNOWFLAKE_PASSWORD: "${SNOWFLAKE_PASSWORD}"
+      TARGET_S3_AWS_ACCESS_KEY_ID: "${TARGET_S3_AWS_ACCESS_KEY_ID}"
+      TARGET_S3_AWS_SECRET_ACCESS_KEY: "${TARGET_S3_AWS_SECRET_ACCESS_KEY}"
+      TARGET_S3_BUCKET: "${TARGET_S3_BUCKET}"
+      TARGET_S3_KEY_PREFIX: "${TARGET_S3_KEY_PREFIX}"
+
+    volumes:
+      - .:/code

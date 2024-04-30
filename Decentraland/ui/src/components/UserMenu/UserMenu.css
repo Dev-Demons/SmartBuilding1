@@ -1,0 +1,17 @@
+.dcl.user-menu {
+  display: flex;
+  position: relative;
+  text-align: left;
+  outline: none;
+}
+
+.dcl .user-menu__jump-in {
+  padding: 14px 32px;
+  margin-left: 24px;
+}
+
+@media (max-width: 991px) {
+  .dcl .user-menu__jump-in {
+    display: none;
+  }
+}

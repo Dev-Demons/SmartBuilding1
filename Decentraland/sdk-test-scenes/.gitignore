@@ -1,0 +1,6 @@
+**/node_modules
+*.js.*
+*.js
+dist/
+generated/
+!test-scenes/8.7.portable-experience-hide-ui/bin/index.js

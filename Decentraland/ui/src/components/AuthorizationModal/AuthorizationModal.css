@@ -1,0 +1,60 @@
+.authorization-modal-container {
+  width: 100%;
+  max-width: 580px;
+}
+
+.authorization-modal {
+  padding: 45px 32px;
+  width: 100%;
+}
+
+.authorization-modal .authorization-header {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 32px;
+  margin: 0;
+  margin-bottom: 48px;
+}
+
+.authorization-modal .contract-name {
+  color: var(--primary);
+}
+
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.authorization-modal .ui.button.close-button::before {
+  content: url(../../assets/close.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.authorization-modal .authorization-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.authorization-modal .authorization-error::before {
+  content: url(../../assets/close.svg);
+  width: 16px;
+  height: 16px;
+  filter: invert(42%) sepia(92%) saturate(5601%) hue-rotate(333deg)
+    brightness(103%) contrast(101%);
+  margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+  .authorization-modal {
+    padding: 20px;
+  }
+
+  .authorization-modal .authorization-header {
+    margin-top: 20px;
+  }
+}

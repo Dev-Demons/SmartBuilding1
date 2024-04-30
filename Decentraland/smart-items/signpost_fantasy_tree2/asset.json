@@ -1,0 +1,37 @@
+{
+  "id": "78307e67-f567-45a0-9a3c-461616088eab",
+  "name": "Signpost",
+  "tags": ["signpost", "text", "interactive"],
+  "category": "decorations",
+  "model": "models/signpost/SignPost_tree2.glb",
+  "parameters": [
+    {
+      "id": "text",
+      "label": "Text",
+      "type": "textarea",
+      "default": "Some text"
+    },
+    {
+      "id": "fontSize",
+      "label": "Font Size",
+      "type": "slider",
+      "min": 12,
+      "max": 30,
+      "step": 0.5,
+      "default": 20
+    }
+  ],
+  "actions": [
+    {
+      "id": "changeText",
+      "label": "Change Text",
+      "parameters": [
+        {
+          "id": "newText",
+          "label": "New Text",
+          "type": "textarea"
+        }
+      ]
+    }
+  ]
+}

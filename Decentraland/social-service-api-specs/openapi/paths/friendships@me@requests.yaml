@@ -1,0 +1,23 @@
+get:
+  operationId: getOwnFriendRequests
+  summary: Gets the incoming and outgoing friendship requests of the authenticated user
+  tags:
+    - Friends
+    - Requests
+  description: >-
+    Retrieves the list of friendship requests that the authenticated user has either sent or received
+
+  responses:
+    "200":
+      description: >-
+        An object with both the incoming and outgoing friendship requests
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: ../components/schemas/friends/200-get-own-friend-requests.yaml
+          examples:
+            default:
+              $ref: ../components/examples/friends/200-get-own-friend-requests.json
+    "401":
+      description: >-
+        "Unauthorized request: This means that the user is not correctly authenticated"

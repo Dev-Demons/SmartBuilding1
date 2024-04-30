@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2020",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "strictFunctionTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "alwaysStrict": true,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "esModuleInterop": true,
+    "allowUnusedLabels": false,
+    "stripInternal": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "pretty": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "lib": [
+      "es2020",
+      "webworker"
+    ],
+    "types": []
+  },
+  "include": [
+    "src"
+  ]
+}

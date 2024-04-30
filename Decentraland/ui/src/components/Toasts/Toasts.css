@@ -1,0 +1,33 @@
+.dcl.toasts {
+  position: fixed;
+  z-index: 2147483002; /* Appear over modals and intercom */
+}
+
+.dcl.toasts.top {
+  top: 0;
+}
+
+.dcl.toasts.bottom {
+  bottom: 0;
+}
+
+.dcl.toasts.left {
+  left: 0;
+}
+
+.dcl.toasts.right {
+  right: 0;
+}
+
+.dcl.toasts.top.center {
+  bottom: unset;
+}
+
+.dcl.toasts.bottom.center {
+  top: unset;
+}
+
+.dcl.toasts.center {
+  width: min-content;
+  margin: auto;
+}

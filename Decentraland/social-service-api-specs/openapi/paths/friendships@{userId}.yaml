@@ -1,0 +1,32 @@
+get:
+  operationId: getFriends
+  summary: List of friends
+  tags:
+    - Friends
+  description: >-
+    Retrieves the addresses of the friends of a certain user
+  parameters:
+    - in: path
+      name: userId
+      required: true
+      schema:
+        type: string
+        example: 0x072Db72D13495635e353bdf6d8073b4Cd7DB3B10
+      description: >- 
+        Address of the user whose friends are being queried
+  responses:
+    "200":
+      description: List of addresses
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: ../components/schemas/friends/200-get-friends.yaml
+          examples:
+            default:
+              $ref: ../components/examples/friends/200-get-friends.json
+    "401":
+      description: >-
+        "Unauthorized request: This means that the user is not correctly authenticated"
+    "403":
+      description: >-
+        "Forbidden request: This means that the user doesn't have the permissions to view the friends of the desired user"

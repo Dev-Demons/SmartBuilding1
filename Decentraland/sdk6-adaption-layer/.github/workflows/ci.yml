@@ -1,0 +1,78 @@
+name: test-build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - name: install dependencies
+        run: npm install
+      - name: npm run build:prod
+        run: |
+          npm run build:prod
+          mv bin/index.js bin/index.min.js
+      - name: npm run build
+        run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: SDK6 Adaption Layer
+          path: |
+            bin/index.js
+            bin/index.min.js
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+          retention-days: 90
+      - uses: actions/github-script@v6
+        id: get-branch-realm-name
+        env:
+          BRANCH: ${{ github.head_ref || github.ref }}
+        with:
+          script: return `${process.env.BRANCH.replaceAll('/', '-').replaceAll('refs-heads-', '').substr(0, 28)}`
+          result-encoding: string
+      - name: upload to s3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.RENDERER_AWS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.RENDERER_AWS_SECRET_KEY }}
+        run: |
+          npx @dcl/cdn-uploader@next \
+              --bucket ${{ secrets.RENDERER_AWS_BUCKET }} \
+              --local-folder "$(pwd)/bin" \
+              --bucket-folder 'sdk6-adaption-layer/${{steps.get-branch-realm-name.outputs.result}}' \
+              --variant uncompressed
+
+          npx @dcl/cdn-uploader@next \
+              --bucket ${{ secrets.RENDERER_AWS_BUCKET }} \
+              --local-folder "$(pwd)/bin" \
+              --bucket-folder 'sdk6-adaption-layer/${{ github.sha }}' \
+              --variant uncompressed
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        if: ${{ github.event.pull_request.number }}
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Test this pull request
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        if: ${{ github.event.pull_request.number }}
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            # Test this pull request
+            ## permalink
+            ${{ secrets.RENDERER_AWS_BASE_URL }}sdk6-adaption-layer/${{ github.sha }}/index.js
+            ${{ secrets.RENDERER_AWS_BASE_URL }}sdk6-adaption-layer/${{ github.sha }}/index.min.js
+            ## branch name
+            ${{ secrets.RENDERER_AWS_BASE_URL }}sdk6-adaption-layer/${{steps.get-branch-realm-name.outputs.result}}/index.js
+            ${{ secrets.RENDERER_AWS_BASE_URL }}sdk6-adaption-layer/${{steps.get-branch-realm-name.outputs.result}}/index.min.js
+          edit-mode: replace

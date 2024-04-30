@@ -1,0 +1,54 @@
+{
+  "id": "91202d69-c9bc-49a9-8120-8b550dc7b5fa",
+  "name": "Pirate Bronze Key",
+  "tags": [
+    "key",
+    "interactive"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "target",
+      "label": "Used on",
+      "type": "entity"
+    },
+    {
+      "id": "respawns",
+      "label": "Respawn on use",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onUse",
+      "label": "When used",
+      "type": "actions"
+    },
+    {
+      "id": "onEquip",
+      "label": "When picked up",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "use",
+      "label": "Use",
+      "parameters": []
+    },
+    {
+      "id": "equip",
+      "label": "Pick up",
+      "parameters": []
+    },
+    {
+      "id": "unequip",
+      "label": "Drop",
+      "parameters": []
+    },
+    {
+      "id": "respawn",
+      "label": "Respawn",
+      "parameters": []
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - created
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install dependencies
+        run: yarn install
+      - name: Prepare Integration
+        run: ./integration/pbjs.sh
+      - name: Codegen
+        run: yarn bin2ts
+      # This will fail if any git-tracked file has changed
+      - name: Diff Output
+        run: git status && git diff --exit-code
+      - name: test
+        run: yarn test
+        env:
+          CI: true
+      - name: test esmodule interop
+        working-directory: ./integration/simple-esmodule-interop
+        run: |
+          yarn install
+          yarn tsc
+          yarn jest
+        env:
+          CI: true
+
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+        
+      - name: publish @dcl/ts-proto package
+        uses: menduz/oddish-action@master
+        id: publish_decentraland_ts_proto
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-key-prefix: '@dcl/ts-proto/branch/${{ github.head_ref || github.ref }}'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+    outputs:
+      decentraland_ts_proto_s3_bucket_key: ${{ steps.publish_decentraland_ts_proto.outputs.s3-bucket-key }}
+
+  notify_deployment:
+    needs: [build]
+    if: ${{ github.event.pull_request.number }}
+    runs-on: ubuntu-latest
+    name: Deployment Notification
+    steps:
+      - uses: actions/github-script@v6
+        id: get-cloudflare-url
+        env:
+          BRANCH: ${{ github.head_ref || github.ref }}
+        with:
+          script: return `${process.env.BRANCH.replaceAll('/', '-').substr(0, 28)}.${context.repo.repo}.pages.dev`
+          result-encoding: string
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Test this pull request
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            # Test this pull request
+            - The `@dcl/ts-proto` package can be tested and installed by:
+               ```bash
+               npm install "${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_ts_proto_s3_bucket_key }}"
+               ```
+          edit-mode: replace

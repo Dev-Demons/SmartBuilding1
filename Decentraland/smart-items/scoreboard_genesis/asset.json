@@ -1,0 +1,83 @@
+{
+  "id": "1d45dc17-42d2-4d02-af19-f5528f395b13",
+  "name": "Scoreboard",
+  "tags": [
+    "scoreboard",
+    "counter",
+    "interactive"
+  ],
+  "category": "decorations",
+  "model": "models/board/Scoreboard.glb",
+  "parameters": [
+    {
+      "id": "initialVal",
+      "label": "Initial value",
+      "type": "integer",
+      "default": 0
+    },
+    {
+      "id": "threshold",
+      "label": "Target value",
+      "type": "integer",
+      "default": 100
+    },
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onThreshold",
+      "label": "When target value reached",
+      "type": "actions",
+      "default": ""
+    }
+  ],
+  "actions": [
+    {
+      "id": "increase",
+      "label": "Increase",
+      "parameters": [
+        {
+          "id": "amount",
+          "label": "Amount",
+          "type": "integer",
+          "default": 1
+        }
+      ]
+    },
+    {
+      "id": "decrease",
+      "label": "Decrease",
+      "parameters": [
+        {
+          "id": "amount",
+          "label": "Amount",
+          "type": "integer",
+          "default": 1
+        }
+      ]
+    },
+    {
+      "id": "reset",
+      "label": "Reset",
+      "parameters": []
+    },
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    },
+    {
+      "id": "toggleEnable",
+      "label": "Toggle Enable",
+      "parameters": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+type: object
+properties:
+  incoming:
+    type: array
+    items:
+      type: object
+      properties:
+        address:
+          type: string
+        createdAt:
+          type: number
+        message:
+          type: string
+  outgoing:
+    type: array
+    items:
+      type: object
+      properties:
+        address:
+          type: string
+        createdAt:
+          type: number
+        message:
+          type: string
+required:
+  - address
+  - createdAt

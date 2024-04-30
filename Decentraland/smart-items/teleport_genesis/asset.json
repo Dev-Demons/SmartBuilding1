@@ -1,0 +1,50 @@
+{
+  "id": "0ee46c79-338c-445a-a506-ea26d80fbe46",
+  "name": "Teleport",
+  "tags": ["teleport", "travel", "wormhole", "fast travel", "link"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "x",
+      "label": "X coordinate",
+      "type": "text",
+      "default": "0"
+    },
+    {
+      "id": "y",
+      "label": "Y coordinate",
+      "type": "text",
+      "default": "0"
+    },
+    {
+      "id": "name",
+      "label": "Location name",
+      "type": "text"
+    }
+  ],
+  "actions": [
+    {
+      "id": "changeLocation",
+      "label": "Change Location",
+      "parameters": [
+        {
+          "id": "x",
+          "label": "X coordinate",
+          "type": "text",
+          "default": "0"
+        },
+        {
+          "id": "y",
+          "label": "Y coordinate",
+          "type": "text",
+          "default": "0"
+        },
+        {
+          "id": "name",
+          "label": "Location name",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

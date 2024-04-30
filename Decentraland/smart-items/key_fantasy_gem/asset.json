@@ -1,0 +1,54 @@
+{
+  "id": "637c0746-3aa0-4e08-8dc0-3aa1f15eeb84",
+  "name": "Fantasy Gem Key",
+  "tags": [
+    "key",
+    "interactive"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "target",
+      "label": "Used on",
+      "type": "entity"
+    },
+    {
+      "id": "respawns",
+      "label": "Respawn on use",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onUse",
+      "label": "When used",
+      "type": "actions"
+    },
+    {
+      "id": "onEquip",
+      "label": "When picked up",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "use",
+      "label": "Use",
+      "parameters": []
+    },
+    {
+      "id": "equip",
+      "label": "Pick up",
+      "parameters": []
+    },
+    {
+      "id": "unequip",
+      "label": "Drop",
+      "parameters": []
+    },
+    {
+      "id": "respawn",
+      "label": "Respawn",
+      "parameters": []
+    }
+  ]
+}

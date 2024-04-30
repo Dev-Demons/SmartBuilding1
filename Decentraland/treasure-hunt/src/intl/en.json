@@ -1,0 +1,13 @@
+{
+  "hunt": {
+    "meta": {
+      "title": "Decentraland Treasure Hunt",
+      "description": "Check your progress with your wallet"
+    },
+    "main": {
+      "title": "Treasure Hunt",
+      "description": "Check your progress with your wallet",
+      "cta": "Connect your wallet"
+    }
+  }
+}

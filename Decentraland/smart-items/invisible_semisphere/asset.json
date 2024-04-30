@@ -1,0 +1,36 @@
+{
+  "id": "6f73cdae-62b7-47b0-831e-40bf6012565f",
+  "name": "Invisible Dome",
+  "model": "models/SemiSphere_EditMode.glb",
+  "tags": [
+    "invisible",
+    "wall",
+    "dome",
+    "sphere",
+    "semisphere",
+    "hemisphere",
+    "globe",
+    "collider"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "enabled",
+      "label": "Enabled",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "enable",
+      "label": "Enable",
+      "parameters": []
+    },
+    {
+      "id": "disable",
+      "label": "Disable",
+      "parameters": []
+    }
+  ]
+}

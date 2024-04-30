@@ -1,0 +1,148 @@
+.user-metadata__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 86px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 24px;
+  margin-right: auto;
+  border-top: 1px solid #716b7c;
+  color: #fcfcfc;
+  width: calc(561px - 48px);
+}
+
+.user-metadata__container i {
+  cursor: pointer;
+  padding: 40px;
+  margin-right: -25px;
+  margin-top: -20px;
+}
+
+.user-metadata:first-of-type .user-metadata__container {
+  border: none !important;
+}
+
+.user-metadata__wrapper {
+  line-height: 46px;
+  height: 46px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.user-metadata__wrapper .dcl.filter {
+  border-radius: 34px;
+  background: #716b7c;
+  margin-left: 7px;
+  padding: 2px 8px;
+}
+
+.user-metadata__wrapper .dcl.filter span {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-left: 0;
+}
+
+.user-metadata__wrapper span,
+.user-metadata__wrapper .span,
+.user-metadata__wrapper .user-metadata__user-name {
+  color: #fcfcfc;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.user-metadata__wrapper .user-metadata__user-name:hover {
+  text-decoration: underline;
+}
+
+.user-metadata__wrapper .span {
+  margin-bottom: 0;
+}
+
+.user-metadata__wearable-switcher {
+  height: 100px;
+  width: 100%;
+}
+
+.user-metadata__wearable-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  margin-right: auto;
+  margin-top: 10px;
+  width: calc(561px - 48px);
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+}
+
+.user-metadata__wearable-container.wearable-metadata__wearable--show {
+  height: auto;
+  opacity: 1;
+}
+
+.wearable-title {
+  color: #fcfcfc;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.no-wearables {
+  width: 288px;
+  height: 101px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+}
+
+.no-wearables img {
+  width: 24px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.no-wearables p {
+  color: #cfcdd4;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 12px;
+}
+
+@media only screen and (max-width: 991px) {
+  .user-metadata__container,
+  .user-metadata__wearable-container {
+    width: calc(100% - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .user-metadata__container,
+  .user-metadata__wearable-container {
+    width: calc(100% - 42px);
+    margin-left: 16px;
+    margin-right: 26px;
+  }
+}

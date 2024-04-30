@@ -1,0 +1,63 @@
+specVersion: 0.0.5
+description: Decentraland rentals
+repository: https://github.com/decentraland/rentals-graph
+schema:
+  file: ./schema.graphql
+dataSources:
+  # ---------------------------------------------------------
+  # Rentals -------------------------------------------------
+  # ---------------------------------------------------------
+  - name: Rentals
+    kind: ethereum/contract
+    network: {{network}}
+    source:
+      abi: Rentals
+      startBlock: {{start_block}}
+      address: '{{address}}'
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/handlers/rentals.ts
+      entities:
+        - Rentals
+      abis:
+        - name: Rentals
+          file: ./abis/Rentals.json
+      eventHandlers:
+        - event: AssetRented(indexed address,indexed uint256,address,address,address,uint256,uint256,bool,address,bytes)
+          handler: handleAssetRented
+        - event: AssetClaimed(indexed address,indexed uint256,address)
+          handler: handleAssetClaimed
+        - event: ContractIndexUpdated(uint256,address)
+          handler: handleContractIndexUpdated
+        - event: SignerIndexUpdated(indexed address,uint256,address)
+          handler: handleSignerIndexUpdated
+        - event: AssetIndexUpdated(indexed address,indexed address,indexed uint256,uint256,address)
+          handler: handleAssetIndexUpdated
+        - event: FeeUpdated(uint256,uint256,address)
+          handler: handleFeeUpdated
+          
+templates:
+  # ---------------------------------------------------------
+  # Rentable ------------------------------------------------
+  # ---------------------------------------------------------
+  - name: Rentable
+    kind: ethereum/contract
+    network: {{network}}
+    source:
+      abi: Rentable
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/handlers/rentable.ts
+      entities:
+        - Rentable
+      abis:
+        - name: Rentable
+          file: ./abis/Rentable.json
+      eventHandlers:
+        - event: UpdateOperator(indexed uint256,indexed address)
+          handler: handleUpdateOperator
+        

@@ -1,0 +1,32 @@
+name: website
+on: push
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install Decentraland Command Line
+        run: npm install -g decentraland@latest
+      - name: Get Genesis Plaza Scene
+        run: git clone https://github.com/decentraland-scenes/Genesis-Plaza.git
+      - name:  Install decentraland-ecs
+        working-directory: ./Genesis-Plaza
+        run: npm install decentraland-ecs@ci
+      - name: Install @dcl/kernel
+        working-directory: ./Genesis-Plaza
+        run: npm install @dcl/kernel@next
+      - name: Build export
+        working-directory: ./Genesis-Plaza
+        run: dcl export
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: Genesis-Plaza/export
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

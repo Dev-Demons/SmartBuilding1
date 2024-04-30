@@ -1,0 +1,21 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: tap-decentraland-thegraph
+plugins:
+  extractors:
+  - name: tap-decentraland-thegraph
+    namespace: tap_decentraland_thegraph
+    executable: ./tap-decentraland-thegraph.sh
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: api_url
+      value: https://api.thegraph.com/subgraphs/name/decentraland/marketplace
+    - name: start_updated_at
+      value: 1
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl

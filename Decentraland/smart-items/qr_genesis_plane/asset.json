@@ -1,0 +1,15 @@
+{
+  "id": "d6d4c908-1cc8-4d4b-bd4e-3fa3d838483b",
+  "name": "QR simple frame",
+  "tags": ["signpost", "text", "interactive"],
+  "category": "decorations",
+  "model": "models/QR_SimpleFrame.glb",
+  "parameters": [
+    {
+      "id": "publicKey",
+      "label": "Ethereum Public Key",
+      "type": "text",
+      "default": "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "68986c60-c95c-41ab-adf0-d0e02f5b5440",
+  "name": "Indicator Arrow",
+  "tags": [
+    "arrow",
+    "indicator",
+    "help"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "active",
+      "label": "Visible",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "activate",
+      "label": "Show",
+      "parameters": []
+    },
+    {
+      "id": "deactivate",
+      "label": "Hide",
+      "parameters": []
+    }
+  ]
+}

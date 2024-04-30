@@ -1,0 +1,37 @@
+get:
+  operationId: getFriendsCount
+  summary: The count of friends of a given user
+  tags:
+    - Friends
+  description: >-
+    Retrieves the amount of friends of a given user.
+    </br>
+    It's important to know that if the other user doesn't expose their friends to the authenticated user, the response will be an Forbidden error.
+
+  parameters:
+    - in: path
+      name: userId
+      required: true
+      schema:
+        type: string
+        example: 0x072Db72D13495635e353bdf6d8073b4Cd7DB3B10
+      description: >- 
+        Address of the user to obtain the amount of friends they have
+
+  responses:
+    "200":
+      description: >-
+        The amount of friends the given user has
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: ../components/schemas/friends/200-get-friends-count.yaml
+          examples:
+            default:
+              $ref: ../components/examples/friends/200-get-friends-count.json
+    "401":
+      description: >-
+        "Unauthorized request: This means that the user is not correctly authenticated"
+    "403":
+      description: >-
+        Forbidden request: The other user has not granted permission to the authenticated user to know the amount of friends.

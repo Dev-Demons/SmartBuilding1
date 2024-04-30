@@ -1,0 +1,15 @@
+{
+  "id": "6f380825-70bb-42f9-8dce-57563c7ac582",
+  "name": "Red Light Button",
+  "tags": [
+    "button"
+  ],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "onClick",
+      "label": "When clicked",
+      "type": "actions"
+    }
+  ]
+}

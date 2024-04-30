@@ -1,0 +1,25 @@
+{
+  "id": "9a0c9732-f45c-4836-a524-e32f786787f7",
+  "name": "Github link",
+  "tags": ["external", "website", "internet", "fast travel", "link"],
+  "category": "decorations",
+  "parameters": [
+    {
+      "id": "url",
+      "label": "Github user or org",
+      "type": "text",
+      "default": "decentraland"
+    },
+    {
+      "id": "name",
+      "label": "Hover Label",
+      "type": "text"
+	},
+	{
+		"id": "bnw",
+		"label": "Black & White",
+		"type": "boolean",
+		"default": false
+	  }
+  ]
+}

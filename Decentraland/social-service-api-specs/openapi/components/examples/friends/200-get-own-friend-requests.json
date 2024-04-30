@@ -1,0 +1,44 @@
+{
+  "value": {
+    "incoming": [
+      {
+        "address": "0xad0a8680845B19f833e317F00CCE41967c85253a",
+        "createdAt": 1675189670,
+        "message": "hi, wanna be friends?"
+      },
+      {
+        "address": "0x0e11577617742B33A41c416F2b55A7e41FeC4F31",
+        "createdAt": 1675189680
+      },
+      {
+        "address": "0xc467Ffa9aba16c90d78e4365724aEA6f61955329",
+        "createdAt": 1675189690
+      },
+      {
+        "address": "0x072Db72D13495635e353bdf6d8073b4Cd7DB3B10",
+        "createdAt": 1675189700,
+        "message": "hi, i loved your name"
+      }
+    ],
+    "outgoing": [
+      {
+        "address": "0xad0a8680845B19f833e317F00CCE41967c85253a",
+        "createdAt": 1675189650
+      },
+      {
+        "address": "0x0e11577617742B33A41c416F2b55A7e41FeC4F31",
+        "createdAt": 1675189660
+      },
+      {
+        "address": "0xc467Ffa9aba16c90d78e4365724aEA6f61955329",
+        "createdAt": 1675189680,
+        "message": "hiiii"
+      },
+      {
+        "address": "0x072Db72D13495635e353bdf6d8073b4Cd7DB3B10",
+        "createdAt": 1675189690,
+        "message": "hey, lets be friends"
+      }
+    ]
+  }
+}

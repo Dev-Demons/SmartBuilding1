@@ -1,0 +1,55 @@
+{
+  "id": "d6043ef0-5f53-4dd0-8956-d1819c4c5046",
+  "name": "Silver Key",
+  "tags": [
+    "key",
+    "interactive"
+  ],
+  "category": "decorations",
+  "model": "models/Silver_Key_Genesis.glb",
+  "parameters": [
+    {
+      "id": "target",
+      "label": "Used on",
+      "type": "entity"
+    },
+    {
+      "id": "respawns",
+      "label": "Respawn on use",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "onUse",
+      "label": "When used",
+      "type": "actions"
+    },
+    {
+      "id": "onEquip",
+      "label": "When picked up",
+      "type": "actions"
+    }
+  ],
+  "actions": [
+    {
+      "id": "use",
+      "label": "Use",
+      "parameters": []
+    },
+    {
+      "id": "equip",
+      "label": "Pick up",
+      "parameters": []
+    },
+    {
+      "id": "unequip",
+      "label": "Drop",
+      "parameters": []
+    },
+    {
+      "id": "respawn",
+      "label": "Respawn",
+      "parameters": []
+    }
+  ]
+}
