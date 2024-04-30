@@ -1,0 +1,117 @@
+name: Unity Test
+
+on:
+  pull_request: {}
+  merge_group: {}
+  push: { branches: [main] }
+
+env:
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+  UNITY_LICENSE: ${{ secrets.UNITY_PERSONAL_LICENSE }}
+  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create LFS file list
+        run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
+
+      - name: Restore LFS cache
+        uses: actions/cache@v3
+        id: lfs-cache
+        with:
+          path: .git/lfs
+          key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
+
+      - name: Git LFS Pull
+        run: |
+          git lfs pull
+          git add .
+          git reset --hard
+
+      - name: Restore Library cache
+        uses: actions/cache@v3
+        with:
+          path: Explorer/Library
+          key: Library-Explorer-Windows
+          
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: 'Add GitHub to the SSH known hosts file'
+        run: |
+              sshPath="$HOME/.ssh"
+              if [ ! -d "$sshPath" ]; then
+                mkdir -p "$sshPath"
+              fi
+              
+              knownHostsPath="$sshPath/known_hosts"
+              curl -s 'https://api.github.com/meta' | jq -r '.ssh_keys[] | "github.com " + .' >> "$knownHostsPath"
+              chmod 600 "$knownHostsPath"
+          
+      - name: Clone Packages To Use Locally
+        run: |
+            git clone git@github.com:decentraland/unity-explorer-packages.git            
+            jsonFilePath="Explorer/Packages/manifest.json"
+            sed -i 's|git@github.com:decentraland/unity-explorer-packages.git?path=/StylizedGrassShader|file:../../unity-explorer-packages/StylizedGrassShader|' "$jsonFilePath"
+            sed -i 's|git@github.com:decentraland/unity-explorer-packages.git?path=/StylizedWater2|file:../../unity-explorer-packages/StylizedWater2|' "$jsonFilePath"
+            sed -i 's|git@github.com:decentraland/unity-explorer-packages.git?path=/AVProVideo|file:../../unity-explorer-packages/AVProVideo|' "$jsonFilePath"
+            sed -i 's|git@github.com:decentraland/unity-explorer-packages.git?path=/SuperScrollView|file:../../unity-explorer-packages/SuperScrollView|' "$jsonFilePath"
+            sed -i 's|git@github.com:decentraland/unity-explorer-packages.git?path=/SoftMask|file:../../unity-explorer-packages/SoftMask|' "$jsonFilePath"
+            ls -l
+            # Display the content of manifest.json
+            cat "$jsonFilePath"
+
+
+      # Configure test runner
+      - uses: game-ci/unity-test-runner@v4.1.1
+        id: testRunner
+        timeout-minutes: 30
+        continue-on-error: true
+        with:
+          projectPath: Explorer
+          testMode: all      
+
+      - name: Convert NUnit to JUnit
+        if: always()
+        run: |
+          mkdir -p ${{ steps.testRunner.outputs.artifactsPath }}-junit
+          sudo rm /etc/apt/sources.list.d/microsoft-prod.list
+          sudo apt-get update
+          sudo apt-get install -y xsltproc
+          sudo xsltproc \
+            --output ${{ steps.testRunner.outputs.artifactsPath }}-junit/playmode-results-junit.xml \
+            .github/workflows/nunit-to-junit.xsl \
+            ${{ steps.testRunner.outputs.artifactsPath }}/playmode-results.xml \
+
+          sudo xsltproc \
+            --output ${{ steps.testRunner.outputs.artifactsPath }}-junit/editmode-results-junit.xml \
+            .github/workflows/nunit-to-junit.xsl \
+            ${{ steps.testRunner.outputs.artifactsPath }}/editmode-results.xml
+
+      - name: Report test results
+        uses: kuruk-mm/test-reporting@0.2
+        if: always()
+        with:
+          name: Report test results
+          path: ${{ steps.testRunner.outputs.artifactsPath }}-junit/*.xml
+          reporter: jest-junit
+
+      # Upload artifact
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Test results (play mode & edit mode)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+          if-no-files-found: error

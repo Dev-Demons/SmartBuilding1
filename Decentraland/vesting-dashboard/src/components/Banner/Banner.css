@@ -1,0 +1,57 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .banner {
+    flex-direction: row;
+  }
+}
+
+.banner .ui.header {
+  margin: 0;
+  font-size: 17px;
+  text-transform: none;
+}
+
+.banner .ui.sub.header {
+  font-size: 15px;
+  text-transform: none;
+}
+
+.banner .column.bannerContainer {
+  padding-right: 0 !important;
+}
+
+@media screen and (max-width: 767px) {
+  .banner .bannerAction {
+    width: 100% !important;
+  }
+
+  .banner .bannerAction .button {
+    width: 100% !important;
+  }
+}
+
+.banner .bannerContainer {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.banner .bannerText {
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

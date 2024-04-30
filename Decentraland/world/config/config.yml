@@ -1,0 +1,64 @@
+identityURL: "http://gameauth:9001/api/v1"
+coordinatorURL: "ws://coordinator:9000"
+
+auth0:
+  domain:   'dcl-test.auth0.com'
+
+coordinator:
+    host: 'localhost'
+    port: 9000
+    apiPort: 9080
+    logLevel: 'debug'
+    authTTL: 60
+    authEnabled: true
+    serverSecret: "123456"
+    metrics:
+        enabled: true
+        traceName: 'coordinator-local'
+
+commserver:
+    logLevel: 'debug'
+    apiHost: 'localhost'
+    apiPort: 9080
+    authTTL: 60
+    authEnabled: true
+    serverSecret: "123456"
+    maxPeers: 60
+    metrics:
+        ddEnabled: true
+        dbEnabled: false
+        debugEnabled: true
+        traceName: 'commserver-local'
+
+gameauth:
+    publicURL: "http://gameauth:9001"
+    host: 'localhost'
+    port: 9001
+    logLevel: 'debug'
+    jwtDuration: 60
+    clientsDataPath: 'config/identity/enabledClients.json'
+    privateKeyPath: "config/identity/devKeys/demoPrivate.key"
+    metrics:
+        enabled: false
+        traceName: 'identityService'
+
+cli:
+  auth0ClientID: lTUEMnFpYb0aiUKeIRPbh7pBxKM6sccx
+  auth0Audience: decentraland.org
+  logLevel: 'info'
+  centerX: 0
+  centerY: 0
+  radius: 3
+
+densetest:
+  nBots: 50
+  spawnObserver: false
+
+sparsetest:
+  nBots: 50
+
+realistictest:
+  nBots: 50
+  centerX: 0
+  centerY: 0
+  radius: 3

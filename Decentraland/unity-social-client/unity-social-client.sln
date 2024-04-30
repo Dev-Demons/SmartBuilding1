@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unity-social-client", "unity-social-client\unity-social-client.csproj", "{4A5043D5-FD64-42B4-AD95-128410D586DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A5043D5-FD64-42B4-AD95-128410D586DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A5043D5-FD64-42B4-AD95-128410D586DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A5043D5-FD64-42B4-AD95-128410D586DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5043D5-FD64-42B4-AD95-128410D586DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

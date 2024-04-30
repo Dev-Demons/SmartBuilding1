@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setenv:dev": "REACT_APP_MANA_CONTRACT_ADDRESS='0xe5969D6592879B8ed89e77852595d434C44220ae'",
+    "setenv:prod": "REACT_APP_MANA_CONTRACT_ADDRESS='0x0f5d2fb29fb7d3cfee444a200298f468908cc942'",
+    "start": "nodemon --exec babel-node lib/index.js",
+    "lint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andres Mijares <andresmijares@gmail.com> (http://andresmijares.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-stage-3": "6.24.1",
+    "eslint": "4.14.0",
+    "eslint-config-standard": "11.0.0-beta.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-node": "5.2.1",
+    "eslint-plugin-promise": "3.6.0",
+    "eslint-plugin-standard": "3.0.1",
+    "morgan": "^1.9.0",
+    "nodemon": "1.14.7",
+    "standard": "10.0.3"
+  },
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "cors": "2.8.4",
+    "decentraland-commons": "git+https://github.com/decentraland/commons.git#release",
+    "express": "4.16.2",
+    "joi": "13.0.2",
+    "pg": "7.4.0",
+    "pg-hstore": "2.3.2",
+    "ramda": "0.25.0",
+    "sequelize": "4.28.7",
+    "uuid": "3.1.0"
+  }
+}

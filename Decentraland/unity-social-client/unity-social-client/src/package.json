@@ -1,0 +1,25 @@
+{
+  "name": "com.decentraland.unity-social-client",
+  "version": "1.0.0",
+  "displayName": "Social Client for Unity",
+  "description": "Decentraland Social Client for Unity Package",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "gitDependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask"
+  },
+  "dependencies": {
+  },
+  "testables": [
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+hhttps://github.com/decentraland/unity-social-client.git?path=unity-social-client/src"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Decentraland",
+    "email": "contact@decentraland.org",
+    "url": "https://www.decentraland.org"
+  }
+}

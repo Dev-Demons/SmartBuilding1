@@ -1,0 +1,18 @@
+{
+    "name": "SocketIOClient",
+    "rootNamespace": "",
+    "references": [
+        "GUID:702f733b4deb246808c6ce84d93b5c9c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "System.Text.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

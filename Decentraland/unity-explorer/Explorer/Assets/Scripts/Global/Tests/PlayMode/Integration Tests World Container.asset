@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e7669db769f7224e94ce1be19e8677e, type: 3}
+  m_Name: Integration Tests World Container
+  m_EditorClassIdentifier: 
+  settings:
+  - rid: 6784895267130048516
+  - rid: 1268264197252972545
+  - rid: 4753057106328551425
+  - rid: 4555433133200637954
+  - rid: 758312634468794373
+  - rid: 758312881421549570
+  references:
+    version: 2
+    RefIds:
+    - rid: 758312634468794373
+      type: {class: AudioSourcesPlugin/AudioSourcesPluginSettings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        AudioMixerGroup: {fileID: -6220823946282331284, guid: e38b0fb061d7ffa47b54d89ecd483bd2, type: 2}
+    - rid: 758312881421549570
+      type: {class: InteractionsAudioPlugin/PluginSettings, ns: DCL.PluginSystem.Global, asm: DCL.Plugins}
+      data:
+        <InteractionsAudioConfigsReference>k__BackingField:
+          m_AssetGUID: cbb820cf51b7a714e88a7c873eb5de9c
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 1268264197252972545
+      type: {class: InteractionPlugin/Settings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        <RaycastBucketThreshold>k__BackingField: 3
+        <RaycastFrameBudgetMs>k__BackingField: 3
+        <PlayerOriginRaycastMaxDistance>k__BackingField: 200
+        <GlobalInputPropagationBucketThreshold>k__BackingField: 3
+        <hoverMaterial>k__BackingField:
+          m_AssetGUID: 31f3cd961c052c84baf27b3938e5b0f4
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <hoverOutOfRangeMaterial>k__BackingField:
+          m_AssetGUID: 0c9a2d5b397aa7e4b892825b20d8bcb8
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 4555433133200637954
+      type: {class: CharacterTriggerAreaSettings, ns: DCL.PluginSystem.Global, asm: DCL.Plugins}
+      data:
+        CharacterTriggerAreaPrefab:
+          m_AssetGUID: 8c2fa120406894778bdb7d4e45135d3b
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 4753057106328551425
+      type: {class: SceneUIPlugin/Settings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        <Canvas>k__BackingField:
+          m_AssetGUID: e0f5a4ab5d8f74640ae94adb6824bd45
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <StyleSheet>k__BackingField:
+          m_AssetGUID: 295cf8ad8d171d849863eccaf581c9e7
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 6784895267130048516
+      type: {class: MaterialsPlugin/Settings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        basicMaterial:
+          m_AssetGUID: 0009549658aa1be40bbed401477fbd48
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        pbrMaterial:
+          m_AssetGUID: 60d3d51407bdce5449781acd4ee86781
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <LoadingAttemptsCount>k__BackingField: 6
+        <PoolInitialCapacity>k__BackingField: 256
+        <PoolMaxSize>k__BackingField: 2048

@@ -1,0 +1,22 @@
+.bar__container {
+  height: 8px;
+  width: 100%;
+  background-color: var(--light-gray);
+  border-radius: 4px;
+  margin: 15px 0;
+  position: relative;
+}
+
+.bar {
+  height: inherit;
+  position: absolute;
+  border-radius: inherit;
+}
+
+.bar.vested {
+  background-color: var(--green);
+}
+
+.bar.released {
+  background-color: var(--orange);
+}

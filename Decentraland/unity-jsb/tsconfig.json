@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "newLine": "CRLF",
+        // "module": "ESNext",
+        "module": "commonjs",
+        "target": "ES2018",
+        "sourceRoot": "",
+        "outDir": "Scripts/out",
+        // "outFile": "Scripts/out/code.js",
+        "typeRoots": [
+            "Packages/cc.starlessnight.unity-jsb/Typings",
+            "Assets/Generated/Typings",
+            "Scripts/types"
+        ],
+        "moduleResolution": "node",
+        "types": [
+            "node"
+        ],
+        // "listEmittedFiles": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        // use 'skipLibCheck' if compilation reports error TS2300 on Promise/Proxy type definition
+        // or just ignore the errors (the typescript source will still be compiled into js)
+        // "skipLibCheck": true,
+        // "strictNullChecks": true,
+        "allowJs": true,
+        "jsx": "react",
+        "jsxFactory": "JSX.createElement",
+        // "jsxFragmentFactory": "React.Fragment",
+        // "jsxImportSource": "react-jsb",
+        "inlineSourceMap": false,
+        "sourceMap": true
+    },
+    "compileOnSave": true,
+    "include": [
+        "Packages/cc.starlessnight.unity-jsb/Typings/**/*.ts",
+        "Assets/Generated/**/*.ts",
+        "Scripts/types/**/*.ts",
+        "Scripts/src/**/*.ts",
+        "Scripts/src/**/*.tsx"
+    ],
+    "exclude": [
+        "Assets/Examples/Scripts/out/**/*"
+    ]
+}

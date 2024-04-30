@@ -1,0 +1,61 @@
+import { ThemeProvider } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Fab from '@mui/material/Fab';
+import ContrastIcon from '@mui/icons-material/Contrast';
+import { rarity, neutral } from "@dcl/watermelon-types/src/colors";
+import RarityLabel from "@dcl/watermelon-mui/src/components/Rarity/RarityLabel";
+import { dark, light } from "@dcl/watermelon-mui/src/theme";
+
+export function Example() {
+  return (
+    <Stack spacing={1} direction="column" alignItems="center">
+      {Object.keys(rarity).map((rarity) => (
+        <div key={rarity}>
+          <RarityLabel rarity={rarity} />
+        </div>
+      ))}
+    </Stack>
+  );
+}
+
+export function Presentation() {
+  const [switched, setSwitched] = React.useState(false)
+  return (
+    <>
+      <Grid container>
+        <Grid
+          item
+          xs={6}
+          minHeight="100vh"
+          alignItems="center"
+          justifyContent="center"
+          padding="5rem"
+          backgroundColor={switched ? neutral.softWhite : neutral.softBlack1}
+        >
+          <ThemeProvider theme={switched ? light : dark}>
+            <Example />
+          </ThemeProvider>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          minHeight="100vh"
+          alignItems="center"
+          justifyContent="center"
+          padding="5rem"
+          backgroundColor={switched ? neutral.softBlack1 : neutral.softWhite}
+        >
+          <ThemeProvider theme={switched ? dark : light }>
+            <Example />
+          </ThemeProvider>
+        </Grid>
+      </Grid>
+      <Fab color={switched ? 'primary' : 'secondary'} style={{ position: 'fixed', bottom: 10, right: 10 }} onClick={() => setSwitched(!switched)} >
+        <ContrastIcon />
+      </Fab>
+    </>
+  );
+}
+
+<Presentation />

@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e7669db769f7224e94ce1be19e8677e, type: 3}
+  m_Name: World Plugins Container
+  m_EditorClassIdentifier: 
+  settings:
+  - rid: 6784895267130048515
+  - rid: 1268264040174714880
+  - rid: 7387084847885844480
+  - rid: 4753057106328551424
+  - rid: 847852733734322176
+  - rid: 1045841226745774107
+  - rid: 1045841258647388162
+  - rid: 758312499805421571
+  - rid: 758312842344792066
+  references:
+    version: 2
+    RefIds:
+    - rid: 758312499805421571
+      type: {class: AudioSourcesPlugin/AudioSourcesPluginSettings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        AudioMixerGroup: {fileID: -6220823946282331284, guid: e38b0fb061d7ffa47b54d89ecd483bd2, type: 2}
+    - rid: 758312842344792066
+      type: {class: InteractionsAudioPlugin/PluginSettings, ns: DCL.PluginSystem.Global, asm: DCL.Plugins}
+      data:
+        <InteractionsAudioConfigsReference>k__BackingField:
+          m_AssetGUID: cbb820cf51b7a714e88a7c873eb5de9c
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 847852733734322176
+      type: {class: CharacterTriggerAreaSettings, ns: DCL.PluginSystem.Global, asm: DCL.Plugins}
+      data:
+        CharacterTriggerAreaPrefab:
+          m_AssetGUID: 8c2fa120406894778bdb7d4e45135d3b
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 1045841226745774107
+      type: {class: DefaultTexturesContainer/Settings, ns: DCL.PluginSystem.Global, asm: DCL.Plugins}
+      data:
+        <DefaultMain256>k__BackingField:
+          m_AssetGUID: b0989591ebd3293419eece13d705a1e3
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultMain512>k__BackingField:
+          m_AssetGUID: b7201c2efeb480b4293d5baae77973d6
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultNormal256>k__BackingField:
+          m_AssetGUID: 2df144b808932744487656f89a42fb11
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultNormal512>k__BackingField:
+          m_AssetGUID: 4428c33e669492748afd75828965504b
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultEmmisive256>k__BackingField:
+          m_AssetGUID: 6bdb4b9ae9bf04745acee14bf4c684e1
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultEmmisive512>k__BackingField:
+          m_AssetGUID: f3fd7329d073f964aaec82eb9acc9ed3
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultMask256>k__BackingField:
+          m_AssetGUID: 6bdb4b9ae9bf04745acee14bf4c684e1
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <DefaultMask512>k__BackingField:
+          m_AssetGUID: f3fd7329d073f964aaec82eb9acc9ed3
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 1045841258647388162
+      type: {class: LODContainer/LODContainerSettings, ns: DCL.LOD.Systems, asm: DCL.Plugins}
+      data:
+        <RoadData>k__BackingField:
+          m_AssetGUID: d7baa85a7da60ef4b8b5252d78fa1b3d
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <LODSettingAsset>k__BackingField:
+          m_AssetGUID: 0703f7736b8c9b244953ae7c6ff9a037
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 1268264040174714880
+      type: {class: InteractionPlugin/Settings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        <RaycastBucketThreshold>k__BackingField: 3
+        <RaycastFrameBudgetMs>k__BackingField: 3
+        <PlayerOriginRaycastMaxDistance>k__BackingField: 200
+        <GlobalInputPropagationBucketThreshold>k__BackingField: 3
+        <hoverMaterial>k__BackingField:
+          m_AssetGUID: 31f3cd961c052c84baf27b3938e5b0f4
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <hoverOutOfRangeMaterial>k__BackingField:
+          m_AssetGUID: 0c9a2d5b397aa7e4b892825b20d8bcb8
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 4753057106328551424
+      type: {class: SceneUIPlugin/Settings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        <Canvas>k__BackingField:
+          m_AssetGUID: e0f5a4ab5d8f74640ae94adb6824bd45
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <StyleSheet>k__BackingField:
+          m_AssetGUID: 295cf8ad8d171d849863eccaf581c9e7
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+    - rid: 6784895267130048515
+      type: {class: MaterialsPlugin/Settings, ns: DCL.PluginSystem.World, asm: DCL.Plugins}
+      data:
+        basicMaterial:
+          m_AssetGUID: 60d3d51407bdce5449781acd4ee86781
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        pbrMaterial:
+          m_AssetGUID: 0009549658aa1be40bbed401477fbd48
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 0
+        <LoadingAttemptsCount>k__BackingField: 6
+        <PoolInitialCapacity>k__BackingField: 256
+        <PoolMaxSize>k__BackingField: 2048
+    - rid: 7387084847885844480
+      type: {class: DynamicWorldSettings, ns: Global.Dynamic, asm: DCL.Plugins}
+      data:
+        <DebugViewsCatalog>k__BackingField:
+          <Widget>k__BackingField: {fileID: 9197481963319205126, guid: f3bf08b2b62097d4aa0574f7bafa4a86, type: 3}
+          <ControlContainer>k__BackingField: {fileID: 9197481963319205126, guid: 6da3ff28c8a87e0428fa07019c15fa2f, type: 3}
+          <Button>k__BackingField: {fileID: 9197481963319205126, guid: 207e926de905f974395ae4f2ddbc5a75, type: 3}
+          <Toggle>k__BackingField: {fileID: 9197481963319205126, guid: 5139c1685feccad419a708be6686e120, type: 3}
+          <ConstLabel>k__BackingField: {fileID: 9197481963319205126, guid: f95cd467ad82d3d468902ab089f3ad7b, type: 3}
+          <SetOnlyLabel>k__BackingField: {fileID: 9197481963319205126, guid: 391c36caf5881234296430ab678bc270, type: 3}
+          <Hint>k__BackingField: {fileID: 9197481963319205126, guid: 6db404a6800b10a428f41e5938693101, type: 3}
+          <TextField>k__BackingField: {fileID: 9197481963319205126, guid: 9ffae7c4dbb654f4bb5cd3419ceda579, type: 3}
+          <LongMarker>k__BackingField: {fileID: 9197481963319205126, guid: 55d7d168269ae5c46a702ea7abff1944, type: 3}
+          <IntField>k__BackingField: {fileID: 9197481963319205126, guid: de80afad302843447b618cd6ca98f3ed, type: 3}
+          <IntSlider>k__BackingField: {fileID: 9197481963319205126, guid: ef1076a0aebac6c4c84b891d303e85ec, type: 3}
+          <FloatField>k__BackingField: {fileID: 9197481963319205126, guid: 3f2e0e33e167f85488492c41409dc34a, type: 3}
+          <FloatSlider>k__BackingField: {fileID: 9197481963319205126, guid: ff6253c6bd224de4aaf597f510466a41, type: 3}
+          <Vector2IntField>k__BackingField: {fileID: 9197481963319205126, guid: 9b80a9e15429ecd489572a5de9918603, type: 3}
+          <Vector3Field>k__BackingField: {fileID: 9197481963319205126, guid: 6e52ba5e3264bfd43b23db247aa2457a, type: 3}
+          <DropdownField>k__BackingField: {fileID: 9197481963319205126, guid: 63de32c36b8356d42bb93522421d6379, type: 3}

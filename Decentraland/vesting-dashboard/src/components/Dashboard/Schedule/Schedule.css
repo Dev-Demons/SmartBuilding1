@@ -1,0 +1,118 @@
+.timeline {
+  width: 100%;
+  --future-color: rgba(115, 110, 125, 0.5);
+  margin-bottom: 30px;
+}
+
+.timeline ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 30px;
+}
+
+.timeline ul li {
+  position: relative;
+}
+
+.timeline ul li.more .ui.header {
+  color: var(--green);
+}
+
+.timeline.paused ul li.more .ui.header {
+  color: var(--paused-color);
+}
+
+.timeline.revoked ul li.more .ui.header {
+  color: var(--revoked-color);
+}
+
+.timeline ul li.future .ui.header {
+  color: var(--future-color);
+}
+
+.timeline ul li::before {
+  content: ' ';
+  border: 0.33em solid var(--green);
+  outline: 0.28em solid white;
+  background-color: var(--green);
+  border-radius: 100%;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em;
+  margin-right: 1.5em;
+  margin-left: -1em;
+  display: inline-table;
+  vertical-align: middle;
+  font-size: xx-small;
+  margin-left: -30px;
+  margin-top: 10px;
+}
+
+.timeline.paused ul li::before {
+  border: 0.33em solid var(--paused-color);
+  background-color: var(--paused-color);
+}
+
+.timeline.revoked ul li::before {
+  border: 0.33em solid var(--revoked-color);
+  background-color: var(--revoked-color);
+}
+
+.timeline ul li.more::before {
+  background-color: white;
+}
+
+.timeline ul li.future::before {
+  border: 0.33em solid var(--future-color);
+  background-color: white;
+}
+
+.timeline ul li div.timeline__event::before {
+  content: '';
+  position: absolute;
+  border-left: 2px solid var(--green);
+  top: -16px;
+  left: -1.85em;
+  bottom: 0;
+  z-index: -1;
+  height: 100%;
+}
+
+.timeline.paused ul li div.timeline__event::before {
+  border-left: 2px solid var(--paused-color);
+}
+
+.timeline.revoked ul li div.timeline__event::before {
+  border-left: 2px solid var(--revoked-color);
+}
+
+.timeline ul li.future div.timeline__event::before {
+  border-left: 2px solid var(--future-color);
+}
+
+ul li:first-child div.timeline__event:before {
+  content: none;
+}
+
+ul li:last-child {
+  padding-bottom: 0;
+}
+
+.timeline .timeline__event {
+  display: inline-table;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+.ui.header > img.Future__Icon {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .timeline ul li div.timeline__event::before {
+    top: -35px;
+  }
+}

@@ -1,0 +1,121 @@
+name: prebuilt_quickjs
+
+on: 
+  push:
+    paths: 
+      - jsb_build/quickjs/quickjs-latest/quickjs.c
+      - jsb_build/quickjs/quickjs-latest/quickjs.h
+      - jsb_build/quickjs/unity_qjs.c
+      - jsb_build/quickjs/unity_ext.c
+      - jsb_build/quickjs/CMakeLists.txt
+      - jsb_build/quickjs/make_jsb_android.sh
+      - jsb_build/quickjs/make_jsb_ios.sh
+      - jsb_build/quickjs/make_jsb_macos.sh
+      - jsb_build/quickjs/make_jsb_win.sh
+      - jsb_build/quickjs/make_jsb_wsa.bat
+      - jsb_build/quickjs/make_jsb_linux.sh
+      - .github/workflows/prebuilt_quickjs.yml
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lukka/get-cmake@v3.19.0
+      - name: Install android-ndk
+        run: |
+          cd ~
+          wget -O android-ndk -q https://dl.google.com/android/repository/android-ndk-r23b-linux.zip
+          sudo apt install unzip -y
+          unzip -q android-ndk
+          export ANDROID_NDK=~/android-ndk-r23b
+      - name: Build
+        run: |
+          echo $ANDROID_NDK
+          cd jsb_build/quickjs
+          chmod 744 make_jsb_android.sh
+          ./make_jsb_android.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./jsb_build/prebuilt/Plugins/**/*
+          name: prebuilt_quickjs_libs
+
+  wsa:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Build
+        run: |
+          cd jsb_build\quickjs
+          .\make_jsb_wsa.bat
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./jsb_build/prebuilt/Plugins/**/*
+          name: prebuilt_quickjs_libs
+
+  windows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lukka/get-cmake@v3.19.0
+      - name: Build
+        run: |
+          sudo apt install mingw-w64
+          cd jsb_build/quickjs
+          chmod 744 make_jsb_win.sh
+          ./make_jsb_win.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./jsb_build/prebuilt/Plugins/**/*
+          name: prebuilt_quickjs_libs
+
+  linux:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lukka/get-cmake@v3.19.0
+      - name: Build
+        run: |
+          sudo apt install g++
+          cd jsb_build/quickjs
+          chmod 744 make_jsb_linux.sh
+          ./make_jsb_linux.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./jsb_build/prebuilt/Plugins/**/*
+          name: prebuilt_quickjs_libs
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lukka/get-cmake@v3.19.0
+      - name: Build
+        run: |
+          cd jsb_build/quickjs
+          sh ./make_jsb_ios.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./jsb_build/prebuilt/Plugins/**/*
+          name: prebuilt_quickjs_libs
+  osx:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lukka/get-cmake@v3.19.0
+      - name: Build
+        run: |
+          cd jsb_build/quickjs
+          sh ./make_jsb_macos.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./jsb_build/prebuilt/Plugins/**/*
+          name: prebuilt_quickjs_libs

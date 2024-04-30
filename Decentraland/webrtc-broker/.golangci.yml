@@ -1,0 +1,22 @@
+linters-settings:
+  govet:
+    check-shadowing: false
+  misspell:
+    locale: US
+
+linters:
+  enable-all: true
+  disable:
+    - dupl
+    - funlen
+    - gocognit
+    - gocyclo
+    - gomnd
+
+issues:
+  exclude-use-default: false
+
+  exclude-rules:
+    - path: bin/*
+      linters:
+        - godox
