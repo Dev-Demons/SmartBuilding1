@@ -1,0 +1,108 @@
+.main {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  gap: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.items {
+  flex-grow: 1;
+  display: grid;
+  gap: 12px;
+  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-rows: max-content;
+  margin-bottom: 12px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 15px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  padding: 150px 0;
+  height: 100%;
+}
+
+.empty .message .image {
+  display: flex;
+  justify-content: center;
+}
+
+.empty .message .image img {
+  height: 82px;
+  width: 82px;
+}
+
+.empty .message .text {
+  font-size: 18px;
+}
+
+.empty .message .text,
+.empty .message .title {
+  text-align: center;
+}
+
+.empty .message .mainCategoryActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.empty .message .subCategoryActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.empty .message .emptyActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.informationBar {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+  .items {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .empty .message .text {
+    font-size: 14px;
+  }
+
+  .empty .message .actions {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 15px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

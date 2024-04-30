@@ -1,0 +1,46 @@
+{
+  "name": "@dcl/platform-crypto-middleware",
+  "version": "0.0.0-development",
+  "description": "Platform's Authentication Middleware",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "lint:check": "eslint '**/*.{js,ts}'",
+    "lint:fix": "eslint '**/*.{js,ts}' --fix",
+    "test": "jest --forceExit --detectOpenHandles --verbose",
+    "test:coverage": "jest --forceExit --detectOpenHandles --coverage --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decentraland/platform-crypto-middleware.git"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "tabWidth": 2
+  },
+  "keywords": [
+    "middleware",
+    "well-known-components"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/decentraland/platform-crypto-middleware/issues"
+  },
+  "homepage": "https://github.com/decentraland/platfom-crypto-middleware#readme",
+  "dependencies": {
+    "@dcl/crypto": "^3.4.3",
+    "@well-known-components/fetch-component": "^2.0.2",
+    "@well-known-components/interfaces": "^1.4.2"
+  },
+  "devDependencies": {
+    "@dcl/eslint-config": "^1.1.8",
+    "@well-known-components/test-helpers": "^1.5.3",
+    "typescript": "^4.4.3"
+  }
+}

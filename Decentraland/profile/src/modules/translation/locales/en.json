@@ -1,0 +1,190 @@
+{
+  "global": {
+    "load_more": "Load more"
+  },
+  "avatar": {
+    "edit": "Edit Avatar",
+    "message": "Edit your avatar in Decentraland"
+  },
+  "profile_information": {
+    "default_name": "Unnamed",
+    "edit": "Edit Profile",
+    "copied": "Copied",
+    "copy_link": "Copy Link",
+    "share_on_tw": "Share on Twitter",
+    "qr_code_item": "Share with QR Code",
+    "qr_code_info": "Scan to see my Profile",
+    "qr_code_info_with_name": "Scan to see {name}'s Profile",
+    "share_my_profile_tw_message": "Discover more about me through my Decentraland profile! #DCLProfiles\n",
+    "share_others_profile_tw_message": "Found an awesome Decentraland profile. Take a look! #DCLProfiles\n",
+    "view_more": "View More",
+    "blocked": "Blocked",
+    "worlds_tooltip": "Worlds",
+    "share_tooltip": "Share"
+  },
+  "blocked": {
+    "blocked_logged_user_title": "{name} blocked you",
+    "blocked_profile_title": "You blocked {name}",
+    "description": "This means that you can't see this person's profile, send a friend request, messages and see their status."
+  },
+  "worlds_button": {
+    "get_a_name": "Get a unique name",
+    "activate_world": "Activate my world",
+    "jump": "Jump to \"{domain}\" World"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "own_assets": "My Assets",
+    "others_assets": "Assets",
+    "own_creations": "My Creations",
+    "others_creations": "Creations"
+  },
+  "friendship_button": {
+    "friends": "Friends",
+    "add_friend": "Add Friend",
+    "pending": "Pending Request",
+    "cancel_request": "Cancel Request",
+    "accept_request": "Accept Request",
+    "blocked": "Blocked",
+    "unfriend": "Unfriend"
+  },
+  "friends_modal": {
+    "friends_title": "Friends",
+    "mutuals_title": "Mutual friends"
+  },
+  "friends_counter": {
+    "friends": "{count} {count, plural, one {friend} other {friends}}"
+  },
+  "mutual_friends_counter": {
+    "mutual": "mutual"
+  },
+  "overview": {
+    "title": "Equipped Collectibles",
+    "start_dressing": "Start dressing in ways beyond your imagination ",
+    "get_collectibles": "Get your first collectible Wearable and rock it in Decentraland!",
+    "go_to_marketplace": "go to marketplace",
+    "no_collectibles": " doesn't have any collectible Wearables yet."
+  },
+  "about_modal": {
+    "title": "About",
+    "description_label": "About",
+    "country_label": "Country",
+    "employment_status_label": "Employment Status",
+    "gender_label": "Gender",
+    "pronouns_label": "Pronouns",
+    "relationship_status_label": "Relationship Status",
+    "sexual_orientation_label": "Sexual Orientation",
+    "language_label": "Language",
+    "profession_label": "Profession",
+    "birthdate_label": "Birth Date",
+    "real_name_label": "Real Name",
+    "hobbies_label": "Hobbies",
+    "links_label": "Links"
+  },
+  "confirmation_modal": {
+    "pending_request_title": "Are you sure you want to cancel the request?",
+    "pending_request_subtitle": "Remember that you can resend the request whenever you want.",
+    "pending_request_confirmation": "cancel request",
+    "pending_request_cancel": "go back",
+    "pending_request_title_mobile": "Cancel request",
+    "friend_title": "Are you sure you want to unfriend {avatarName}?",
+    "friend_subtitle": "Remember that you can resend the request whenever you want.",
+    "friend_confirmation": "yes, unfriend",
+    "friend_cancel": "cancel",
+    "friend_title_mobile": "Unfriend {avatarName}"
+  },
+  "navbar": {
+    "sign_in": "sign in"
+  },
+  "not_found_page": {
+    "title": "Looks like even explorers can get lost!<br></br>Can't find this address or name in Decentraland.",
+    "message": "Please double-check and try again"
+  },
+  "categories": {
+    "wearable": "Wearables",
+    "wearable_head": "Head",
+    "wearable_upper_body": "Upper body",
+    "wearable_lower_body": "Lower body",
+    "wearable_feet": "Feet",
+    "wearable_hands": "Hands",
+    "wearable_accessories": "Accessories",
+    "wearable_skin": "Skin",
+    "wearable_earring": "Earrings",
+    "wearable_eyewear": "Eyewear",
+    "wearable_hat": "Hat",
+    "wearable_helmet": "Helmet",
+    "wearable_mask": "Mask",
+    "wearable_tiara": "Tiara",
+    "wearable_top_head": "Top head",
+    "wearable_eyebrows": "Eyebrows",
+    "wearable_eyes": "Eyes",
+    "wearable_facial_hair": "Facial hair",
+    "wearable_hair": "Hair",
+    "wearable_mouth": "Mouth",
+    "emote": "Emotes",
+    "emote_dance": "Dance",
+    "emote_stunt": "Stunt",
+    "emote_greetings": "Greetings",
+    "emote_fun": "Fun",
+    "emote_poses": "Poses",
+    "emote_reactions": "Reactions",
+    "emote_horror": "Horror",
+    "emote_miscellaneous": "Miscellaneous",
+    "land": "Land",
+    "land_parcel": "Parcels",
+    "land_estate": "Estates",
+    "ens": "Names"
+  },
+  "categories_menu": {
+    "title": "Categories"
+  },
+  "catalog_sort_by": {
+    "newest": "Newest",
+    "recently_sold": "Recently sold",
+    "cheapest": "Cheapest",
+    "most_expensive": "Most expensive",
+    "recently_listed": "Recently listed"
+  },
+  "creations": {
+    "items_count": "{count} {count, plural, one {item} other {items}}",
+    "own_empty_main_category_title": "You haven't created any {parentCategory} yet",
+    "own_empty_sub_category_title": "No {category} {parentCategory} found",
+    "other_empty_main_category_title": "{name} hasn't created any {parentCategory} yet",
+    "other_empty_sub_category_title": "{name} hasn't created any {category} {parentCategory} yet",
+    "empty_multiple_filters_title": "No results found for these filters",
+    "own_empty_main_category_text": "Unleash your creativity and start earning from your own designs!",
+    "own_empty_sub_category_text": "You haven’t published any {category} {parentCategory} yet.",
+    "own_empty_primary_action": "Learn more",
+    "own_empty_secondary_action": "Create a collection",
+    "clear_filters": "Clear filters"
+  },
+  "on_sale_filter": {
+    "title": "Status",
+    "label": "On sale",
+    "for_sale": "Only for sale",
+    "not_for_sale": "Include items not for sale",
+    "tooltip": "Show items only for sale or both"
+  },
+  "filters_modal": {
+    "title": "Filters",
+    "reset": "Reset",
+    "apply": "Apply filters"
+  },
+  "assets_tab": {
+    "assets_count": "{count} {count, plural, one {asset} other {assets}}",
+    "own_empty_category": "You don't have any {category} yet.",
+    "other_empty_category": "{name} doesn't have any {category} yet",
+    "go_to_marketplace": "Go to the marketplace",
+    "empty_with_filters": "No results found for these filters",
+    "clear_filters": "Clear filters"
+  },
+  "nfts_sort_by": {
+    "name": "Name",
+    "newest": "Newest",
+    "recently_sold": "Recently sold",
+    "recently_listed": "Recently listed",
+    "cheapest": "Cheapest",
+    "rental_listing_date": "Recently listed for rent",
+    "max_rental_price": "Cheapest listing"
+  }
+}

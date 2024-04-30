@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+name: Clippy check
+jobs:
+  clippy_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+      - uses: actions/checkout@v1
+      - run: rustup component add clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: main
+          key: build
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features

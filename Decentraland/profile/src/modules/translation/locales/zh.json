@@ -1,0 +1,190 @@
+{
+  "global": {
+    "load_more": "装载更多"
+  },
+  "avatar": {
+    "edit": "編輯頭像",
+    "message": "在 Decentraland 中编辑您的头像"
+  },
+  "profile_information": {
+    "default_name": "未命名的",
+    "edit": "編輯個人資料",
+    "copied": "已復制",
+    "copy_link": "複製鏈接",
+    "tw_message": "分享到Twitter",
+    "qr_code_item": "与QR码共享",
+    "qr_code_info": "扫描以查看我的个人资料",
+    "qr_code_info_with_name": "扫描以查看{name}的个人资料",
+    "share_my_profile_tw_message": "通过我的 Decentraland 个人资料了解更多关于我的信息！#DCLProfiles\n",
+    "share_others_profile_tw_message": "找到了很棒的 Decentraland 简介。 看一看！#DCLProfiles\n",
+    "view_more": "查看更多",
+    "blocked": "被阻止",
+    "worlds_tooltip": "世界",
+    "share_tooltip": "分享"
+  },
+  "blocked": {
+    "blocked_logged_user_title": "{name} 阻止了你",
+    "blocked_profile_title": "您屏蔽了 {name}",
+    "description": "这意味着您无法查看此人的个人资料、发送好友请求、消息以及查看他们的状态。"
+  },
+  "worlds_button": {
+    "get_a_name": "取一个独特的名字",
+    "activate_world": "创造我的世界",
+    "jump": "跳转到“{domain}”世界"
+  },
+  "tabs": {
+    "overview": "概述",
+    "own_assets": "我的资产",
+    "others_assets": "资产",
+    "own_creations": "我的创作",
+    "others_creations": "创作"
+  },
+  "friendship_button": {
+    "friends": "朋友们",
+    "add_friend": "添加好友",
+    "pending": "待处理请求",
+    "cancel_request": "取消请求",
+    "accept_request": "接受请求",
+    "blocked": "阻止",
+    "unfriend": "不朋友"
+  },
+  "friends_modal": {
+    "friends_title": "朋友们",
+    "mutuals_title": "共同的朋友"
+  },
+  "friends_counter": {
+    "friends": "{count} 朋友們"
+  },
+  "mutual_friends_counter": {
+    "mutual": "共同的朋友"
+  },
+  "overview": {
+    "title": "裝備收藏品",
+    "start_dressing": "开始以超出你想象的方式穿着",
+    "get_collectibles": "获得你的第一件可收藏的服饰,在Decentraland展示它!",
+    "go_to_marketplace": "前往市场",
+    "no_collectibles": " 還沒有收藏品"
+  },
+  "about_modal": {
+    "title": "关于",
+    "description_label": "关于",
+    "country_label": "国家",
+    "employment_status_label": "就业状况",
+    "gender_label": "性别",
+    "pronouns_label": "代词",
+    "relationship_status_label": "关系状态",
+    "sexual_orientation_label": "性取向",
+    "language_label": "语言",
+    "profession_label": "职业",
+    "birthdate_label": "出生日期",
+    "real_name_label": "真正的名字",
+    "hobbies_label": "兴趣爱好",
+    "links_label": "链接"
+  },
+  "confirmation_modal": {
+    "pending_request_title": "您确定要取消请求吗？",
+    "pending_request_subtitle": "请记住，您随时可以重新发送请求。",
+    "pending_request_confirmation": "取消请求",
+    "pending_request_cancel": "返回",
+    "pending_request_title_mobile": "取消請求",
+    "friend_title": "您确定要解除与{avatarName}的好友关系吗？",
+    "friend_subtitle": "请记住，您随时可以重新发送请求。",
+    "friend_confirmation": "是的，解除好友关系",
+    "friend_cancel": "取消",
+    "friend_title_mobile": "解除好友关系 {avatarName}"
+  },
+  "navbar": {
+    "sign_in": "登入"
+  },
+  "not_found_page": {
+    "title": "看来即使是探险家也会迷路！<br></br>在 Decentraland 中找不到此地址或名称。",
+    "message": "请仔细检查并重试"
+  },
+  "categories": {
+    "wearables": "可穿戴",
+    "wearables_head": "头部",
+    "wearables_upper_body": "上半身",
+    "wearables_lower_body": "下半身",
+    "wearables_feet": "腿部",
+    "wearables_hands": "手",
+    "wearables_accessories": "饰品",
+    "wearables_skin": "皮肤",
+    "wearables_earring": "耳环",
+    "wearables_eyewear": "眼镜",
+    "wearables_hat": "帽子",
+    "wearables_helmet": "头盔",
+    "wearables_mask": "面具",
+    "wearables_tiara": "头饰",
+    "wearables_top_head": "头顶",
+    "wearables_eyebrows": "眉毛",
+    "wearables_eyes": "眼睛",
+    "wearables_facial_hair": "胡子",
+    "wearables_hair": "头发",
+    "wearables_mouth": "嘴巴",
+    "emotes": "表情",
+    "emotes_dance": "舞蹈",
+    "emotes_stunt": "特技",
+    "emotes_greetings": "问候",
+    "emotes_fun": "乐趣",
+    "emotes_poses": "姿势",
+    "emotes_reactions": "反应",
+    "emotes_horror": "恐怖",
+    "emotes_miscellaneous": "各种各样的",
+    "land": "土地",
+    "land_parcel": "地块",
+    "land_estate": "产业",
+    "ens": "名称"
+  },
+  "categories_menu": {
+    "title": "类别"
+  },
+  "catalog_sort_by": {
+    "newest": "最新",
+    "recently_sold": "最近售出",
+    "cheapest": "最低价",
+    "most_expensive": "最貴",
+    "recently_listed": "最新上市"
+  },
+  "creations": {
+    "items_count": "{count} 项目}",
+    "own_empty_main_category_title": "您尚未创建任何{parentCategory}",
+    "own_empty_sub_category_title": "找不到{category} {parentCategory}",
+    "other_empty_main_category_title": "{name} 尚未创建任何 {parentCategory}",
+    "other_empty_sub_category_title": "{name} 尚未创建任何 {category} {parentCategory}",
+    "empty_multiple_filters_title": "没有找到这些过滤器的结果",
+    "own_empty_main_category_text": "释放您的创造力并开始从您自己的设计中赚钱！",
+    "own_empty_sub_category_text": "您尚未发布任何{category} {parentCategory}。",
+    "own_empty_primary_action": "了解更多",
+    "own_empty_secondary_action": "创建一个集合",
+    "clear_filters": "清除过滤器"
+  },
+  "on_sale_filter": {
+    "title": "地位",
+    "label": "出售",
+    "for_sale": "仅出售",
+    "not_for_sale": "包括不出售的物品",
+    "tooltip": "仅显示出售物品或两者兼而有之"
+  },
+  "filters_modal": {
+    "filters": "过滤器",
+    "reset": "重置",
+    "apply": "应用过滤器"
+  },
+  "assets_tab": {
+    "assets_count": "{count} {count, plural, one {资产} other {资产}}",
+    "own_empty_category": "你没有任何{category} 然而.",
+    "other_empty_category": "{name} 没有 {category} 然而",
+    "go_to_marketplace": "去市场",
+    "empty_with_filters": "这些过滤器找不到结果",
+    "clear_filters": "清除过滤器"
+  },
+  "nfts_sort_by": {
+    "name": "姓名",
+    "newest": "最新",
+    "recently_sold": "最近售出",
+    "recently_listed": "最近列出",
+    "cheapest": "最便宜",
+    "rental_listing_date": "最近列出出租",
+    "max_rental_price": "最便宜的清单"
+  }
+}

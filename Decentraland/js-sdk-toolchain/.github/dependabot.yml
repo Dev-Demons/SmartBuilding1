@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/packages/@dcl/sdk"
+    schedule:
+      interval: daily
+    allow:
+      - dependency-name: "@dcl/explorer"
+      - dependency-name: "@dcl/schemas"
+    versioning-strategy: auto

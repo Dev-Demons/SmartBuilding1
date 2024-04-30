@@ -1,0 +1,10 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "inlineSources": true
+  },
+  "extends": "@dcl/sdk/types/tsconfig.ecs7.json",
+  "exclude": ["./dist"]
+}

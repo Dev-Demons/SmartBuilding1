@@ -1,0 +1,228 @@
+{
+  "general": {
+    "visits": "{value, number, ::compact-short}",
+    "count_places": "{count} {count, plural, one {place} other {places}}",
+    "order_by": {
+      "updated_at": "Recently Updated",
+      "like_score": "Best",
+      "most_active": "Most Active"
+    },
+    "place_share": "Look at this place I found in Decentraland: "
+  },
+  "navigation": {
+    "overview": "Overview",
+    "places": "Genesis City",
+    "favorites": "Favorites",
+    "worlds": "Worlds",
+    "faq": "FAQ",
+    "faq_target": "https://docs.decentraland.org/creator/places/faq/",
+    "search": {
+      "overview": "Search Genesis City and Worlds...",
+      "places": "Search Genesis City...",
+      "worlds": "Search Worlds...",
+      "favorites": "Search Favorites...",
+      "default": "Search..."
+    }
+  },
+  "components": {
+    "button": {
+      "jump_in": "jump in",
+      "favorite": "favorite",
+      "share": "share",
+      "join": "join",
+      "find_out_more": "find out more"
+    },
+    "place_stats": {
+      "active": "active",
+      "favorites": "favorites",
+      "visits": "visits (last 30 d)",
+      "created": "created",
+      "updated": "updated",
+      "point_of_interest": "point of interest",
+      "favorite": "favorite",
+      "added": "added",
+      "age_rating_label": "age rating",
+      "age_rating_t": "TEEN",
+      "age_rating_a": "ADULT",
+      "age_rating_r": "RESTRICTED"
+    },
+    "place_description": {
+      "created_by": "created by",
+      "like_percentage_explanation": "Like percentage is calculated from likes given by users with over 100VP"
+    },
+    "place_realm_activity": {
+      "title": "realms",
+      "realm": "realm",
+      "players": "active"
+    },
+    "overview_list": {
+      "view_all": "view all",
+      "search_results_count": "results for"
+    },
+    "place_detail": {
+      "about": "About",
+      "realms": "Realms",
+      "description": "description",
+      "location": "location",
+      "content_moderation": "Content Moderation",
+      "rate_label": "Please rate this scene",
+      "appears_on": "Appears On"
+    },
+    "rating_button": {
+      "rating_t": "T",
+      "rating_t_label": "PG 13+",
+      "rating_a": "A",
+      "rating_a_label": "PG 18+",
+      "rating_r": "R",
+      "rating_r_label": "RESTRICTED"
+    },
+    "place_featured": {
+      "jump_in": "Jump In",
+      "find_out_more": "find out more"
+    },
+    "world_description": {
+      "decentraland": "Decentraland",
+      "worlds": "Worlds"
+    },
+    "search": {
+      "search_results_title": "Search results for",
+      "no_results": "No results found for"
+    },
+    "modal": {
+      "content_moderation": {
+        "you_are_about_title_t": "You're about to change {place_name}'s rating to Teen (PG 13+)",
+        "you_are_about_description_t": "This means that everyone will be able to see the scene's content without a warning.",
+        "you_are_about_title_a": "Confirm Adult (PG 18+) Content",
+        "you_are_about_description_a": "This scene has been flagged by the community for potentially containing adult content that may be inappropriate for some users.",
+        "you_are_about_title_r": "You're about to Restrict {place_name}",
+        "you_are_about_description_r": "This means that nobody will be able to see this scene's content.",
+        "proceed": "Confirm Rating",
+        "cancel": "Cancel"
+      },
+      "confirmed_rating": {
+        "title": "{scene_name} has been rated {rating}",
+        "description_t": "The rating for {scene_name} has been successful changed to Teen (PG 13+). This content is now available to all users aged 13 and above.",
+        "description_a": "The rating for {scene_name} has been successful changed to Adult (PG 18+). This content is now only available to users aged 18 and above.",
+        "description_r": "The rating for {scene_name} has been successful changed to Restricted. This content is now no longer visible in Decentraland.",
+        "button_label": "OK"
+      },
+      "category": {
+        "clear_all": "Clear All",
+        "one_or_more": "Select one or more Categories",
+        "quantity_selected": "{quantity} Category Selected"
+      }
+    }
+  },
+  "pages": {
+    "overview": {
+      "title": "Genesis City",
+      "search_the_metaverse": "Search the Metaverse",
+      "highest_rated": "Highest Rated",
+      "best": "Best",
+      "featured": "Featured",
+      "most_active": "Most Active",
+      "my_favorites": "My Favorites",
+      "recently_updated": "Recently Added",
+      "points_of_interest": "Points of Interest",
+      "view_all": "view all",
+      "worlds": "Worlds",
+      "places": "Genesis City",
+      "search_results_title": "Search results for"
+    },
+    "places": {
+      "title": "Genesis City",
+      "filters_title": "Sort and filter",
+      "filters_places": "Filters",
+      "filter": "Filter",
+      "sort_by": "Sort by",
+      "pois": "Point of interest",
+      "featured": "Featured",
+      "show_more": "Show More",
+      "search_results_title": "Search results for",
+      "clear_all": "Clear All",
+      "category_filter_title": "Categories",
+      "categories_selected": "Selected",
+      "banner": {
+        "title": "Genesis City",
+        "description": "Map Made up of thousands of parcels owned and populated with dynamic content by its diverse community."
+      }
+    },
+    "favorites": {
+      "title": "Favorites",
+      "title_places": "Favorites Genesis City",
+      "title_worlds": "Favorites Worlds",
+      "places": "Genesis City",
+      "worlds": "Worlds",
+      "no_favorite_selected": "You haven’t added any Places to your favorites",
+      "no_world_selected": "You haven’t saved any Worlds to your favorites",
+      "go_to_places": "Discover Places",
+      "go_to_worlds": "Discover Worlds",
+      "back": "Back",
+      "search_results_title": "Search results for"
+    },
+    "worlds": {
+      "description": "Your own 3D Space in the Metaverse. A place for Decentraland citizens to build, experiment, and host events and even interactive experiences without owning LAND.",
+      "find_out_more": "Find Out More",
+      "search_results_title": "Search results for",
+      "banner": {
+        "title": "Decentraland Worlds",
+        "description": "Personal 3D space separate from Genesis City, where you can unleash your creativity, host events, and more!"
+      }
+    }
+  },
+  "social": {
+    "home": {
+      "title": "Places Overview",
+      "description": "Decentraland is a virtual social platform built and governed by its users. Every day, users enter the world to meet up, play games, attend live events, trade in the marketplace, engage with brands, visit galleries and much more",
+      "image": "https://places.decentraland.org/images/background-v3@1x.jpg",
+      "site": "@decentraland",
+      "card": "summary_large_image",
+      "creator": "@decentraland"
+    },
+    "places": {
+      "title": "Places",
+      "description": "Decentraland is a virtual social platform built and governed by its users. Every day, users enter the world to meet up, play games, attend live events, trade in the marketplace, engage with brands, visit galleries and much more",
+      "image": "https://places.decentraland.org/images/background-v3@1x.jpg",
+      "site": "@decentraland",
+      "card": "summary_large_image",
+      "creator": "@decentraland"
+    },
+    "favorites": {
+      "title": "Favorites",
+      "description": "Decentraland is a virtual social platform built and governed by its users. Every day, users enter the world to meet up, play games, attend live events, trade in the marketplace, engage with brands, visit galleries and much more",
+      "image": "https://places.decentraland.org/images/background-v3@1x.jpg",
+      "site": "@decentraland",
+      "card": "summary_large_image",
+      "creator": "@decentraland"
+    },
+    "place": {
+      "title": "Decentraland Place",
+      "description": "This place is awesome",
+      "image": "image",
+      "site": "site",
+      "card": "card",
+      "creator": "creator"
+    }
+  },
+  "user_menu": {
+    "api": "API"
+  },
+  "categories": {
+    "poi": "📍 Point of Interest",
+    "featured": "✨ Featured",
+    "art": "🎨 Art",
+    "game": "🎮 Game",
+    "casino": "♣️ Casino",
+    "social": "👥 Social",
+    "music": "🎵 Music",
+    "fashion": "👠 Fashion",
+    "crypto": "🪙 Crypto",
+    "education": "📚 Education",
+    "shop": "🛍️ Shop",
+    "business": "🏢 Business",
+    "sports": "⚽️ Sports",
+    "title": "Categories",
+    "new_label": "NEW",
+    "explore": "Explore Categories"
+  }
+}

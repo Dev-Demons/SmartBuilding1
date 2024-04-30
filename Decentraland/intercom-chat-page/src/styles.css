@@ -1,0 +1,16 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-color: #230B61;
+  background-image: url("./background-v3@blur.jpg");
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}

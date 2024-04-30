@@ -1,0 +1,190 @@
+{
+  "global": {
+    "load_more": "Cargar más"
+  },
+  "avatar": {
+    "edit": "Editar Avatar",
+    "message": "Edita tu Avatar en Decentraland"
+  },
+  "profile_information": {
+    "default_name": "Sin nombrar",
+    "edit": "Editar Perfil",
+    "copied": "Copiado",
+    "copy_link": "Copiar enlace",
+    "share_on_tw": "Compartir en Twitter",
+    "qr_code_item": "Compartir con el código QR",
+    "qr_code_info": "Escanear para ver mi perfil",
+    "qr_code_info_with_name": "Escanear para ver el perfil de {name}",
+    "share_my_profile_tw_message": "Descubre más acerca de mí a través de mi perfil en Decentraland! #DCLProfiles\n",
+    "share_others_profile_tw_message": "Encontré un profile de Decentraland asombroso. Échale un vistazo! #DCLProfiles\n",
+    "view_more": "Ver Más",
+    "blocked": "Bloqueado",
+    "worlds_tooltip": "Mundos",
+    "share_tooltip": "Compartir"
+  },
+  "blocked": {
+    "blocked_logged_user_title": "{name} te ha bloqueado",
+    "blocked_profile_title": "Has bloqueado a {name}",
+    "description": "Esto significa que no puede ver el perfil de esta persona, enviar una solicitud de amistad, mensajes y ver su estado."
+  },
+  "worlds_button": {
+    "get_a_name": "Obtenga un nombre único",
+    "activate_world": "Activar mi mundo",
+    "jump": "Saltar al mundo \"{domain}\""
+  },
+  "tabs": {
+    "overview": "Resumen",
+    "own_assets": "Mis assets",
+    "others_assets": "Assets",
+    "own_creations": "Mis creaciones",
+    "others_creations": "Creaciones"
+  },
+  "friendship_button": {
+    "friends": "Amigos",
+    "add_friend": "Agregar amigo",
+    "pending": "Petición pendiente",
+    "cancel_request": "Cancelar petición",
+    "accept_request": "Acceptar petición",
+    "blocked": "Bloqueado",
+    "unfriend": "Dejar de ser amigo"
+  },
+  "friends_modal": {
+    "friends_title": "Amigos",
+    "mutuals_title": "Amigos en común"
+  },
+  "friends_counter": {
+    "friends": "{count} {count, plural, one {amigo} other {amigos}}"
+  },
+  "mutual_friends_counter": {
+    "mutual": "amigos en común"
+  },
+  "overview": {
+    "title": "Collecionables Equipados",
+    "start_dressing": "Comienza a vestirte de formas más allá de tu imaginación",
+    "get_collectibles": "¡Obtén tu primer coleccionable y lúcete en Decentraland!",
+    "go_to_marketplace": "ir al marketplace",
+    "no_collectibles": " no posee collecionables aun"
+  },
+  "about_modal": {
+    "title": "Acerca de",
+    "description_label": "Acerca de",
+    "country_label": "País",
+    "employment_status_label": "Estado de Empleo",
+    "gender_label": "Género",
+    "pronouns_label": "Pronombres",
+    "relationship_status_label": "estado civil",
+    "sexual_orientation_label": "Orientación sexual",
+    "language_label": "Idioma",
+    "profession_label": "Profesión",
+    "birthdate_label": "Fecha de nacimiento",
+    "real_name_label": "Nombre real",
+    "hobbies_label": "Aficiones",
+    "links_label": "Enlaces"
+  },
+  "confirmation_modal": {
+    "pending_request_title": "¿Estás seguro de que deseas cancelar la solicitud?",
+    "pending_request_subtitle": "Recuerda que puedes reenviar la solicitud cuando quieras.",
+    "pending_request_confirmation": "cancelar solicitud",
+    "pending_request_cancel": "volver atrás",
+    "pending_request_title_mobile": "Cancelar solicitud",
+    "friend_title": "¿Estás seguro de que deseas eliminar a {avatarName} como amigo?",
+    "friend_subtitle": "Recuerda que puedes reenviar la solicitud cuando quieras.",
+    "friend_confirmation": "sí, eliminar amigo",
+    "friend_cancel": "cancelar",
+    "friend_title_mobile": "Eliminar amigo {avatarName}"
+  },
+  "navbar": {
+    "sign_in": "iniciar sesión"
+  },
+  "not_found_page": {
+    "title": "¡Parece que hasta los exploradores pueden perderse!<br></br>No pudimos encontrar ésta dirección o nombre en Decentraland.",
+    "message": "Por favor revísalo e intenta nuevamente"
+  },
+  "categories": {
+    "wearables": "Wearables",
+    "wearables_head": "Cabeza",
+    "wearables_upper_body": "Torso",
+    "wearables_lower_body": "Piernas",
+    "wearables_feet": "Pies",
+    "wearables_hands": "Manos",
+    "wearables_accessories": "Accesorios",
+    "wearables_skin": "Skin",
+    "wearables_earring": "Aros",
+    "wearables_eyewear": "Gafas",
+    "wearables_hat": "Sombreros",
+    "wearables_helmet": "Cascos",
+    "wearables_mask": "Mascaras",
+    "wearables_tiara": "Tiara",
+    "wearables_top_head": "Tope de la cabeza",
+    "wearables_eyebrows": "Cejas",
+    "wearables_eyes": "Ojos",
+    "wearables_facial_hair": "Barba",
+    "wearables_hair": "Cabello",
+    "wearables_mouth": "Boca",
+    "emotes": "Emotes",
+    "emotes_dance": "Dance",
+    "emotes_stunt": "Truco",
+    "emotes_greetings": "Saludos",
+    "emotes_fun": "Divertido",
+    "emotes_poses": "Poses",
+    "emotes_reactions": "Reacciones",
+    "emotes_horror": "Horror",
+    "emotes_miscellaneous": "Misceláneos",
+    "land": "Tierra",
+    "land_parcel": "Parcelas",
+    "land_estate": "Estates",
+    "ens": "Nombres"
+  },
+  "categories_menu": {
+    "title": "Categorías"
+  },
+  "catalog_sort_by": {
+    "newest": "Más nuevos",
+    "recently_sold": "Vendidos recientemente",
+    "cheapest": "Más baratos",
+    "most_expensive": "Más caros",
+    "recently_listed": "Listados recientemente"
+  },
+  "creations": {
+    "items_count": "{count} {count, plural, one {item} other {items}}",
+    "own_empty_main_category_title": "No has creado ningún {parentCategory} todavía",
+    "own_empty_sub_category_title": "No se encontró ningún {parentCategory} de {category}",
+    "other_empty_main_category_title": "{name} no ha creado ningún {parentCategory} todavía",
+    "other_empty_sub_category_title": "{name} no ha creado ningún {parentCategory} de {category} todavía",
+    "empty_multiple_filters_title": "No se ha encontrado ningún resultado para éstos filtros",
+    "own_empty_main_category_text": "¡Libera tu creatividad y comienza a ganar de tus propios diseños!",
+    "own_empty_sub_category_text": "No has publicado ningún {parentCategory} de {category} todavía.",
+    "own_empty_primary_action": "Aprende más",
+    "own_empty_secondary_action": "Crear una collección",
+    "clear_filters": "Limpiar filtros"
+  },
+  "on_sale_filter": {
+    "title": "Estado",
+    "label": "En venta",
+    "for_sale": "Solo en venta",
+    "not_for_sale": "Artículos a la venta y no",
+    "tooltip": "Mostrar artículos solo para la venta o ambos"
+  },
+  "filters_modal": {
+    "title": "Filtros",
+    "reset": "Limpiar",
+    "apply_filters": "Aplicar filtros"
+  },
+  "assets_tab": {
+    "assets_count": "{count} {count, plural, one {objeto} other {objetos}}",
+    "own_empty_category": "No tienes ninguno {category} todavía.",
+    "other_empty_category": "{name} not tiene ningun {category} todavía",
+    "go_to_marketplace": "Ir al marketplace",
+    "empty_with_filters": "No se encontraron resultados para los filtros seleccionados",
+    "clear_filters": "Limpiar filtros"
+  },
+  "nfts_sort_by": {
+    "name": "Nombre",
+    "newest": "Más nuevos",
+    "recently_sold": "Vendidos recientemente",
+    "recently_listed": "Listados recientemente",
+    "cheapest": "Más baratos",
+    "rental_listing_date": "Puesto en alquiler recientemente",
+    "max_rental_price": "Alquiler más barato"
+  }
+}

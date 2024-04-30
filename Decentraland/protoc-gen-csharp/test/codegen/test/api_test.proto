@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+package codegen.test;
+
+message GetBookRequest {
+  int64 isbn = 1;
+}
+
+message QueryBooksRequest {
+  string author_prefix = 1;
+}
+
+
+service BookService {
+  rpc GetBook(GetBookRequest) returns (common.Book) {}
+  rpc QueryBooks(QueryBooksRequest) returns (stream common.Book) {}
+  rpc GetBookStream(stream GetBookRequest) returns (common.Book) {}
+  rpc QueryBooksStream(stream GetBookRequest) returns (stream common.Book) {}
+  rpc Empty(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}

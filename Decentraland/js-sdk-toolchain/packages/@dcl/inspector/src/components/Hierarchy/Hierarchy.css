@@ -1,0 +1,23 @@
+.Hierarchy {
+  height: 100%;
+  background: var(--tree-bg-color);
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.Hierarchy .tree-icon {
+  width: 16px;
+  height: 14px;
+  margin-right: 4px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Hierarchy .player-icon {
+  background-image: url(./icons/player.svg);
+}
+
+.Hierarchy .camera-icon {
+  background-image: url(./icons/camera.svg);
+}

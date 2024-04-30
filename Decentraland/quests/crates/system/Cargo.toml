@@ -1,0 +1,23 @@
+[package]
+name = "quests_system"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+quests_db = { path = "../db" }
+quests_message_broker = { path = "../message_broker" }
+quests_protocol = { path = "../protocol" }
+actix-web = { workspace = true }
+env_logger = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+config = { workspace = true }
+log = { workspace = true }
+tokio = { workspace = true }
+futures-util = "0.3.25"
+reqwest = { version = "0.11.18", features = ["json"]}
+
+[dev-dependencies]
+async-trait = "0.1.57"
+uuid = { version = "1.2.2", features = ["v4"] }
+wiremock = "0.5.19"

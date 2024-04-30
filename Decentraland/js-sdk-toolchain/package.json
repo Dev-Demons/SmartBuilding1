@@ -1,0 +1,39 @@
+{
+  "name": "js-sdk-toolchain",
+  "description": "",
+  "version": "7.0.0",
+  "author": "",
+  "bugs": "https://github.com/decentraland/js-sdk-toolchain/issues",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@dcl/protocol": "1.0.0-8758013256.commit-44aab53",
+    "@dcl/quickjs-emscripten": "^0.21.0-3680274614.commit-1808aa1",
+    "@dcl/ts-proto": "1.153.0",
+    "@types/fs-extra": "^9.0.12",
+    "@types/jest": "^28.1.8",
+    "@types/rimraf": "^3.0.0",
+    "buffer": "^6.0.3",
+    "fs-extra": "^10.0.0",
+    "jest": "^29.5.0",
+    "jest-matcher-deep-close-to": "^3.0.2",
+    "mitt": "^3.0.1",
+    "rimraf": "^3.0.2",
+    "source-map": "^0.7.4",
+    "ts-jest": "^29.0.5",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.2"
+  },
+  "devDependencies": {
+    "@dcl/eslint-config": "^1.0.6-20220629202434.commit-44f87f0",
+    "@types/node": "^18.11.18",
+    "syncpack": "^9.8.4",
+    "typedoc": "^0.23.28"
+  },
+  "homepage": "https://github.com/decentraland/js-sdk-toolchain#readme",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "repository": "decentraland/js-sdk-toolchain.git",
+  "scripts": {
+    "postinstall": "make sync-deps"
+  }
+}

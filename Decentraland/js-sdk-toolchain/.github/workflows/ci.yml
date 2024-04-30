@@ -1,0 +1,436 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  release:
+    types:
+      - created
+
+name: CI
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: install npm
+        run: npm i -g npm
+      - name: install
+        run: make install
+      - name: lint
+        run: make lint
+      - name: lint-packages
+        run: make lint-packages
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: install npm
+        run: npm i -g npm
+      - name: docs
+        run: make docs
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: install npm
+        run: npm i -g npm
+      - name: install
+        run: make install
+      - name: build
+        run: make build
+      - name: test
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: make test-coverage
+      - name: test-cli
+        run: make test-cli
+      - name: test-inspector
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: make test-inspector
+      - uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          fail_ci_if_error: false # optional (default = false)
+          verbose: true # optional (default = false)
+      - name: prepare releasable packages
+        run: make prepare
+  test-e2e:
+    needs: [notify_deployment]
+    runs-on: ubuntu-latest
+    if: false
+    steps:
+      - uses: actions/github-script@v6
+        id: get-cloudflare-url
+        env:
+          BRANCH: ${{ github.head_ref || github.ref }}
+        with:
+          script: return `${process.env.BRANCH.replaceAll('/', '-').substr(0, 28)}.${context.repo.repo}.pages.dev`
+          result-encoding: string
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: install npm
+        run: npm i -g npm
+      - name: install repo
+        run: npm ci
+      - name: install inspector
+        run: cd packages/@dcl/inspector && npm i && cd ../../../
+      - name: test-inspector E2E
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: E2E_URL=https://${{steps.get-cloudflare-url.outputs.result}}/inspector make test-inspector-e2e
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      decentraland_sdk_s3_bucket_key: ${{ steps.publish_decentraland_sdk.outputs.s3-bucket-key }}
+      decentraland_sdk_commands_s3_bucket_key: ${{ steps.publish_decentraland_sdk_commands.outputs.s3-bucket-key }}
+      decentraland_inspector_s3_bucket_key: ${{ steps.publish_decentraland_inspector.outputs.s3-bucket-key }}
+      decentraland_js_runtime_s3_bucket_key: ${{ steps.publish_dcl_js_runtime.outputs.s3-bucket-key }}
+      decentraland_ecs_bucket_key: ${{ steps.publish_ecs.outputs.s3-bucket-key }}
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: install npm
+        run: npm i -g npm
+
+      - name: install
+        run: make install
+
+      - name: update version of packages/@dcl/sdk/package.json, this version will be used for all packages
+        uses: menduz/oddish-action@master
+        with:
+          cwd: ./packages/@dcl/sdk
+          deterministic-snapshot: true
+          only-update-versions: true
+
+      - name: build
+        run: make build
+
+      - name: prepare releasable packages
+        run: make prepare
+
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: built-artifacts
+          path: 'packages/**/*.tgz'
+          retention-days: 5
+
+      - name: publish @dcl/js-runtime package
+        id: publish_dcl_js_runtime
+        uses: menduz/oddish-action@master
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/js-runtime
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}/@dcl/js-runtime'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: publish @dcl/ecs package
+        uses: menduz/oddish-action@master
+        id: publish_ecs
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/ecs
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}/@dcl/ecs'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: (PR) change @dcl/react-ecs dependencies versions to point to s3 url
+        working-directory: ./packages/@dcl/react-ecs
+        if: ${{ github.event.pull_request.number }}
+        run: |
+          node -e "\
+            let pkg=require('./package.json');\
+            pkg.dependencies['@dcl/ecs']='$ECS_S3_URL';\
+            require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));\
+          "
+        env:
+          ECS_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_ecs.outputs.s3-bucket-key }}
+
+      - name: publish @dcl/react-ecs package
+        id: publish_dcl_react_ecs
+        uses: menduz/oddish-action@master
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/react-ecs
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}/@dcl/react-ecs'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: publish @dcl/inspector package
+        uses: menduz/oddish-action@master
+        id: publish_decentraland_inspector
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/inspector
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}/@dcl/inspector'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: (PR) change @dcl/sdk-commands dependencies versions to point to s3 url
+        working-directory: ./packages/@dcl/sdk-commands
+        if: ${{ github.event.pull_request.number }}
+        run: |
+          node -e "\
+            let pkg=require('./package.json');\
+            pkg.dependencies['@dcl/inspector']='$INSPECTOR_URL';\
+            pkg.dependencies['@dcl/ecs']='$ECS_S3_URL';\
+            require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));\
+          "
+        env:
+          ECS_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_ecs.outputs.s3-bucket-key }}
+          INSPECTOR_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_decentraland_inspector.outputs.s3-bucket-key }}
+
+      - name: publish @dcl/sdk-commands package
+        uses: menduz/oddish-action@master
+        id: publish_decentraland_sdk_commands
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/sdk-commands
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: (PR) change @dcl/sdk version to s3 url
+        working-directory: ./packages/@dcl/sdk
+        if: ${{ github.event.pull_request.number }}
+        run: |
+          node -e "\
+            let pkg=require('./package.json');\
+            pkg.dependencies['@dcl/inspector']='$INSPECTOR_URL';\
+            pkg.dependencies['@dcl/js-runtime']='$JS_RUNTIME_S3_URL';\
+            pkg.dependencies['@dcl/ecs']='$ECS_S3_URL';\
+            pkg.dependencies['@dcl/react-ecs']='$REACT_ECS_S3_URL';\
+            pkg.dependencies['@dcl/sdk-commands']='$SDK_COMMANDS_S3_URL';\
+            require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));\
+          "
+        env:
+          INSPECTOR_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_decentraland_inspector.outputs.s3-bucket-key }}
+          REACT_ECS_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_dcl_react_ecs.outputs.s3-bucket-key }}
+          ECS_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_ecs.outputs.s3-bucket-key }}
+          ROLLUP_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_dcl_rollup.outputs.s3-bucket-key }}
+          JS_RUNTIME_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_dcl_js_runtime.outputs.s3-bucket-key }}
+          SDK_COMMANDS_S3_URL: ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ steps.publish_decentraland_sdk_commands.outputs.s3-bucket-key }}
+
+      - name: publish @dcl/sdk package
+        uses: menduz/oddish-action@master
+        id: publish_decentraland_sdk
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/sdk
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: playground upload to s3
+        run: npx @dcl/cdn-uploader@next --bucket ${{ secrets.SDK_TEAM_S3_BUCKET }} --local-folder $(pwd)/packages/@dcl/playground-assets/dist --bucket-folder '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}/playground-assets'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+
+      - name: publish @dcl/playground-assets package
+        uses: menduz/oddish-action@master
+        id: publish_playground_assets
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          access: public
+          cwd: ./packages/@dcl/playground-assets
+          ## use action runId instead of current date to generate snapshot numbers
+          deterministic-snapshot: true
+          ## sign the deployment
+          provenance: true
+          ## publish every package to s3
+          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket-region: ${{ secrets.SDK_TEAM_AWS_REGION }}
+          s3-bucket-key-prefix: '@dcl/js-sdk-toolchain/branch/${{ github.head_ref || github.ref }}'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
+  notify_deployment:
+    needs: [build]
+    if: ${{ github.event.pull_request.number }}
+    runs-on: ubuntu-latest
+    name: Deployment Notification
+    steps:
+      - uses: actions/github-script@v6
+        id: get-cloudflare-url
+        env:
+          BRANCH: ${{ github.head_ref || github.ref }}
+        with:
+          script: return `${process.env.BRANCH.replaceAll('/', '-').substr(0, 28)}.${context.repo.repo}.pages.dev`
+          result-encoding: string
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Test this pull request
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            # Test this pull request
+            - The `@dcl/sdk` package can be tested in scenes by running
+               ```bash
+               npm install "${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_sdk_s3_bucket_key }}"
+               ```
+
+            - To test with `npx init`
+               ```bash
+               export SDK_COMMANDS="${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_sdk_commands_s3_bucket_key }}"
+               npx $SDK_COMMANDS init
+               ```
+
+            - The `@dcl/inspector` package can be tested by visiting [this url](https://${{steps.get-cloudflare-url.outputs.result}}/inspector)
+              - Or by installing it via NPM
+               ```bash
+               npm install "${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_inspector_s3_bucket_key }}"
+               ```
+
+            - The `/changerealm` command to test [test in-world](https://play.decentraland.zone/?realm=${{ secrets.SDK_TEAM_S3_BASE_URL }}/ipfs/${{ github.head_ref || github.ref }}-e2e)
+               ```
+               /changerealm ${{ secrets.SDK_TEAM_S3_BASE_URL }}/ipfs/${{ github.head_ref || github.ref }}-e2e
+               ```
+
+            - You can preview this build entering:
+              https://playground.decentraland.org/?sdk-branch=${{ github.head_ref || github.ref }}
+          edit-mode: replace
+      - name: Test SDK Install S3 URL
+        run: mkdir -p test_sdk_s3 && cd test_sdk_s3 && npm init --yes && npm install "${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_sdk_s3_bucket_key }}"
+      - name: Test Inspector Install S3 URL
+        run: mkdir -p test_inspector_s3 && cd test_inspector_s3 && npm init --yes && npm install "${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_inspector_s3_bucket_key }}"
+  cli_e2e:
+    needs: [build]
+    runs-on: ubuntu-latest
+    name: CLI E2E
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: install npm
+        run: npm i -g npm
+      - run: mkdir -p scene
+      - name: npx @dcl/sdk-commands init --skip-install
+        run: npx ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_sdk_commands_s3_bucket_key }} init --skip-install
+        working-directory: scene
+      - name: install CI version of @dcl/sdk
+        run: npm install ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_sdk_s3_bucket_key }}
+        working-directory: scene
+      - name: install rest of the dependencies
+        run: npm install
+        working-directory: scene
+      - name: npm run build
+        run: npm run build
+        working-directory: scene
+
+      - name: Set Realm Name
+        run: |
+          modified_realm=$(echo "${{ github.head_ref || github.ref }}" | tr '/' '-' | tr -d '@')
+          echo "REALM_NAME=${modified_realm}" >> $GITHUB_ENV
+      - name: export-static
+        run: >
+          npx ${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build.outputs.decentraland_sdk_commands_s3_bucket_key }} \
+            export-static \
+              --realmName ${{ env.REALM_NAME }}-e2e \
+              --commsAdapter ws-room:ws-room-service.decentraland.org/rooms/sdk-${{ github.sha }} \
+              --baseUrl ${{ secrets.SDK_TEAM_S3_BASE_URL }}/ipfs \
+              --dir scene \
+              --destination $(pwd)/out-static
+      - name: upload to s3
+        run: >
+          npx @dcl/cdn-uploader@next \
+              --bucket ${{ secrets.SDK_TEAM_S3_BUCKET }} \
+              --local-folder $(pwd)/out-static \
+              --bucket-folder 'ipfs'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}

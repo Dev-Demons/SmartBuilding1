@@ -1,0 +1,73 @@
+name: CI/CD on PR for apps
+
+on:
+  workflow_call:
+    inputs:
+      service-name:
+        required: true
+        type: string
+      build-args:
+        required: false
+        type: string
+      layers:
+        required: false
+        type: boolean
+        default: true
+      dockerfile-url:
+        required: false
+        type: string
+    secrets:
+      QUAY_USERNAME:
+        required: false
+      QUAY_TOKEN:
+        required: false
+    outputs:
+      registry-path:
+        description: "Registry path"
+        value: ${{ jobs.quay-build-push.registry-path }}
+      registry-paths:
+        description: "Registry paths (JSON)"
+        value: ${{ jobs.quay-build-push.registry-paths }}
+
+jobs:
+  quay-build-push:
+    runs-on: ubuntu-latest
+    outputs:
+      registry-path: ${{ steps.push-to-quay.outputs.registry-path }}
+      registry-paths: ${{ steps.push-to-quay.outputs.registry-paths }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: download Dockerfile
+        if: ${{ inputs.dockerfile-url }}
+        run: wget -O Dockerfile ${{ inputs.dockerfile-url }}
+      - name: Build Image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ inputs.service-name }}
+          layers: ${{ inputs.layers }}
+          tags: ${{ github.event.pull_request.head.sha }}
+          dockerfiles: |
+            ./Dockerfile
+          build-args: |
+            ${{ inputs.build-args }}
+            CURRENT_VERSION=${{ github.event.pull_request.head.ref }}
+            COMMIT_HASH=${{ github.event.pull_request.head.sha }}
+      # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
+      # in which case 'username' and 'password' can be omitted.
+      - name: Push To quay.io
+        id: push-to-quay
+        uses: redhat-actions/push-to-registry@v2
+        if: ${{ env.quay_username && env.quay_token }}
+        env:
+          quay_username: ${{ secrets.QUAY_USERNAME }}
+          quay_token: ${{ secrets.QUAY_TOKEN }}
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: quay.io/decentraland
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
+
+      - name: Print image url
+        run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"

@@ -1,0 +1,44 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(../../assets/images/background.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.content {
+  padding: 0 24px;
+  flex-grow: 1;
+}
+
+.navbar {
+  flex-shrink: 0;
+}
+
+.page :global(.ui.button.backToTop) {
+  width: 170px;
+}
+
+@media (max-width: 991px) {
+  .content {
+    padding: 0;
+  }
+
+  .page {
+    background-size: 100% 480px;
+    background-color: black;
+    background-position: initial;
+    background-attachment: initial;
+    background-image: url(../../assets/images/background-tablet.webp);
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    background-image: url(../../assets/images/background-mobile.webp);
+  }
+}
